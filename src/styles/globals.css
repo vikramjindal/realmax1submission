@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --mode: light;
+}
+
+/* RE/MAX Brand Identity - Official Colors */
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    
+    /* Official RE/MAX Primary Colors */
+    --primary: 0 84% 49%; /* RE/MAX Primary Red: #dc1c2e */
+    --primary-foreground: 0 0% 98%;
+    --secondary: 214 100% 32%; /* RE/MAX Primary Blue: #003da5 */
+    --secondary-foreground: 0 0% 98%;
+    
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 214 100% 32%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 0 84% 49%;
+    --chart-1: 0 84% 49%;
+    --chart-2: 214 100% 32%;
+    --chart-3: 0 0% 45%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+    
+    /* Official RE/MAX Brand Colors */
+    --remax-red: 0 84% 49%; /* #dc1c2e */
+    --remax-blue: 214 100% 32%; /* #003da5 */
+    --remax-white: 0 0% 100%; /* #ffffff */
+    --remax-gray: 0 0% 45%; /* #737373 */
+    --gradient-start: 0 84% 49%;
+    --gradient-end: 214 100% 32%;
+  }
+  
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 84% 49%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 214 100% 32%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 214 100% 32%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 0 84% 49%;
+    --chart-1: 0 84% 49%;
+    --chart-2: 214 100% 32%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    
+    /* RE/MAX colors for dark mode */
+    --remax-red: 0 84% 49%;
+    --remax-blue: 214 100% 40%;
+    --remax-white: 0 0% 100%;
+    --remax-gray: 0 0% 60%;
+    --gradient-start: 0 84% 49%;
+    --gradient-end: 214 100% 40%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  }
+  
+  /* RE/MAX Brand Typography */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    font-weight: 700;
+  }
+  
+  .font-gotham {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  }
+  
+  .font-arial {
+    font-family: Arial, sans-serif;
+  }
+  
+  .font-montserrat {
+    font-family: 'Montserrat', sans-serif;
+  }
+}
+
+@layer components {
+  /* RE/MAX Brand Button Styles */
+  .btn-remax-primary {
+    @apply bg-primary hover:bg-primary/90 text-primary-foreground font-semibold;
+  }
+  
+  .btn-remax-secondary {
+    @apply bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold;
+  }
+  
+  /* RE/MAX Brand Card Styles */
+  .card-remax {
+    @apply bg-white border-0 shadow-sm hover:shadow-md transition-all duration-300;
+  }
+  
+  /* RE/MAX Brand Gradient */
+  .gradient-remax {
+    background: linear-gradient(135deg, hsl(var(--remax-red)) 0%, hsl(var(--remax-blue)) 100%);
+  }
+}
+
+/* Custom animations for premium feel */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.6s ease-out;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.6s ease-out;
+}
