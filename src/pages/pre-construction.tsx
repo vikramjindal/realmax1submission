@@ -9,6 +9,7 @@ import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { 
   Building, 
+  Building2,
   Users, 
   TrendingUp, 
   Home as HomeIcon,

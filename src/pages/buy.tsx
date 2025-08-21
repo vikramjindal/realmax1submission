@@ -134,6 +134,7 @@ export default function Buy() {
               <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-8 font-arial leading-relaxed">
                 Discover exclusive listings, get expert guidance, and make your homeownership dreams come true with Ontario's fastest-growing brokerage.
               </p>
+            </motion.div>
 
             {/* Search Bar */}
             <motion.div
