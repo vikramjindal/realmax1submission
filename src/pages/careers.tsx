@@ -61,7 +61,7 @@ export default function Careers() {
           <div className="absolute right-8 top-16 z-10">
             <div className="relative">
               <Image 
-                src="/images/ballon.png" 
+                src="/images/company-pin-icon.png" 
                 alt="RE/MAX Balloon" 
                 width={80} 
                 height={80} 
@@ -75,7 +75,7 @@ export default function Careers() {
           <div className="absolute left-8 top-32 z-10">
             <div className="relative">
               <Image 
-                src="/images/ballon.png" 
+                src="/images/company-pin-icon.png" 
                 alt="RE/MAX Balloon" 
                 width={56} 
                 height={56} 
@@ -92,10 +92,6 @@ export default function Careers() {
               transition={{ duration: 0.8 }}
               className="text-center"
             >
-              <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-full text-white text-sm font-semibold shadow-lg mb-6">
-                <Users className="w-4 h-4 mr-2" />
-                Join Our Growing Team
-              </div>
               <h1 className="text-5xl lg:text-6xl font-black text-slate-900 mb-8 font-montserrat leading-tight">
                 Your Future in Real Estate <span className="text-transparent bg-gradient-to-r from-indigo-500 via-blue-600 to-cyan-600 bg-clip-text">Starts Here</span>
               </h1>
@@ -398,7 +394,7 @@ export default function Careers() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 bg-gradient-to-r from-primary to-secondary">
+        <section className="py-20 bg-gradient-to-r from-brand-bright-red via-brand-medium-blue to-brand-dark-blue">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -406,18 +402,12 @@ export default function Careers() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-                Ready to Start Your Real Estate Career?
+              <h2 className="text-3xl md:text-5xl font-bold text-white mb-8">
+                Let's Build Your Brand Together
               </h2>
-              <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-                Join Ontario's most dynamic real estate team and build the career you've always dreamed of.
-              </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="bg-white text-primary hover:bg-white/90">
-                  Apply Now
-                </Button>
-                <Button size="lg" variant="outline" className="bg-white/10 border-white text-white hover:bg-white hover:text-foreground">
-                  Schedule Interview
+                <Button size="lg" className="bg-white text-brand-bright-red hover:bg-white/90 font-bold px-8 py-4 text-xl">
+                  Join Us
                 </Button>
               </div>
             </motion.div>

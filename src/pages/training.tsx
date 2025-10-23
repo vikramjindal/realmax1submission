@@ -52,39 +52,39 @@ export default function Training() {
         <Header />
         
         {/* Hero Section */}
-        <section className="relative py-20 bg-gradient-to-br from-orange-50 via-white to-amber-100 overflow-hidden">
+        <section className="relative py-20 bg-gradient-to-br from-brand-bright-red/10 via-white to-brand-medium-blue/10 overflow-hidden">
           {/* Background Elements */}
           <div className="absolute inset-0">
-            <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-orange-200/30 to-orange-300/20 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-br from-amber-200/30 to-amber-300/20 rounded-full blur-3xl"></div>
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-br from-purple-200/20 to-purple-300/10 rounded-full blur-3xl"></div>
+            <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-brand-bright-red/30 to-brand-dark-red/20 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-br from-brand-medium-blue/30 to-brand-dark-blue/20 rounded-full blur-3xl"></div>
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-br from-brand-dark-blue/20 to-brand-medium-blue/10 rounded-full blur-3xl"></div>
           </div>
           
           {/* Creative Floating Balloon Elements */}
           <div className="absolute right-8 top-16 z-10">
             <div className="relative">
               <Image 
-                src="/images/ballon.png" 
-                alt="RE/MAX Balloon" 
+                src="https://dontdelete2005142.kloudbean.com/1761170133_Group 14.png" 
+                alt="RE/MAX Excellence Logo" 
                 width={80} 
                 height={80} 
                 className="w-20 h-20 object-contain opacity-80 animate-pulse transform rotate-6"
               />
-              <div className="absolute -top-3 -right-3 w-10 h-10 bg-gradient-to-br from-amber-400 to-yellow-500 rounded-full opacity-60 animate-bounce"></div>
-              <div className="absolute -bottom-3 -left-3 w-8 h-8 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full opacity-70 animate-ping"></div>
+              <div className="absolute -top-3 -right-3 w-10 h-10 bg-gradient-to-br from-brand-medium-blue to-brand-dark-blue rounded-full opacity-60 animate-bounce"></div>
+              <div className="absolute -bottom-3 -left-3 w-8 h-8 bg-gradient-to-br from-brand-bright-red to-brand-dark-red rounded-full opacity-70 animate-ping"></div>
             </div>
           </div>
           
           <div className="absolute left-8 top-32 z-10">
             <div className="relative">
               <Image 
-                src="/images/ballon.png" 
-                alt="RE/MAX Balloon" 
+                src="https://dontdelete2005142.kloudbean.com/1761170133_Group 14.png" 
+                alt="RE/MAX Excellence Logo" 
                 width={56} 
                 height={56} 
                 className="w-14 h-14 object-contain opacity-70 animate-bounce transform -rotate-6"
               />
-              <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-br from-orange-400 to-red-500 rounded-full opacity-80 animate-pulse"></div>
+              <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-br from-brand-dark-red to-brand-bright-red rounded-full opacity-80 animate-pulse"></div>
             </div>
           </div>
           
@@ -95,12 +95,8 @@ export default function Training() {
               transition={{ duration: 0.8 }}
               className="text-center"
             >
-              <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full text-white text-sm font-semibold shadow-lg mb-6">
-                <GraduationCap className="w-4 h-4 mr-2" />
-                Professional Development
-              </div>
               <h1 className="text-5xl lg:text-6xl font-black text-slate-900 mb-8 font-montserrat leading-tight">
-                Training That Turns Good Agents into <span className="text-transparent bg-gradient-to-r from-orange-500 via-amber-600 to-yellow-600 bg-clip-text">Great Ones</span>
+                Turns agents into <span className="text-transparent bg-gradient-to-r from-brand-bright-red via-brand-dark-red to-brand-medium-blue bg-clip-text">performers</span>
               </h1>
               <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-8 font-arial leading-relaxed">
                 At RE/MAX Excellence, learning never stops. With 3–5 sessions every week, we keep our agents sharp, confident, and ahead of the market. From marketing strategies to legal updates, we give you the skills to close deals and build a career that lasts.
@@ -117,8 +113,89 @@ export default function Training() {
           </div>
         </section>
 
-        {/* Benefits Section */}
-        <section className="py-20">
+        {/* Training Posters Carousel */}
+        <section className="py-20 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
+                Comprehensive <span className="text-primary">Training Modules</span>
+              </h2>
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+                Four core areas of expertise to master your real estate career
+              </p>
+            </motion.div>
+
+            <motion.div 
+              className="relative"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <div className="relative overflow-hidden">
+                {/* Auto-scrolling carousel */}
+                <div className="flex animate-scroll space-x-8 py-8">
+                  {/* First set of posters */}
+                  {[
+                    "/images/training posters/RE (2).png",
+                    "/images/training posters/SOCIAL MEDIA POSTS (13).png",
+                    "/images/training posters/SOCIAL MEDIA POSTS (18).png",
+                    "/images/training posters/SOCIAL MEDIA POSTS (23).png",
+                    "/images/training posters/SOCIAL MEDIA POSTS (28).png",
+                    "/images/training posters/SOCIAL MEDIA POSTS (5).png",
+                    "/images/training posters/SOCIAL MEDIA POSTS (8).png",
+                    "/images/training posters/Untitled (1080 x 1090 px) (3).png"
+                  ].map((poster, index) => (
+                    <div key={index} className="flex-shrink-0 group">
+                      <div className="w-80 h-96 group-hover:scale-105 transition-all duration-500">
+                        <Image
+                          src={poster}
+                          alt={`Training Poster ${index + 1}`}
+                          width={320}
+                          height={384}
+                          className="w-full h-full object-cover rounded-lg shadow-lg group-hover:shadow-2xl transition-all duration-500"
+                        />
+                      </div>
+                    </div>
+                  ))}
+                  
+                  {/* Duplicate set for seamless loop */}
+                  {[
+                    "/images/training posters/RE (2).png",
+                    "/images/training posters/SOCIAL MEDIA POSTS (13).png",
+                    "/images/training posters/SOCIAL MEDIA POSTS (18).png",
+                    "/images/training posters/SOCIAL MEDIA POSTS (23).png",
+                    "/images/training posters/SOCIAL MEDIA POSTS (28).png",
+                    "/images/training posters/SOCIAL MEDIA POSTS (5).png",
+                    "/images/training posters/SOCIAL MEDIA POSTS (8).png",
+                    "/images/training posters/Untitled (1080 x 1090 px) (3).png"
+                  ].map((poster, index) => (
+                    <div key={`duplicate-${index}`} className="flex-shrink-0 group">
+                      <div className="w-80 h-96 group-hover:scale-105 transition-all duration-500">
+                        <Image
+                          src={poster}
+                          alt={`Training Poster ${index + 1}`}
+                          width={320}
+                          height={384}
+                          className="w-full h-full object-cover rounded-lg shadow-lg group-hover:shadow-2xl transition-all duration-500"
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Training Features Section */}
+        <section className="py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div 
               variants={staggerContainer}
@@ -128,13 +205,13 @@ export default function Training() {
               className="grid md:grid-cols-3 gap-8"
             >
               <motion.div variants={fadeInUp}>
-                <Card className="h-full border-0 bg-gradient-to-br from-primary/5 to-primary/10 hover:from-primary/10 hover:to-primary/15 transition-all duration-300">
+                <Card className="h-full border-0 bg-gradient-to-br from-pink-50 to-pink-100 hover:shadow-lg transition-all duration-300">
                   <CardContent className="p-8 text-center">
-                    <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                      <TrendingUp className="h-8 w-8 text-primary" />
+                    <div className="w-16 h-16 bg-pink-200 rounded-full flex items-center justify-center mx-auto mb-6">
+                      <TrendingUp className="h-8 w-8 text-pink-600" />
                     </div>
-                    <h3 className="text-2xl font-bold mb-4">Accelerated Growth</h3>
-                    <p className="text-muted-foreground">
+                    <h3 className="text-2xl font-bold mb-4 text-slate-800">1:1 Training & Mentorship</h3>
+                    <p className="text-slate-600">
                       Fast-track your career with proven strategies and techniques that deliver immediate results.
                     </p>
                   </CardContent>
@@ -142,13 +219,13 @@ export default function Training() {
               </motion.div>
 
               <motion.div variants={fadeInUp}>
-                <Card className="h-full border-0 bg-gradient-to-br from-secondary/5 to-secondary/10 hover:from-secondary/10 hover:to-secondary/15 transition-all duration-300">
+                <Card className="h-full border-0 bg-gradient-to-br from-blue-50 to-blue-100 hover:shadow-lg transition-all duration-300">
                   <CardContent className="p-8 text-center">
-                    <div className="w-16 h-16 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                      <Users className="h-8 w-8 text-secondary" />
+                    <div className="w-16 h-16 bg-blue-200 rounded-full flex items-center justify-center mx-auto mb-6">
+                      <Users className="h-8 w-8 text-blue-600" />
                     </div>
-                    <h3 className="text-2xl font-bold mb-4">Expert Instructors</h3>
-                    <p className="text-muted-foreground">
+                    <h3 className="text-2xl font-bold mb-4 text-slate-800">Role Play Sessions</h3>
+                    <p className="text-slate-600">
                       Learn from top-performing agents and industry experts with years of proven success.
                     </p>
                   </CardContent>
@@ -156,13 +233,13 @@ export default function Training() {
               </motion.div>
 
               <motion.div variants={fadeInUp}>
-                <Card className="h-full border-0 bg-gradient-to-br from-primary/5 to-primary/10 hover:from-primary/10 hover:to-primary/15 transition-all duration-300">
+                <Card className="h-full border-0 bg-gradient-to-br from-pink-50 to-pink-100 hover:shadow-lg transition-all duration-300">
                   <CardContent className="p-8 text-center">
-                    <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                      <Zap className="h-8 w-8 text-primary" />
+                    <div className="w-16 h-16 bg-pink-200 rounded-full flex items-center justify-center mx-auto mb-6">
+                      <Zap className="h-8 w-8 text-pink-600" />
                     </div>
-                    <h3 className="text-2xl font-bold mb-4">Cutting-Edge Content</h3>
-                    <p className="text-muted-foreground">
+                    <h3 className="text-2xl font-bold mb-4 text-slate-800">In-House Coaching</h3>
+                    <p className="text-slate-600">
                       Stay ahead with the latest industry trends, technology, and best practices.
                     </p>
                   </CardContent>
@@ -328,8 +405,9 @@ export default function Training() {
           </div>
         </section>
 
-        {/* Current Programs */}
-        <section className="py-20 bg-muted/30">
+
+        {/* Training Deliverables Section */}
+        <section className="py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -339,40 +417,405 @@ export default function Training() {
               className="text-center mb-16"
             >
               <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
-                Current <span className="text-primary">Training Programs</span>
+                Training <span className="text-primary">Deliverables</span>
               </h2>
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                We're currently running specialized programs designed to accelerate your success
+                Comprehensive skill development across all essential areas of real estate success
               </p>
             </motion.div>
 
+            <motion.div 
+              variants={staggerContainer}
+              initial="initial"
+              whileInView="animate"
+              viewport={{ once: true }}
+              className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+            >
+              {/* 7 Day Schedule */}
+              <motion.div variants={fadeInUp}>
+                <Card className="h-full border-0 bg-gradient-to-br from-blue-50 to-blue-100 hover:shadow-lg transition-all duration-300 group">
+                  <CardContent className="p-6 text-center">
+                    <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                      <Clock className="h-8 w-8 text-white" />
+                    </div>
+                    <h3 className="text-xl font-bold mb-3 text-blue-800">7-Day Schedule</h3>
+                    <p className="text-blue-700 text-sm">
+                      Structured weekly planning and time management system for maximum productivity and consistent results.
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              {/* Monthly Task Review */}
+              <motion.div variants={fadeInUp}>
+                <Card className="h-full border-0 bg-gradient-to-br from-green-50 to-green-100 hover:shadow-lg transition-all duration-300 group">
+                  <CardContent className="p-6 text-center">
+                    <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                      <CheckCircle className="h-8 w-8 text-white" />
+                    </div>
+                    <h3 className="text-xl font-bold mb-3 text-green-800">Monthly Task Review</h3>
+                    <p className="text-green-700 text-sm">
+                      Comprehensive monthly assessment and planning sessions to track progress and optimize performance.
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              {/* Budgets */}
+              <motion.div variants={fadeInUp}>
+                <Card className="h-full border-0 bg-gradient-to-br from-purple-50 to-purple-100 hover:shadow-lg transition-all duration-300 group">
+                  <CardContent className="p-6 text-center">
+                    <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                      <Calculator className="h-8 w-8 text-white" />
+                    </div>
+                    <h3 className="text-xl font-bold mb-3 text-purple-800">Budget Management</h3>
+                    <p className="text-purple-700 text-sm">
+                      Financial planning and budget allocation strategies for sustainable business growth and profitability.
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              {/* Follow Up Strategy */}
+              <motion.div variants={fadeInUp}>
+                <Card className="h-full border-0 bg-gradient-to-br from-orange-50 to-orange-100 hover:shadow-lg transition-all duration-300 group">
+                  <CardContent className="p-6 text-center">
+                    <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                      <Target className="h-8 w-8 text-white" />
+                    </div>
+                    <h3 className="text-xl font-bold mb-3 text-orange-800">Follow-Up Strategy</h3>
+                    <p className="text-orange-700 text-sm">
+                      Systematic follow-up processes and lead nurturing techniques to convert prospects into clients.
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              {/* Pre-qualifying Buyers */}
+              <motion.div variants={fadeInUp}>
+                <Card className="h-full border-0 bg-gradient-to-br from-red-50 to-red-100 hover:shadow-lg transition-all duration-300 group">
+                  <CardContent className="p-6 text-center">
+                    <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                      <Users className="h-8 w-8 text-white" />
+                    </div>
+                    <h3 className="text-xl font-bold mb-3 text-red-800">Pre-qualifying Buyers</h3>
+                    <p className="text-red-700 text-sm">
+                      Advanced buyer qualification techniques to identify serious prospects and maximize closing rates.
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              {/* Objection Handling */}
+              <motion.div variants={fadeInUp}>
+                <Card className="h-full border-0 bg-gradient-to-br from-teal-50 to-teal-100 hover:shadow-lg transition-all duration-300 group">
+                  <CardContent className="p-6 text-center">
+                    <div className="w-16 h-16 bg-gradient-to-br from-teal-500 to-teal-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                      <Shield className="h-8 w-8 text-white" />
+                    </div>
+                    <h3 className="text-xl font-bold mb-3 text-teal-800">Objection Handling</h3>
+                    <p className="text-teal-700 text-sm">
+                      Proven techniques to address and overcome common client objections and concerns effectively.
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              {/* Negotiation Skills */}
+              <motion.div variants={fadeInUp}>
+                <Card className="h-full border-0 bg-gradient-to-br from-indigo-50 to-indigo-100 hover:shadow-lg transition-all duration-300 group">
+                  <CardContent className="p-6 text-center">
+                    <div className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                      <Scale className="h-8 w-8 text-white" />
+                    </div>
+                    <h3 className="text-xl font-bold mb-3 text-indigo-800">Negotiation Skills</h3>
+                    <p className="text-indigo-700 text-sm">
+                      Advanced negotiation strategies and tactics to secure the best deals for your clients.
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              {/* Communication Skills */}
+              <motion.div variants={fadeInUp}>
+                <Card className="h-full border-0 bg-gradient-to-br from-pink-50 to-pink-100 hover:shadow-lg transition-all duration-300 group">
+                  <CardContent className="p-6 text-center">
+                    <div className="w-16 h-16 bg-gradient-to-br from-pink-500 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                      <BookOpen className="h-8 w-8 text-white" />
+                    </div>
+                    <h3 className="text-xl font-bold mb-3 text-pink-800">Communication Skills</h3>
+                    <p className="text-pink-700 text-sm">
+                      Professional communication techniques for effective client relationships and business development.
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              {/* Dress Up */}
+              <motion.div variants={fadeInUp}>
+                <Card className="h-full border-0 bg-gradient-to-br from-amber-50 to-amber-100 hover:shadow-lg transition-all duration-300 group">
+                  <CardContent className="p-6 text-center">
+                    <div className="w-16 h-16 bg-gradient-to-br from-amber-500 to-amber-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                      <Award className="h-8 w-8 text-white" />
+                    </div>
+                    <h3 className="text-xl font-bold mb-3 text-amber-800">Professional Image</h3>
+                    <p className="text-amber-700 text-sm">
+                      Professional presentation and personal branding strategies to build trust and credibility.
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Ken Wilder In-House Coach Section */}
+        <section className="py-20 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+              >
+                <div className="space-y-6">
+                  <div>
+                    <h2 className="text-4xl md:text-5xl font-bold mb-4">
+                      <span className="text-red-600">In-House</span> Real Estate Coach
+                    </h2>
+                    <h3 className="text-5xl md:text-6xl font-black text-slate-900 mb-6">
+                      Ken Wilder
+                    </h3>
+                  </div>
+                  
+                  <p className="text-lg text-slate-600 leading-relaxed">
+                    Ken Wilder brings over 39 years of real estate experience and 20+ years of coaching expertise. He has guided countless agents and teams to grow their businesses, close more deals, and achieve long-term success through proven strategies and practical coaching. Known for his practical, results-driven approach, Ken blends proven business strategies with mindset development, ensuring his clients not only grow their income but also create balance and longevity in their careers. Whether you're a new agent seeking guidance or a seasoned professional aiming to scale, Ken Wilder's mission is clear: to help you unlock your full potential and build the real estate business you've always envisioned.
+                  </p>
+                  
+                  <div className="pt-4">
+                    <Button size="lg" className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold px-8 py-4 text-lg">
+                      GET YOUR FREE GUIDE
+                    </Button>
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="relative"
+              >
+                <div className="relative">
+                  <Image
+                    src="https://dontdelete2005142.kloudbean.com/1761170485_Ken Wilder.png"
+                    alt="Ken Wilder - In-House Real Estate Coach"
+                    width={500}
+                    height={600}
+                    className="w-full h-auto object-cover rounded-lg shadow-2xl"
+                  />
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* IN-HOUSE COACH Section - Client Request */}
+        <section className="py-20 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="max-w-4xl mx-auto"
+              className="text-center mb-16"
             >
-              <Card className="border-0 bg-gradient-to-r from-primary/10 to-secondary/10">
-                <CardContent className="p-8 text-center">
-                  <div className="w-20 h-20 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <Target className="h-10 w-10 text-primary" />
+              <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
+                Meet Your <span className="text-primary">IN-HOUSE COACH</span>
+              </h2>
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+                Dedicated coaching and mentorship to accelerate your success
+              </p>
+            </motion.div>
+
+            <motion.div 
+              className="grid lg:grid-cols-2 gap-12 items-center"
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <div>
+                <div className="space-y-6">
+                  <div className="flex items-start space-x-4">
+                    <div className="w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center">
+                      <Users className="h-8 w-8 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold mb-2">One-on-One Coaching</h3>
+                      <p className="text-muted-foreground">
+                        Personalized coaching sessions tailored to your specific needs and career goals.
+                      </p>
+                    </div>
                   </div>
-                  <h3 className="text-2xl font-bold mb-4 font-montserrat">Accountability Program</h3>
-                  <p className="text-lg text-muted-foreground mb-6 font-arial leading-relaxed">
-                    Our flagship accountability program/course is currently running and helping agents stay focused, 
-                    track their progress, and achieve their goals. This program provides structured guidance, 
-                    regular check-ins, and proven strategies to boost productivity and results.
-                  </p>
-                  <Button size="lg" className="bg-primary hover:bg-primary/90">
-                    View Training Schedule
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
-                </CardContent>
-              </Card>
+                  
+                  <div className="flex items-start space-x-4">
+                    <div className="w-16 h-16 bg-gradient-to-br from-secondary to-purple-500 rounded-full flex items-center justify-center">
+                      <Target className="h-8 w-8 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold mb-2">Goal Setting & Tracking</h3>
+                      <p className="text-muted-foreground">
+                        Set ambitious goals and track your progress with regular check-ins and accountability.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start space-x-4">
+                    <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-primary rounded-full flex items-center justify-center">
+                      <TrendingUp className="h-8 w-8 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold mb-2">Performance Optimization</h3>
+                      <p className="text-muted-foreground">
+                        Identify areas for improvement and implement strategies to maximize your results.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="relative">
+                <div className="w-32 h-32 object-contain opacity-70 animate-pulse shadow-xl transform rotate-12 absolute -top-8 -right-8">
+                  <Image src="https://dontdelete2005142.kloudbean.com/1761170133_Group 14.png" alt="RE/MAX Excellence Logo" width={128} height={128} className="w-full h-full" />
+                </div>
+                <div className="bg-gradient-to-br from-primary/10 to-secondary/10 rounded-2xl p-8 shadow-2xl">
+                  <h3 className="text-2xl font-bold mb-4">Coaching Benefits</h3>
+                  <div className="space-y-4">
+                    <div className="flex items-center space-x-3">
+                      <CheckCircle className="h-6 w-6 text-green-600" />
+                      <span className="text-slate-700">Weekly coaching sessions</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <CheckCircle className="h-6 w-6 text-green-600" />
+                      <span className="text-slate-700">Performance analytics</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <CheckCircle className="h-6 w-6 text-green-600" />
+                      <span className="text-slate-700">Actionable feedback</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <CheckCircle className="h-6 w-6 text-green-600" />
+                      <span className="text-slate-700">24/7 support access</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </motion.div>
           </div>
         </section>
+
+        {/* ABOUT KEN WILDER Section - Client Request */}
+        <section className="py-20 bg-slate-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
+                About <span className="text-primary">KEN WILDER</span>
+              </h2>
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+                Your dedicated mentor at RE/MAX Excellence
+              </p>
+            </motion.div>
+
+            <motion.div 
+              className="grid lg:grid-cols-2 gap-12 items-center"
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <div className="relative">
+                <div className="w-28 h-28 object-contain opacity-80 animate-bounce shadow-2xl transform -rotate-12 absolute -top-8 -left-8">
+                  <Image src="https://dontdelete2005142.kloudbean.com/1761170133_Group 14.png" alt="RE/MAX Excellence Logo" width={112} height={112} className="w-full h-full" />
+                </div>
+                <div className="bg-gradient-to-br from-primary/10 to-secondary/10 rounded-2xl p-8 shadow-2xl">
+                  <h3 className="text-2xl font-bold mb-4">Experience & Expertise</h3>
+                  <div className="space-y-4">
+                    <div className="flex items-center space-x-3">
+                      <CheckCircle className="h-6 w-6 text-green-600" />
+                      <span className="text-slate-700">39+ years in real estate</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <CheckCircle className="h-6 w-6 text-green-600" />
+                      <span className="text-slate-700">20+ years of coaching expertise</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <CheckCircle className="h-6 w-6 text-green-600" />
+                      <span className="text-slate-700">$100M+ in sales volume</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <CheckCircle className="h-6 w-6 text-green-600" />
+                      <span className="text-slate-700">Top 1% RE/MAX agent</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <CheckCircle className="h-6 w-6 text-green-600" />
+                      <span className="text-slate-700">Mentored 50+ agents</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <div className="space-y-6">
+                  <div className="flex items-start space-x-4">
+                    <div className="w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center">
+                      <Award className="h-8 w-8 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold mb-2">Award-Winning Leadership</h3>
+                      <p className="text-muted-foreground">
+                        Recognized as one of Ontario's top real estate professionals with multiple industry awards.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start space-x-4">
+                    <div className="w-16 h-16 bg-gradient-to-br from-secondary to-purple-500 rounded-full flex items-center justify-center">
+                      <GraduationCap className="h-8 w-8 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold mb-2">Continuous Learning</h3>
+                      <p className="text-muted-foreground">
+                        Committed to staying ahead of market trends and sharing knowledge with our team.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start space-x-4">
+                    <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-primary rounded-full flex items-center justify-center">
+                      <Users className="h-8 w-8 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold mb-2">Team Building</h3>
+                      <p className="text-muted-foreground">
+                        Built RE/MAX Excellence from the ground up, creating opportunities for ambitious agents.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
 
         {/* AI Integration */}
         <section className="py-20">
@@ -392,8 +835,8 @@ export default function Training() {
                 </p>
                 <div className="space-y-6">
                   <div className="flex items-start space-x-4">
-                    <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center">
-                      <BookOpen className="h-6 w-6 text-primary" />
+                    <div className="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center">
+                      <BookOpen className="h-6 w-6 text-pink-600" />
                     </div>
                     <div>
                       <h3 className="text-xl font-bold mb-2">Personalized Learning Paths</h3>
@@ -401,8 +844,8 @@ export default function Training() {
                     </div>
                   </div>
                   <div className="flex items-start space-x-4">
-                    <div className="w-12 h-12 bg-secondary/20 rounded-full flex items-center justify-center">
-                      <Video className="h-6 w-6 text-secondary" />
+                    <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                      <Video className="h-6 w-6 text-blue-600" />
                     </div>
                     <div>
                       <h3 className="text-xl font-bold mb-2">Interactive Simulations</h3>
@@ -410,8 +853,8 @@ export default function Training() {
                     </div>
                   </div>
                   <div className="flex items-start space-x-4">
-                    <div className="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center">
-                      <Award className="h-6 w-6 text-purple-500" />
+                    <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                      <Award className="h-6 w-6 text-purple-600" />
                     </div>
                     <div>
                       <h3 className="text-xl font-bold mb-2">Progress Tracking</h3>
@@ -428,11 +871,13 @@ export default function Training() {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="relative"
               >
-                <div className="bg-gradient-to-br from-primary/10 to-secondary/10 rounded-2xl p-8">
-                  <img 
-                    src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                    alt="Training Session"
-                    className="w-full rounded-lg"
+                <div className="rounded-2xl overflow-hidden shadow-2xl">
+                  <Image 
+                    src="https://dontdelete2005142.kloudbean.com/1761169495_Futuristic Tools for todays Agents.png"
+                    alt="Futuristic Tools for Today's Agents"
+                    width={600}
+                    height={400}
+                    className="w-full h-auto object-cover"
                   />
                 </div>
               </motion.div>
@@ -454,7 +899,7 @@ export default function Training() {
                 Flexible <span className="text-primary">Learning Options</span>
               </h2>
               <p className="text-xl text-muted-foreground">
-                Choose the format that works best for your schedule and learning style
+                Choose the format that works best for your schedule and learning style. We also offer TREEB, MRREB, and RECO sessions to meet your professional development needs.
               </p>
             </motion.div>
 
@@ -540,90 +985,8 @@ export default function Training() {
           </div>
         </section>
 
-        {/* Schedule Preview */}
-        <section className="py-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
-                Upcoming <span className="text-primary">Training Sessions</span>
-              </h2>
-              <p className="text-xl text-muted-foreground">
-                Join our next training sessions and accelerate your growth
-              </p>
-            </motion.div>
-
-            <motion.div 
-              variants={staggerContainer}
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: true }}
-              className="grid md:grid-cols-2 gap-8"
-            >
-              {[
-                {
-                  title: "Marketing Mastery Bootcamp",
-                  date: "March 15, 2024",
-                  time: "9:00 AM - 5:00 PM",
-                  format: "In-Person",
-                  spots: "8 spots left"
-                },
-                {
-                  title: "Pre-Construction Strategies",
-                  date: "March 22, 2024",
-                  time: "2:00 PM - 4:00 PM",
-                  format: "Virtual",
-                  spots: "15 spots left"
-                },
-                {
-                  title: "Legal & Compliance Update",
-                  date: "March 29, 2024",
-                  time: "10:00 AM - 12:00 PM",
-                  format: "Virtual",
-                  spots: "12 spots left"
-                },
-                {
-                  title: "Mortgage & Finance Workshop",
-                  date: "April 5, 2024",
-                  time: "1:00 PM - 5:00 PM",
-                  format: "In-Person",
-                  spots: "5 spots left"
-                }
-              ].map((session, index) => (
-                <motion.div key={index} variants={fadeInUp}>
-                  <Card className="border-0 bg-white hover:shadow-lg transition-all duration-300">
-                    <CardContent className="p-8">
-                      <div className="flex justify-between items-start mb-4">
-                        <h3 className="text-xl font-bold">{session.title}</h3>
-                        <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">
-                          {session.format}
-                        </span>
-                      </div>
-                      <div className="space-y-2 text-muted-foreground mb-6">
-                        <p className="flex items-center">
-                          <Clock className="h-4 w-4 mr-2" />
-                          {session.date} • {session.time}
-                        </p>
-                        <p className="text-sm text-green-600 font-medium">{session.spots}</p>
-                      </div>
-                      <Button className="w-full bg-primary hover:bg-primary/90">
-                        Register Now
-                      </Button>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
-        </section>
-
         {/* CTA Section */}
-        <section className="py-20 bg-gradient-to-r from-primary to-secondary">
+        <section className="py-20 bg-gradient-to-r from-brand-bright-red via-brand-medium-blue to-brand-dark-blue">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -631,18 +994,12 @@ export default function Training() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-                Ready to Elevate Your Skills?
+              <h2 className="text-3xl md:text-5xl font-bold text-white mb-8">
+                Let's Build Your Brand Together
               </h2>
-              <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-                Join our comprehensive training programs and transform your real estate career with expert guidance and cutting-edge tools.
-              </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="bg-white text-primary hover:bg-white/90">
-                  View Training Schedule
-                </Button>
-                <Button size="lg" variant="outline" className="bg-white/10 border-white text-white hover:bg-white hover:text-foreground">
-                  Contact Training Team
+                <Button size="lg" className="bg-white text-brand-bright-red hover:bg-white/90 font-bold px-8 py-4 text-xl">
+                  Join Us
                 </Button>
               </div>
             </motion.div>

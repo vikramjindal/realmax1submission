@@ -4,6 +4,23 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom scrollbar styles */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Safari and Chrome */
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  20% { opacity: 1; }
+  30% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
 :root {
   --mode: light;
 }
@@ -18,35 +35,37 @@
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
     
-    /* Official RE/MAX Primary Colors */
-    --primary: 0 84% 49%; /* RE/MAX Primary Red: #dc1c2e */
+    /* Custom 4-Color Palette */
+    --primary: 0 89% 30%; /* Dark Red: #640E0E */
     --primary-foreground: 0 0% 98%;
-    --secondary: 214 100% 32%; /* RE/MAX Primary Blue: #003da5 */
+    --secondary: 0 89% 47%; /* Bright Red: #EE2924 */
     --secondary-foreground: 0 0% 98%;
     
     --muted: 240 4.8% 95.9%;
     --muted-foreground: 240 3.8% 46.1%;
-    --accent: 214 100% 32%;
+    --accent: 220 100% 20%; /* Dark Navy Blue: #091537 */
     --accent-foreground: 0 0% 98%;
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 89% 47%; /* Bright Red: #EE2924 */
     --destructive-foreground: 0 0% 98%;
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
-    --ring: 0 84% 49%;
-    --chart-1: 0 84% 49%;
-    --chart-2: 214 100% 32%;
-    --chart-3: 0 0% 45%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
+    --ring: 0 89% 30%; /* Dark Red: #640E0E */
+    --chart-1: 0 89% 30%; /* Dark Red */
+    --chart-2: 0 89% 47%; /* Bright Red */
+    --chart-3: 220 100% 20%; /* Dark Navy Blue */
+    --chart-4: 220 100% 40%; /* Medium Blue */
+    --chart-5: 0 0% 45%; /* Gray for neutral elements */
     --radius: 0.5rem;
     
-    /* Official RE/MAX Brand Colors */
-    --remax-red: 0 84% 49%; /* #dc1c2e */
-    --remax-blue: 214 100% 32%; /* #003da5 */
-    --remax-white: 0 0% 100%; /* #ffffff */
-    --remax-gray: 0 0% 45%; /* #737373 */
-    --gradient-start: 0 84% 49%;
-    --gradient-end: 214 100% 32%;
+    /* Custom 4-Color Brand Palette */
+    --brand-dark-red: 0 89% 30%; /* #640E0E */
+    --brand-bright-red: 0 89% 47%; /* #EE2924 */
+    --brand-dark-blue: 220 100% 20%; /* #091537 */
+    --brand-medium-blue: 220 100% 40%; /* #3F5CAA */
+    --brand-white: 0 0% 100%; /* #ffffff */
+    --brand-gray: 0 0% 45%; /* #737373 */
+    --gradient-start: 0 89% 30%; /* Dark Red */
+    --gradient-end: 220 100% 20%; /* Dark Navy Blue */
   }
   
   .dark {
@@ -56,38 +75,45 @@
     --card-foreground: 0 0% 98%;
     --popover: 240 10% 3.9%;
     --popover-foreground: 0 0% 98%;
-    --primary: 0 84% 49%;
+    --primary: 0 89% 30%; /* Dark Red: #640E0E */
     --primary-foreground: 0 0% 98%;
-    --secondary: 214 100% 32%;
+    --secondary: 0 89% 47%; /* Bright Red: #EE2924 */
     --secondary-foreground: 0 0% 98%;
     --muted: 240 3.7% 15.9%;
     --muted-foreground: 240 5% 64.9%;
-    --accent: 214 100% 32%;
+    --accent: 220 100% 20%; /* Dark Navy Blue: #091537 */
     --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 89% 47%; /* Bright Red: #EE2924 */
     --destructive-foreground: 0 0% 98%;
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
-    --ring: 0 84% 49%;
-    --chart-1: 0 84% 49%;
-    --chart-2: 214 100% 32%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+    --ring: 0 89% 30%; /* Dark Red: #640E0E */
+    --chart-1: 0 89% 30%; /* Dark Red */
+    --chart-2: 0 89% 47%; /* Bright Red */
+    --chart-3: 220 100% 20%; /* Dark Navy Blue */
+    --chart-4: 220 100% 40%; /* Medium Blue */
+    --chart-5: 0 0% 60%; /* Gray for neutral elements */
     
-    /* RE/MAX colors for dark mode */
-    --remax-red: 0 84% 49%;
-    --remax-blue: 214 100% 40%;
-    --remax-white: 0 0% 100%;
-    --remax-gray: 0 0% 60%;
-    --gradient-start: 0 84% 49%;
-    --gradient-end: 214 100% 40%;
+    /* Custom 4-Color Brand Palette for dark mode */
+    --brand-dark-red: 0 89% 30%; /* #640E0E */
+    --brand-bright-red: 0 89% 47%; /* #EE2924 */
+    --brand-dark-blue: 220 100% 20%; /* #091537 */
+    --brand-medium-blue: 220 100% 40%; /* #3F5CAA */
+    --brand-white: 0 0% 100%;
+    --brand-gray: 0 0% 60%;
+    --gradient-start: 0 89% 30%; /* Dark Red */
+    --gradient-end: 220 100% 20%; /* Dark Navy Blue */
   }
 }
 
 @layer base {
   * {
     @apply border-border;
+  }
+  
+  html, body {
+    margin: 0;
+    padding: 0;
   }
   
   body {
@@ -129,9 +155,17 @@
     @apply bg-white border-0 shadow-sm hover:shadow-md transition-all duration-300;
   }
   
-  /* RE/MAX Brand Gradient */
+  /* Custom 4-Color Brand Gradient */
   .gradient-remax {
-    background: linear-gradient(135deg, hsl(var(--remax-red)) 0%, hsl(var(--remax-blue)) 100%);
+    background: linear-gradient(135deg, hsl(var(--brand-dark-red)) 0%, hsl(var(--brand-dark-blue)) 100%);
+  }
+  
+  .gradient-red-to-blue {
+    background: linear-gradient(135deg, hsl(var(--brand-bright-red)) 0%, hsl(var(--brand-medium-blue)) 100%);
+  }
+  
+  .gradient-blue-to-red {
+    background: linear-gradient(135deg, hsl(var(--brand-medium-blue)) 0%, hsl(var(--brand-bright-red)) 100%);
   }
 }
 
@@ -179,4 +213,22 @@
 
 .animate-slide-in-right {
   animation: slideInRight 0.6s ease-out;
+}
+
+/* Auto-scrolling animation for marketing carousel */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 45s linear infinite;
+}
+
+.animate-scroll:hover {
+  animation-play-state: paused;
 }

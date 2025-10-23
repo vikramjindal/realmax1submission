@@ -68,7 +68,7 @@ export default function JoinUs() {
                     <div className="absolute right-8 top-16 z-10">
                       <div className="relative">
                         <Image 
-                          src="/images/ballon.png" 
+                          src="/images/company-pin-icon.png" 
                           alt="RE/MAX Balloon" 
                           width={80} 
                           height={80} 
@@ -82,7 +82,7 @@ export default function JoinUs() {
                     <div className="absolute left-8 top-32 z-10">
                       <div className="relative">
                         <Image 
-                          src="/images/ballon.png" 
+                          src="/images/company-pin-icon.png" 
                           alt="RE/MAX Balloon" 
                           width={56} 
                           height={56} 
@@ -99,10 +99,6 @@ export default function JoinUs() {
               transition={{ duration: 0.8 }}
               className="text-center"
             >
-              <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-green-500 to-green-600 rounded-full text-white text-sm font-semibold shadow-lg mb-6">
-                <UserPlus className="w-4 h-4 mr-2" />
-                Join Our Growing Team
-              </div>
               <h1 className="text-5xl lg:text-6xl font-black text-slate-900 mb-8 font-montserrat leading-tight">
                 Your Future in Real Estate 
                 <span className="block text-transparent bg-gradient-to-r from-green-500 via-emerald-600 to-teal-600 bg-clip-text">
@@ -116,103 +112,127 @@ export default function JoinUs() {
           </div>
         </section>
 
-        {/* AI/Tech Angle Statement */}
-        <section className="py-16 bg-gradient-to-r from-muted/50 to-muted/30">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center"
-            >
-              <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-secondary/5 rounded-3xl blur-3xl opacity-30"></div>
-                <Card className="relative border-0 bg-gradient-to-r from-primary/10 to-secondary/10 backdrop-blur-sm">
-                  <CardContent className="p-12 text-center">
-                    <div className="w-20 h-20 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                      <Zap className="h-10 w-10 text-primary" />
-                    </div>
-                    <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-6 font-montserrat">
-                      AI-Powered Onboarding & Support
-                    </h3>
-                    <p className="text-lg text-muted-foreground max-w-4xl mx-auto font-arial leading-relaxed">
-                      From AI-powered lead matching to automated onboarding, we make your transition into RE/MAX Excellence seamless. Our technology ensures you hit the ground running with smart tools and insights from day one.
-                    </p>
-                  </CardContent>
-                </Card>
-              </div>
-            </motion.div>
+        {/* Onboarding Levels Section */}
+        <section className="py-16 bg-gradient-to-br from-slate-50 via-white to-slate-50 relative overflow-hidden">
+          {/* Background Elements */}
+          <div className="absolute inset-0">
+            <div className="absolute top-10 left-10 w-72 h-72 bg-gradient-to-br from-brand-bright-red/10 to-brand-dark-red/5 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-10 right-10 w-96 h-96 bg-gradient-to-br from-brand-medium-blue/10 to-brand-bright-red/5 rounded-full blur-3xl"></div>
           </div>
-        </section>
 
-        {/* For Different Agent Types */}
-        <section className="py-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="text-center mb-16"
+              className="text-center mb-12"
             >
-              <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6 font-montserrat">
-                Designed for <span className="text-primary">Every Stage</span>
+              <h2 className="text-3xl lg:text-4xl font-black text-slate-900 mb-6 font-montserrat leading-tight">
+                Your <span className="text-transparent bg-gradient-to-r from-brand-bright-red via-brand-dark-red to-brand-medium-blue bg-clip-text">Onboarding Journey</span>
               </h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto font-arial">
-                We have specialized programs and support for agents at every level of their career
+              <p className="text-lg text-slate-600 max-w-3xl mx-auto font-arial leading-relaxed">
+                      From AI-powered lead matching to automated onboarding, we make your transition into RE/MAX Excellence seamless. Our technology ensures you hit the ground running with smart tools and insights from day one.
               </p>
             </motion.div>
 
+            {/* Onboarding Levels - Optimized 2x3 Grid */}
             <motion.div 
               variants={staggerContainer}
               initial="initial"
               whileInView="animate"
               viewport={{ once: true }}
-              className="grid md:grid-cols-3 gap-8"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto"
             >
-              {[
-                {
-                  title: "For New Agents",
-                  description: "Hands-on mentorship, training, and first-deal guidance to launch your career successfully.",
-                  icon: GraduationCap,
-                  benefits: ["Comprehensive training program", "Mentorship from top performers", "First-deal support", "Marketing materials provided"]
-                },
-                {
-                  title: "For Experienced Agents",
-                  description: "Marketing, tech, and lead-generation support to grow your existing business.",
-                  icon: TrendingUp,
-                  benefits: ["Advanced marketing tools", "Lead generation systems", "Technology integration", "Business scaling support"]
-                },
-                {
-                  title: "For Team Leaders",
-                  description: "Resources to scale your team and increase profitability with proven systems.",
-                  icon: Users,
-                  benefits: ["Team management tools", "Recruitment support", "Profit optimization", "Leadership training"]
-                }
-              ].map((type, index) => (
-                <motion.div key={index} variants={fadeInUp}>
-                  <Card className="h-full border-0 bg-gradient-to-br from-primary/5 to-primary/10 hover:from-primary/10 hover:to-primary/15 transition-all duration-300">
-                    <CardContent className="p-8 text-center">
-                      <div className="w-20 h-20 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <type.icon className="h-10 w-10 text-primary" />
+              <motion.div variants={fadeInUp}>
+                <Card className="h-full border-0 bg-white/80 backdrop-blur-sm hover:bg-white hover:shadow-2xl transition-all duration-500 group relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-brand-bright-red/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <CardContent className="p-6 text-center relative z-10">
+                    <div className="w-14 h-14 bg-gradient-to-br from-brand-bright-red to-brand-dark-red rounded-2xl flex items-center justify-center mx-auto mb-5 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg">
+                      <span className="text-white font-bold text-xl">1</span>
+                    </div>
+                    <h3 className="text-lg font-bold mb-3 text-slate-800 group-hover:text-brand-bright-red transition-colors duration-300">Onboarding</h3>
+                    <p className="text-slate-600 text-sm leading-relaxed">
+                      Get officially welcomed to the team and set up with all necessary accounts and tools.
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              <motion.div variants={fadeInUp}>
+                <Card className="h-full border-0 bg-white/80 backdrop-blur-sm hover:bg-white hover:shadow-2xl transition-all duration-500 group relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-brand-dark-red/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <CardContent className="p-6 text-center relative z-10">
+                    <div className="w-14 h-14 bg-gradient-to-br from-brand-dark-red to-brand-medium-blue rounded-2xl flex items-center justify-center mx-auto mb-5 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg">
+                      <span className="text-white font-bold text-xl">2</span>
+                    </div>
+                    <h3 className="text-lg font-bold mb-3 text-slate-800 group-hover:text-brand-dark-red transition-colors duration-300">Orientation</h3>
+                    <p className="text-slate-600 text-sm leading-relaxed">
+                      Learn about our culture, processes, and how we support your growth every step of the way.
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              <motion.div variants={fadeInUp}>
+                <Card className="h-full border-0 bg-white/80 backdrop-blur-sm hover:bg-white hover:shadow-2xl transition-all duration-500 group relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-brand-medium-blue/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <CardContent className="p-6 text-center relative z-10">
+                    <div className="w-14 h-14 bg-gradient-to-br from-brand-medium-blue to-brand-bright-red rounded-2xl flex items-center justify-center mx-auto mb-5 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg">
+                      <span className="text-white font-bold text-xl">3</span>
+                    </div>
+                    <h3 className="text-lg font-bold mb-3 text-slate-800 group-hover:text-brand-medium-blue transition-colors duration-300">Welcome Package & Essentials</h3>
+                    <p className="text-slate-600 text-sm leading-relaxed">
+                      Receive branding materials, resources, and everything you need to start representing clients confidently.
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              <motion.div variants={fadeInUp}>
+                <Card className="h-full border-0 bg-white/80 backdrop-blur-sm hover:bg-white hover:shadow-2xl transition-all duration-500 group relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-brand-bright-red/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <CardContent className="p-6 text-center relative z-10">
+                    <div className="w-14 h-14 bg-gradient-to-br from-brand-bright-red to-brand-dark-red rounded-2xl flex items-center justify-center mx-auto mb-5 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg">
+                      <span className="text-white font-bold text-xl">4</span>
+                    </div>
+                    <h3 className="text-lg font-bold mb-3 text-slate-800 group-hover:text-brand-bright-red transition-colors duration-300">Tutorials & Marketing Assets</h3>
+                    <p className="text-slate-600 text-sm leading-relaxed">
+                      Access step-by-step tutorials, templates, and ready-to-use marketing materials to hit the ground running.
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              <motion.div variants={fadeInUp}>
+                <Card className="h-full border-0 bg-white/80 backdrop-blur-sm hover:bg-white hover:shadow-2xl transition-all duration-500 group relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-brand-dark-red/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <CardContent className="p-6 text-center relative z-10">
+                    <div className="w-14 h-14 bg-gradient-to-br from-brand-dark-red to-brand-medium-blue rounded-2xl flex items-center justify-center mx-auto mb-5 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg">
+                      <span className="text-white font-bold text-xl">5</span>
+                    </div>
+                    <h3 className="text-lg font-bold mb-3 text-slate-800 group-hover:text-brand-dark-red transition-colors duration-300">Listing Presentation</h3>
+                    <p className="text-slate-600 text-sm leading-relaxed">
+                      Master the art of presenting properties to sellers with professional listing presentations and strategies.
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              <motion.div variants={fadeInUp}>
+                <Card className="h-full border-0 bg-white/80 backdrop-blur-sm hover:bg-white hover:shadow-2xl transition-all duration-500 group relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-brand-medium-blue/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <CardContent className="p-6 text-center relative z-10">
+                    <div className="w-14 h-14 bg-gradient-to-br from-brand-medium-blue to-brand-bright-red rounded-2xl flex items-center justify-center mx-auto mb-5 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg">
+                      <span className="text-white font-bold text-xl">6</span>
                       </div>
-                      <h3 className="text-2xl font-bold mb-4 font-montserrat">{type.title}</h3>
-                      <p className="text-muted-foreground mb-6 font-arial leading-relaxed">
-                        {type.description}
-                      </p>
-                      <ul className="text-left space-y-2">
-                        {type.benefits.map((benefit, idx) => (
-                          <li key={idx} className="flex items-center space-x-2 text-sm text-muted-foreground">
-                            <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
-                            <span>{benefit}</span>
-                          </li>
-                        ))}
-                      </ul>
+                    <h3 className="text-lg font-bold mb-3 text-slate-800 group-hover:text-brand-medium-blue transition-colors duration-300">Buyer Presentation</h3>
+                    <p className="text-slate-600 text-sm leading-relaxed">
+                      Learn effective buyer presentation techniques to help clients find their perfect home and close deals.
+                    </p>
                     </CardContent>
                   </Card>
                 </motion.div>
-              ))}
             </motion.div>
           </div>
         </section>
@@ -288,11 +308,10 @@ export default function JoinUs() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="message">Why do you want to join RE/MAX Excellence? *</Label>
-                      <Textarea 
-                        id="message" 
-                        placeholder="Tell us about your goals and what you're looking for in a brokerage..."
-                        rows={4}
+                      <Label htmlFor="brokerage">What is your current brokerage's name? *</Label>
+                      <Input 
+                        id="brokerage" 
+                        placeholder="Brokerage's name"
                         required
                       />
                     </div>
@@ -366,94 +385,8 @@ export default function JoinUs() {
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className="py-20 bg-gradient-to-r from-primary to-secondary">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 font-montserrat">
-                Ready to Start Your Journey?
-              </h2>
-              <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto font-arial">
-                Join the fastest-growing brokerage in Ontario and take your career to new heights.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" variant="outline" className="bg-white/10 border-white text-white hover:bg-white hover:text-primary">
-                  Contact Us
-                </Button>
-                <Button size="lg" className="bg-white text-primary hover:bg-white/90">
-                  Learn More
-                </Button>
-              </div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* Footer */}
-        <footer className="bg-foreground text-background py-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid md:grid-cols-4 gap-8">
-              {/* Company Info */}
-              <div className="md:col-span-2">
-                <div className="flex items-center space-x-2 mb-6">
-                  <div className="text-2xl font-bold">
-                    <span className="text-primary">RE/MAX</span>
-                    <span className="text-secondary ml-2">Excellence</span>
-                  </div>
-                </div>
-                <p className="text-background/80 mb-6 max-w-md">
-                  Ontario's youngest, fastest-growing real estate brokerage. Your trusted partner with a fresh edge.
-                </p>
-              </div>
-
-              {/* Quick Links */}
-              <div>
-                <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
-                <ul className="space-y-2">
-                  <li><a href="/" className="text-background/80 hover:text-primary transition-colors">Home</a></li>
-                  <li><a href="/marketing" className="text-background/80 hover:text-primary transition-colors">Marketing</a></li>
-                  <li><a href="/training" className="text-background/80 hover:text-primary transition-colors">Training</a></li>
-                  <li><a href="/careers" className="text-background/80 hover:text-primary transition-colors">Careers</a></li>
-                </ul>
-              </div>
-
-              {/* Contact Info */}
-              <div>
-                <h3 className="text-lg font-semibold mb-4">Contact</h3>
-                <ul className="space-y-3">
-                  <li className="flex items-center space-x-3">
-                    <Phone className="h-4 w-4 text-primary" />
-                    <span className="text-background/80">(416) 555-0123</span>
-                  </li>
-                  <li className="flex items-center space-x-3">
-                    <Mail className="h-4 w-4 text-primary" />
-                    <span className="text-background/80">careers@remaxexcellence.ca</span>
-                  </li>
-                  <li className="flex items-center space-x-3">
-                    <MapPin className="h-4 w-4 text-primary" />
-                    <span className="text-background/80">Toronto, Ontario</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="border-t border-background/20 mt-12 pt-8 text-center">
-              <p className="text-background/60 mb-2">
-                © 2024 RE/MAX Excellence. All rights reserved.
-              </p>
-              <p className="text-background/60 text-sm font-arial">
-                Each Office Independently Owned and Operated
-              </p>
-            </div>
-          </div>
-        </footer>
       </div>
       
-      {/* Footer */}
       <Footer />
     </>
   );

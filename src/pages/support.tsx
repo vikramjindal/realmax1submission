@@ -73,33 +73,33 @@ export default function Support() {
         <Header />
         
         {/* Hero Section */}
-        <section className="relative py-20 bg-gradient-to-br from-rose-50 via-white to-pink-100 overflow-hidden">
+        <section className="relative py-20 bg-gradient-to-br from-brand-bright-red/10 via-white to-brand-medium-blue/10 overflow-hidden">
           {/* Background Elements */}
           <div className="absolute inset-0">
-            <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-rose-200/30 to-rose-300/20 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-br from-pink-200/30 to-pink-300/20 rounded-full blur-3xl"></div>
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-br from-purple-200/20 to-purple-300/10 rounded-full blur-3xl"></div>
+            <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-brand-bright-red/30 to-brand-dark-red/20 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-br from-brand-medium-blue/30 to-brand-dark-blue/20 rounded-full blur-3xl"></div>
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-br from-brand-dark-blue/20 to-brand-medium-blue/10 rounded-full blur-3xl"></div>
           </div>
           
           {/* Creative Floating Balloon Elements */}
           <div className="absolute right-8 top-16 z-10">
             <div className="relative">
               <Image 
-                src="/images/ballon.png" 
+                src="/images/company-pin-icon.png" 
                 alt="RE/MAX Balloon" 
                 width={80} 
                 height={80} 
                 className="w-20 h-20 object-contain opacity-80 animate-pulse transform rotate-6"
               />
-              <div className="absolute -top-3 -right-3 w-10 h-10 bg-gradient-to-br from-pink-400 to-purple-500 rounded-full opacity-60 animate-bounce"></div>
-              <div className="absolute -bottom-3 -left-3 w-8 h-8 bg-gradient-to-br from-purple-400 to-indigo-500 rounded-full opacity-70 animate-ping"></div>
+              <div className="absolute -top-3 -right-3 w-10 h-10 bg-gradient-to-br from-brand-medium-blue to-brand-dark-blue rounded-full opacity-60 animate-bounce"></div>
+              <div className="absolute -bottom-3 -left-3 w-8 h-8 bg-gradient-to-br from-brand-bright-red to-brand-dark-red rounded-full opacity-70 animate-ping"></div>
             </div>
           </div>
           
           <div className="absolute left-8 top-32 z-10">
             <div className="relative">
               <Image 
-                src="/images/ballon.png" 
+                src="/images/company-pin-icon.png" 
                 alt="RE/MAX Balloon" 
                 width={56} 
                 height={56} 
@@ -116,10 +116,6 @@ export default function Support() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
               >
-                <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-rose-500 to-rose-600 rounded-full text-white text-sm font-semibold shadow-lg mb-6">
-                  <Heart className="w-4 h-4 mr-2" />
-                  Dedicated Support Team
-                </div>
                 <h1 className="text-5xl lg:text-6xl font-black text-slate-900 mb-8 font-montserrat leading-tight">
                   Everything You Need, <span className="text-transparent bg-gradient-to-r from-rose-500 via-pink-600 to-purple-600 bg-clip-text">All Under One Roof</span>
                 </h1>
@@ -559,7 +555,7 @@ export default function Support() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 bg-gradient-to-r from-primary to-secondary">
+        <section className="py-20 bg-gradient-to-r from-brand-bright-red via-brand-medium-blue to-brand-dark-blue">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -567,18 +563,12 @@ export default function Support() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-                Experience the Difference
+              <h2 className="text-3xl md:text-5xl font-bold text-white mb-8">
+                Let's Build Your Brand Together
               </h2>
-              <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-                Join RE/MAX Excellence and discover how comprehensive support can transform your real estate business.
-              </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="bg-white text-primary hover:bg-white/90">
-                  Meet Our Support Team
-                </Button>
-                <Button size="lg" variant="outline" className="bg-white/10 border-white text-white hover:bg-white hover:text-foreground">
-                  Schedule Consultation
+                <Button size="lg" className="bg-white text-brand-bright-red hover:bg-white/90 font-bold px-8 py-4 text-xl">
+                  Join Us
                 </Button>
               </div>
             </motion.div>

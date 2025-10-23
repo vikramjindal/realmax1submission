@@ -81,39 +81,39 @@ export default function Buy() {
         <Header />
         
         {/* Hero Section */}
-        <section className="relative py-20 bg-gradient-to-br from-blue-50 via-white to-indigo-100 overflow-hidden">
+        <section className="relative py-20 bg-gradient-to-br from-brand-medium-blue/10 via-white to-brand-dark-blue/10 overflow-hidden">
           {/* Background Elements */}
           <div className="absolute inset-0">
-            <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-blue-200/30 to-blue-300/20 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-br from-indigo-200/30 to-indigo-300/20 rounded-full blur-3xl"></div>
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-br from-purple-200/20 to-purple-300/10 rounded-full blur-3xl"></div>
+            <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-brand-medium-blue/30 to-brand-dark-blue/20 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-br from-brand-dark-blue/30 to-brand-medium-blue/20 rounded-full blur-3xl"></div>
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-br from-brand-bright-red/20 to-brand-dark-red/10 rounded-full blur-3xl"></div>
           </div>
           
           {/* Creative Floating Balloon Elements */}
           <div className="absolute right-8 top-16 z-10">
             <div className="relative">
               <Image 
-                src="/images/ballon.png" 
+                src="/images/company-pin-icon.png" 
                 alt="RE/MAX Balloon" 
                 width={80} 
                 height={80} 
                 className="w-20 h-20 object-contain opacity-80 animate-pulse transform rotate-6"
               />
-              <div className="absolute -top-3 -right-3 w-10 h-10 bg-gradient-to-br from-indigo-400 to-purple-500 rounded-full opacity-60 animate-bounce"></div>
-              <div className="absolute -bottom-3 -left-3 w-8 h-8 bg-gradient-to-br from-purple-400 to-pink-500 rounded-full opacity-70 animate-ping"></div>
+              <div className="absolute -top-3 -right-3 w-10 h-10 bg-gradient-to-br from-brand-medium-blue to-brand-dark-blue rounded-full opacity-60 animate-bounce"></div>
+              <div className="absolute -bottom-3 -left-3 w-8 h-8 bg-gradient-to-br from-brand-bright-red to-brand-dark-red rounded-full opacity-70 animate-ping"></div>
             </div>
           </div>
           
           <div className="absolute left-8 top-32 z-10">
             <div className="relative">
               <Image 
-                src="/images/ballon.png" 
+                src="/images/company-pin-icon.png" 
                 alt="RE/MAX Balloon" 
                 width={56} 
                 height={56} 
                 className="w-14 h-14 object-contain opacity-70 animate-bounce transform -rotate-6"
               />
-              <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-br from-pink-400 to-red-500 rounded-full opacity-80 animate-pulse"></div>
+              <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-br from-brand-bright-red to-brand-dark-red rounded-full opacity-80 animate-pulse"></div>
             </div>
           </div>
           
@@ -124,12 +124,8 @@ export default function Buy() {
               transition={{ duration: 0.8 }}
               className="text-center mb-12"
             >
-              <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full text-white text-sm font-semibold shadow-lg mb-6">
-                <Search className="w-4 h-4 mr-2" />
-                Find Your Perfect Home
-              </div>
               <h1 className="text-5xl lg:text-6xl font-black text-slate-900 mb-8 font-montserrat leading-tight">
-                Find Your <span className="text-transparent bg-gradient-to-r from-blue-500 via-indigo-600 to-purple-600 bg-clip-text">Dream Home</span>
+                Find Your <span className="text-transparent bg-gradient-to-r from-brand-medium-blue via-brand-dark-blue to-brand-bright-red bg-clip-text">Dream Home</span>
               </h1>
               <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-8 font-arial leading-relaxed">
                 Discover exclusive listings, get expert guidance, and make your homeownership dreams come true with Ontario's fastest-growing brokerage.
@@ -242,8 +238,8 @@ export default function Buy() {
           {/* Creative Background Elements */}
           <div className="absolute right-8 top-8 z-10">
             <div className="relative">
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-indigo-500 rounded-full opacity-40 animate-pulse"></div>
-              <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-br from-indigo-400 to-purple-500 rounded-full opacity-60 animate-bounce"></div>
+              <div className="w-12 h-12 bg-gradient-to-br from-brand-medium-blue to-brand-dark-blue rounded-full opacity-40 animate-pulse"></div>
+              <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-br from-brand-bright-red to-brand-dark-red rounded-full opacity-60 animate-bounce"></div>
             </div>
           </div>
           
@@ -297,7 +293,7 @@ export default function Buy() {
                       <div className="flex justify-between items-start mb-4">
                         <h3 className="text-2xl font-bold text-primary">{listing.price}</h3>
                         <div className="flex items-center">
-                          <Star className="h-4 w-4 text-yellow-400 fill-current" />
+                          <Star className="h-4 w-4 text-brand-bright-red fill-current" />
                           <span className="text-sm text-muted-foreground ml-1">4.8</span>
                         </div>
                       </div>
@@ -371,7 +367,7 @@ export default function Buy() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 bg-gradient-to-r from-primary to-secondary">
+        <section className="py-20 bg-gradient-to-r from-brand-bright-red via-brand-medium-blue to-brand-dark-blue">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -379,18 +375,12 @@ export default function Buy() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-                Ready to Find Your Dream Home?
+              <h2 className="text-3xl md:text-5xl font-bold text-white mb-8">
+                Let's Build Your Brand Together
               </h2>
-              <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-                Let our expert agents help you navigate the market and find the perfect property for your needs.
-              </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="bg-white text-primary hover:bg-white/90">
-                  Start Your Search
-                </Button>
-                <Button size="lg" variant="outline" className="bg-white/10 border-white text-white hover:bg-white hover:text-foreground">
-                  Contact an Agent
+                <Button size="lg" className="bg-white text-brand-bright-red hover:bg-white/90 font-bold px-8 py-4 text-xl">
+                  Join Us
                 </Button>
               </div>
             </motion.div>

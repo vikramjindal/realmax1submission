@@ -62,7 +62,7 @@ export default function Sell() {
           <div className="absolute right-8 top-16 z-10">
             <div className="relative">
               <Image 
-                src="/images/ballon.png" 
+                src="/images/company-pin-icon.png" 
                 alt="RE/MAX Balloon" 
                 width={80} 
                 height={80} 
@@ -76,7 +76,7 @@ export default function Sell() {
           <div className="absolute left-8 top-32 z-10">
             <div className="relative">
               <Image 
-                src="/images/ballon.png" 
+                src="/images/company-pin-icon.png" 
                 alt="RE/MAX Balloon" 
                 width={56} 
                 height={56} 
@@ -93,10 +93,6 @@ export default function Sell() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
               >
-                <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-full text-white text-sm font-semibold shadow-lg mb-6">
-                  <TrendingUp className="w-4 h-4 mr-2" />
-                  Maximize Your Sale Price
-                </div>
                 <h1 className="text-5xl lg:text-6xl font-black text-slate-900 mb-8 font-montserrat leading-tight">
                   Sell Your Home for <span className="text-transparent bg-gradient-to-r from-emerald-500 via-green-600 to-teal-600 bg-clip-text">Top Dollar</span>
                 </h1>
@@ -397,7 +393,7 @@ export default function Sell() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 bg-gradient-to-r from-secondary to-primary">
+        <section className="py-20 bg-gradient-to-r from-brand-bright-red via-brand-medium-blue to-brand-dark-blue">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -405,18 +401,12 @@ export default function Sell() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-                Ready to Sell Your Home?
+              <h2 className="text-3xl md:text-5xl font-bold text-white mb-8">
+                Let's Build Your Brand Together
               </h2>
-              <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-                Get a free home valuation and discover how much your property is worth in today's market.
-              </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="bg-white text-primary hover:bg-white/90">
-                  Get Free Valuation
-                </Button>
-                <Button size="lg" variant="outline" className="bg-white/10 border-white text-white hover:bg-white hover:text-foreground">
-                  Schedule Consultation
+                <Button size="lg" className="bg-white text-brand-bright-red hover:bg-white/90 font-bold px-8 py-4 text-xl">
+                  Join Us
                 </Button>
               </div>
             </motion.div>

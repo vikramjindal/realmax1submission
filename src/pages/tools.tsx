@@ -65,7 +65,7 @@ export default function Tools() {
           <div className="absolute right-8 top-16 z-10">
             <div className="relative">
               <Image 
-                src="/images/ballon.png" 
+                src="/images/company-pin-icon.png" 
                 alt="RE/MAX Balloon" 
                 width={80} 
                 height={80} 
@@ -79,7 +79,7 @@ export default function Tools() {
           <div className="absolute left-8 top-32 z-10">
             <div className="relative">
               <Image 
-                src="/images/ballon.png" 
+                src="/images/company-pin-icon.png" 
                 alt="RE/MAX Balloon" 
                 width={56} 
                 height={56} 
@@ -96,10 +96,6 @@ export default function Tools() {
               transition={{ duration: 0.8 }}
               className="text-center"
             >
-              <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-violet-500 to-violet-600 rounded-full text-white text-sm font-semibold shadow-lg mb-6">
-                <Zap className="w-4 h-4 mr-2" />
-                Cutting-Edge Technology
-              </div>
               <h1 className="text-5xl lg:text-6xl font-black text-slate-900 mb-8 font-montserrat leading-tight">
                 Built for <span className="text-transparent bg-gradient-to-r from-violet-500 via-purple-600 to-indigo-600 bg-clip-text">Productivity</span>, Powered by <span className="text-transparent bg-gradient-to-r from-purple-500 via-indigo-600 to-blue-600 bg-clip-text">Innovation</span>
               </h1>
@@ -520,7 +516,7 @@ export default function Tools() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 bg-gradient-to-r from-primary via-secondary to-blue-500">
+        <section className="py-20 bg-gradient-to-r from-brand-bright-red via-brand-medium-blue to-brand-dark-blue">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -528,18 +524,12 @@ export default function Tools() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-                Ready to Transform Your Business?
+              <h2 className="text-3xl md:text-5xl font-bold text-white mb-8">
+                Let's Build Your Brand Together
               </h2>
-              <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-                Experience the power of our integrated technology platform and see how it can revolutionize your real estate practice.
-              </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="bg-white text-primary hover:bg-white/90">
-                  Explore Our Tech Tools
-                </Button>
-                <Button size="lg" variant="outline" className="bg-white/10 border-white text-white hover:bg-white hover:text-foreground">
-                  Schedule Demo
+                <Button size="lg" className="bg-white text-brand-bright-red hover:bg-white/90 font-bold px-8 py-4 text-xl">
+                  Join Us
                 </Button>
               </div>
             </motion.div>

@@ -7,16 +7,16 @@ const config = {
   theme: {
   	extend: {
   		colors: {
+  			// Custom 4-Color Brand Palette
+  			brand: {
+  				'dark-red': '#640E0E',
+  				'bright-red': '#EE2924',
+  				'dark-blue': '#091537',
+  				'medium-blue': '#3F5CAA',
+  				'white': '#ffffff',
+  				'gray': '#737373'
+  			},
   			primary: {
-  				'100': '#e6f5e6',
-  				'200': '#c2e0c2',
-  				'300': '#9ecb9e',
-  				'400': '#7ab67a',
-  				'500': '#56a156',
-  				'600': '#3d8c3d',
-  				'700': '#2b772b',
-  				'800': '#1a611a',
-  				'900': '#0a4c0a',
   				DEFAULT: 'hsl(var(--primary))',
   				foreground: 'hsl(var(--primary-foreground))'
   			},

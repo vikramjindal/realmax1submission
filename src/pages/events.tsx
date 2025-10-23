@@ -47,19 +47,19 @@ export default function Events() {
         <Header />
         
         {/* Hero Section */}
-        <section className="relative py-20 bg-gradient-to-br from-red-50 via-white to-orange-100 overflow-hidden">
+        <section className="relative py-20 bg-gradient-to-br from-brand-bright-red/10 via-white to-brand-medium-blue/10 overflow-hidden">
           {/* Background Elements */}
           <div className="absolute inset-0">
-            <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-red-200/30 to-red-300/20 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-br from-orange-200/30 to-orange-300/20 rounded-full blur-3xl"></div>
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-br from-purple-200/20 to-purple-300/10 rounded-full blur-3xl"></div>
+            <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-brand-bright-red/30 to-brand-dark-red/20 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-br from-brand-medium-blue/30 to-brand-dark-blue/20 rounded-full blur-3xl"></div>
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-br from-brand-dark-blue/20 to-brand-medium-blue/10 rounded-full blur-3xl"></div>
           </div>
           
           {/* Creative Floating Balloon Elements */}
           <div className="absolute right-8 top-16 z-10">
             <div className="relative">
               <Image 
-                src="/images/ballon.png" 
+                src="/images/company-pin-icon.png" 
                 alt="RE/MAX Balloon" 
                 width={80} 
                 height={80} 
@@ -73,7 +73,7 @@ export default function Events() {
           <div className="absolute left-8 top-32 z-10">
             <div className="relative">
               <Image 
-                src="/images/ballon.png" 
+                src="/images/company-pin-icon.png" 
                 alt="RE/MAX Balloon" 
                 width={56} 
                 height={56} 
@@ -90,17 +90,111 @@ export default function Events() {
               transition={{ duration: 0.8 }}
               className="text-center"
             >
-              <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-red-500 to-red-600 rounded-full text-white text-sm font-semibold shadow-lg mb-6">
-                <Calendar className="w-4 h-4 mr-2" />
-                Exclusive Events & Networking
-              </div>
               <h1 className="text-5xl lg:text-6xl font-black text-slate-900 mb-8 font-montserrat leading-tight">
-                Connect, Learn, and <span className="text-transparent bg-gradient-to-r from-red-500 via-orange-600 to-yellow-600 bg-clip-text">Grow</span>
+                Connect, Learn, and <span className="text-transparent bg-gradient-to-r from-brand-bright-red via-brand-dark-red to-brand-medium-blue bg-clip-text">Grow</span>
               </h1>
               <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-8 font-arial leading-relaxed">
                 Join our exclusive events, networking opportunities, and industry insights. Connect with top real estate professionals and stay ahead of market trends.
               </p>
             </motion.div>
+          </div>
+        </section>
+
+        {/* Video Reels Section */}
+        <section className="py-20 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6 font-montserrat">
+                Event <span className="text-primary">Moments</span>
+              </h2>
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto font-arial">
+                Experience the energy and excitement of our events through these highlights
+              </p>
+            </motion.div>
+
+            <motion.div 
+              variants={staggerContainer}
+              initial="initial"
+              whileInView="animate"
+              viewport={{ once: true }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto"
+            >
+              {/* Video 1 - IMG_3416 */}
+              <motion.div variants={fadeInUp} className="group">
+                <div className="relative bg-black rounded-2xl overflow-hidden shadow-xl transition-all duration-300">
+                  <video 
+                    id="video1"
+                    className="w-full h-[400px] md:h-[500px] lg:h-[600px] object-cover"
+                    controls
+                    muted
+                    loop
+                    autoPlay
+                    playsInline
+                    poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 600'%3E%3Crect width='400' height='600' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' font-family='Arial' font-size='18' fill='%236b7280'%3ENetworking Event%3C/text%3E%3C/svg%3E"
+                  >
+                    <source src="https://dontdelete2005142.kloudbean.com/1761257463_1761203384_IMG_3416%20(1).mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                  <div className="absolute bottom-4 left-4 right-4 text-white">
+                    <h3 className="text-lg font-bold font-montserrat">Networking Event</h3>
+                    <p className="text-sm opacity-90">Professional connections</p>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Video 2 - IMG_5203 */}
+              <motion.div variants={fadeInUp} className="group">
+                <div className="relative bg-black rounded-2xl overflow-hidden shadow-xl transition-all duration-300">
+                  <video 
+                    id="video2"
+                    className="w-full h-[400px] md:h-[500px] lg:h-[600px] object-cover"
+                    controls
+                    muted
+                    loop
+                    autoPlay
+                    playsInline
+                    poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 600'%3E%3Crect width='400' height='600' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' font-family='Arial' font-size='18' fill='%236b7280'%3EEvent Highlights%3C/text%3E%3C/svg%3E"
+                  >
+                    <source src="https://dontdelete2005142.kloudbean.com/1761203384_IMG_5203%20(1).MP4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                  <div className="absolute bottom-4 left-4 right-4 text-white">
+                    <h3 className="text-lg font-bold font-montserrat">Event Highlights</h3>
+                    <p className="text-sm opacity-90">Behind the scenes moments</p>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Video 3 - RE/MAX BBQ */}
+              <motion.div variants={fadeInUp} className="group md:col-span-2 lg:col-span-1">
+                <div className="relative bg-black rounded-2xl overflow-hidden shadow-xl transition-all duration-300">
+                  <video 
+                    id="video3"
+                    className="w-full h-[400px] md:h-[500px] lg:h-[600px] object-cover"
+                    controls
+                    muted
+                    loop
+                    autoPlay
+                    playsInline
+                    poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 600'%3E%3Crect width='400' height='600' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' font-family='Arial' font-size='18' fill='%236b7280'%3EREMAX BBQ Event%3C/text%3E%3C/svg%3E"
+                  >
+                    <source src="https://dontdelete2005142.kloudbean.com/1761203384_Remax_BBQ.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                  <div className="absolute bottom-4 left-4 right-4 text-white">
+                    <h3 className="text-lg font-bold font-montserrat">RE/MAX BBQ Event</h3>
+                    <p className="text-sm opacity-90">Team building and networking</p>
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
+
           </div>
         </section>
 
@@ -280,7 +374,7 @@ export default function Events() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 bg-gradient-to-r from-primary to-secondary">
+        <section className="py-20 bg-gradient-to-r from-brand-bright-red via-brand-medium-blue to-brand-dark-blue">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -288,18 +382,12 @@ export default function Events() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 font-montserrat">
-                Ready to Join Our Events?
+              <h2 className="text-3xl md:text-5xl font-bold text-white mb-8">
+                Let's Build Your Brand Together
               </h2>
-              <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto font-arial">
-                Stay connected with the latest events, networking opportunities, and industry insights.
-              </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" variant="outline" className="bg-white/10 border-white text-white hover:bg-white hover:text-primary">
-                  View All Events
-                </Button>
-                <Button size="lg" className="bg-white text-primary hover:bg-white/90">
-                  Subscribe to Updates
+                <Button size="lg" className="bg-white text-brand-bright-red hover:bg-white/90 font-bold px-8 py-4 text-xl">
+                  Join Us
                 </Button>
               </div>
             </motion.div>

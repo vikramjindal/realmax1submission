@@ -88,67 +88,65 @@ export default function PreConstruction() {
         <Header />
         
         {/* Hero Section */}
-        <section className="relative py-20 bg-gradient-to-br from-amber-50 via-white to-yellow-100 overflow-hidden">
-          {/* Background Elements */}
-          <div className="absolute inset-0">
-            <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-amber-200/30 to-amber-300/20 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-br from-yellow-200/30 to-yellow-300/20 rounded-full blur-3xl"></div>
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-br from-purple-200/20 to-purple-300/10 rounded-full blur-3xl"></div>
+        <section className="relative py-20 bg-white overflow-hidden">
+          {/* Decorative RE/MAX Pin Icons */}
+          <div className="absolute left-8 top-16 z-10 opacity-60">
+            <Image 
+              src="/images/company-pin-icon.png" 
+              alt="RE/MAX Pin" 
+              width={60} 
+              height={60} 
+              className="w-15 h-15 object-contain"
+            />
           </div>
           
-          {/* Creative Floating Balloon Elements */}
-          <div className="absolute right-8 top-16 z-10">
-            <div className="relative">
-              <Image 
-                src="/images/ballon.png" 
-                alt="RE/MAX Balloon" 
-                width={80} 
-                height={80} 
-                className="w-20 h-20 object-contain opacity-80 animate-pulse transform rotate-6"
-              />
-              <div className="absolute -top-3 -right-3 w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full opacity-60 animate-bounce"></div>
-              <div className="absolute -bottom-3 -left-3 w-8 h-8 bg-gradient-to-br from-orange-400 to-red-500 rounded-full opacity-70 animate-ping"></div>
-            </div>
+          <div className="absolute right-16 top-24 z-10 opacity-50">
+            <Image 
+              src="/images/company-pin-icon.png" 
+              alt="RE/MAX Pin" 
+              width={80} 
+              height={80} 
+              className="w-20 h-20 object-contain"
+            />
           </div>
-          
-          <div className="absolute left-8 top-32 z-10">
-            <div className="relative">
-              <Image 
-                src="/images/ballon.png" 
-                alt="RE/MAX Balloon" 
-                width={56} 
-                height={56} 
-                className="w-14 h-14 object-contain opacity-70 animate-bounce transform -rotate-6"
-              />
-              <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-br from-red-400 to-pink-500 rounded-full opacity-80 animate-pulse"></div>
-            </div>
+
+          <div className="absolute right-8 bottom-32 z-10 opacity-40">
+            <Image 
+              src="/images/company-pin-icon.png" 
+              alt="RE/MAX Pin" 
+              width={50} 
+              height={50} 
+              className="w-12 h-12 object-contain"
+            />
           </div>
           
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
               >
-                <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-amber-500 to-amber-600 rounded-full text-white text-sm font-semibold shadow-lg mb-6">
-                  <Building2 className="w-4 h-4 mr-2" />
-                  Early Investment Access
+                {/* Badge */}
+                <div className="inline-flex items-center bg-gradient-to-r from-orange-100 to-yellow-100 rounded-full px-4 py-2 mb-6">
+                  <span className="text-orange-600 font-semibold text-sm">🎯 Early Investment Access</span>
                 </div>
-                <h1 className="text-5xl lg:text-6xl font-black text-slate-900 mb-8 font-montserrat leading-tight">
-                  Unlock Your Dream Home <span className="text-transparent bg-gradient-to-r from-amber-500 via-yellow-600 to-orange-600 bg-clip-text">Before It's Built</span>
+
+                <h1 className="text-5xl lg:text-6xl font-black text-slate-900 mb-6 leading-tight">
+                  VIP Access to the Hottest{" "}
+                  <span className="text-transparent bg-gradient-to-r from-orange-500 via-yellow-500 to-orange-600 bg-clip-text">
+                    Pre-Construction
+                  </span>{" "}
+                  Projects
                 </h1>
-                <p className="text-xl text-slate-600 mb-8 font-arial leading-relaxed">
-                  Get exclusive access to pre-construction properties with the best prices, prime locations, and flexible payment plans. Secure your future home today.
+                
+                <p className="text-lg text-slate-600 mb-8 leading-relaxed">
+                  Get exclusive VIP access to the best projects, prime locations, and builder incentives before they hit the market.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Button size="lg" className="bg-primary hover:bg-primary/90">
-                    Explore Listings
-                  </Button>
-                  <Button size="lg" variant="outline" className="border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground">
-                    Book Consultation
-                  </Button>
-                </div>
+                
+                <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-6 text-lg rounded-md">
+                  Book Consultation
+                </Button>
               </motion.div>
 
               <motion.div
@@ -157,11 +155,11 @@ export default function PreConstruction() {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="relative"
               >
-                <div className="bg-gradient-to-br from-primary/10 to-secondary/10 rounded-2xl p-8">
+                <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl p-6 shadow-xl">
                   <img 
                     src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
                     alt="Pre-Construction Development"
-                    className="w-full rounded-lg"
+                    className="w-full rounded-2xl"
                   />
                 </div>
               </motion.div>
@@ -439,6 +437,340 @@ export default function PreConstruction() {
           </div>
         </section>
 
+        {/* Pre-Construction Flyers Section - Client Request */}
+        <section className="py-20 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
+                Pre-Construction <span className="text-primary">Flyers & Marketing</span>
+              </h2>
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+                Actual marketing materials and flyers - not generic listings
+              </p>
+            </motion.div>
+
+            <motion.div 
+              variants={staggerContainer}
+              initial="initial"
+              whileInView="animate"
+              viewport={{ once: true }}
+              className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+            >
+              {/* Skyline Towers Flyer */}
+              <motion.div variants={fadeInUp}>
+                <Card className="h-full border-0 bg-gradient-to-br from-blue-50 to-indigo-100 hover:shadow-xl transition-all duration-300 group">
+                  <CardContent className="p-6">
+                    <div className="text-center mb-6">
+                      <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                        <Building2 className="h-10 w-10 text-white" />
+                      </div>
+                      <h3 className="text-2xl font-bold text-blue-800 mb-2">SKYLINE TOWERS</h3>
+                      <p className="text-blue-600 font-semibold">Downtown Toronto</p>
+                    </div>
+                    
+                    <div className="space-y-3 mb-6">
+                      <div className="bg-white/60 rounded-lg p-3 text-center">
+                        <div className="text-2xl font-bold text-blue-800">$650,000</div>
+                        <div className="text-sm text-blue-600">Starting From</div>
+                      </div>
+                      <div className="grid grid-cols-2 gap-2">
+                        <div className="bg-white/60 rounded-lg p-2 text-center">
+                          <div className="text-sm font-bold text-blue-800">FALL 2025</div>
+                          <div className="text-xs text-blue-600">Completion</div>
+                        </div>
+                        <div className="bg-white/60 rounded-lg p-2 text-center">
+                          <div className="text-sm font-bold text-blue-800">450</div>
+                          <div className="text-xs text-blue-600">Units</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2 mb-6">
+                      <div className="flex items-center space-x-2">
+                        <Star className="h-4 w-4 text-yellow-500" />
+                        <span className="text-sm text-blue-700">Luxury Amenities</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Star className="h-4 w-4 text-yellow-500" />
+                        <span className="text-sm text-blue-700">Transit Access</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Star className="h-4 w-4 text-yellow-500" />
+                        <span className="text-sm text-blue-700">City Views</span>
+                      </div>
+                    </div>
+
+                    <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
+                      Download Flyer
+                    </Button>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              {/* Riverside Commons Flyer */}
+              <motion.div variants={fadeInUp}>
+                <Card className="h-full border-0 bg-gradient-to-br from-green-50 to-emerald-100 hover:shadow-xl transition-all duration-300 group">
+                  <CardContent className="p-6">
+                    <div className="text-center mb-6">
+                      <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                        <Building2 className="h-10 w-10 text-white" />
+                      </div>
+                      <h3 className="text-2xl font-bold text-green-800 mb-2">RIVERSIDE COMMONS</h3>
+                      <p className="text-green-600 font-semibold">Mississauga</p>
+                    </div>
+                    
+                    <div className="space-y-3 mb-6">
+                      <div className="bg-white/60 rounded-lg p-3 text-center">
+                        <div className="text-2xl font-bold text-green-800">$480,000</div>
+                        <div className="text-sm text-green-600">Starting From</div>
+                      </div>
+                      <div className="grid grid-cols-2 gap-2">
+                        <div className="bg-white/60 rounded-lg p-2 text-center">
+                          <div className="text-sm font-bold text-green-800">SPRING 2026</div>
+                          <div className="text-xs text-green-600">Completion</div>
+                        </div>
+                        <div className="bg-white/60 rounded-lg p-2 text-center">
+                          <div className="text-sm font-bold text-green-800">320</div>
+                          <div className="text-xs text-green-600">Units</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2 mb-6">
+                      <div className="flex items-center space-x-2">
+                        <Star className="h-4 w-4 text-yellow-500" />
+                        <span className="text-sm text-green-700">Waterfront</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Star className="h-4 w-4 text-yellow-500" />
+                        <span className="text-sm text-green-700">Family-Friendly</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Star className="h-4 w-4 text-yellow-500" />
+                        <span className="text-sm text-green-700">Green Spaces</span>
+                      </div>
+                    </div>
+
+                    <Button className="w-full bg-green-600 hover:bg-green-700 text-white">
+                      Download Flyer
+                    </Button>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              {/* Urban Heights Flyer */}
+              <motion.div variants={fadeInUp}>
+                <Card className="h-full border-0 bg-gradient-to-br from-purple-50 to-violet-100 hover:shadow-xl transition-all duration-300 group">
+                  <CardContent className="p-6">
+                    <div className="text-center mb-6">
+                      <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-violet-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                        <Building2 className="h-10 w-10 text-white" />
+                      </div>
+                      <h3 className="text-2xl font-bold text-purple-800 mb-2">URBAN HEIGHTS</h3>
+                      <p className="text-purple-600 font-semibold">Brampton</p>
+                    </div>
+                    
+                    <div className="space-y-3 mb-6">
+                      <div className="bg-white/60 rounded-lg p-3 text-center">
+                        <div className="text-2xl font-bold text-purple-800">$420,000</div>
+                        <div className="text-sm text-purple-600">Starting From</div>
+                      </div>
+                      <div className="grid grid-cols-2 gap-2">
+                        <div className="bg-white/60 rounded-lg p-2 text-center">
+                          <div className="text-sm font-bold text-purple-800">WINTER 2025</div>
+                          <div className="text-xs text-purple-600">Completion</div>
+                        </div>
+                        <div className="bg-white/60 rounded-lg p-2 text-center">
+                          <div className="text-sm font-bold text-purple-800">280</div>
+                          <div className="text-xs text-purple-600">Units</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2 mb-6">
+                      <div className="flex items-center space-x-2">
+                        <Star className="h-4 w-4 text-yellow-500" />
+                        <span className="text-sm text-purple-700">Modern Design</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Star className="h-4 w-4 text-yellow-500" />
+                        <span className="text-sm text-purple-700">Smart Home</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Star className="h-4 w-4 text-yellow-500" />
+                        <span className="text-sm text-purple-700">Retail Below</span>
+                      </div>
+                    </div>
+
+                    <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white">
+                      Download Flyer
+                    </Button>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              {/* Investment Opportunity Flyer */}
+              <motion.div variants={fadeInUp}>
+                <Card className="h-full border-0 bg-gradient-to-br from-orange-50 to-amber-100 hover:shadow-xl transition-all duration-300 group">
+                  <CardContent className="p-6">
+                    <div className="text-center mb-6">
+                      <div className="w-20 h-20 bg-gradient-to-br from-orange-500 to-amber-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                        <TrendingUp className="h-10 w-10 text-white" />
+                      </div>
+                      <h3 className="text-2xl font-bold text-orange-800 mb-2">INVESTMENT SPECIAL</h3>
+                      <p className="text-orange-600 font-semibold">Limited Time Offer</p>
+                    </div>
+                    
+                    <div className="space-y-3 mb-6">
+                      <div className="bg-white/60 rounded-lg p-3 text-center">
+                        <div className="text-2xl font-bold text-orange-800">VIP ACCESS</div>
+                        <div className="text-sm text-orange-600">Priority Booking</div>
+                      </div>
+                      <div className="grid grid-cols-2 gap-2">
+                        <div className="bg-white/60 rounded-lg p-2 text-center">
+                          <div className="text-sm font-bold text-orange-800">FLEXIBLE</div>
+                          <div className="text-xs text-orange-600">Deposits</div>
+                        </div>
+                        <div className="bg-white/60 rounded-lg p-2 text-center">
+                          <div className="text-sm font-bold text-orange-800">ASSIGNMENT</div>
+                          <div className="text-xs text-orange-600">Rights</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2 mb-6">
+                      <div className="flex items-center space-x-2">
+                        <CheckCircle className="h-4 w-4 text-green-500" />
+                        <span className="text-sm text-orange-700">Pre-construction Pricing</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <CheckCircle className="h-4 w-4 text-green-500" />
+                        <span className="text-sm text-orange-700">Assignment Rights</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <CheckCircle className="h-4 w-4 text-green-500" />
+                        <span className="text-sm text-orange-700">Rental Income Potential</span>
+                      </div>
+                    </div>
+
+                    <Button className="w-full bg-orange-600 hover:bg-orange-700 text-white">
+                      Get VIP Access
+                    </Button>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              {/* First-Time Buyer Flyer */}
+              <motion.div variants={fadeInUp}>
+                <Card className="h-full border-0 bg-gradient-to-br from-pink-50 to-rose-100 hover:shadow-xl transition-all duration-300 group">
+                  <CardContent className="p-6">
+                    <div className="text-center mb-6">
+                      <div className="w-20 h-20 bg-gradient-to-br from-pink-500 to-rose-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                        <HomeIcon className="h-10 w-10 text-white" />
+                      </div>
+                      <h3 className="text-2xl font-bold text-pink-800 mb-2">FIRST-TIME BUYERS</h3>
+                      <p className="text-pink-600 font-semibold">Special Programs</p>
+                    </div>
+                    
+                    <div className="space-y-3 mb-6">
+                      <div className="bg-white/60 rounded-lg p-3 text-center">
+                        <div className="text-2xl font-bold text-pink-800">5% DOWN</div>
+                        <div className="text-sm text-pink-600">Minimum Deposit</div>
+                      </div>
+                      <div className="grid grid-cols-2 gap-2">
+                        <div className="bg-white/60 rounded-lg p-2 text-center">
+                          <div className="text-sm font-bold text-pink-800">GOVERNMENT</div>
+                          <div className="text-xs text-pink-600">Incentives</div>
+                        </div>
+                        <div className="bg-white/60 rounded-lg p-2 text-center">
+                          <div className="text-sm font-bold text-pink-800">EXTENDED</div>
+                          <div className="text-xs text-pink-600">Timeline</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2 mb-6">
+                      <div className="flex items-center space-x-2">
+                        <CheckCircle className="h-4 w-4 text-green-500" />
+                        <span className="text-sm text-pink-700">Lower Initial Deposits</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <CheckCircle className="h-4 w-4 text-green-500" />
+                        <span className="text-sm text-pink-700">Extended Payment Plans</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <CheckCircle className="h-4 w-4 text-green-500" />
+                        <span className="text-sm text-pink-700">Government Incentives</span>
+                      </div>
+                    </div>
+
+                    <Button className="w-full bg-pink-600 hover:bg-pink-700 text-white">
+                      Learn More
+                    </Button>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              {/* Consultation Flyer */}
+              <motion.div variants={fadeInUp}>
+                <Card className="h-full border-0 bg-gradient-to-br from-teal-50 to-cyan-100 hover:shadow-xl transition-all duration-300 group">
+                  <CardContent className="p-6">
+                    <div className="text-center mb-6">
+                      <div className="w-20 h-20 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                        <Users className="h-10 w-10 text-white" />
+                      </div>
+                      <h3 className="text-2xl font-bold text-teal-800 mb-2">FREE CONSULTATION</h3>
+                      <p className="text-teal-600 font-semibold">Expert Guidance</p>
+                    </div>
+                    
+                    <div className="space-y-3 mb-6">
+                      <div className="bg-white/60 rounded-lg p-3 text-center">
+                        <div className="text-2xl font-bold text-teal-800">NO COST</div>
+                        <div className="text-sm text-teal-600">Initial Meeting</div>
+                      </div>
+                      <div className="grid grid-cols-2 gap-2">
+                        <div className="bg-white/60 rounded-lg p-2 text-center">
+                          <div className="text-sm font-bold text-teal-800">EXPERT</div>
+                          <div className="text-xs text-teal-600">Advice</div>
+                        </div>
+                        <div className="bg-white/60 rounded-lg p-2 text-center">
+                          <div className="text-sm font-bold text-teal-800">PERSONALIZED</div>
+                          <div className="text-xs text-teal-600">Strategy</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2 mb-6">
+                      <div className="flex items-center space-x-2">
+                        <CheckCircle className="h-4 w-4 text-green-500" />
+                        <span className="text-sm text-teal-700">Market Analysis</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <CheckCircle className="h-4 w-4 text-green-500" />
+                        <span className="text-sm text-teal-700">Investment Strategy</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <CheckCircle className="h-4 w-4 text-green-500" />
+                        <span className="text-sm text-teal-700">Financing Options</span>
+                      </div>
+                    </div>
+
+                    <Button className="w-full bg-teal-600 hover:bg-teal-700 text-white">
+                      Book Consultation
+                    </Button>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </motion.div>
+          </div>
+        </section>
+
         {/* Process Section */}
         <section className="py-20 bg-muted/30">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -483,7 +815,7 @@ export default function PreConstruction() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 bg-gradient-to-r from-primary to-secondary">
+        <section className="py-20 bg-gradient-to-r from-brand-bright-red via-brand-medium-blue to-brand-dark-blue">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -491,18 +823,12 @@ export default function PreConstruction() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-                Start Your Pre-Construction Journey
+              <h2 className="text-3xl md:text-5xl font-bold text-white mb-8">
+                Let's Build Your Brand Together
               </h2>
-              <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-                Get exclusive access to the best pre-construction opportunities before they're available to the public.
-              </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="bg-white text-primary hover:bg-white/90">
-                  Explore Listings
-                </Button>
-                <Button size="lg" variant="outline" className="bg-white/10 border-white text-white hover:bg-white hover:text-foreground">
-                  Book Consultation
+                <Button size="lg" className="bg-white text-brand-bright-red hover:bg-white/90 font-bold px-8 py-4 text-xl">
+                  Join Us
                 </Button>
               </div>
             </motion.div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import { motion } from "framer-motion";
 import Header from "@/components/Header";
@@ -20,7 +20,10 @@ import {
   Share2,
   Globe,
   Smartphone,
-  Mail
+  Mail,
+  CheckCircle,
+  Calendar,
+  Home as HomeIcon
 } from "lucide-react";
 
 const fadeInUp = {
@@ -38,6 +41,27 @@ const staggerContainer = {
 };
 
 export default function Marketing() {
+  const [marketingImages, setMarketingImages] = useState<string[]>([]);
+
+  useEffect(() => {
+    // List of marketing flyer images - matches actual files in the folder
+    const imageList = [
+      'Combined (29).png',
+      'For Sale Team (18).png',
+      'For Sale Team (43).png',
+      'just-leased-flyer.png',
+      'open house2026 Solo (17).png',
+      'SOCIAL ASSETS (3).png',
+      'SOCIAL ASSETS (51) (1)-1.png',
+      'SOCIAL ASSETS (51) (1).png',
+      'SOCIAL ASSETS (53).png',
+      'SOCIAL ASSETS (61).png'
+    ];
+    
+    setMarketingImages(imageList);
+    console.log('Marketing images loaded:', imageList);
+  }, []);
+
   return (
     <>
       <Head>
@@ -51,39 +75,39 @@ export default function Marketing() {
         <Header />
         
         {/* Hero Section */}
-        <section className="relative py-20 bg-gradient-to-br from-purple-50 via-white to-pink-100 overflow-hidden">
+        <section className="relative py-20 bg-gradient-to-br from-brand-bright-red/10 via-white to-brand-medium-blue/10 overflow-hidden">
           {/* Background Elements */}
           <div className="absolute inset-0">
-            <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-purple-200/30 to-purple-300/20 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-br from-pink-200/30 to-pink-300/20 rounded-full blur-3xl"></div>
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-br from-purple-200/20 to-purple-300/10 rounded-full blur-3xl"></div>
+            <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-brand-bright-red/30 to-brand-dark-red/20 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-br from-brand-medium-blue/30 to-brand-dark-blue/20 rounded-full blur-3xl"></div>
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-br from-brand-dark-blue/20 to-brand-medium-blue/10 rounded-full blur-3xl"></div>
           </div>
           
-          {/* Creative Floating Balloon Elements */}
+          {/* Company Pin Icon Elements */}
           <div className="absolute right-8 top-16 z-10">
             <div className="relative">
               <Image 
-                src="/images/ballon.png" 
-                alt="RE/MAX Balloon" 
+                src="/images/company-pin-icon.png" 
+                alt="Company Pin Icon" 
                 width={80} 
                 height={80} 
-                className="w-20 h-20 object-contain opacity-80 animate-pulse transform rotate-6"
+                className="opacity-80 animate-pulse transform rotate-6"
               />
-              <div className="absolute -top-3 -right-3 w-10 h-10 bg-gradient-to-br from-pink-400 to-rose-500 rounded-full opacity-60 animate-bounce"></div>
-              <div className="absolute -bottom-3 -left-3 w-8 h-8 bg-gradient-to-br from-rose-400 to-red-500 rounded-full opacity-70 animate-ping"></div>
+              <div className="absolute -top-3 -right-3 w-10 h-10 bg-gradient-to-br from-brand-bright-red to-brand-dark-red rounded-full opacity-60 animate-bounce"></div>
+              <div className="absolute -bottom-3 -left-3 w-8 h-8 bg-gradient-to-br from-brand-medium-blue to-brand-dark-blue rounded-full opacity-70 animate-ping"></div>
             </div>
           </div>
           
           <div className="absolute left-8 top-32 z-10">
             <div className="relative">
               <Image 
-                src="/images/ballon.png" 
-                alt="RE/MAX Balloon" 
+                src="/images/company-pin-icon.png" 
+                alt="Company Pin Icon" 
                 width={56} 
                 height={56} 
-                className="w-14 h-14 object-contain opacity-70 animate-bounce transform -rotate-6"
+                className="opacity-70 animate-bounce transform -rotate-6"
               />
-              <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-br from-red-400 to-orange-500 rounded-full opacity-80 animate-pulse"></div>
+              <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-br from-brand-dark-red to-brand-bright-red rounded-full opacity-80 animate-pulse"></div>
             </div>
           </div>
           
@@ -94,78 +118,373 @@ export default function Marketing() {
               transition={{ duration: 0.8 }}
               className="text-center"
             >
-              <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full text-white text-sm font-semibold shadow-lg mb-6">
-                <Megaphone className="w-4 h-4 mr-2" />
-                Innovative Marketing Solutions
-              </div>
               <h1 className="text-5xl lg:text-6xl font-black text-slate-900 mb-8 font-montserrat leading-tight">
-                In-House Marketing with <span className="text-transparent bg-gradient-to-r from-purple-500 via-pink-600 to-rose-600 bg-clip-text">Edge</span>
+                In-House Marketing with <span className="text-brand-bright-red">Edge</span>
               </h1>
               <p className="text-2xl md:text-3xl font-medium text-slate-700 mb-8 font-montserrat">
                 Fresh, Fierce & Fearlessly Effective
               </p>
               <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-8 font-arial leading-relaxed">
-                As Ontario's youngest, fastest-moving RE/MAX brokerage, we don't just use marketing tools, we turn them into your growth engine. From eye-catching campaigns and AI-powered insights to brand-building strategies, we cover all your creative and strategic needs in-house.
+                We don't just use marketing tools, we turn them into your growth engine. From eye-catching campaigns and AI-powered insights to brand-building strategies, we cover all your creative and strategic needs in-house.
               </p>
-              <Button size="lg" className="bg-gradient-to-r from-primary to-secondary text-white hover:opacity-90">
+              <Button size="lg" className="bg-gradient-to-r from-brand-bright-red to-brand-dark-blue text-white hover:opacity-90 font-bold px-8 py-4 text-xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 rounded-xl">
                 Start Marketing Like a Pro
               </Button>
             </motion.div>
           </div>
         </section>
 
-        {/* Intro Section */}
-        <section className="py-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Marketing Arsenal Section */}
+        <section className="py-20 bg-gradient-to-br from-brand-bright-red/5 via-white to-brand-medium-blue/5 relative overflow-hidden">
+          {/* Background Elements */}
+          <div className="absolute inset-0">
+            <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-brand-bright-red/10 to-brand-dark-red/5 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-br from-brand-medium-blue/10 to-brand-dark-blue/5 rounded-full blur-3xl"></div>
+          </div>
+          
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <motion.div 
-              variants={staggerContainer}
-              initial="initial"
-              whileInView="animate"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="grid md:grid-cols-3 gap-8"
+              transition={{ duration: 0.6 }}
+              className="text-center mb-16"
             >
-              <motion.div variants={fadeInUp}>
-                <Card className="h-full border-0 bg-gradient-to-br from-primary/5 to-primary/15 hover:from-primary/10 hover:to-primary/20 transition-all duration-300">
-                  <CardContent className="p-8 text-center">
-                    <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                      <Zap className="h-8 w-8 text-primary" />
-                    </div>
-                    <h3 className="text-2xl font-bold mb-4">Bold & Fearless</h3>
-                    <p className="text-muted-foreground">
-                      No hesitation. We take bold moves backed by data and digital smarts.
-                    </p>
-                  </CardContent>
-                </Card>
+              <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6 font-montserrat">
+                Our <span className="text-brand-bright-red">Marketing Arsenal</span>
+              </h2>
+              <p className="text-xl text-slate-600 max-w-3xl mx-auto font-arial">
+                Comprehensive marketing services that deliver results
+              </p>
               </motion.div>
 
-              <motion.div variants={fadeInUp}>
-                <Card className="h-full border-0 bg-gradient-to-br from-secondary/5 to-secondary/15 hover:from-secondary/10 hover:to-secondary/20 transition-all duration-300">
-                  <CardContent className="p-8 text-center">
-                    <div className="w-16 h-16 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                      <Sparkles className="h-8 w-8 text-secondary" />
+            {/* Auto-scrolling Marketing Materials Carousel */}
+            <div className="relative overflow-hidden rounded-2xl bg-white/50 backdrop-blur-sm p-8">
+              <div className="flex animate-scroll space-x-6">
+                {/* Dynamic Marketing Flyers */}
+                {marketingImages.length > 0 ? (
+                  marketingImages.map((imageName, index) => (
+                    <div key={index} className="flex-shrink-0 w-72 h-auto rounded-xl overflow-hidden transform hover:scale-105 transition-all duration-300 bg-white">
+                      <Image
+                        src={`/images/marketing-flyers/${imageName}`}
+                        alt={`Marketing Flyer ${index + 1}`}
+                        width={288}
+                        height={400}
+                        className="w-full h-auto object-contain"
+                        quality={100}
+                        priority={index < 3}
+                        onError={(e) => {
+                          console.log('Image failed to load:', imageName);
+                          e.currentTarget.style.display = 'none';
+                        }}
+                      />
                     </div>
-                    <h3 className="text-2xl font-bold mb-4">Alpha-Beta Marketing</h3>
-                    <p className="text-muted-foreground">
-                      Test, learn, and optimize. We harness AI, social insights, and cutting-edge strategies to stay ahead.
-                    </p>
-                  </CardContent>
-                </Card>
+                  ))
+                ) : (
+                  <div className="flex-shrink-0 w-72 h-96 rounded-xl bg-gray-200 flex items-center justify-center">
+                    <p className="text-gray-500">Loading marketing materials...</p>
+                  </div>
+                )}
+                
+                {/* Duplicate images for seamless loop */}
+                {marketingImages.length > 0 && marketingImages.slice(0, 3).map((imageName, index) => (
+                  <div key={`duplicate-${index}`} className="flex-shrink-0 w-72 h-auto rounded-xl overflow-hidden transform hover:scale-105 transition-all duration-300 bg-white">
+                    <Image
+                      src={`/images/marketing-flyers/${imageName}`}
+                      alt={`Marketing Flyer ${index + 1}`}
+                      width={288}
+                      height={400}
+                      className="w-full h-auto object-contain"
+                      quality={100}
+                      onError={(e) => {
+                        console.log('Duplicate image failed to load:', imageName);
+                        e.currentTarget.style.display = 'none';
+                      }}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Four Quadrant Services Section */}
+        <section className="py-24 bg-gradient-to-br from-brand-dark-blue/5 via-white to-brand-bright-red/5 relative overflow-hidden">
+          {/* Background Elements */}
+          <div className="absolute inset-0">
+            <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-brand-medium-blue/10 to-brand-dark-blue/5 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-br from-brand-bright-red/10 to-brand-dark-red/5 rounded-full blur-3xl"></div>
+          </div>
+          
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-20"
+            >
+              <h2 className="text-5xl md:text-6xl font-bold text-slate-900 mb-8 font-montserrat">
+                What <span className="text-brand-bright-red">Agents Get</span>
+              </h2>
+              <p className="text-xl text-slate-600 max-w-3xl mx-auto font-arial leading-relaxed">
+                Four essential marketing services designed to elevate your real estate business
+              </p>
               </motion.div>
 
-              <motion.div variants={fadeInUp}>
-                <Card className="h-full border-0 bg-gradient-to-br from-purple-500/5 to-purple-500/15 hover:from-purple-500/10 hover:to-purple-500/20 transition-all duration-300">
-                  <CardContent className="p-8 text-center">
-                    <div className="w-16 h-16 bg-purple-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                      <Users className="h-8 w-8 text-purple-500" />
+            {/* Four Quadrant Grid */}
+            <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+              {/* Flyer Design */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="group"
+              >
+                <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+                  <div className="p-6">
+                    <h3 className="text-2xl font-bold text-brand-dark-red mb-4 font-montserrat text-center">Flyer Design</h3>
+                    <div className="flex justify-center">
+                      <Image
+                        src="https://dontdelete2005142.kloudbean.com/1761000695_Flyer design.png"
+                        alt="Flyer Design Example"
+                        width={350}
+                        height={525}
+                        className="rounded-xl"
+                        quality={100}
+                        priority={true}
+                      />
                     </div>
-                    <h3 className="text-2xl font-bold mb-4">Inclusive & Empowering</h3>
-                    <p className="text-muted-foreground">
-                      Tools, tech, and know-how for every agent, rookie or veteran, so everyone can win.
-                    </p>
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
               </motion.div>
+
+              {/* Email Marketing */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="group"
+              >
+                <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+                  <div className="p-6">
+                    <h3 className="text-2xl font-bold text-brand-dark-blue mb-4 font-montserrat text-center">Email Marketing</h3>
+                    <div className="flex justify-center">
+                      <Image
+                        src="https://dontdelete2005142.kloudbean.com/1761000695_Email Marketing_.png"
+                        alt="Email Marketing Example"
+                        width={350}
+                        height={525}
+                        className="rounded-xl"
+                        quality={100}
+                        priority={true}
+                      />
+                    </div>
+                  </div>
+                </div>
             </motion.div>
+
+              {/* Social Campaigns */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="group"
+              >
+                <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+                  <div className="p-6">
+                    <h3 className="text-2xl font-bold text-brand-dark-red mb-4 font-montserrat text-center">Social Campaigns</h3>
+                    <div className="flex justify-center">
+                      <Image
+                        src="https://dontdelete2005142.kloudbean.com/1761000695_Social Campaigns_.png"
+                        alt="Social Campaigns Example"
+                        width={350}
+                        height={525}
+                        className="rounded-xl"
+                        quality={100}
+                        priority={true}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Pre-construction */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="group"
+              >
+                <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+                  <div className="p-6">
+                    <h3 className="text-2xl font-bold text-brand-dark-blue mb-4 font-montserrat text-center">Pre-construction</h3>
+                    <div className="flex justify-center">
+                      <Image
+                        src="https://dontdelete2005142.kloudbean.com/1761000695_Pre-Construction_.png"
+                        alt="Pre-construction Example"
+                        width={350}
+                        height={525}
+                        className="rounded-xl"
+                        quality={100}
+                        priority={true}
+                      />
+                    </div>
+                  </div>
+                </div>
+            </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Marketing Services Section */}
+        <section className="py-24 bg-gradient-to-br from-brand-bright-red/5 via-white to-brand-medium-blue/5 relative overflow-hidden">
+          {/* Background Elements */}
+          <div className="absolute inset-0">
+            <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-brand-bright-red/10 to-brand-dark-red/5 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-br from-brand-medium-blue/10 to-brand-dark-blue/5 rounded-full blur-3xl"></div>
+          </div>
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-20"
+            >
+              <h2 className="text-5xl md:text-6xl font-bold text-slate-900 mb-8 font-montserrat">
+                Our <span className="text-brand-bright-red">Marketing Services</span>
+              </h2>
+              <p className="text-xl text-slate-600 max-w-3xl mx-auto font-arial leading-relaxed">
+                Comprehensive marketing solutions designed to elevate your real estate business and maximize your reach
+              </p>
+            </motion.div>
+
+            {/* Services Grid */}
+            <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+              {/* Facebook Ads */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="group"
+              >
+                <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+                  <div className="p-6">
+                    <h3 className="text-2xl font-bold text-brand-dark-red mb-4 font-montserrat text-center">Facebook Ads</h3>
+                    <div className="flex justify-center">
+                      <video
+                        width={350}
+                        height={525}
+                        className="rounded-xl"
+                        controls
+                        preload="metadata"
+                        onError={(e) => {
+                          console.error('Video failed to load:', e);
+                        }}
+                      >
+                        <source src="https://dontdelete2005142.kloudbean.com/1761163685_FBADS.mp4" type="video/mp4" />
+                        Your browser does not support the video tag.
+                      </video>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Welcome Package */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="group"
+              >
+                <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+                  <div className="p-6">
+                    <h3 className="text-2xl font-bold text-brand-dark-blue mb-4 font-montserrat text-center">Welcome Package</h3>
+                    <div className="flex justify-center">
+                      <Image
+                        src="https://dontdelete2005142.kloudbean.com/1761163612_MARKETING%20KIT-01.png"
+                        alt="Welcome Package"
+                        width={350}
+                        height={525}
+                        className="rounded-xl"
+                        quality={100}
+                        priority={true}
+                        onError={(e) => {
+                          console.error('Image failed to load:', e);
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Social Media Reels/Podcast */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="group"
+              >
+                <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+                  <div className="p-6">
+                    <h3 className="text-2xl font-bold text-brand-dark-red mb-4 font-montserrat text-center">Social Media Reels/Podcast</h3>
+                    <div className="flex justify-center">
+                      <video
+                        width={350}
+                        height={525}
+                        className="rounded-xl"
+                        controls
+                        preload="metadata"
+                        onError={(e) => {
+                          console.error('Video failed to load:', e);
+                        }}
+                      >
+                        <source src="https://dontdelete2005142.kloudbean.com/1761163684_gurv.mp4" type="video/mp4" />
+                        Your browser does not support the video tag.
+                      </video>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Virtual Tours */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="group"
+              >
+                <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+                  <div className="p-6">
+                    <h3 className="text-2xl font-bold text-brand-dark-blue mb-4 font-montserrat text-center">Virtual Tours</h3>
+                    <div className="flex justify-center">
+                      <Image
+                        src="https://dontdelete2005142.kloudbean.com/1761163704_6214c16f032e902b6ee30edb_61dc7edc4959c17ee5501634_dollhouse%20mock%20up%20(1)-p-800%20(1).webp"
+                        alt="Virtual Tours"
+                        width={350}
+                        height={525}
+                        className="rounded-xl"
+                        quality={100}
+                        priority={true}
+                        onError={(e) => {
+                          console.error('Image failed to load:', e);
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
           </div>
         </section>
 
@@ -186,109 +505,6 @@ export default function Marketing() {
           </div>
         </section>
 
-        {/* Services Section */}
-        <section className="py-20 bg-muted/30">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
-                Our Marketing <span className="text-primary">Arsenal</span>
-              </h2>
-              <p className="text-xl text-muted-foreground">
-                Comprehensive marketing services that deliver results
-              </p>
-            </motion.div>
-
-            <motion.div 
-              variants={staggerContainer}
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: true }}
-              className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
-            >
-              <motion.div variants={fadeInUp}>
-                <Card className="h-full border-0 bg-white hover:shadow-lg transition-all duration-300 group">
-                  <CardContent className="p-8 text-center">
-                    <div className="w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
-                      <Palette className="h-8 w-8 text-white" />
-                    </div>
-                    <h3 className="text-xl font-bold mb-4">Flyer Design</h3>
-                    <p className="text-muted-foreground text-sm mb-4">
-                      Eye-catching, professional flyers that showcase your listings with stunning visuals and compelling copy.
-                    </p>
-                    <ul className="text-xs text-muted-foreground space-y-1">
-                      <li>• Custom design templates</li>
-                      <li>• High-resolution graphics</li>
-                      <li>• Brand-consistent layouts</li>
-                    </ul>
-                  </CardContent>
-                </Card>
-              </motion.div>
-
-              <motion.div variants={fadeInUp}>
-                <Card className="h-full border-0 bg-white hover:shadow-lg transition-all duration-300 group">
-                  <CardContent className="p-8 text-center">
-                    <div className="w-16 h-16 bg-gradient-to-br from-secondary to-purple-500 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
-                      <Share2 className="h-8 w-8 text-white" />
-                    </div>
-                    <h3 className="text-xl font-bold mb-4">Social Campaigns</h3>
-                    <p className="text-muted-foreground text-sm mb-4">
-                      Targeted social media campaigns across all platforms to maximize your listing's reach and engagement.
-                    </p>
-                    <ul className="text-xs text-muted-foreground space-y-1">
-                      <li>• Multi-platform posting</li>
-                      <li>• Targeted advertising</li>
-                      <li>• Engagement optimization</li>
-                    </ul>
-                  </CardContent>
-                </Card>
-              </motion.div>
-
-              <motion.div variants={fadeInUp}>
-                <Card className="h-full border-0 bg-white hover:shadow-lg transition-all duration-300 group">
-                  <CardContent className="p-8 text-center">
-                    <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-primary rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
-                      <BarChart3 className="h-8 w-8 text-white" />
-                    </div>
-                    <h3 className="text-xl font-bold mb-4">Market Reports</h3>
-                    <p className="text-muted-foreground text-sm mb-4">
-                      Comprehensive market analysis and reports that position you as the local market expert.
-                    </p>
-                    <ul className="text-xs text-muted-foreground space-y-1">
-                      <li>• Data visualization</li>
-                      <li>• Trend analysis</li>
-                      <li>• Custom branding</li>
-                    </ul>
-                  </CardContent>
-                </Card>
-              </motion.div>
-
-              <motion.div variants={fadeInUp}>
-                <Card className="h-full border-0 bg-white hover:shadow-lg transition-all duration-300 group">
-                  <CardContent className="p-8 text-center">
-                    <div className="w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
-                      <Building className="h-8 w-8 text-white" />
-                    </div>
-                    <h3 className="text-xl font-bold mb-4">Pre-Construction</h3>
-                    <p className="text-muted-foreground text-sm mb-4">
-                      Specialized marketing materials for pre-construction projects with 3D renderings and floor plans.
-                    </p>
-                    <ul className="text-xs text-muted-foreground space-y-1">
-                      <li>• 3D visualizations</li>
-                      <li>• Interactive floor plans</li>
-                      <li>• Virtual tours</li>
-                    </ul>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            </motion.div>
-          </div>
-        </section>
 
         {/* AI Integration */}
         <section className="py-20 bg-gradient-to-r from-primary/5 to-secondary/5">
@@ -356,72 +572,6 @@ export default function Marketing() {
           </div>
         </section>
 
-        {/* What's Changing Section */}
-        <section className="py-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
-                What's <span className="text-primary">Changing</span> in Real Estate Marketing
-              </h2>
-              <p className="text-xl text-muted-foreground">
-                Stay ahead of the curve with our innovative approach
-              </p>
-            </motion.div>
-
-            <motion.div 
-              variants={staggerContainer}
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: true }}
-              className="grid md:grid-cols-2 gap-8"
-            >
-              {[
-                {
-                  icon: Smartphone,
-                  title: "Mobile-First Design",
-                  desc: "Over 80% of buyers start their search on mobile. Our designs are optimized for mobile viewing and engagement."
-                },
-                {
-                  icon: Camera,
-                  title: "Video Content Dominance",
-                  desc: "Video content gets 1200% more shares than text and images combined. We create compelling video tours and stories."
-                },
-                {
-                  icon: Globe,
-                  title: "Virtual Reality Tours",
-                  desc: "VR and 3D tours are becoming standard. We provide immersive experiences that sell properties faster."
-                },
-                {
-                  icon: Mail,
-                  title: "Personalized Campaigns",
-                  desc: "Generic marketing is dead. We create personalized campaigns that speak directly to your target audience."
-                }
-              ].map((item, index) => (
-                <motion.div key={index} variants={fadeInUp}>
-                  <Card className="border-0 bg-white/50 backdrop-blur-sm hover:bg-white/80 transition-all duration-300">
-                    <CardContent className="p-8">
-                      <div className="flex items-start space-x-4">
-                        <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center">
-                          <item.icon className="h-6 w-6 text-primary" />
-                        </div>
-                        <div>
-                          <h3 className="text-xl font-bold mb-3">{item.title}</h3>
-                          <p className="text-muted-foreground">{item.desc}</p>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
-        </section>
 
         {/* Portfolio Section */}
         <section className="py-20 bg-muted/30">
@@ -487,38 +637,105 @@ export default function Marketing() {
           </div>
         </section>
 
+
         {/* AI Marketing Integration Statement */}
-        <section className="py-16 bg-gradient-to-r from-muted/50 to-muted/30">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="py-24 bg-white relative overflow-hidden">
+          {/* Background Elements */}
+          <div className="absolute inset-0">
+            <div className="absolute top-20 left-10 w-80 h-80 bg-gradient-to-br from-pink-100/20 to-pink-200/10 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-br from-purple-100/20 to-purple-200/10 rounded-full blur-3xl"></div>
+          </div>
+          
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="text-center"
+              className="text-center mb-16"
             >
-              <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-secondary/5 rounded-3xl blur-3xl opacity-30"></div>
-                <Card className="relative border-0 bg-gradient-to-r from-primary/10 to-secondary/10 backdrop-blur-sm">
-                  <CardContent className="p-12 text-center">
-                    <div className="w-20 h-20 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                      <Zap className="h-10 w-10 text-primary" />
+              <div className="w-20 h-20 bg-gradient-to-br from-pink-200 to-pink-300 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Zap className="w-10 h-10 text-pink-600" />
+              </div>
+              <h2 className="text-4xl lg:text-5xl font-black text-slate-900 mb-8 font-montserrat leading-tight">
+                AI-Powered Marketing Excellence
+              </h2>
+            </motion.div>
+
+            {/* Software Tools Carousel */}
+            <motion.div 
+              className="relative"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <div className="relative overflow-hidden">
+                {/* Auto-scrolling carousel */}
+                <div className="flex animate-scroll space-x-12 py-8">
+                  {/* First set of tools */}
+                  {[
+                    { name: "Collov.ai", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqtppn8zI-NDHl3tx8m_mb9EEPSjkBjh6K1A&s" },
+                    { name: "Eleven Labs", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBVNpGHzjV-JkT1ekBJqayI93p42HDiK2XSw&s" },
+                    { name: "Boldtrail", logo: "https://play-lh.googleusercontent.com/Arz-WvOeHYEzyixj0ObACnjFop814NxwWZuFfnoq-l-Cw-sYKxYaejfR0jMX1Z9SUA" },
+                    { name: "SendGrid", logo: "https://cdn.dribbble.com/userupload/21155567/file/original-e0922910e5ed9a602582d9fc27ef9959.jpg?resize=752x&vertical=center" },
+                    { name: "FollowUp Boss", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwJE_cdjNHipgrAIPP5GuGpF4S-ukkyigCPw&s" },
+                    { name: "CapCut", logo: "https://i.pinimg.com/474x/0d/64/2b/0d642b674f86ef3f50cf08a522237c2e.jpg" },
+                    { name: "Canva", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGpJ8UFG03-e_wuIAfqnNlnVzUDZ-4Uxxwiw&s" }
+                  ].map((tool, index) => (
+                    <div key={index} className="flex-shrink-0 group">
+                      <div className="flex flex-col items-center space-y-4 group-hover:scale-110 transition-all duration-500">
+                        <div className="w-32 h-32 flex items-center justify-center group-hover:drop-shadow-2xl transition-all duration-500">
+                          <Image
+                            src={tool.logo}
+                            alt={tool.name}
+                            width={120}
+                            height={120}
+                            className="object-contain filter group-hover:brightness-110 transition-all duration-500"
+                          />
                     </div>
-                    <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-6 font-montserrat">
-                      AI-Powered Marketing Excellence
-                    </h3>
-                    <p className="text-lg text-muted-foreground max-w-4xl mx-auto font-arial leading-relaxed">
-                      In today's market, standing out means staying ahead of the curve—and AI is changing the game. At RE/MAX Excellence, we harness AI-powered design tools, predictive analytics, and smart ad targeting to give your listings more reach, your brand more recognition, and your time more freedom. The result? Campaigns that not only look good, but work harder for you, 24/7.
-                    </p>
-                  </CardContent>
-                </Card>
+                        <h3 className="text-lg font-bold text-slate-800 group-hover:text-pink-600 transition-colors duration-300 font-montserrat">
+                          {tool.name}
+                        </h3>
+                      </div>
+                    </div>
+                  ))}
+                  
+                  {/* Duplicate set for seamless loop */}
+                  {[
+                    { name: "Collov.ai", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqtppn8zI-NDHl3tx8m_mb9EEPSjkBjh6K1A&s" },
+                    { name: "Eleven Labs", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBVNpGHzjV-JkT1ekBJqayI93p42HDiK2XSw&s" },
+                    { name: "Boldtrail", logo: "https://play-lh.googleusercontent.com/Arz-WvOeHYEzyixj0ObACnjFop814NxwWZuFfnoq-l-Cw-sYKxYaejfR0jMX1Z9SUA" },
+                    { name: "SendGrid", logo: "https://cdn.dribbble.com/userupload/21155567/file/original-e0922910e5ed9a602582d9fc27ef9959.jpg?resize=752x&vertical=center" },
+                    { name: "FollowUp Boss", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwJE_cdjNHipgrAIPP5GuGpF4S-ukkyigCPw&s" },
+                    { name: "CapCut", logo: "https://i.pinimg.com/474x/0d/64/2b/0d642b674f86ef3f50cf08a522237c2e.jpg" },
+                    { name: "Canva", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGpJ8UFG03-e_wuIAfqnNlnVzUDZ-4Uxxwiw&s" }
+                  ].map((tool, index) => (
+                    <div key={`duplicate-${index}`} className="flex-shrink-0 group">
+                      <div className="flex flex-col items-center space-y-4 group-hover:scale-110 transition-all duration-500">
+                        <div className="w-32 h-32 flex items-center justify-center group-hover:drop-shadow-2xl transition-all duration-500">
+                          <Image
+                            src={tool.logo}
+                            alt={tool.name}
+                            width={120}
+                            height={120}
+                            className="object-contain filter group-hover:brightness-110 transition-all duration-500"
+                          />
+                    </div>
+                        <h3 className="text-lg font-bold text-slate-800 group-hover:text-pink-600 transition-colors duration-300 font-montserrat">
+                          {tool.name}
+                        </h3>
+                      </div>
+                    </div>
+                  ))}
+                    </div>
               </div>
             </motion.div>
           </div>
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 bg-gradient-to-r from-primary via-secondary to-purple-500">
+        <section className="py-20 bg-gradient-to-r from-brand-bright-red via-brand-medium-blue to-brand-dark-blue">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -526,15 +743,12 @@ export default function Marketing() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
+              <h2 className="text-3xl md:text-5xl font-bold text-white mb-8">
                 Let's Build Your Brand Together
               </h2>
-              <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-                Ready to take your marketing to the next level? Our team is here to help you succeed.
-              </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="bg-white text-primary hover:bg-white/90">
-                  Start Marketing Like a Pro
+                <Button size="lg" className="bg-white text-brand-bright-red hover:bg-white/90 font-bold px-8 py-4 text-xl">
+                  Join Us
                 </Button>
               </div>
             </motion.div>
