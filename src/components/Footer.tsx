@@ -27,7 +27,7 @@ const Footer = () => {
           alt="Company Pin Icon" 
           width={400} 
           height={400} 
-          className="w-96 h-96"
+          className="w-96 h-96 object-contain"
         />
       </div>
       
@@ -38,13 +38,13 @@ const Footer = () => {
           alt="Company Pin Icon" 
           width={300} 
           height={300} 
-          className="w-72 h-72"
+          className="w-72 h-72 object-contain"
         />
       </div>
 
       {/* Main Footer Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           
           {/* Company Info */}
           <div className="lg:col-span-1">
@@ -60,7 +60,7 @@ const Footer = () => {
                 />
               </div>
               <p className="text-white/90 text-sm leading-relaxed font-arial">
-                Ontario's youngest, fastest-growing real estate brokerage. We bring fresh energy with RE/MAX's unmatched global reach.
+                Youngest, fastest-growing real estate brokerage. We bring fresh energy with RE/MAX's unmatched global reach.
               </p>
             </div>
             
@@ -79,45 +79,6 @@ const Footer = () => {
                 <Linkedin className="w-5 h-5" />
               </a>
             </div>
-          </div>
-
-          {/* Quick Links */}
-          <div>
-            <h4 className="text-lg font-bold text-white mb-6 font-montserrat border-b-2 border-brand-bright-red pb-2">
-              Quick Links
-            </h4>
-            <ul className="space-y-3">
-              <li>
-                <a href="/buy" className="text-white/90 hover:text-brand-bright-red transition-colors duration-200 flex items-center group">
-                  <ArrowRight className="w-4 h-4 mr-2 group-hover:translate-x-1 transition-transform duration-200" />
-                  Buy Properties
-                </a>
-              </li>
-              <li>
-                <a href="/sell" className="text-white/90 hover:text-brand-bright-red transition-colors duration-200 flex items-center group">
-                  <ArrowRight className="w-4 h-4 mr-2 group-hover:translate-x-1 transition-transform duration-200" />
-                  Sell Your Home
-                </a>
-              </li>
-              <li>
-                <a href="/marketing" className="text-white/90 hover:text-brand-bright-red transition-colors duration-200 flex items-center group">
-                  <ArrowRight className="w-4 h-4 mr-2 group-hover:translate-x-1 transition-transform duration-200" />
-                  Marketing Services
-                </a>
-              </li>
-              <li>
-                <a href="/training" className="text-white/90 hover:text-brand-bright-red transition-colors duration-200 flex items-center group">
-                  <ArrowRight className="w-4 h-4 mr-2 group-hover:translate-x-1 transition-transform duration-200" />
-                  Agent Training
-                </a>
-              </li>
-              <li>
-                <a href="/support" className="text-white/90 hover:text-brand-bright-red transition-colors duration-200 flex items-center group">
-                  <ArrowRight className="w-4 h-4 mr-2 group-hover:translate-x-1 transition-transform duration-200" />
-                  Office Support
-                </a>
-              </li>
-            </ul>
           </div>
 
           {/* Services */}
@@ -151,6 +112,12 @@ const Footer = () => {
                 </a>
               </li>
               <li>
+                <a href="/support" className="text-white/90 hover:text-brand-bright-red transition-colors duration-200 flex items-center group">
+                  <ArrowRight className="w-4 h-4 mr-2 group-hover:translate-x-1 transition-transform duration-200" />
+                  Support
+                </a>
+              </li>
+              <li>
                 <a href="/join-us" className="text-white/90 hover:text-brand-bright-red transition-colors duration-200 flex items-center group">
                   <ArrowRight className="w-4 h-4 mr-2 group-hover:translate-x-1 transition-transform duration-200" />
                   Join Our Team
@@ -165,13 +132,25 @@ const Footer = () => {
               Get In Touch
             </h4>
             <div className="space-y-4 mb-6">
-              <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-brand-bright-red rounded-full flex items-center justify-center">
-                  <Phone className="w-4 h-4 text-white" />
+              <div className="flex items-start space-x-3">
+                <div className="w-8 h-8 bg-brand-bright-red rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                  <MapPin className="w-4 h-4 text-white" />
                 </div>
                 <div>
-                  <p className="text-white/80 text-sm">Call Us</p>
-                  <p className="text-white font-semibold">(416) 555-0123</p>
+                  <p className="text-white/80 text-sm">Mississauga Office</p>
+                  <p className="text-white font-semibold text-sm leading-relaxed">100 Milverton Dr #610<br />Mississauga, ON L6R 4H1</p>
+                  <a href="tel:9055074436" className="text-brand-bright-red hover:text-white transition-colors text-sm font-semibold">(905) 507-4436</a>
+                </div>
+              </div>
+              
+              <div className="flex items-start space-x-3">
+                <div className="w-8 h-8 bg-brand-bright-red rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                  <MapPin className="w-4 h-4 text-white" />
+                </div>
+                <div>
+                  <p className="text-white/80 text-sm">Brampton Office</p>
+                  <p className="text-white font-semibold text-sm leading-relaxed">456 Vodden St E #21b<br />Brampton, ON L6S 5Y7</p>
+                  <a href="tel:5193421961" className="text-brand-bright-red hover:text-white transition-colors text-sm font-semibold">519-342-1961</a>
                 </div>
               </div>
               
@@ -184,41 +163,11 @@ const Footer = () => {
                   <p className="text-white font-semibold">info@remaxexcellence.ca</p>
                 </div>
               </div>
-              
-              <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-brand-bright-red rounded-full flex items-center justify-center">
-                  <MapPin className="w-4 h-4 text-white" />
-                </div>
-                <div>
-                  <p className="text-white/80 text-sm">Visit Us</p>
-                  <p className="text-white font-semibold">Toronto, Ontario</p>
-                </div>
-              </div>
             </div>
             
-            <Button className="w-full bg-gradient-to-r from-brand-bright-red to-brand-dark-red hover:from-brand-dark-red hover:to-brand-bright-red text-white font-bold py-3 shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-200 border-2 border-brand-bright-red">
+            <Button className="w-full bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold py-3 shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-200">
               Book a Meeting
             </Button>
-          </div>
-        </div>
-
-        {/* Stats Section */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 py-8 border-t border-white/20">
-          <div className="text-center">
-            <div className="text-3xl font-bold text-brand-bright-red mb-2">500+</div>
-            <div className="text-white/90 text-sm font-medium">Properties Sold</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-brand-bright-red mb-2">98%</div>
-            <div className="text-white/90 text-sm font-medium">Client Satisfaction</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-brand-bright-red mb-2">120+</div>
-            <div className="text-white/90 text-sm font-medium">Expert Agents</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-brand-bright-red mb-2">#1</div>
-            <div className="text-white/90 text-sm font-medium">Growth Rate</div>
           </div>
         </div>
 
@@ -238,9 +187,11 @@ const Footer = () => {
               <span className="text-white/90 text-sm font-medium drop-shadow-lg">4.9/5</span>
             </div>
             
-            <Button className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-semibold px-6 py-2 text-sm shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200">
-              Leave a Review
-            </Button>
+            <a href="https://share.google/0b8eBsJOqJ035ZZm4" target="_blank" rel="noopener noreferrer">
+              <Button className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-semibold px-6 py-2 text-sm shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200">
+                Leave a Review
+              </Button>
+            </a>
           </div>
         </div>
       </div>

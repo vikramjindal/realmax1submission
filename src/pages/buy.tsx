@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
+import { useJoinUsModal } from "@/contexts/JoinUsModalContext";
 import { 
   Search, 
   MapPin, 
@@ -35,6 +36,7 @@ const staggerContainer = {
 };
 
 export default function Buy() {
+  const { openModal } = useJoinUsModal();
   const featuredListings = [
     {
       id: 1,
@@ -151,11 +153,11 @@ export default function Buy() {
                     </div>
                   </div>
                   <div className="flex gap-2">
-                    <Button variant="outline" size="lg" className="h-12">
+                    <Button onClick={openModal} size="lg" className="h-12 bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold">
                       <Filter className="h-5 w-5 mr-2" />
                       Filters
                     </Button>
-                    <Button size="lg" className="h-12 bg-primary hover:bg-primary/90">
+                    <Button onClick={openModal} size="lg" className="h-12 bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold">
                       <Search className="h-5 w-5 mr-2" />
                       Search
                     </Button>
@@ -276,10 +278,10 @@ export default function Buy() {
                         className="w-full h-64 object-cover"
                       />
                       <div className="absolute top-4 right-4 flex gap-2">
-                        <Button size="sm" variant="outline" className="bg-white/90 hover:bg-white">
+                        <Button onClick={openModal} size="sm" className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold">
                           <Heart className="h-4 w-4" />
                         </Button>
-                        <Button size="sm" variant="outline" className="bg-white/90 hover:bg-white">
+                        <Button onClick={openModal} size="sm" className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold">
                           <Share2 className="h-4 w-4" />
                         </Button>
                       </div>
@@ -306,7 +308,7 @@ export default function Buy() {
                         <span>{listing.baths} baths</span>
                         <span>{listing.sqft} sqft</span>
                       </div>
-                      <Button className="w-full mt-4 bg-primary hover:bg-primary/90">
+                      <Button onClick={openModal} className="w-full mt-4 bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold">
                         View Details
                       </Button>
                     </CardContent>
@@ -316,7 +318,7 @@ export default function Buy() {
             </motion.div>
 
             <div className="text-center mt-12">
-              <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+              <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold">
                 View All Listings
               </Button>
             </div>
@@ -379,7 +381,7 @@ export default function Buy() {
                 Let's Build Your Brand Together
               </h2>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="bg-white text-brand-bright-red hover:bg-white/90 font-bold px-8 py-4 text-xl">
+                <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold px-8 py-4 text-xl">
                   Join Us
                 </Button>
               </div>

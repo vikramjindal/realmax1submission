@@ -102,7 +102,7 @@ export default function Tools() {
               <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-8 font-arial leading-relaxed">
                 Access cutting-edge technology tools designed specifically for real estate professionals. Streamline your workflow, automate tasks, and focus on what matters most - your clients.
               </p>
-              <Button size="lg" className="bg-gradient-to-r from-primary to-secondary text-white hover:opacity-90">
+              <Button size="lg" className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold">
                 Explore Our Tech Tools
               </Button>
             </motion.div>
@@ -528,7 +528,7 @@ export default function Tools() {
                 Let's Build Your Brand Together
               </h2>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="bg-white text-brand-bright-red hover:bg-white/90 font-bold px-8 py-4 text-xl">
+                <Button size="lg" className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold px-8 py-4 text-xl">
                   Join Us
                 </Button>
               </div>

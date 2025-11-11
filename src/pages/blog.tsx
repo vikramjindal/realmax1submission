@@ -1,27 +1,19 @@
 import React from "react";
 import Head from "next/head";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import Image from "next/image";
 import { Input } from "@/components/ui/input";
+import Image from "next/image";
+import { useJoinUsModal } from '@/contexts/JoinUsModalContext';
 import { 
-  BookOpen, 
-  TrendingUp, 
-  Scale, 
-  Target,
   Calendar,
   User,
-  ArrowRight,
-  Search,
-  Tag,
   Clock,
-  Eye,
-  MessageCircle,
-  Share2,
-  FileText
+  Share2
 } from "lucide-react";
 
 const fadeInUp = {
@@ -39,50 +31,39 @@ const staggerContainer = {
 };
 
 export default function Blog() {
-  const featuredPosts = [
+  const { openModal } = useJoinUsModal();
+  const recentPosts = [
     {
       id: 1,
       title: "The Future of Real Estate: AI and Market Predictions",
-      excerpt: "Discover how artificial intelligence is revolutionizing property valuation and market analysis in 2024.",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      excerpt: "Discover how artificial intelligence is revolutionizing property valuation and market analysis in 2024. Learn about the latest AI tools that are helping agents make data-driven decisions and provide better service to their clients.",
       category: "Market Trends",
       author: "Sarah Chen",
       date: "March 15, 2024",
-      readTime: "5 min read",
-      views: "2.1k",
-      comments: 24
+      readTime: "5 min read"
     },
     {
       id: 2,
       title: "New Ontario Real Estate Regulations: What Agents Need to Know",
-      excerpt: "A comprehensive guide to the latest regulatory changes affecting real estate professionals in Ontario.",
-      image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      excerpt: "A comprehensive guide to the latest regulatory changes affecting real estate professionals in Ontario. Stay compliant and informed about new disclosure requirements, licensing updates, and professional standards.",
       category: "Legal Updates",
       author: "Michael Rodriguez",
       date: "March 12, 2024",
-      readTime: "8 min read",
-      views: "1.8k",
-      comments: 18
+      readTime: "8 min read"
     },
     {
       id: 3,
       title: "Social Media Marketing Strategies That Actually Work",
-      excerpt: "Proven tactics to boost your real estate social media presence and generate quality leads.",
-      image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      category: "Marketing Practices",
+      excerpt: "Proven tactics to boost your real estate social media presence and generate quality leads. Discover the best platforms, content types, and posting schedules for maximum engagement and conversions.",
+      category: "Marketing",
       author: "Jennifer Park",
       date: "March 10, 2024",
-      readTime: "6 min read",
-      views: "3.2k",
-      comments: 31
-    }
-  ];
-
-  const recentPosts = [
+      readTime: "6 min read"
+    },
     {
       id: 4,
       title: "Pre-Construction Investment: Timing the Market Right",
-      excerpt: "Learn when and how to invest in pre-construction properties for maximum returns.",
+      excerpt: "Learn when and how to invest in pre-construction properties for maximum returns. Understand market cycles, developer incentives, and how to identify the best opportunities before they're gone.",
       category: "Pre-Construction",
       author: "David Kim",
       date: "March 8, 2024",
@@ -91,8 +72,8 @@ export default function Blog() {
     {
       id: 5,
       title: "Building Your Personal Brand as a Real Estate Agent",
-      excerpt: "Essential steps to establish yourself as a trusted authority in your local market.",
-      category: "Marketing Practices",
+      excerpt: "Essential steps to establish yourself as a trusted authority in your local market. From creating a unique value proposition to developing a consistent online presence that attracts ideal clients.",
+      category: "Marketing",
       author: "Lisa Thompson",
       date: "March 5, 2024",
       readTime: "4 min read"
@@ -100,19 +81,66 @@ export default function Blog() {
     {
       id: 6,
       title: "Understanding Mortgage Rate Trends in 2024",
-      excerpt: "What current rate changes mean for buyers and sellers in today's market.",
+      excerpt: "What current rate changes mean for buyers and sellers in today's market. Get insights on Bank of Canada decisions, inflation impacts, and strategies to help your clients navigate financing options.",
       category: "Market Trends",
       author: "Robert Wilson",
       date: "March 3, 2024",
       readTime: "5 min read"
+    },
+    {
+      id: 7,
+      title: "Mastering the Art of Open House Events",
+      excerpt: "Transform your open houses from basic showings to unforgettable experiences that generate leads and close deals. Learn staging secrets, visitor engagement tactics, and follow-up strategies that convert.",
+      category: "Marketing",
+      author: "Amanda Foster",
+      date: "March 1, 2024",
+      readTime: "6 min read"
+    },
+    {
+      id: 8,
+      title: "Navigating Multiple Offers: A Complete Guide",
+      excerpt: "Expert strategies for representing both buyers and sellers in competitive bidding situations. Understand escalation clauses, presentation timing, and negotiation techniques that win deals.",
+      category: "Legal Updates",
+      author: "James Patterson",
+      date: "February 28, 2024",
+      readTime: "9 min read"
+    },
+    {
+      id: 9,
+      title: "Toronto's Condo Market: Q1 2024 Analysis",
+      excerpt: "In-depth analysis of Toronto's condo market performance, including price trends, inventory levels, and neighborhood highlights. See which areas are outperforming and where opportunities lie.",
+      category: "Market Trends",
+      author: "Emily Zhang",
+      date: "February 25, 2024",
+      readTime: "10 min read"
+    },
+    {
+      id: 10,
+      title: "Building a Referral Network That Grows Your Business",
+      excerpt: "Proven strategies to create and nurture a referral network that consistently sends you quality clients. Learn how to build relationships with other professionals and turn past clients into brand ambassadors.",
+      category: "Marketing",
+      author: "Kevin Martinez",
+      date: "February 22, 2024",
+      readTime: "5 min read"
+    },
+    {
+      id: 11,
+      title: "First-Time Home Buyer Programs in Ontario",
+      excerpt: "Complete guide to government programs, grants, and incentives available to first-time buyers in Ontario. Help your clients maximize their purchasing power and understand qualification requirements.",
+      category: "Legal Updates",
+      author: "Rachel Green",
+      date: "February 20, 2024",
+      readTime: "7 min read"
+    },
+    {
+      id: 12,
+      title: "Luxury Real Estate Marketing: Selling High-End Properties",
+      excerpt: "Specialized strategies for marketing luxury properties to affluent buyers. From high-end photography and videography to private showings and international marketing tactics.",
+      category: "Marketing",
+      author: "Victoria Sterling",
+      date: "February 18, 2024",
+      readTime: "8 min read"
     }
-  ];
-
-  const categories = [
-    { name: "Market Trends", count: 24, color: "primary" },
-    { name: "Legal Updates", count: 18, color: "secondary" },
-    { name: "Marketing Practices", count: 32, color: "purple-500" },
-    { name: "Pre-Construction", count: 15, color: "blue-500" }
   ];
 
   return (
@@ -174,157 +202,9 @@ export default function Blog() {
               <h1 className="text-5xl lg:text-6xl font-black text-slate-900 mb-8 font-montserrat leading-tight">
                 Insights That Keep You <span className="text-transparent bg-gradient-to-r from-teal-500 via-cyan-600 to-blue-600 bg-clip-text">Ahead</span>
               </h1>
-              <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-8 font-arial leading-relaxed">
+              <p className="text-xl text-slate-600 max-w-3xl mx-auto font-arial leading-relaxed">
                 Stay informed with expert insights, market analysis, and practical advice from Ontario's fastest-growing real estate brokerage.
               </p>
-              
-              {/* Search Bar */}
-              <div className="max-w-2xl mx-auto">
-                <div className="relative">
-                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                  <Input 
-                    placeholder="Search articles, topics, or keywords..."
-                    className="pl-12 h-14 text-lg"
-                  />
-                  <Button className="absolute right-2 top-2 h-10 bg-primary hover:bg-primary/90">
-                    Search
-                  </Button>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* Categories Section */}
-        <section className="py-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
-                Explore by <span className="text-primary">Category</span>
-              </h2>
-              <p className="text-xl text-muted-foreground">
-                Find the content that matters most to your business
-              </p>
-            </motion.div>
-
-            <motion.div 
-              variants={staggerContainer}
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: true }}
-              className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
-            >
-              {categories.map((category, index) => (
-                <motion.div key={index} variants={fadeInUp}>
-                  <Card className="h-full border-0 bg-white hover:shadow-lg transition-all duration-300 group cursor-pointer">
-                    <CardContent className="p-8 text-center">
-                      <div className={`w-16 h-16 bg-${category.color}/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform`}>
-                        {category.name === "Market Trends" && <TrendingUp className={`h-8 w-8 text-${category.color}`} />}
-                        {category.name === "Legal Updates" && <Scale className={`h-8 w-8 text-${category.color}`} />}
-                        {category.name === "Marketing Practices" && <Target className={`h-8 w-8 text-${category.color}`} />}
-                        {category.name === "Pre-Construction" && <BookOpen className={`h-8 w-8 text-${category.color}`} />}
-                      </div>
-                      <h3 className="text-xl font-bold mb-2">{category.name}</h3>
-                      <p className="text-muted-foreground text-sm">{category.count} articles</p>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
-        </section>
-
-        {/* Featured Posts */}
-        <section className="py-20 bg-muted/30">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
-                Featured Articles
-              </h2>
-              <p className="text-xl text-muted-foreground">
-                Our most popular and impactful content
-              </p>
-            </motion.div>
-
-            <motion.div 
-              variants={staggerContainer}
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: true }}
-              className="grid lg:grid-cols-3 gap-8"
-            >
-              {featuredPosts.map((post, index) => (
-                <motion.div key={post.id} variants={fadeInUp}>
-                  <Card className="h-full overflow-hidden border-0 bg-white hover:shadow-lg transition-all duration-300 group">
-                    <div className="relative">
-                      <img 
-                        src={post.image} 
-                        alt={post.title}
-                        className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                      <div className="absolute top-4 left-4">
-                        <span className="bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-medium">
-                          {post.category}
-                        </span>
-                      </div>
-                    </div>
-                    <CardContent className="p-6">
-                      <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">
-                        {post.title}
-                      </h3>
-                      <p className="text-muted-foreground mb-4 text-sm">
-                        {post.excerpt}
-                      </p>
-                      
-                      <div className="flex items-center justify-between text-sm text-muted-foreground mb-4">
-                        <div className="flex items-center space-x-4">
-                          <div className="flex items-center">
-                            <User className="h-4 w-4 mr-1" />
-                            {post.author}
-                          </div>
-                          <div className="flex items-center">
-                            <Calendar className="h-4 w-4 mr-1" />
-                            {post.date}
-                          </div>
-                        </div>
-                      </div>
-                      
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-4 text-sm text-muted-foreground">
-                          <div className="flex items-center">
-                            <Clock className="h-4 w-4 mr-1" />
-                            {post.readTime}
-                          </div>
-                          <div className="flex items-center">
-                            <Eye className="h-4 w-4 mr-1" />
-                            {post.views}
-                          </div>
-                          <div className="flex items-center">
-                            <MessageCircle className="h-4 w-4 mr-1" />
-                            {post.comments}
-                          </div>
-                        </div>
-                        <Button variant="ghost" size="sm" className="text-primary hover:text-primary/80">
-                          Read More
-                          <ArrowRight className="h-4 w-4 ml-1" />
-                        </Button>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
             </motion.div>
           </div>
         </section>
@@ -354,51 +234,64 @@ export default function Blog() {
                 >
                   {recentPosts.map((post, index) => (
                     <motion.div key={post.id} variants={fadeInUp}>
-                      <Card className="border-0 bg-white hover:shadow-lg transition-all duration-300 group">
-                        <CardContent className="p-8">
-                          <div className="flex items-start justify-between mb-4">
-                            <span className="bg-secondary/10 text-secondary px-3 py-1 rounded-full text-sm font-medium">
-                              {post.category}
-                            </span>
-                            <Button variant="ghost" size="sm">
-                              <Share2 className="h-4 w-4" />
-                            </Button>
-                          </div>
-                          
-                          <h3 className="text-2xl font-bold mb-3 group-hover:text-primary transition-colors cursor-pointer">
-                            {post.title}
-                          </h3>
-                          <p className="text-muted-foreground mb-4">
-                            {post.excerpt}
-                          </p>
-                          
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center space-x-4 text-sm text-muted-foreground">
-                              <div className="flex items-center">
-                                <User className="h-4 w-4 mr-1" />
-                                {post.author}
-                              </div>
-                              <div className="flex items-center">
-                                <Calendar className="h-4 w-4 mr-1" />
-                                {post.date}
-                              </div>
-                              <div className="flex items-center">
-                                <Clock className="h-4 w-4 mr-1" />
-                                {post.readTime}
-                              </div>
+                      <Link href={`/blog/${post.id}`}>
+                        <Card className="border-0 bg-white hover:shadow-lg transition-all duration-300 group cursor-pointer">
+                          <CardContent className="p-8">
+                            <div className="flex items-start justify-between mb-4">
+                              <span className="bg-secondary/10 text-secondary px-3 py-1 rounded-full text-sm font-medium">
+                                {post.category}
+                              </span>
+                              <Button 
+                                size="sm" 
+                                className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold"
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  e.stopPropagation();
+                                  // Share functionality
+                                }}
+                              >
+                                <Share2 className="h-4 w-4" />
+                              </Button>
                             </div>
-                            <Button variant="outline" size="sm" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
-                              Read Article
-                            </Button>
-                          </div>
-                        </CardContent>
-                      </Card>
+                            
+                            <h3 className="text-2xl font-bold mb-3 group-hover:text-primary transition-colors">
+                              {post.title}
+                            </h3>
+                            <p className="text-muted-foreground mb-4">
+                              {post.excerpt}
+                            </p>
+                            
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center space-x-4 text-sm text-muted-foreground">
+                                <div className="flex items-center">
+                                  <User className="h-4 w-4 mr-1" />
+                                  {post.author}
+                                </div>
+                                <div className="flex items-center">
+                                  <Calendar className="h-4 w-4 mr-1" />
+                                  {post.date}
+                                </div>
+                                <div className="flex items-center">
+                                  <Clock className="h-4 w-4 mr-1" />
+                                  {post.readTime}
+                                </div>
+                              </div>
+                              <Button 
+                                size="sm" 
+                                className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold"
+                              >
+                                Read Article
+                              </Button>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      </Link>
                     </motion.div>
                   ))}
                 </motion.div>
 
                 <div className="text-center mt-12">
-                  <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+                  <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold">
                     Load More Articles
                   </Button>
                 </div>
@@ -422,7 +315,7 @@ export default function Blog() {
                       </p>
                       <div className="space-y-4">
                         <Input placeholder="Your email address" />
-                        <Button className="w-full bg-primary hover:bg-primary/90">
+                        <Button onClick={openModal} className="w-full bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold">
                           Subscribe
                         </Button>
                       </div>
@@ -460,7 +353,10 @@ export default function Blog() {
                           { author: "Mary Johnson", comment: "Very helpful legal update.", article: "Ontario Regulations" },
                           { author: "David Lee", comment: "These marketing tips work!", article: "Social Media Strategies" }
                         ].map((comment, index) => (
-                          <div key={index} className="border-b border-border pb-4 last:border-b-0">
+                          <div 
+                            key={index} 
+                            className="border-b border-border pb-4 last:border-b-0"
+                          >
                             <p className="text-sm text-muted-foreground mb-1">
                               <span className="font-medium text-foreground">{comment.author}</span> on
                             </p>
@@ -490,7 +386,7 @@ export default function Blog() {
                 Let's Build Your Brand Together
               </h2>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="bg-white text-brand-bright-red hover:bg-white/90 font-bold px-8 py-4 text-xl">
+                <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold px-8 py-4 text-xl">
                   Join Us
                 </Button>
               </div>

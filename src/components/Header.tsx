@@ -3,16 +3,18 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import Image from 'next/image';
+import { useJoinUsModal } from '@/contexts/JoinUsModalContext';
 
 const Header = () => {
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeMegaMenu, setActiveMegaMenu] = useState<string | null>(null);
+  const { openModal } = useJoinUsModal();
 
   const navItems = [
     { name: 'Marketing', href: '/marketing' },
     { name: 'Training', href: '/training' },
-    { name: 'Support', href: '/support' },
+    { name: 'Pre Con', href: '/pre-construction' },
     { name: 'Events', href: '/events' },
     { name: 'Blog', href: '/blog' },
     { name: 'About', href: '/about-us' },
@@ -68,7 +70,10 @@ const Header = () => {
 
           {/* Desktop CTA Section */}
           <div className="hidden lg:flex items-center">
-            <Button className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold px-6 py-2 text-sm rounded">
+            <Button 
+              onClick={openModal}
+              className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold px-6 py-2 text-sm rounded"
+            >
               Join Excellence
             </Button>
           </div>
@@ -98,7 +103,13 @@ const Header = () => {
               ))}
               
               <div className="pt-4 border-t border-white/20">
-                <Button className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold w-full mx-4 py-3 text-lg">
+                <Button 
+                  onClick={() => {
+                    openModal();
+                    setIsMenuOpen(false);
+                  }}
+                  className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold w-full mx-4 py-3 text-lg"
+                >
                   Join Excellence
                 </Button>
               </div>

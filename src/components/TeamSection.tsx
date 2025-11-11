@@ -50,7 +50,7 @@ const teamMembers = [
   {
     name: "Nikita Suri",
     role: "Real Estate Professional",
-    image: "https://dontdelete2005142.kloudbean.com/1760994107_Nikita%20Suri.png",
+    image: "/images/agents/nikita suri.png?v=2",
     phone: "(416) 555-0105",
     email: "nikita@remaxexcellence.ca"
   }
@@ -92,7 +92,7 @@ const TeamSection: React.FC = () => {
                       alt={`${member.name} - ${member.role}`}
                       width={300}
                       height={300}
-                      className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-300"
+                      className={`w-full h-80 object-cover group-hover:scale-105 transition-transform duration-300 ${member.name === "Nikita Suri" ? "object-top" : ""}`}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>

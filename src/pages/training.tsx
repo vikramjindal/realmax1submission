@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
+import { useJoinUsModal } from "@/contexts/JoinUsModalContext";
 import { 
   GraduationCap, 
   Target, 
@@ -21,7 +22,9 @@ import {
   Zap,
   TrendingUp,
   Shield,
-  ArrowRight
+  ArrowRight,
+  Home,
+  Building
 } from "lucide-react";
 
 const fadeInUp = {
@@ -39,6 +42,8 @@ const staggerContainer = {
 };
 
 export default function Training() {
+  const { openModal } = useJoinUsModal();
+  
   return (
     <>
       <Head>
@@ -52,12 +57,12 @@ export default function Training() {
         <Header />
         
         {/* Hero Section */}
-        <section className="relative py-20 bg-gradient-to-br from-brand-bright-red/10 via-white to-brand-medium-blue/10 overflow-hidden">
+        <section className="relative py-20 bg-white overflow-hidden">
           {/* Background Elements */}
           <div className="absolute inset-0">
-            <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-brand-bright-red/30 to-brand-dark-red/20 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-br from-brand-medium-blue/30 to-brand-dark-blue/20 rounded-full blur-3xl"></div>
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-br from-brand-dark-blue/20 to-brand-medium-blue/10 rounded-full blur-3xl"></div>
+            <div className="absolute top-20 left-10 w-72 h-72 bg-brand-bright-red/10 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-20 right-10 w-96 h-96 bg-brand-dark-blue/10 rounded-full blur-3xl"></div>
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-brand-dark-blue/10 rounded-full blur-3xl"></div>
           </div>
           
           {/* Creative Floating Balloon Elements */}
@@ -70,8 +75,8 @@ export default function Training() {
                 height={80} 
                 className="w-20 h-20 object-contain opacity-80 animate-pulse transform rotate-6"
               />
-              <div className="absolute -top-3 -right-3 w-10 h-10 bg-gradient-to-br from-brand-medium-blue to-brand-dark-blue rounded-full opacity-60 animate-bounce"></div>
-              <div className="absolute -bottom-3 -left-3 w-8 h-8 bg-gradient-to-br from-brand-bright-red to-brand-dark-red rounded-full opacity-70 animate-ping"></div>
+              <div className="absolute -top-3 -right-3 w-10 h-10 bg-brand-dark-blue rounded-full opacity-60 animate-bounce"></div>
+              <div className="absolute -bottom-3 -left-3 w-8 h-8 bg-brand-bright-red rounded-full opacity-70 animate-ping"></div>
             </div>
           </div>
           
@@ -84,7 +89,7 @@ export default function Training() {
                 height={56} 
                 className="w-14 h-14 object-contain opacity-70 animate-bounce transform -rotate-6"
               />
-              <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-br from-brand-dark-red to-brand-bright-red rounded-full opacity-80 animate-pulse"></div>
+              <div className="absolute -top-2 -right-2 w-6 h-6 bg-brand-bright-red rounded-full opacity-80 animate-pulse"></div>
             </div>
           </div>
           
@@ -96,16 +101,16 @@ export default function Training() {
               className="text-center"
             >
               <h1 className="text-5xl lg:text-6xl font-black text-slate-900 mb-8 font-montserrat leading-tight">
-                Turns agents into <span className="text-transparent bg-gradient-to-r from-brand-bright-red via-brand-dark-red to-brand-medium-blue bg-clip-text">performers</span>
+                Turns agents into <span className="text-brand-bright-red">performers</span>
               </h1>
               <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-8 font-arial leading-relaxed">
-                At RE/MAX Excellence, learning never stops. With 3–5 sessions every week, we keep our agents sharp, confident, and ahead of the market. From marketing strategies to legal updates, we give you the skills to close deals and build a career that lasts.
+                At RE/MAX Excellence, learning never stops. upto 3 imperson monthly session and utpo 3 online sessions From marketing strategies to legal updates, we give you the skills to close deals and build a career that lasts.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="bg-primary hover:bg-primary/90">
+                <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold">
                   View Training Schedule
                 </Button>
-                <Button size="lg" variant="outline" className="border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground">
+                <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold">
                   Join Next Session
                 </Button>
               </div>
@@ -205,13 +210,13 @@ export default function Training() {
               className="grid md:grid-cols-3 gap-8"
             >
               <motion.div variants={fadeInUp}>
-                <Card className="h-full border-0 bg-gradient-to-br from-pink-50 to-pink-100 hover:shadow-lg transition-all duration-300">
+                <Card className="h-full border border-red-100 bg-red-50 hover:shadow-xl transition-all duration-300">
                   <CardContent className="p-8 text-center">
-                    <div className="w-16 h-16 bg-pink-200 rounded-full flex items-center justify-center mx-auto mb-6">
-                      <TrendingUp className="h-8 w-8 text-pink-600" />
+                    <div className="w-20 h-20 bg-brand-bright-red rounded-full flex items-center justify-center mx-auto mb-6 shadow-md">
+                      <TrendingUp className="h-10 w-10 text-white" />
                     </div>
-                    <h3 className="text-2xl font-bold mb-4 text-slate-800">1:1 Training & Mentorship</h3>
-                    <p className="text-slate-600">
+                    <h3 className="text-2xl font-bold mb-4 text-slate-900 font-montserrat">1:1 Training & Mentorship</h3>
+                    <p className="text-slate-600 font-arial leading-relaxed">
                       Fast-track your career with proven strategies and techniques that deliver immediate results.
                     </p>
                   </CardContent>
@@ -219,13 +224,13 @@ export default function Training() {
               </motion.div>
 
               <motion.div variants={fadeInUp}>
-                <Card className="h-full border-0 bg-gradient-to-br from-blue-50 to-blue-100 hover:shadow-lg transition-all duration-300">
+                <Card className="h-full border border-blue-100 bg-blue-50 hover:shadow-xl transition-all duration-300">
                   <CardContent className="p-8 text-center">
-                    <div className="w-16 h-16 bg-blue-200 rounded-full flex items-center justify-center mx-auto mb-6">
-                      <Users className="h-8 w-8 text-blue-600" />
+                    <div className="w-20 h-20 bg-brand-dark-blue rounded-full flex items-center justify-center mx-auto mb-6 shadow-md">
+                      <Users className="h-10 w-10 text-white" />
                     </div>
-                    <h3 className="text-2xl font-bold mb-4 text-slate-800">Role Play Sessions</h3>
-                    <p className="text-slate-600">
+                    <h3 className="text-2xl font-bold mb-4 text-slate-900 font-montserrat">Role Play Sessions</h3>
+                    <p className="text-slate-600 font-arial leading-relaxed">
                       Learn from top-performing agents and industry experts with years of proven success.
                     </p>
                   </CardContent>
@@ -233,13 +238,13 @@ export default function Training() {
               </motion.div>
 
               <motion.div variants={fadeInUp}>
-                <Card className="h-full border-0 bg-gradient-to-br from-pink-50 to-pink-100 hover:shadow-lg transition-all duration-300">
+                <Card className="h-full border border-red-100 bg-red-50 hover:shadow-xl transition-all duration-300">
                   <CardContent className="p-8 text-center">
-                    <div className="w-16 h-16 bg-pink-200 rounded-full flex items-center justify-center mx-auto mb-6">
-                      <Zap className="h-8 w-8 text-pink-600" />
+                    <div className="w-20 h-20 bg-brand-bright-red rounded-full flex items-center justify-center mx-auto mb-6 shadow-md">
+                      <Zap className="h-10 w-10 text-white" />
                     </div>
-                    <h3 className="text-2xl font-bold mb-4 text-slate-800">In-House Coaching</h3>
-                    <p className="text-slate-600">
+                    <h3 className="text-2xl font-bold mb-4 text-slate-900 font-montserrat">In-House Coaching</h3>
+                    <p className="text-slate-600 font-arial leading-relaxed">
                       Stay ahead with the latest industry trends, technology, and best practices.
                     </p>
                   </CardContent>
@@ -260,10 +265,10 @@ export default function Training() {
               className="text-center mb-16"
             >
               <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
-                Comprehensive <span className="text-primary">Training Modules</span>
+                Comprehensive <span className="text-brand-bright-red">Training Modules</span>
               </h2>
               <p className="text-xl text-muted-foreground">
-                Four core areas of expertise to master your real estate career
+                Eight core areas of expertise to master your real estate career
               </p>
             </motion.div>
 
@@ -272,33 +277,34 @@ export default function Training() {
               initial="initial"
               whileInView="animate"
               viewport={{ once: true }}
-              className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
+              className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
             >
+              {/* Card 1: Marketing Mastery */}
               <motion.div variants={fadeInUp}>
-                <Card className="h-full border-0 bg-white hover:shadow-lg transition-all duration-300 group">
-                  <CardContent className="p-8 text-center">
-                    <div className="w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
+                <Card className="h-full border-0 bg-white hover:shadow-lg transition-all duration-300">
+                  <CardContent className="p-6 text-center flex flex-col">
+                    <div className="w-16 h-16 bg-brand-bright-red rounded-full flex items-center justify-center mx-auto mb-4">
                       <Target className="h-8 w-8 text-white" />
                     </div>
-                    <h3 className="text-xl font-bold mb-4">Marketing Mastery</h3>
-                    <p className="text-muted-foreground text-sm mb-4">
+                    <h3 className="text-xl font-bold mb-3 min-h-[3.5rem] flex items-center justify-center">Marketing Mastery</h3>
+                    <p className="text-muted-foreground text-sm mb-4 min-h-[4.5rem]">
                       Master digital marketing, social media strategies, and lead generation techniques.
                     </p>
                     <ul className="text-xs text-muted-foreground space-y-2 text-left">
                       <li className="flex items-center">
-                        <CheckCircle className="h-3 w-3 text-primary mr-2" />
+                        <CheckCircle className="h-3 w-3 text-brand-bright-red mr-2" />
                         Social media marketing
                       </li>
                       <li className="flex items-center">
-                        <CheckCircle className="h-3 w-3 text-primary mr-2" />
+                        <CheckCircle className="h-3 w-3 text-brand-bright-red mr-2" />
                         Content creation
                       </li>
                       <li className="flex items-center">
-                        <CheckCircle className="h-3 w-3 text-primary mr-2" />
+                        <CheckCircle className="h-3 w-3 text-brand-bright-red mr-2" />
                         Lead nurturing
                       </li>
                       <li className="flex items-center">
-                        <CheckCircle className="h-3 w-3 text-primary mr-2" />
+                        <CheckCircle className="h-3 w-3 text-brand-bright-red mr-2" />
                         Brand building
                       </li>
                     </ul>
@@ -306,31 +312,32 @@ export default function Training() {
                 </Card>
               </motion.div>
 
+              {/* Card 2: Pre-Construction Strategy */}
               <motion.div variants={fadeInUp}>
-                <Card className="h-full border-0 bg-white hover:shadow-lg transition-all duration-300 group">
-                  <CardContent className="p-8 text-center">
-                    <div className="w-16 h-16 bg-gradient-to-br from-secondary to-purple-500 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
+                <Card className="h-full border-0 bg-white hover:shadow-lg transition-all duration-300">
+                  <CardContent className="p-6 text-center flex flex-col">
+                    <div className="w-16 h-16 bg-brand-dark-blue rounded-full flex items-center justify-center mx-auto mb-4">
                       <GraduationCap className="h-8 w-8 text-white" />
                     </div>
-                    <h3 className="text-xl font-bold mb-4">Pre-Construction Strategy</h3>
-                    <p className="text-muted-foreground text-sm mb-4">
+                    <h3 className="text-xl font-bold mb-3 min-h-[3.5rem] flex items-center justify-center">Pre-Construction Strategy</h3>
+                    <p className="text-muted-foreground text-sm mb-4 min-h-[4.5rem]">
                       Specialized training for pre-construction sales and development projects.
                     </p>
                     <ul className="text-xs text-muted-foreground space-y-2 text-left">
                       <li className="flex items-center">
-                        <CheckCircle className="h-3 w-3 text-secondary mr-2" />
+                        <CheckCircle className="h-3 w-3 text-brand-dark-blue mr-2" />
                         Developer relationships
                       </li>
                       <li className="flex items-center">
-                        <CheckCircle className="h-3 w-3 text-secondary mr-2" />
+                        <CheckCircle className="h-3 w-3 text-brand-dark-blue mr-2" />
                         Floor plan analysis
                       </li>
                       <li className="flex items-center">
-                        <CheckCircle className="h-3 w-3 text-secondary mr-2" />
+                        <CheckCircle className="h-3 w-3 text-brand-dark-blue mr-2" />
                         Investment strategies
                       </li>
                       <li className="flex items-center">
-                        <CheckCircle className="h-3 w-3 text-secondary mr-2" />
+                        <CheckCircle className="h-3 w-3 text-brand-dark-blue mr-2" />
                         Market timing
                       </li>
                     </ul>
@@ -338,31 +345,32 @@ export default function Training() {
                 </Card>
               </motion.div>
 
+              {/* Card 3: Legal & Compliance */}
               <motion.div variants={fadeInUp}>
-                <Card className="h-full border-0 bg-white hover:shadow-lg transition-all duration-300 group">
-                  <CardContent className="p-8 text-center">
-                    <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-primary rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
+                <Card className="h-full border-0 bg-white hover:shadow-lg transition-all duration-300">
+                  <CardContent className="p-6 text-center flex flex-col">
+                    <div className="w-16 h-16 bg-brand-bright-red rounded-full flex items-center justify-center mx-auto mb-4">
                       <Scale className="h-8 w-8 text-white" />
                     </div>
-                    <h3 className="text-xl font-bold mb-4">Legal & Compliance</h3>
-                    <p className="text-muted-foreground text-sm mb-4">
+                    <h3 className="text-xl font-bold mb-3 min-h-[3.5rem] flex items-center justify-center">Legal & Compliance</h3>
+                    <p className="text-muted-foreground text-sm mb-4 min-h-[4.5rem]">
                       Stay compliant with current regulations and legal requirements.
                     </p>
                     <ul className="text-xs text-muted-foreground space-y-2 text-left">
                       <li className="flex items-center">
-                        <CheckCircle className="h-3 w-3 text-purple-500 mr-2" />
+                        <CheckCircle className="h-3 w-3 text-brand-bright-red mr-2" />
                         Contract law
                       </li>
                       <li className="flex items-center">
-                        <CheckCircle className="h-3 w-3 text-purple-500 mr-2" />
+                        <CheckCircle className="h-3 w-3 text-brand-bright-red mr-2" />
                         Disclosure requirements
                       </li>
                       <li className="flex items-center">
-                        <CheckCircle className="h-3 w-3 text-purple-500 mr-2" />
+                        <CheckCircle className="h-3 w-3 text-brand-bright-red mr-2" />
                         Ethics training
                       </li>
                       <li className="flex items-center">
-                        <CheckCircle className="h-3 w-3 text-purple-500 mr-2" />
+                        <CheckCircle className="h-3 w-3 text-brand-bright-red mr-2" />
                         Risk management
                       </li>
                     </ul>
@@ -370,32 +378,165 @@ export default function Training() {
                 </Card>
               </motion.div>
 
+              {/* Card 4: Mortgage & Finance */}
               <motion.div variants={fadeInUp}>
-                <Card className="h-full border-0 bg-white hover:shadow-lg transition-all duration-300 group">
-                  <CardContent className="p-8 text-center">
-                    <div className="w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
+                <Card className="h-full border-0 bg-white hover:shadow-lg transition-all duration-300">
+                  <CardContent className="p-6 text-center flex flex-col">
+                    <div className="w-16 h-16 bg-brand-dark-blue rounded-full flex items-center justify-center mx-auto mb-4">
                       <Calculator className="h-8 w-8 text-white" />
                     </div>
-                    <h3 className="text-xl font-bold mb-4">Mortgage & Finance</h3>
-                    <p className="text-muted-foreground text-sm mb-4">
+                    <h3 className="text-xl font-bold mb-3 min-h-[3.5rem] flex items-center justify-center">Mortgage & Finance</h3>
+                    <p className="text-muted-foreground text-sm mb-4 min-h-[4.5rem]">
                       Understand financing options and help clients navigate the mortgage process.
                     </p>
                     <ul className="text-xs text-muted-foreground space-y-2 text-left">
                       <li className="flex items-center">
-                        <CheckCircle className="h-3 w-3 text-primary mr-2" />
+                        <CheckCircle className="h-3 w-3 text-brand-dark-blue mr-2" />
                         Mortgage products
                       </li>
                       <li className="flex items-center">
-                        <CheckCircle className="h-3 w-3 text-primary mr-2" />
+                        <CheckCircle className="h-3 w-3 text-brand-dark-blue mr-2" />
                         Qualification process
                       </li>
                       <li className="flex items-center">
-                        <CheckCircle className="h-3 w-3 text-primary mr-2" />
+                        <CheckCircle className="h-3 w-3 text-brand-dark-blue mr-2" />
                         Credit analysis
                       </li>
                       <li className="flex items-center">
-                        <CheckCircle className="h-3 w-3 text-primary mr-2" />
+                        <CheckCircle className="h-3 w-3 text-brand-dark-blue mr-2" />
                         Rate negotiations
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              {/* Card 5: Resale Real Estate (NEW) */}
+              <motion.div variants={fadeInUp}>
+                <Card className="h-full border-0 bg-white hover:shadow-lg transition-all duration-300">
+                  <CardContent className="p-6 text-center flex flex-col">
+                    <div className="w-16 h-16 bg-brand-bright-red rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Home className="h-8 w-8 text-white" />
+                    </div>
+                    <h3 className="text-xl font-bold mb-3 min-h-[3.5rem] flex items-center justify-center">Resale Real Estate</h3>
+                    <p className="text-muted-foreground text-sm mb-4 min-h-[4.5rem]">
+                      Master the resale market with proven strategies for listing and selling homes.
+                    </p>
+                    <ul className="text-xs text-muted-foreground space-y-2 text-left">
+                      <li className="flex items-center">
+                        <CheckCircle className="h-3 w-3 text-brand-bright-red mr-2" />
+                        Property valuation
+                      </li>
+                      <li className="flex items-center">
+                        <CheckCircle className="h-3 w-3 text-brand-bright-red mr-2" />
+                        Listing strategies
+                      </li>
+                      <li className="flex items-center">
+                        <CheckCircle className="h-3 w-3 text-brand-bright-red mr-2" />
+                        Buyer representation
+                      </li>
+                      <li className="flex items-center">
+                        <CheckCircle className="h-3 w-3 text-brand-bright-red mr-2" />
+                        Negotiation tactics
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              {/* Card 6: Commercial Training (NEW) */}
+              <motion.div variants={fadeInUp}>
+                <Card className="h-full border-0 bg-white hover:shadow-lg transition-all duration-300">
+                  <CardContent className="p-6 text-center flex flex-col">
+                    <div className="w-16 h-16 bg-brand-dark-blue rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Building className="h-8 w-8 text-white" />
+                    </div>
+                    <h3 className="text-xl font-bold mb-3 min-h-[3.5rem] flex items-center justify-center">Commercial Training</h3>
+                    <p className="text-muted-foreground text-sm mb-4 min-h-[4.5rem]">
+                      Specialized training for commercial real estate transactions and leasing.
+                    </p>
+                    <ul className="text-xs text-muted-foreground space-y-2 text-left">
+                      <li className="flex items-center">
+                        <CheckCircle className="h-3 w-3 text-brand-dark-blue mr-2" />
+                        Commercial leasing
+                      </li>
+                      <li className="flex items-center">
+                        <CheckCircle className="h-3 w-3 text-brand-dark-blue mr-2" />
+                        Investment properties
+                      </li>
+                      <li className="flex items-center">
+                        <CheckCircle className="h-3 w-3 text-brand-dark-blue mr-2" />
+                        Tenant relations
+                      </li>
+                      <li className="flex items-center">
+                        <CheckCircle className="h-3 w-3 text-brand-dark-blue mr-2" />
+                        Market analysis
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              {/* Card 7: Sales Training (NEW) */}
+              <motion.div variants={fadeInUp}>
+                <Card className="h-full border-0 bg-white hover:shadow-lg transition-all duration-300">
+                  <CardContent className="p-6 text-center flex flex-col">
+                    <div className="w-16 h-16 bg-brand-bright-red rounded-full flex items-center justify-center mx-auto mb-4">
+                      <TrendingUp className="h-8 w-8 text-white" />
+                    </div>
+                    <h3 className="text-xl font-bold mb-3 min-h-[3.5rem] flex items-center justify-center">Sales Training</h3>
+                    <p className="text-muted-foreground text-sm mb-4 min-h-[4.5rem]">
+                      Master the art of closing deals with advanced sales techniques and strategies.
+                    </p>
+                    <ul className="text-xs text-muted-foreground space-y-2 text-left">
+                      <li className="flex items-center">
+                        <CheckCircle className="h-3 w-3 text-brand-bright-red mr-2" />
+                        Objection handling
+                      </li>
+                      <li className="flex items-center">
+                        <CheckCircle className="h-3 w-3 text-brand-bright-red mr-2" />
+                        Closing techniques
+                      </li>
+                      <li className="flex items-center">
+                        <CheckCircle className="h-3 w-3 text-brand-bright-red mr-2" />
+                        Client psychology
+                      </li>
+                      <li className="flex items-center">
+                        <CheckCircle className="h-3 w-3 text-brand-bright-red mr-2" />
+                        Follow-up systems
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              {/* Card 8: Forms and MLS Training (NEW) */}
+              <motion.div variants={fadeInUp}>
+                <Card className="h-full border-0 bg-white hover:shadow-lg transition-all duration-300">
+                  <CardContent className="p-6 text-center flex flex-col">
+                    <div className="w-16 h-16 bg-brand-dark-blue rounded-full flex items-center justify-center mx-auto mb-4">
+                      <FileText className="h-8 w-8 text-white" />
+                    </div>
+                    <h3 className="text-xl font-bold mb-3 min-h-[3.5rem] flex items-center justify-center">Forms and MLS Training</h3>
+                    <p className="text-muted-foreground text-sm mb-4 min-h-[4.5rem]">
+                      Master real estate forms, contracts, and MLS system for efficient transactions.
+                    </p>
+                    <ul className="text-xs text-muted-foreground space-y-2 text-left">
+                      <li className="flex items-center">
+                        <CheckCircle className="h-3 w-3 text-brand-dark-blue mr-2" />
+                        MLS navigation
+                      </li>
+                      <li className="flex items-center">
+                        <CheckCircle className="h-3 w-3 text-brand-dark-blue mr-2" />
+                        Contract preparation
+                      </li>
+                      <li className="flex items-center">
+                        <CheckCircle className="h-3 w-3 text-brand-dark-blue mr-2" />
+                        Form completion
+                      </li>
+                      <li className="flex items-center">
+                        <CheckCircle className="h-3 w-3 text-brand-dark-blue mr-2" />
+                        Digital submissions
                       </li>
                     </ul>
                   </CardContent>
@@ -417,7 +558,7 @@ export default function Training() {
               className="text-center mb-16"
             >
               <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
-                Training <span className="text-primary">Deliverables</span>
+                Training <span className="text-brand-bright-red">Deliverables</span>
               </h2>
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
                 Comprehensive skill development across all essential areas of real estate success
@@ -429,17 +570,17 @@ export default function Training() {
               initial="initial"
               whileInView="animate"
               viewport={{ once: true }}
-              className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+              className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
             >
               {/* 7 Day Schedule */}
               <motion.div variants={fadeInUp}>
-                <Card className="h-full border-0 bg-gradient-to-br from-blue-50 to-blue-100 hover:shadow-lg transition-all duration-300 group">
-                  <CardContent className="p-6 text-center">
-                    <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                <Card className="h-full border-0 bg-white hover:shadow-lg transition-all duration-300 border border-red-100">
+                  <CardContent className="p-6 text-center flex flex-col">
+                    <div className="w-16 h-16 bg-brand-bright-red rounded-full flex items-center justify-center mx-auto mb-4">
                       <Clock className="h-8 w-8 text-white" />
                     </div>
-                    <h3 className="text-xl font-bold mb-3 text-blue-800">7-Day Schedule</h3>
-                    <p className="text-blue-700 text-sm">
+                    <h3 className="text-xl font-bold mb-3 text-slate-900 min-h-[3rem] flex items-center justify-center">7-Day Schedule</h3>
+                    <p className="text-slate-600 text-sm">
                       Structured weekly planning and time management system for maximum productivity and consistent results.
                     </p>
                   </CardContent>
@@ -448,13 +589,13 @@ export default function Training() {
 
               {/* Monthly Task Review */}
               <motion.div variants={fadeInUp}>
-                <Card className="h-full border-0 bg-gradient-to-br from-green-50 to-green-100 hover:shadow-lg transition-all duration-300 group">
-                  <CardContent className="p-6 text-center">
-                    <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                <Card className="h-full border-0 bg-white hover:shadow-lg transition-all duration-300 border border-blue-100">
+                  <CardContent className="p-6 text-center flex flex-col">
+                    <div className="w-16 h-16 bg-brand-dark-blue rounded-full flex items-center justify-center mx-auto mb-4">
                       <CheckCircle className="h-8 w-8 text-white" />
                     </div>
-                    <h3 className="text-xl font-bold mb-3 text-green-800">Monthly Task Review</h3>
-                    <p className="text-green-700 text-sm">
+                    <h3 className="text-xl font-bold mb-3 text-slate-900 min-h-[3rem] flex items-center justify-center">Monthly Task Review</h3>
+                    <p className="text-slate-600 text-sm">
                       Comprehensive monthly assessment and planning sessions to track progress and optimize performance.
                     </p>
                   </CardContent>
@@ -463,13 +604,13 @@ export default function Training() {
 
               {/* Budgets */}
               <motion.div variants={fadeInUp}>
-                <Card className="h-full border-0 bg-gradient-to-br from-purple-50 to-purple-100 hover:shadow-lg transition-all duration-300 group">
-                  <CardContent className="p-6 text-center">
-                    <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                <Card className="h-full border-0 bg-white hover:shadow-lg transition-all duration-300 border border-red-100">
+                  <CardContent className="p-6 text-center flex flex-col">
+                    <div className="w-16 h-16 bg-brand-bright-red rounded-full flex items-center justify-center mx-auto mb-4">
                       <Calculator className="h-8 w-8 text-white" />
                     </div>
-                    <h3 className="text-xl font-bold mb-3 text-purple-800">Budget Management</h3>
-                    <p className="text-purple-700 text-sm">
+                    <h3 className="text-xl font-bold mb-3 text-slate-900 min-h-[3rem] flex items-center justify-center">Budget Management</h3>
+                    <p className="text-slate-600 text-sm">
                       Financial planning and budget allocation strategies for sustainable business growth and profitability.
                     </p>
                   </CardContent>
@@ -478,13 +619,13 @@ export default function Training() {
 
               {/* Follow Up Strategy */}
               <motion.div variants={fadeInUp}>
-                <Card className="h-full border-0 bg-gradient-to-br from-orange-50 to-orange-100 hover:shadow-lg transition-all duration-300 group">
-                  <CardContent className="p-6 text-center">
-                    <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                <Card className="h-full border-0 bg-white hover:shadow-lg transition-all duration-300 border border-blue-100">
+                  <CardContent className="p-6 text-center flex flex-col">
+                    <div className="w-16 h-16 bg-brand-dark-blue rounded-full flex items-center justify-center mx-auto mb-4">
                       <Target className="h-8 w-8 text-white" />
                     </div>
-                    <h3 className="text-xl font-bold mb-3 text-orange-800">Follow-Up Strategy</h3>
-                    <p className="text-orange-700 text-sm">
+                    <h3 className="text-xl font-bold mb-3 text-slate-900 min-h-[3rem] flex items-center justify-center">Follow-Up Strategy</h3>
+                    <p className="text-slate-600 text-sm">
                       Systematic follow-up processes and lead nurturing techniques to convert prospects into clients.
                     </p>
                   </CardContent>
@@ -493,13 +634,13 @@ export default function Training() {
 
               {/* Pre-qualifying Buyers */}
               <motion.div variants={fadeInUp}>
-                <Card className="h-full border-0 bg-gradient-to-br from-red-50 to-red-100 hover:shadow-lg transition-all duration-300 group">
-                  <CardContent className="p-6 text-center">
-                    <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                <Card className="h-full border-0 bg-white hover:shadow-lg transition-all duration-300 border border-red-100">
+                  <CardContent className="p-6 text-center flex flex-col">
+                    <div className="w-16 h-16 bg-brand-bright-red rounded-full flex items-center justify-center mx-auto mb-4">
                       <Users className="h-8 w-8 text-white" />
                     </div>
-                    <h3 className="text-xl font-bold mb-3 text-red-800">Pre-qualifying Buyers</h3>
-                    <p className="text-red-700 text-sm">
+                    <h3 className="text-xl font-bold mb-3 text-slate-900 min-h-[3rem] flex items-center justify-center">Pre-qualifying Buyers</h3>
+                    <p className="text-slate-600 text-sm">
                       Advanced buyer qualification techniques to identify serious prospects and maximize closing rates.
                     </p>
                   </CardContent>
@@ -508,13 +649,13 @@ export default function Training() {
 
               {/* Objection Handling */}
               <motion.div variants={fadeInUp}>
-                <Card className="h-full border-0 bg-gradient-to-br from-teal-50 to-teal-100 hover:shadow-lg transition-all duration-300 group">
-                  <CardContent className="p-6 text-center">
-                    <div className="w-16 h-16 bg-gradient-to-br from-teal-500 to-teal-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                <Card className="h-full border-0 bg-white hover:shadow-lg transition-all duration-300 border border-blue-100">
+                  <CardContent className="p-6 text-center flex flex-col">
+                    <div className="w-16 h-16 bg-brand-dark-blue rounded-full flex items-center justify-center mx-auto mb-4">
                       <Shield className="h-8 w-8 text-white" />
                     </div>
-                    <h3 className="text-xl font-bold mb-3 text-teal-800">Objection Handling</h3>
-                    <p className="text-teal-700 text-sm">
+                    <h3 className="text-xl font-bold mb-3 text-slate-900 min-h-[3rem] flex items-center justify-center">Objection Handling</h3>
+                    <p className="text-slate-600 text-sm">
                       Proven techniques to address and overcome common client objections and concerns effectively.
                     </p>
                   </CardContent>
@@ -523,13 +664,13 @@ export default function Training() {
 
               {/* Negotiation Skills */}
               <motion.div variants={fadeInUp}>
-                <Card className="h-full border-0 bg-gradient-to-br from-indigo-50 to-indigo-100 hover:shadow-lg transition-all duration-300 group">
-                  <CardContent className="p-6 text-center">
-                    <div className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                <Card className="h-full border-0 bg-white hover:shadow-lg transition-all duration-300 border border-red-100">
+                  <CardContent className="p-6 text-center flex flex-col">
+                    <div className="w-16 h-16 bg-brand-bright-red rounded-full flex items-center justify-center mx-auto mb-4">
                       <Scale className="h-8 w-8 text-white" />
                     </div>
-                    <h3 className="text-xl font-bold mb-3 text-indigo-800">Negotiation Skills</h3>
-                    <p className="text-indigo-700 text-sm">
+                    <h3 className="text-xl font-bold mb-3 text-slate-900 min-h-[3rem] flex items-center justify-center">Negotiation Skills</h3>
+                    <p className="text-slate-600 text-sm">
                       Advanced negotiation strategies and tactics to secure the best deals for your clients.
                     </p>
                   </CardContent>
@@ -538,29 +679,74 @@ export default function Training() {
 
               {/* Communication Skills */}
               <motion.div variants={fadeInUp}>
-                <Card className="h-full border-0 bg-gradient-to-br from-pink-50 to-pink-100 hover:shadow-lg transition-all duration-300 group">
-                  <CardContent className="p-6 text-center">
-                    <div className="w-16 h-16 bg-gradient-to-br from-pink-500 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                <Card className="h-full border-0 bg-white hover:shadow-lg transition-all duration-300 border border-blue-100">
+                  <CardContent className="p-6 text-center flex flex-col">
+                    <div className="w-16 h-16 bg-brand-dark-blue rounded-full flex items-center justify-center mx-auto mb-4">
                       <BookOpen className="h-8 w-8 text-white" />
                     </div>
-                    <h3 className="text-xl font-bold mb-3 text-pink-800">Communication Skills</h3>
-                    <p className="text-pink-700 text-sm">
+                    <h3 className="text-xl font-bold mb-3 text-slate-900 min-h-[3rem] flex items-center justify-center">Communication Skills</h3>
+                    <p className="text-slate-600 text-sm">
                       Professional communication techniques for effective client relationships and business development.
                     </p>
                   </CardContent>
                 </Card>
               </motion.div>
 
-              {/* Dress Up */}
+              {/* Professional Image */}
               <motion.div variants={fadeInUp}>
-                <Card className="h-full border-0 bg-gradient-to-br from-amber-50 to-amber-100 hover:shadow-lg transition-all duration-300 group">
-                  <CardContent className="p-6 text-center">
-                    <div className="w-16 h-16 bg-gradient-to-br from-amber-500 to-amber-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                <Card className="h-full border-0 bg-white hover:shadow-lg transition-all duration-300 border border-red-100">
+                  <CardContent className="p-6 text-center flex flex-col">
+                    <div className="w-16 h-16 bg-brand-bright-red rounded-full flex items-center justify-center mx-auto mb-4">
                       <Award className="h-8 w-8 text-white" />
                     </div>
-                    <h3 className="text-xl font-bold mb-3 text-amber-800">Professional Image</h3>
-                    <p className="text-amber-700 text-sm">
+                    <h3 className="text-xl font-bold mb-3 text-slate-900 min-h-[3rem] flex items-center justify-center">Professional Image</h3>
+                    <p className="text-slate-600 text-sm">
                       Professional presentation and personal branding strategies to build trust and credibility.
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              {/* Door Knocking (NEW) */}
+              <motion.div variants={fadeInUp}>
+                <Card className="h-full border-0 bg-white hover:shadow-lg transition-all duration-300 border border-blue-100">
+                  <CardContent className="p-6 text-center flex flex-col">
+                    <div className="w-16 h-16 bg-brand-dark-blue rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Home className="h-8 w-8 text-white" />
+                    </div>
+                    <h3 className="text-xl font-bold mb-3 text-slate-900 min-h-[3rem] flex items-center justify-center">Door Knocking</h3>
+                    <p className="text-slate-600 text-sm">
+                      Effective door-to-door prospecting techniques to build connections and generate quality leads in your community.
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              {/* Open Houses (NEW) */}
+              <motion.div variants={fadeInUp}>
+                <Card className="h-full border-0 bg-white hover:shadow-lg transition-all duration-300 border border-red-100">
+                  <CardContent className="p-6 text-center flex flex-col">
+                    <div className="w-16 h-16 bg-brand-bright-red rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Building className="h-8 w-8 text-white" />
+                    </div>
+                    <h3 className="text-xl font-bold mb-3 text-slate-900 min-h-[3rem] flex items-center justify-center">Open Houses</h3>
+                    <p className="text-slate-600 text-sm">
+                      Master the art of hosting successful open houses to attract buyers and generate seller leads effectively.
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              {/* Prelisting Skills (NEW) */}
+              <motion.div variants={fadeInUp}>
+                <Card className="h-full border-0 bg-white hover:shadow-lg transition-all duration-300 border border-blue-100">
+                  <CardContent className="p-6 text-center flex flex-col">
+                    <div className="w-16 h-16 bg-brand-dark-blue rounded-full flex items-center justify-center mx-auto mb-4">
+                      <FileText className="h-8 w-8 text-white" />
+                    </div>
+                    <h3 className="text-xl font-bold mb-3 text-slate-900 min-h-[3rem] flex items-center justify-center">Prelisting Skills</h3>
+                    <p className="text-slate-600 text-sm">
+                      Comprehensive prelisting presentation strategies to win more listings and establish seller confidence.
                     </p>
                   </CardContent>
                 </Card>
@@ -594,7 +780,7 @@ export default function Training() {
                   </p>
                   
                   <div className="pt-4">
-                    <Button size="lg" className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold px-8 py-4 text-lg">
+                    <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold px-8 py-4 text-lg">
                       GET YOUR FREE GUIDE
                     </Button>
                   </div>
@@ -885,106 +1071,6 @@ export default function Training() {
           </div>
         </section>
 
-        {/* Training Formats */}
-        <section className="py-20 bg-muted/30">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
-                Flexible <span className="text-primary">Learning Options</span>
-              </h2>
-              <p className="text-xl text-muted-foreground">
-                Choose the format that works best for your schedule and learning style. We also offer TREEB, MRREB, and RECO sessions to meet your professional development needs.
-              </p>
-            </motion.div>
-
-            <motion.div 
-              variants={staggerContainer}
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: true }}
-              className="grid md:grid-cols-3 gap-8"
-            >
-              <motion.div variants={fadeInUp}>
-                <Card className="h-full border-0 bg-white hover:shadow-lg transition-all duration-300">
-                  <CardContent className="p-8 text-center">
-                    <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                      <Users className="h-8 w-8 text-primary" />
-                    </div>
-                    <h3 className="text-2xl font-bold mb-4">In-Person Workshops</h3>
-                    <p className="text-muted-foreground mb-6">
-                      Interactive classroom sessions with hands-on activities and networking opportunities.
-                    </p>
-                    <div className="space-y-2 text-sm text-muted-foreground">
-                      <div className="flex items-center justify-center">
-                        <Clock className="h-4 w-4 mr-2" />
-                        Full-day sessions
-                      </div>
-                      <div className="flex items-center justify-center">
-                        <Users className="h-4 w-4 mr-2" />
-                        Small group setting
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-
-              <motion.div variants={fadeInUp}>
-                <Card className="h-full border-0 bg-white hover:shadow-lg transition-all duration-300">
-                  <CardContent className="p-8 text-center">
-                    <div className="w-16 h-16 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                      <Video className="h-8 w-8 text-secondary" />
-                    </div>
-                    <h3 className="text-2xl font-bold mb-4">Virtual Sessions</h3>
-                    <p className="text-muted-foreground mb-6">
-                      Live online training sessions with real-time interaction and Q&A opportunities.
-                    </p>
-                    <div className="space-y-2 text-sm text-muted-foreground">
-                      <div className="flex items-center justify-center">
-                        <Clock className="h-4 w-4 mr-2" />
-                        Flexible timing
-                      </div>
-                      <div className="flex items-center justify-center">
-                        <Video className="h-4 w-4 mr-2" />
-                        Interactive features
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-
-              <motion.div variants={fadeInUp}>
-                <Card className="h-full border-0 bg-white hover:shadow-lg transition-all duration-300">
-                  <CardContent className="p-8 text-center">
-                    <div className="w-16 h-16 bg-purple-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                      <FileText className="h-8 w-8 text-purple-500" />
-                    </div>
-                    <h3 className="text-2xl font-bold mb-4">Self-Paced Learning</h3>
-                    <p className="text-muted-foreground mb-6">
-                      Access comprehensive course materials and videos anytime, anywhere at your own pace.
-                    </p>
-                    <div className="space-y-2 text-sm text-muted-foreground">
-                      <div className="flex items-center justify-center">
-                        <Clock className="h-4 w-4 mr-2" />
-                        24/7 access
-                      </div>
-                      <div className="flex items-center justify-center">
-                        <FileText className="h-4 w-4 mr-2" />
-                        Downloadable resources
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            </motion.div>
-          </div>
-        </section>
-
         {/* CTA Section */}
         <section className="py-20 bg-gradient-to-r from-brand-bright-red via-brand-medium-blue to-brand-dark-blue">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -998,7 +1084,7 @@ export default function Training() {
                 Let's Build Your Brand Together
               </h2>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="bg-white text-brand-bright-red hover:bg-white/90 font-bold px-8 py-4 text-xl">
+                <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold px-8 py-4 text-xl">
                   Join Us
                 </Button>
               </div>

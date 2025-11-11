@@ -100,10 +100,10 @@ export default function Sell() {
                   Get maximum value with our proven marketing strategies, professional photography, and expert negotiation skills.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <Button size="lg" className="bg-primary hover:bg-primary/90">
+                  <Button size="lg" className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold">
                     Get Free Home Valuation
                   </Button>
-                  <Button size="lg" variant="outline" className="border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground">
+                  <Button size="lg" className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold">
                     Schedule Consultation
                   </Button>
                 </div>
@@ -124,7 +124,7 @@ export default function Sell() {
                     </div>
                     <Input placeholder="Square Footage" />
                     <Input placeholder="Your Email" />
-                    <Button className="w-full bg-primary hover:bg-primary/90">
+                    <Button className="w-full bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold">
                       Get Instant Valuation
                     </Button>
                   </div>
@@ -405,7 +405,7 @@ export default function Sell() {
                 Let's Build Your Brand Together
               </h2>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="bg-white text-brand-bright-red hover:bg-white/90 font-bold px-8 py-4 text-xl">
+                <Button size="lg" className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold px-8 py-4 text-xl">
                   Join Us
                 </Button>
               </div>

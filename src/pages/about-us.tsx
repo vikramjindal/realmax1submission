@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { useJoinUsModal } from '@/contexts/JoinUsModalContext';
 import { 
   Users, 
   Target, 
@@ -22,6 +23,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
 const AboutUs = () => {
+  const { openModal } = useJoinUsModal();
   const fadeInUp = {
     initial: { opacity: 0, y: 60 },
     animate: { opacity: 1, y: 0 },
@@ -57,13 +59,6 @@ const AboutUs = () => {
       title: "Integrity",
       description: "Maintaining the highest ethical standards in everything we do"
     }
-  ];
-
-  const achievements = [
-    { number: "500+", label: "Happy Clients" },
-    { number: "$50M+", label: "Sales Volume" },
-    { number: "25+", label: "Expert Agents" },
-    { number: "98%", label: "Client Satisfaction" }
   ];
 
   return (
@@ -160,7 +155,7 @@ const AboutUs = () => {
                 <p className="text-lg text-slate-600 mb-8 leading-relaxed">
                   Our team is made up of highly motivated agents and industry leaders who believe in doing things smarter, faster, and better. Whether you're a first-time buyer, a seasoned investor, or a Realtor® looking for the best brokerage to grow with, we're here to deliver.
                 </p>
-                <Button className="bg-brand-bright-red hover:bg-brand-dark-red text-white px-8 py-3 text-lg">
+                <Button onClick={openModal} className="bg-brand-bright-red hover:bg-brand-dark-red text-white px-8 py-3 text-lg">
                   Learn More About Our Mission
                 </Button>
               </div>
@@ -238,47 +233,6 @@ const AboutUs = () => {
           </div>
         </section>
 
-        {/* Achievements Section */}
-        <section className="py-20 bg-gradient-to-r from-brand-dark-blue to-brand-dark-blue text-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div 
-              className="text-center mb-16"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              <h2 className="text-4xl font-bold mb-6 font-montserrat">
-                Our <span className="text-brand-bright-red">Achievements</span>
-              </h2>
-              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-                Numbers that tell the story of our success and growth.
-              </p>
-            </motion.div>
-
-            <motion.div 
-              className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
-              variants={staggerContainer}
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: true }}
-            >
-              {achievements.map((achievement, index) => (
-                <motion.div
-                  key={index}
-                  variants={fadeInUp}
-                  className="text-center"
-                >
-                  <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
-                    <div className="text-4xl font-bold text-brand-bright-red mb-2">{achievement.number}</div>
-                    <div className="text-gray-300">{achievement.label}</div>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
-        </section>
-
         {/* CTA Section */}
         <section className="py-20 bg-gradient-to-r from-brand-bright-red via-brand-medium-blue to-brand-dark-blue">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -292,7 +246,7 @@ const AboutUs = () => {
                 Let's Build Your Brand Together
               </h2>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="bg-white text-brand-bright-red hover:bg-white/90 font-bold px-8 py-4 text-xl">
+                <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold px-8 py-4 text-xl">
                   Join Us
                 </Button>
               </div>

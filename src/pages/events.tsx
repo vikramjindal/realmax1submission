@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Head from "next/head";
 import { motion } from "framer-motion";
 import Header from "@/components/Header";
@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
+import { useJoinUsModal } from '@/contexts/JoinUsModalContext';
 import { 
   Calendar,
   MapPin,
@@ -16,7 +17,8 @@ import {
   Video,
   Award,
   TrendingUp,
-  Zap
+  Zap,
+  Sparkles
 } from "lucide-react";
 
 const fadeInUp = {
@@ -34,6 +36,60 @@ const staggerContainer = {
 };
 
 export default function Events() {
+  const { openModal } = useJoinUsModal();
+  const video1Ref = useRef<HTMLVideoElement>(null);
+  const video2Ref = useRef<HTMLVideoElement>(null);
+  const video3Ref = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const playAllVideos = async () => {
+      try {
+        // Wait a bit for the videos to load
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        // Play all videos simultaneously
+        const playPromises = [
+          video1Ref.current?.play(),
+          video2Ref.current?.play(),
+          video3Ref.current?.play()
+        ].filter(Boolean);
+
+        await Promise.all(playPromises);
+        console.log('All videos started playing');
+      } catch (error) {
+        console.log('Some videos may not have started:', error);
+        // Fallback: try to play each video individually
+        video1Ref.current?.play().catch(e => console.log('Video 1 error:', e));
+        video2Ref.current?.play().catch(e => console.log('Video 2 error:', e));
+        video3Ref.current?.play().catch(e => console.log('Video 3 error:', e));
+      }
+    };
+
+    // Play videos when component mounts
+    playAllVideos();
+
+    // Also try to play when videos come into view
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            playAllVideos();
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    // Observe all video elements
+    if (video1Ref.current) observer.observe(video1Ref.current);
+    if (video2Ref.current) observer.observe(video2Ref.current);
+    if (video3Ref.current) observer.observe(video3Ref.current);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   return (
     <>
       <Head>
@@ -129,12 +185,12 @@ export default function Events() {
               <motion.div variants={fadeInUp} className="group">
                 <div className="relative bg-black rounded-2xl overflow-hidden shadow-xl transition-all duration-300">
                   <video 
+                    ref={video1Ref}
                     id="video1"
                     className="w-full h-[400px] md:h-[500px] lg:h-[600px] object-cover"
                     controls
                     muted
                     loop
-                    autoPlay
                     playsInline
                     poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 600'%3E%3Crect width='400' height='600' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' font-family='Arial' font-size='18' fill='%236b7280'%3ENetworking Event%3C/text%3E%3C/svg%3E"
                   >
@@ -152,12 +208,12 @@ export default function Events() {
               <motion.div variants={fadeInUp} className="group">
                 <div className="relative bg-black rounded-2xl overflow-hidden shadow-xl transition-all duration-300">
                   <video 
+                    ref={video2Ref}
                     id="video2"
                     className="w-full h-[400px] md:h-[500px] lg:h-[600px] object-cover"
                     controls
                     muted
                     loop
-                    autoPlay
                     playsInline
                     poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 600'%3E%3Crect width='400' height='600' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' font-family='Arial' font-size='18' fill='%236b7280'%3EEvent Highlights%3C/text%3E%3C/svg%3E"
                   >
@@ -175,12 +231,12 @@ export default function Events() {
               <motion.div variants={fadeInUp} className="group md:col-span-2 lg:col-span-1">
                 <div className="relative bg-black rounded-2xl overflow-hidden shadow-xl transition-all duration-300">
                   <video 
+                    ref={video3Ref}
                     id="video3"
                     className="w-full h-[400px] md:h-[500px] lg:h-[600px] object-cover"
                     controls
                     muted
                     loop
-                    autoPlay
                     playsInline
                     poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 600'%3E%3Crect width='400' height='600' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' font-family='Arial' font-size='18' fill='%236b7280'%3EREMAX BBQ Event%3C/text%3E%3C/svg%3E"
                   >
@@ -199,8 +255,23 @@ export default function Events() {
         </section>
 
         {/* Upcoming Events */}
-        <section className="py-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="relative py-24 bg-gradient-to-br from-slate-50 via-white to-red-50 overflow-hidden">
+          {/* Background Decorative Elements */}
+          <div className="absolute inset-0">
+            <div className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-br from-brand-bright-red/10 to-brand-dark-red/5 rounded-full blur-3xl animate-pulse"></div>
+            <div className="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-br from-brand-dark-blue/10 to-brand-medium-blue/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+            <div className="absolute top-1/2 left-1/3 w-64 h-64 bg-gradient-to-br from-brand-bright-red/5 to-transparent rounded-full blur-2xl"></div>
+          </div>
+
+          {/* Floating Sparkle Decorations */}
+          <div className="absolute top-32 right-1/4 animate-bounce" style={{ animationDuration: '3s' }}>
+            <Sparkles className="w-8 h-8 text-brand-bright-red/30" />
+          </div>
+          <div className="absolute bottom-32 left-1/4 animate-bounce" style={{ animationDuration: '4s', animationDelay: '1s' }}>
+            <Sparkles className="w-6 h-6 text-brand-dark-blue/30" />
+          </div>
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -208,10 +279,13 @@ export default function Events() {
               transition={{ duration: 0.6 }}
               className="text-center mb-16"
             >
-              <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6 font-montserrat">
-                Upcoming <span className="text-primary">Events</span>
+              <div className="inline-block mb-4 px-6 py-2 bg-gradient-to-r from-brand-bright-red/10 to-brand-dark-red/10 rounded-full">
+                <span className="text-brand-bright-red font-bold text-sm uppercase tracking-wider">Exclusive Events</span>
+              </div>
+              <h2 className="text-4xl md:text-6xl font-black text-slate-900 mb-6 font-montserrat leading-tight">
+                Upcoming <span className="text-transparent bg-gradient-to-r from-brand-bright-red via-brand-dark-red to-brand-medium-blue bg-clip-text">Events</span>
               </h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto font-arial">
+              <p className="text-xl text-slate-600 max-w-3xl mx-auto font-arial leading-relaxed">
                 Don't miss out on these exclusive opportunities to network and grow your business
               </p>
             </motion.div>
@@ -231,6 +305,7 @@ export default function Events() {
                   location: "Downtown Toronto",
                   attendees: "50+",
                   type: "Networking",
+                  typeColor: "red",
                   description: "Connect with fellow agents, share success stories, and build lasting relationships in a relaxed, social setting."
                 },
                 {
@@ -240,6 +315,7 @@ export default function Events() {
                   location: "Virtual Event",
                   attendees: "100+",
                   type: "Education",
+                  typeColor: "blue",
                   description: "Deep dive into current market trends, investment opportunities, and strategies for success in 2025."
                 },
                 {
@@ -249,48 +325,69 @@ export default function Events() {
                   location: "Mississauga Conference Centre",
                   attendees: "200+",
                   type: "Conference",
+                  typeColor: "red",
                   description: "Our biggest event of the year featuring industry leaders, breakout sessions, and exclusive networking opportunities."
                 }
               ].map((event, index) => (
-                <motion.div key={index} variants={fadeInUp}>
-                  <Card className="h-full border-0 bg-gradient-to-br from-primary/5 to-primary/10 hover:from-primary/10 hover:to-primary/15 transition-all duration-300 group hover:shadow-xl">
-                    <CardHeader className="pb-4">
+                <motion.div 
+                  key={index} 
+                  variants={fadeInUp}
+                  whileHover={{ y: -8, scale: 1.02 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Card className="relative h-full border-2 border-transparent bg-white hover:border-brand-bright-red/20 hover:shadow-2xl transition-all duration-500 group overflow-hidden">
+                    {/* Decorative corner gradient */}
+                    <div className={`absolute top-0 right-0 w-32 h-32 ${event.typeColor === 'red' ? 'bg-gradient-to-br from-brand-bright-red/10 to-transparent' : 'bg-gradient-to-br from-brand-dark-blue/10 to-transparent'} rounded-bl-[100px] transition-all duration-500 group-hover:w-40 group-hover:h-40`}></div>
+                    
+                    {/* Shine effect on hover */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/0 to-transparent group-hover:via-white/20 transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+
+                    <CardHeader className="pb-4 relative z-10">
                       <div className="flex items-center justify-between mb-4">
-                        <div className="px-3 py-1 bg-primary/20 rounded-full text-primary text-sm font-semibold">
+                        <div className={`px-4 py-2 ${event.typeColor === 'red' ? 'bg-gradient-to-r from-brand-bright-red to-brand-dark-red' : 'bg-gradient-to-r from-brand-dark-blue to-brand-medium-blue'} rounded-full text-white text-sm font-bold shadow-lg transform group-hover:scale-110 transition-transform duration-300`}>
                           {event.type}
                         </div>
-                        <div className="flex items-center space-x-1 text-muted-foreground">
-                          <Users className="w-4 h-4" />
-                          <span className="text-sm">{event.attendees}</span>
+                        <div className={`flex items-center space-x-2 ${event.typeColor === 'red' ? 'text-brand-bright-red' : 'text-brand-dark-blue'} font-bold`}>
+                          <Users className="w-5 h-5" />
+                          <span className="text-base">{event.attendees}</span>
                         </div>
                       </div>
-                      <CardTitle className="text-xl font-bold font-montserrat group-hover:text-primary transition-colors duration-300">
+                      <CardTitle className={`text-2xl font-black font-montserrat ${event.typeColor === 'red' ? 'group-hover:text-brand-bright-red' : 'group-hover:text-brand-dark-blue'} transition-colors duration-300`}>
                         {event.title}
                       </CardTitle>
                     </CardHeader>
-                    <CardContent className="pt-0">
-                      <p className="text-muted-foreground mb-6 font-arial leading-relaxed">
+                    <CardContent className="pt-0 relative z-10">
+                      <p className="text-slate-600 mb-6 font-arial leading-relaxed text-sm">
                         {event.description}
                       </p>
                       
-                      <div className="space-y-3 mb-6">
+                      <div className="space-y-3 mb-6 bg-slate-50 rounded-xl p-4">
                         <div className="flex items-center space-x-3">
-                          <Calendar className="w-4 h-4 text-primary" />
-                          <span className="text-sm text-muted-foreground">{event.date}</span>
+                          <div className={`w-8 h-8 ${event.typeColor === 'red' ? 'bg-brand-bright-red' : 'bg-brand-dark-blue'} rounded-lg flex items-center justify-center shadow-md`}>
+                            <Calendar className="w-4 h-4 text-white" />
+                          </div>
+                          <span className="text-sm font-semibold text-slate-700">{event.date}</span>
                         </div>
                         <div className="flex items-center space-x-3">
-                          <Clock className="w-4 h-4 text-primary" />
-                          <span className="text-sm text-muted-foreground">{event.time}</span>
+                          <div className={`w-8 h-8 ${event.typeColor === 'red' ? 'bg-brand-bright-red' : 'bg-brand-dark-blue'} rounded-lg flex items-center justify-center shadow-md`}>
+                            <Clock className="w-4 h-4 text-white" />
+                          </div>
+                          <span className="text-sm font-semibold text-slate-700">{event.time}</span>
                         </div>
                         <div className="flex items-center space-x-3">
-                          <MapPin className="w-4 h-4 text-primary" />
-                          <span className="text-sm text-muted-foreground">{event.location}</span>
+                          <div className={`w-8 h-8 ${event.typeColor === 'red' ? 'bg-brand-bright-red' : 'bg-brand-dark-blue'} rounded-lg flex items-center justify-center shadow-md`}>
+                            <MapPin className="w-4 h-4 text-white" />
+                          </div>
+                          <span className="text-sm font-semibold text-slate-700">{event.location}</span>
                         </div>
                       </div>
                       
-                      <Button className="w-full bg-primary hover:bg-primary/90 group-hover:bg-primary transition-colors duration-300">
+                      <Button 
+                        onClick={openModal}
+                        className="w-full bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold py-6 text-base shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 rounded-xl"
+                      >
                         Register Now
-                        <ArrowRight className="w-4 h-4 ml-2" />
+                        <ArrowRight className="w-5 h-5 ml-2" />
                       </Button>
                     </CardContent>
                   </Card>
@@ -386,7 +483,7 @@ export default function Events() {
                 Let's Build Your Brand Together
               </h2>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="bg-white text-brand-bright-red hover:bg-white/90 font-bold px-8 py-4 text-xl">
+                <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold px-8 py-4 text-xl">
                   Join Us
                 </Button>
               </div>

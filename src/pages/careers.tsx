@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
+import { useJoinUsModal } from "@/contexts/JoinUsModalContext";
 import { 
   Users, 
   TrendingUp, 
@@ -36,6 +37,7 @@ const staggerContainer = {
 };
 
 export default function Careers() {
+  const { openModal } = useJoinUsModal();
   return (
     <>
       <Head>
@@ -99,10 +101,10 @@ export default function Careers() {
                 Join Ontario's youngest, fastest-growing real estate brokerage and build the career you've always dreamed of with unmatched support and cutting-edge tools.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="bg-primary hover:bg-primary/90">
+                <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold">
                   Apply Now
                 </Button>
-                <Button size="lg" variant="outline" className="border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground">
+                <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold">
                   Schedule Interview
                 </Button>
               </div>
@@ -406,7 +408,7 @@ export default function Careers() {
                 Let's Build Your Brand Together
               </h2>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="bg-white text-brand-bright-red hover:bg-white/90 font-bold px-8 py-4 text-xl">
+                <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold px-8 py-4 text-xl">
                   Join Us
                 </Button>
               </div>

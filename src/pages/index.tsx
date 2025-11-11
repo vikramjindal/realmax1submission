@@ -11,6 +11,7 @@ import TeamSection from "@/components/TeamSection";
 
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { useJoinUsModal } from "@/contexts/JoinUsModalContext";
 
 
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
@@ -104,6 +105,7 @@ const staggerContainer = {
 
 
 const HeroSection = () => {
+  const { openModal } = useJoinUsModal();
 
   return (
 
@@ -173,7 +175,7 @@ const HeroSection = () => {
         <div className="flex items-center min-h-screen">
           <div className="text-left space-y-8 max-w-2xl">
             <h1 className="text-5xl lg:text-7xl font-black text-white leading-tight font-montserrat">
-              <span className="block">RE/MAX</span>
+              <span className="block">REMAX</span>
 
               <span className="block text-brand-bright-red">
                 EXCELLENCE
@@ -188,7 +190,7 @@ const HeroSection = () => {
             </p>
             
             <div className="flex justify-start">
-              <Button className="bg-brand-medium-blue hover:bg-brand-dark-blue text-white font-bold px-10 py-5 text-2xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 rounded-lg flex items-center space-x-4">
+              <Button onClick={openModal} className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold px-10 py-5 text-2xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 rounded-lg flex items-center space-x-4">
                 <Users className="w-8 h-8" />
                 <span>Join Our Team</span>
                 <ArrowRight className="w-8 h-8" />
@@ -229,6 +231,8 @@ export default function Home() {
   const [selectedReel, setSelectedReel] = useState<any>(null);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const { openModal } = useJoinUsModal();
 
   const [currentAgentIndex, setCurrentAgentIndex] = useState(0);
 
@@ -298,13 +302,13 @@ export default function Home() {
         
 
         {/* SECTION 1: Your Trusted Real Estate Partner */}
-        <section className="py-24 bg-gradient-to-br from-white via-pink-50 to-purple-50 relative overflow-hidden">
+        <section className="py-24 bg-gradient-to-r from-brand-dark-blue via-brand-dark-blue to-brand-dark-blue relative overflow-hidden">
           {/* Background Elements */}
 
           <div className="absolute inset-0">
 
-            <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-pink-200/30 to-pink-300/20 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-br from-purple-200/30 to-purple-300/20 rounded-full blur-3xl"></div>
+            <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-red-500/20 to-red-600/10 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-br from-red-400/20 to-red-500/10 rounded-full blur-3xl"></div>
           </div>
           
           
@@ -321,8 +325,8 @@ export default function Home() {
                 height={80}
                 className="opacity-60 animate-pulse transform rotate-12"
               />
-              <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-br from-purple-400 to-pink-500 rounded-full opacity-70 animate-bounce"></div>
-              <div className="absolute -bottom-2 -left-2 w-4 h-4 bg-gradient-to-br from-pink-400 to-red-500 rounded-full opacity-80 animate-ping"></div>
+              <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-br from-red-400 to-red-500 rounded-full opacity-70 animate-bounce"></div>
+              <div className="absolute -bottom-2 -left-2 w-4 h-4 bg-gradient-to-br from-red-400 to-red-600 rounded-full opacity-80 animate-ping"></div>
                        </div>
 
                      </div>
@@ -344,18 +348,18 @@ export default function Home() {
 
             >
 
-              <h2 className="text-5xl lg:text-6xl font-black text-slate-900 mb-8 font-montserrat leading-tight">
+              <h2 className="text-5xl lg:text-6xl font-black text-white mb-8 font-montserrat leading-tight">
 
                 Your Trusted Real Estate Partner
 
-                <span className="block text-transparent bg-gradient-to-r from-brand-bright-red via-brand-medium-blue to-brand-dark-blue bg-clip-text">
+                <span className="block text-brand-bright-red">
                   With a Fresh Edge
 
                 </span>
 
               </h2>
 
-              <p className="text-xl text-slate-600 max-w-4xl mx-auto font-arial leading-relaxed">
+              <p className="text-xl text-white max-w-4xl mx-auto font-arial leading-relaxed">
 
                 At RE/MAX Excellence, we're proud to be one of the youngest brokerage in the RE/MAX family, and that's our advantage. We bring fresh ideas, modern marketing, and a results-driven approach that keeps us ahead in a fast-changing market.
               </p>
@@ -397,55 +401,59 @@ export default function Home() {
                 viewport={{ once: true }}
 
             >
-              <h2 className="text-4xl lg:text-5xl font-black text-slate-900 mb-8 font-montserrat leading-tight">
-                Home of <span className="text-transparent bg-gradient-to-r from-brand-bright-red to-brand-dark-red bg-clip-text">Top Performers</span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 mb-8 font-montserrat leading-tight px-2">
+                HOME OF <span className="text-transparent bg-gradient-to-r from-brand-bright-red to-brand-dark-red bg-clip-text">TOP PERFORMERS</span>
               </h2>
             </motion.div>
 
             {/* Two Column Layout */}
-            <div className="grid lg:grid-cols-2 gap-8">
+            <div className="grid lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
               {/* Left Column - Home of Top Performers */}
                   <motion.div 
 
-                className="bg-white rounded-3xl p-8 shadow-2xl border border-slate-200 hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2 group"
+                className="bg-white rounded-3xl p-4 sm:p-6 lg:p-8 shadow-2xl border border-slate-200 hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2 group"
                 initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
               >
-                <div className="flex items-center space-x-12">
-                      {/* Agent Image Carousel */}
-                      <div className="relative">
-                        <div className="w-80 h-80 shadow-2xl group-hover:shadow-3xl transition-shadow duration-500 relative rounded-2xl overflow-hidden">
-                          {/* Current Agent Image */}
-                          <Image
-                            key={currentAgentIndex}
-                            src={agents[currentAgentIndex].src}
-                            alt={agents[currentAgentIndex].name}
-                            width={320}
-                            height={320}
-                            className="w-full h-full object-contain transition-opacity duration-1000"
-                          />
-                      </div>
+                <div className="flex flex-col lg:flex-row items-center lg:items-start lg:space-x-8 space-y-6 lg:space-y-0">
+                      {/* Agent Image Carousel with Name */}
+                      <div className="flex flex-col items-center space-y-4">
+                        <div className="relative">
+                          <div className="w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 shadow-2xl group-hover:shadow-3xl transition-shadow duration-500 relative rounded-2xl overflow-hidden">
+                            {/* Current Agent Image */}
+                            <Image
+                              key={currentAgentIndex}
+                              src={agents[currentAgentIndex].src}
+                              alt={agents[currentAgentIndex].name}
+                              width={320}
+                              height={320}
+                              className="w-full h-full object-contain transition-opacity duration-1000"
+                            />
+                          </div>
 
-                        <div className="absolute -top-3 -right-3 w-12 h-12 bg-gradient-to-br from-brand-bright-red to-brand-dark-red rounded-full flex items-center justify-center shadow-lg">
-                          <Crown className="w-6 h-6 text-white" />
-                    </div>
+                          <div className="absolute -top-3 -right-3 w-12 h-12 bg-gradient-to-br from-brand-bright-red to-brand-dark-red rounded-full flex items-center justify-center shadow-lg">
+                            <Crown className="w-6 h-6 text-white" />
+                          </div>
+                        </div>
 
-                        {/* Agent Name */}
-                        <div className="mt-4 text-center">
-                          <h3 className="text-2xl font-bold text-slate-900 transition-opacity duration-1000">
+                        {/* Agent Name and Disclaimer */}
+                        <div className="text-center">
+                          <h3 className="text-xl sm:text-2xl font-bold text-slate-900 transition-opacity duration-1000">
                             {agents[currentAgentIndex].name}
                           </h3>
+                          <p className="text-xs text-slate-500 mt-2">
+                            *Selected based on performance
+                          </p>
+                        </div>
                       </div>
-                    </div>
 
-                  {/* Agent Info */}
-                  <div className="flex-1">
-                    <div className="text-8xl font-black text-slate-900 mb-4">#1</div>
-                    <div className="text-3xl font-bold text-slate-900 mb-2">Home of Top Performers</div>
-                    <div className="text-slate-600 font-semibold text-xl">In Ontario</div>
-                </div>
+                      {/* Agent Info - #1 HOME OF TOP PERFORMERS */}
+                      <div className="flex-1 text-center lg:text-left">
+                        <div className="text-6xl sm:text-7xl lg:text-8xl font-black text-slate-900 mb-4">#1</div>
+                        <div className="text-xl lg:text-2xl font-bold text-slate-900 mb-2 leading-tight">HOME OF TOP PERFORMERS</div>
+                      </div>
 
                 </div>
 
@@ -456,7 +464,7 @@ export default function Home() {
               {/* Right Column - Why Choose RE/MAX Excellence */}
               <motion.div
 
-                className="bg-white rounded-3xl p-8 shadow-2xl border border-slate-200 hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2 group"
+                className="bg-white rounded-3xl p-4 sm:p-6 lg:p-8 shadow-2xl border border-slate-200 hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2 group"
                 initial={{ opacity: 0, x: 50 }}
 
                 whileInView={{ opacity: 1, x: 0 }}
@@ -466,7 +474,7 @@ export default function Home() {
 
               >
 
-                  <h3 className="text-3xl font-bold text-slate-900 mb-6 font-montserrat">Why Choose RE/MAX Excellence?</h3>
+                  <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-6 font-montserrat">WHY CHOOSE RE/MAX EXCELLENCE?</h3>
 
                   <div className="space-y-6">
 
@@ -476,7 +484,7 @@ export default function Home() {
 
                         icon: Crown,
 
-                      title: "Collaborative Culture",
+                      title: "COLLABORATIVE CULTURE",
                       description: "We foster a supportive, inclusive, and high-energy environment where agents thrive together — not in isolation.",
                       color: "from-brand-dark-blue to-brand-medium-blue"
                       },
@@ -485,7 +493,7 @@ export default function Home() {
 
                         icon: Zap,
 
-                      title: "Young & Dynamic Team",
+                      title: "YOUNG & DYNAMIC TEAM",
                       description: "Driven by fresh perspectives and digital-first strategies, our young team is adapting fast to the ever-changing real estate market.",
                       color: "from-brand-bright-red to-brand-dark-red"
                       },
@@ -494,7 +502,7 @@ export default function Home() {
 
                         icon: Shield,
 
-                      title: "Full-Service Support",
+                      title: "FULL-SERVICE SUPPORT",
                       description: "From in-house marketing to training and mentorship, we equip you with everything you need for smooth, successful transactions.",
                       color: "from-brand-medium-blue to-brand-dark-blue"
                       }
@@ -734,7 +742,7 @@ export default function Home() {
 
             >
 
-              <Button className="bg-gradient-to-r from-brand-medium-blue to-brand-bright-red hover:from-brand-dark-blue hover:to-brand-dark-red text-white font-bold px-8 py-4 text-xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 border-2 border-brand-medium-blue rounded-xl">
+              <Button onClick={openModal} className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold px-8 py-4 text-xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 rounded-xl">
                 <UserPlus className="w-6 h-6 mr-3" />
                 Join Our Team
                 <ArrowRight className="w-6 h-6 ml-3" />
@@ -956,7 +964,7 @@ export default function Home() {
 
             >
 
-              <Button className="bg-gradient-to-r from-brand-bright-red to-brand-dark-red hover:from-brand-dark-red hover:to-brand-bright-red text-white font-bold px-8 py-4 text-xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 border-2 border-brand-bright-red rounded-xl">
+              <Button onClick={openModal} className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold px-8 py-4 text-xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 rounded-xl">
                 <UserPlus className="w-6 h-6 mr-3" />
 
                 Join Our Team
@@ -974,15 +982,15 @@ export default function Home() {
 
         {/* SECTION 4: Client Testimonials */}
 
-        <section className="py-24 bg-gradient-to-br from-white via-slate-50 to-white relative overflow-hidden">
+        <section className="py-24 bg-gradient-to-r from-brand-dark-blue via-brand-dark-blue to-brand-dark-blue relative overflow-hidden">
 
           {/* Background Elements */}
 
           <div className="absolute inset-0">
 
-            <div className="absolute top-20 right-10 w-64 h-64 bg-gradient-to-br from-yellow-200/20 to-orange-200/15 rounded-full blur-3xl"></div>
+            <div className="absolute top-20 right-10 w-64 h-64 bg-gradient-to-br from-red-500/20 to-red-600/10 rounded-full blur-3xl"></div>
 
-            <div className="absolute bottom-20 left-10 w-80 h-80 bg-gradient-to-br from-green-200/20 to-emerald-200/15 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-20 left-10 w-80 h-80 bg-gradient-to-br from-red-400/20 to-red-500/10 rounded-full blur-3xl"></div>
 
           </div>
           
@@ -1004,9 +1012,9 @@ export default function Home() {
                 className="opacity-60 animate-pulse transform -rotate-12" 
                          />
 
-                         <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-br from-orange-400 to-red-500 rounded-full opacity-70 animate-bounce"></div>
+                         <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-br from-red-400 to-red-500 rounded-full opacity-70 animate-bounce"></div>
 
-                         <div className="absolute -bottom-2 -left-2 w-4 h-4 bg-gradient-to-br from-red-400 to-pink-500 rounded-full opacity-80 animate-ping"></div>
+                         <div className="absolute -bottom-2 -left-2 w-4 h-4 bg-gradient-to-br from-red-400 to-red-600 rounded-full opacity-80 animate-ping"></div>
 
                        </div>
 
@@ -1030,12 +1038,12 @@ export default function Home() {
 
             >
 
-              <h2 className="text-5xl lg:text-6xl font-black text-slate-900 mb-8 font-montserrat leading-tight">
+              <h2 className="text-5xl lg:text-6xl font-black text-white mb-8 font-montserrat leading-tight">
 
-                What Our <span className="text-transparent bg-gradient-to-r from-brand-bright-red to-brand-dark-red bg-clip-text">Clients Say</span>
+                What Our <span className="text-brand-bright-red">Clients Say</span>
               </h2>
 
-              <p className="text-xl text-slate-600 max-w-3xl mx-auto font-arial leading-relaxed">
+              <p className="text-xl text-white max-w-3xl mx-auto font-arial leading-relaxed">
 
                 Real stories from real clients who've experienced the RE/MAX Excellence difference.
 
@@ -1106,11 +1114,11 @@ export default function Home() {
 
                   variants={fadeInUp}
 
-                  className="group relative p-8 bg-white rounded-3xl shadow-xl border border-slate-200 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
+                  className="group relative p-8 bg-white/10 backdrop-blur-sm rounded-3xl shadow-xl border border-white/20 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
 
                 >
 
-                  <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-brand-bright-red to-brand-dark-red rounded-full opacity-10 group-hover:opacity-20 transition-opacity duration-500"></div>
+                  <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-red-400/30 to-red-500/20 rounded-full opacity-30 group-hover:opacity-50 transition-opacity duration-500"></div>
                   <div className="relative z-10">
 
                     <div className="flex items-center mb-4">
@@ -1122,7 +1130,7 @@ export default function Home() {
 
                     </div>
 
-                    <p className="text-slate-700 mb-6 font-arial leading-relaxed italic">
+                    <p className="text-white mb-6 font-arial leading-relaxed italic">
 
                       "{testimonial.content}"
 
@@ -1130,9 +1138,9 @@ export default function Home() {
 
                     <div>
 
-                      <h4 className="font-bold text-slate-900 font-montserrat">{testimonial.name}</h4>
+                      <h4 className="font-bold text-white font-montserrat">{testimonial.name}</h4>
 
-                      <p className="text-slate-600 text-sm">{testimonial.role}</p>
+                      <p className="text-gray-300 text-sm">{testimonial.role}</p>
 
                     </div>
 

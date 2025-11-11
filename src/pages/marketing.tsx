@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
+import { useJoinUsModal } from "@/contexts/JoinUsModalContext";
 import { 
   Palette, 
   Megaphone, 
@@ -41,21 +42,18 @@ const staggerContainer = {
 };
 
 export default function Marketing() {
+  const { openModal } = useJoinUsModal();
   const [marketingImages, setMarketingImages] = useState<string[]>([]);
 
   useEffect(() => {
-    // List of marketing flyer images - matches actual files in the folder
+    // List of marketing flyer images - Order: 1-3-2-4-5-6
     const imageList = [
-      'Combined (29).png',
-      'For Sale Team (18).png',
-      'For Sale Team (43).png',
-      'just-leased-flyer.png',
-      'open house2026 Solo (17).png',
-      'SOCIAL ASSETS (3).png',
-      'SOCIAL ASSETS (51) (1)-1.png',
-      'SOCIAL ASSETS (51) (1).png',
-      'SOCIAL ASSETS (53).png',
-      'SOCIAL ASSETS (61).png'
+      'https://dontdelete2005142.kloudbean.com/1762877751_Sold_2.png',     // Position 1
+      'https://dontdelete2005142.kloudbean.com/1762877751_Sold_1 .png',    // Position 3
+      'https://dontdelete2005142.kloudbean.com/1762877751_sale_2.png',     // Position 2
+      'https://dontdelete2005142.kloudbean.com/1762877751_Sold_2.png',     // Position 4
+      'https://dontdelete2005142.kloudbean.com/1762877751_PreCon_1.jpg',   // Position 5
+      'https://dontdelete2005142.kloudbean.com/1762877751_Precon_2.jpg'    // Position 6
     ];
     
     setMarketingImages(imageList);
@@ -127,7 +125,7 @@ export default function Marketing() {
               <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-8 font-arial leading-relaxed">
                 We don't just use marketing tools, we turn them into your growth engine. From eye-catching campaigns and AI-powered insights to brand-building strategies, we cover all your creative and strategic needs in-house.
               </p>
-              <Button size="lg" className="bg-gradient-to-r from-brand-bright-red to-brand-dark-blue text-white hover:opacity-90 font-bold px-8 py-4 text-xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 rounded-xl">
+              <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold px-8 py-4 text-xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 rounded-xl">
                 Start Marketing Like a Pro
               </Button>
             </motion.div>
@@ -159,46 +157,46 @@ export default function Marketing() {
               </motion.div>
 
             {/* Auto-scrolling Marketing Materials Carousel */}
-            <div className="relative overflow-hidden rounded-2xl bg-white/50 backdrop-blur-sm p-8">
-              <div className="flex animate-scroll space-x-6">
-                {/* Dynamic Marketing Flyers */}
+            <div className="relative overflow-hidden bg-transparent p-0">
+              <div className="flex animate-scroll gap-4">
+                {/* Dynamic Marketing Flyers - First Set */}
                 {marketingImages.length > 0 ? (
-                  marketingImages.map((imageName, index) => (
-                    <div key={index} className="flex-shrink-0 w-72 h-auto rounded-xl overflow-hidden transform hover:scale-105 transition-all duration-300 bg-white">
+                  marketingImages.map((imageUrl, index) => (
+                    <div key={`first-${index}`} className="flex-shrink-0 w-72 h-auto overflow-hidden transform hover:scale-105 transition-all duration-300">
                       <Image
-                        src={`/images/marketing-flyers/${imageName}`}
+                        src={imageUrl}
                         alt={`Marketing Flyer ${index + 1}`}
                         width={288}
                         height={400}
                         className="w-full h-auto object-contain"
                         quality={100}
                         priority={index < 3}
+                        unoptimized
                         onError={(e) => {
-                          console.log('Image failed to load:', imageName);
-                          e.currentTarget.style.display = 'none';
+                          console.error('Image failed to load:', imageUrl);
                         }}
                       />
                     </div>
                   ))
                 ) : (
-                  <div className="flex-shrink-0 w-72 h-96 rounded-xl bg-gray-200 flex items-center justify-center">
+                  <div className="flex-shrink-0 w-72 h-96 bg-gray-200 flex items-center justify-center">
                     <p className="text-gray-500">Loading marketing materials...</p>
                   </div>
                 )}
                 
-                {/* Duplicate images for seamless loop */}
-                {marketingImages.length > 0 && marketingImages.slice(0, 3).map((imageName, index) => (
-                  <div key={`duplicate-${index}`} className="flex-shrink-0 w-72 h-auto rounded-xl overflow-hidden transform hover:scale-105 transition-all duration-300 bg-white">
+                {/* Duplicate ALL images for seamless loop */}
+                {marketingImages.length > 0 && marketingImages.map((imageUrl, index) => (
+                  <div key={`duplicate-${index}`} className="flex-shrink-0 w-72 h-auto overflow-hidden transform hover:scale-105 transition-all duration-300">
                     <Image
-                      src={`/images/marketing-flyers/${imageName}`}
+                      src={imageUrl}
                       alt={`Marketing Flyer ${index + 1}`}
                       width={288}
                       height={400}
                       className="w-full h-auto object-contain"
                       quality={100}
+                      unoptimized
                       onError={(e) => {
-                        console.log('Duplicate image failed to load:', imageName);
-                        e.currentTarget.style.display = 'none';
+                        console.error('Duplicate image failed to load:', imageUrl);
                       }}
                     />
                   </div>
@@ -325,7 +323,7 @@ export default function Marketing() {
                     <h3 className="text-2xl font-bold text-brand-dark-blue mb-4 font-montserrat text-center">Pre-construction</h3>
                     <div className="flex justify-center">
                       <Image
-                        src="https://dontdelete2005142.kloudbean.com/1761000695_Pre-Construction_.png"
+                        src="https://dontdelete2005142.kloudbean.com/1762877284_SOCIAL ASSETS - 2025-11-11T110251.860.jpg"
                         alt="Pre-construction Example"
                         width={350}
                         height={525}
@@ -484,6 +482,118 @@ export default function Marketing() {
                   </div>
                 </div>
               </motion.div>
+
+              {/* Google Ads */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                className="group"
+              >
+                <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+                  <div className="p-6">
+                    <h3 className="text-2xl font-bold text-brand-dark-red mb-4 font-montserrat text-center">Google Ads</h3>
+                    <div className="flex justify-center">
+                      <Image
+                        src="https://dontdelete2005142.kloudbean.com/1762879530_google ads.jpg"
+                        alt="Google Ads"
+                        width={350}
+                        height={525}
+                        className="rounded-xl"
+                        quality={100}
+                        onError={(e) => {
+                          console.error('Image failed to load:', e);
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Social Media */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+                className="group"
+              >
+                <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+                  <div className="p-6">
+                    <h3 className="text-2xl font-bold text-brand-dark-red mb-4 font-montserrat text-center">Social Media</h3>
+                    <div className="flex justify-center">
+                      <Image
+                        src="https://dontdelete2005142.kloudbean.com/1762879530_social media (6).jpg"
+                        alt="Social Media"
+                        width={350}
+                        height={525}
+                        className="rounded-xl"
+                        quality={100}
+                        onError={(e) => {
+                          console.error('Image failed to load:', e);
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Video Shoot/Editing */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.8 }}
+                className="group"
+              >
+                <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+                  <div className="p-6">
+                    <h3 className="text-2xl font-bold text-brand-dark-blue mb-4 font-montserrat text-center">Video Shoot/Editing</h3>
+                    <div className="flex justify-center">
+                      <Image
+                        src="https://dontdelete2005142.kloudbean.com/1762879530_video shoot  editing.jpg"
+                        alt="Video Shoot/Editing"
+                        width={350}
+                        height={525}
+                        className="rounded-xl"
+                        quality={100}
+                        onError={(e) => {
+                          console.error('Image failed to load:', e);
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Website/Web Designing */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.9 }}
+                className="group"
+              >
+                <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+                  <div className="p-6">
+                    <h3 className="text-2xl font-bold text-brand-dark-red mb-4 font-montserrat text-center">Website/Web Designing</h3>
+                    <div className="flex justify-center">
+                      <Image
+                        src="https://dontdelete2005142.kloudbean.com/1762879530_website.jpg"
+                        alt="Website/Web Designing"
+                        width={350}
+                        height={525}
+                        className="rounded-xl"
+                        quality={100}
+                        onError={(e) => {
+                          console.error('Image failed to load:', e);
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
             </div>
           </div>
         </section>
@@ -507,8 +617,14 @@ export default function Marketing() {
 
 
         {/* AI Integration */}
-        <section className="py-20 bg-gradient-to-r from-primary/5 to-secondary/5">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="py-20 bg-gradient-to-r from-brand-dark-blue via-brand-dark-blue to-brand-dark-blue relative overflow-hidden">
+          {/* Background Elements */}
+          <div className="absolute inset-0">
+            <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-brand-bright-red/20 to-brand-dark-red/10 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-br from-brand-medium-blue/20 to-brand-dark-blue/10 rounded-full blur-3xl"></div>
+          </div>
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
@@ -516,38 +632,38 @@ export default function Marketing() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.8 }}
               >
-                <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
-                  AI-Powered <span className="text-primary">Marketing Intelligence</span>
+                <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 font-montserrat">
+                  AI-Powered <span className="text-brand-bright-red">Marketing Intelligence</span>
                 </h2>
-                <p className="text-xl text-muted-foreground mb-8">
+                <p className="text-xl text-white mb-8 font-arial">
                   We leverage artificial intelligence to optimize every aspect of your marketing campaigns, from audience targeting to content creation.
                 </p>
                 <div className="space-y-4">
                   <div className="flex items-start space-x-4">
-                    <div className="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center mt-1">
-                      <Target className="h-4 w-4 text-primary" />
+                    <div className="w-8 h-8 bg-brand-bright-red/20 rounded-full flex items-center justify-center mt-1">
+                      <Target className="h-4 w-4 text-brand-bright-red" />
                     </div>
                     <div>
-                      <h3 className="font-bold mb-2">Smart Audience Targeting</h3>
-                      <p className="text-muted-foreground text-sm">AI analyzes buyer behavior to target the most likely prospects for your listings.</p>
+                      <h3 className="font-bold mb-2 text-white">Smart Audience Targeting</h3>
+                      <p className="text-gray-300 text-sm">AI analyzes buyer behavior to target the most likely prospects for your listings.</p>
                     </div>
                   </div>
                   <div className="flex items-start space-x-4">
-                    <div className="w-8 h-8 bg-secondary/20 rounded-full flex items-center justify-center mt-1">
-                      <Sparkles className="h-4 w-4 text-secondary" />
+                    <div className="w-8 h-8 bg-brand-bright-red/20 rounded-full flex items-center justify-center mt-1">
+                      <Sparkles className="h-4 w-4 text-brand-bright-red" />
                     </div>
                     <div>
-                      <h3 className="font-bold mb-2">Content Optimization</h3>
-                      <p className="text-muted-foreground text-sm">Machine learning optimizes headlines, descriptions, and visuals for maximum engagement.</p>
+                      <h3 className="font-bold mb-2 text-white">Content Optimization</h3>
+                      <p className="text-gray-300 text-sm">Machine learning optimizes headlines, descriptions, and visuals for maximum engagement.</p>
                     </div>
                   </div>
                   <div className="flex items-start space-x-4">
-                    <div className="w-8 h-8 bg-purple-500/20 rounded-full flex items-center justify-center mt-1">
-                      <TrendingUp className="h-4 w-4 text-purple-500" />
+                    <div className="w-8 h-8 bg-brand-bright-red/20 rounded-full flex items-center justify-center mt-1">
+                      <TrendingUp className="h-4 w-4 text-brand-bright-red" />
                     </div>
                     <div>
-                      <h3 className="font-bold mb-2">Performance Analytics</h3>
-                      <p className="text-muted-foreground text-sm">Real-time insights and recommendations to continuously improve campaign performance.</p>
+                      <h3 className="font-bold mb-2 text-white">Performance Analytics</h3>
+                      <p className="text-gray-300 text-sm">Real-time insights and recommendations to continuously improve campaign performance.</p>
                     </div>
                   </div>
                 </div>
@@ -560,7 +676,7 @@ export default function Marketing() {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="relative"
               >
-                <div className="bg-gradient-to-br from-primary/10 to-secondary/10 rounded-2xl p-8">
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
                   <img 
                     src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
                     alt="AI Marketing Dashboard"
@@ -569,71 +685,6 @@ export default function Marketing() {
                 </div>
               </motion.div>
             </div>
-          </div>
-        </section>
-
-
-        {/* Portfolio Section */}
-        <section className="py-20 bg-muted/30">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
-                Our Work <span className="text-primary">Speaks</span> for Itself
-              </h2>
-              <p className="text-xl text-muted-foreground">
-                See how our marketing drives real results
-              </p>
-            </motion.div>
-
-            <motion.div 
-              variants={staggerContainer}
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: true }}
-              className="grid md:grid-cols-3 gap-8"
-            >
-              {[
-                {
-                  image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                  title: "Luxury Home Campaign",
-                  result: "Sold in 3 days",
-                  engagement: "500% increase in views"
-                },
-                {
-                  image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                  title: "Pre-Construction Launch",
-                  result: "85% sold in pre-launch",
-                  engagement: "10,000+ social shares"
-                },
-                {
-                  image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                  title: "Condo Marketing",
-                  result: "Multiple offers",
-                  engagement: "300% above asking"
-                }
-              ].map((item, index) => (
-                <motion.div key={index} variants={fadeInUp}>
-                  <Card className="overflow-hidden border-0 bg-white hover:shadow-lg transition-all duration-300">
-                    <img 
-                      src={item.image} 
-                      alt={item.title}
-                      className="w-full h-48 object-cover"
-                    />
-                    <CardContent className="p-6">
-                      <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-                      <p className="text-primary font-medium mb-1">{item.result}</p>
-                      <p className="text-sm text-muted-foreground">{item.engagement}</p>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </motion.div>
           </div>
         </section>
 
@@ -747,7 +798,7 @@ export default function Marketing() {
                 Let's Build Your Brand Together
               </h2>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="bg-white text-brand-bright-red hover:bg-white/90 font-bold px-8 py-4 text-xl">
+                <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold px-8 py-4 text-xl">
                   Join Us
                 </Button>
               </div>

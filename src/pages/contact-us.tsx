@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { useJoinUsModal } from '@/contexts/JoinUsModalContext';
 import { 
   Phone, 
   Mail, 
@@ -20,6 +21,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
 const ContactUs = () => {
+  const { openModal } = useJoinUsModal();
   const fadeInUp = {
     initial: { opacity: 0, y: 60 },
     animate: { opacity: 1, y: 0 },
@@ -39,8 +41,8 @@ const ContactUs = () => {
       icon: <Phone className="h-8 w-8 text-red-600" />,
       title: "Phone",
       details: [
-        { label: "Main Office", value: "+1 (416) 555-0123" },
-        { label: "Direct Line", value: "+1 (416) 555-0124" }
+        { label: "Mississauga", value: "(905) 507-4436" },
+        { label: "Brampton", value: "519-342-1961" }
       ],
       action: "Call Now"
     },
@@ -48,17 +50,17 @@ const ContactUs = () => {
       icon: <Mail className="h-8 w-8 text-blue-600" />,
       title: "Email",
       details: [
-        { label: "General Inquiries", value: "info@remaxexcellence.com" },
-        { label: "Support", value: "support@remaxexcellence.com" }
+        { label: "General Inquiries", value: "info@remaxexcellence.ca" },
+        { label: "Support", value: "support@remaxexcellence.ca" }
       ],
       action: "Send Email"
     },
     {
       icon: <MapPin className="h-8 w-8 text-green-600" />,
-      title: "Office",
+      title: "Offices",
       details: [
-        { label: "Address", value: "123 Excellence Way, Toronto, ON M5V 3A8" },
-        { label: "Hours", value: "Mon-Fri: 9AM-6PM, Sat: 10AM-4PM" }
+        { label: "Mississauga", value: "100 Milverton Dr #610, Mississauga, ON L6R 4H1" },
+        { label: "Brampton", value: "456 Vodden St E #21b, Brampton, ON L6S 5Y7" }
       ],
       action: "Get Directions"
     }
@@ -178,7 +180,7 @@ const ContactUs = () => {
                       </div>
                     ))}
                   </div>
-                  <Button className="w-full bg-red-600 hover:bg-red-700 text-white">
+                  <Button onClick={openModal} className="w-full bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold">
                     {method.action}
                   </Button>
                 </motion.div>
@@ -280,7 +282,7 @@ const ContactUs = () => {
                       ></textarea>
                     </div>
 
-                    <Button className="w-full bg-red-600 hover:bg-red-700 text-white py-4 text-lg font-semibold">
+                    <Button className="w-full bg-brand-bright-red hover:bg-brand-dark-red text-white py-4 text-lg font-bold">
                       <Send className="h-5 w-5 mr-2" />
                       Send Message
                     </Button>
@@ -329,7 +331,7 @@ const ContactUs = () => {
                   <p className="text-slate-600 mb-4">{dept.description}</p>
                   <div className="flex items-center justify-between">
                     <span className="text-red-600 font-semibold">{dept.contact}</span>
-                    <Button className="bg-red-600 hover:bg-red-700 text-white">
+                    <Button onClick={openModal} className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold">
                       Contact
                     </Button>
                   </div>
@@ -369,34 +371,37 @@ const ContactUs = () => {
                   <div className="flex items-start space-x-4">
                     <MapPin className="h-8 w-8 text-red-400 mt-1" />
                     <div>
-                      <h3 className="text-xl font-bold mb-2">Office Address</h3>
+                      <h3 className="text-xl font-bold mb-2">Mississauga Office</h3>
                       <p className="text-gray-300">
-                        123 Excellence Way<br />
-                        Toronto, ON M5V 3A8<br />
+                        100 Milverton Dr #610<br />
+                        Mississauga, ON L6R 4H1<br />
                         Canada
                       </p>
+                      <a href="tel:9055074436" className="text-brand-bright-red hover:text-white transition-colors mt-2 inline-block">(905) 507-4436</a>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start space-x-4">
+                    <MapPin className="h-8 w-8 text-blue-400 mt-1" />
+                    <div>
+                      <h3 className="text-xl font-bold mb-2">Brampton Office</h3>
+                      <p className="text-gray-300">
+                        456 Vodden St E #21b<br />
+                        Brampton, ON L6S 5Y7<br />
+                        Canada
+                      </p>
+                      <a href="tel:5193421961" className="text-brand-bright-red hover:text-white transition-colors mt-2 inline-block">519-342-1961</a>
                     </div>
                   </div>
                   
                   <div className="flex items-start space-x-4">
-                    <Clock className="h-8 w-8 text-blue-400 mt-1" />
+                    <Clock className="h-8 w-8 text-green-400 mt-1" />
                     <div>
                       <h3 className="text-xl font-bold mb-2">Business Hours</h3>
                       <p className="text-gray-300">
                         Monday - Friday: 9:00 AM - 6:00 PM<br />
                         Saturday: 10:00 AM - 4:00 PM<br />
                         Sunday: Closed
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start space-x-4">
-                    <Phone className="h-8 w-8 text-green-400 mt-1" />
-                    <div>
-                      <h3 className="text-xl font-bold mb-2">Emergency Contact</h3>
-                      <p className="text-gray-300">
-                        For urgent matters outside business hours<br />
-                        +1 (416) 555-0125
                       </p>
                     </div>
                   </div>

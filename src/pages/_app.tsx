@@ -2,8 +2,23 @@ import type { AppProps } from 'next/app'
 import '../styles/globals.css';
 import { Toaster } from "@/components/ui/toaster"
 import { useEffect, useState } from 'react';
+import { JoinUsModalProvider } from '@/contexts/JoinUsModalContext';
+import JoinUsModal from '@/components/JoinUsModal';
+import { useJoinUsModal } from '@/contexts/JoinUsModalContext';
 
-export default function App({ Component, pageProps }: AppProps) {
+function AppContent({ Component, pageProps }: AppProps) {
+  const { isOpen, closeModal } = useJoinUsModal();
+  
+  return (
+    <div className="min-h-screen">
+      <Component {...pageProps} />
+      <Toaster />
+      <JoinUsModal isOpen={isOpen} onClose={closeModal} />
+    </div>
+  );
+}
+
+export default function App(props: AppProps) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -19,15 +34,9 @@ export default function App({ Component, pageProps }: AppProps) {
     setMounted(true);
   }, []);
 
-  // Prevent flash while theme loads
-  if (!mounted) {
-    return null;
-  }
-
   return (
-    <div className="min-h-screen">
-      <Component {...pageProps} />
-      <Toaster />
-    </div>
+    <JoinUsModalProvider>
+      {mounted && <AppContent {...props} />}
+    </JoinUsModalProvider>
   )
 }

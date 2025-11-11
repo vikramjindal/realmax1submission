@@ -333,7 +333,7 @@ export default function JoinUs() {
                     </div>
 
                     <div className="pt-4">
-                      <Button type="submit" size="lg" className="w-full bg-primary hover:bg-primary/90 text-lg py-6">
+                      <Button type="submit" size="lg" className="w-full bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold text-lg py-6">
                         Apply Now
                         <ArrowRight className="ml-2 h-5 w-5" />
                       </Button>
