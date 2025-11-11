@@ -43,30 +43,29 @@ export default async function handler(
     const firstName = nameParts[0];
     const lastName = nameParts.slice(1).join(' ') || firstName;
 
-    // Prepare data for FollowUpBoss
+    // Prepare data for FollowUpBoss API
+    // Based on FollowUpBoss API v1 documentation
     const followUpBossData = {
       firstName: firstName,
       lastName: lastName,
-      email: email,
-      phoneNumbers: [
+      emails: [
         {
-          type: 'mobile',
-          value: phoneNumber
+          value: email,
+          type: 'work'
         }
       ],
-      // Custom fields
-      customFields: {
-        experienceLevel: experienceLevel,
-        currentBrokerage: currentBrokerage || 'Not specified',
-        switchTiming: switchTiming,
-        notes: notes || ''
-      },
+      phones: [
+        {
+          value: phoneNumber,
+          type: 'mobile'
+        }
+      ],
+      // Source information
+      source: 'Website - Remax',
       // Tags for organization
       tags: ['Website Lead', 'Join Team Form', experienceLevel],
-      // Source information
-      source: 'Website - Join Excellence Form',
-      // Lead status
-      status: 'New'
+      // Note with all the details
+      note: `Experience Level: ${experienceLevel}\nCurrent Brokerage: ${currentBrokerage || 'Not specified'}\nPlanning to Switch: ${switchTiming}\nNotes: ${notes || 'None'}`
     };
 
     // Get API credentials from environment variables
