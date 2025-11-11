@@ -77,9 +77,13 @@ export default async function handler(
       console.error('FollowUpBoss API key is not configured');
       return res.status(500).json({ 
         success: false, 
-        message: 'CRM integration is not properly configured' 
+        message: 'CRM integration is not properly configured',
+        error: 'FOLLOWUPBOSS_API_KEY environment variable is missing'
       });
     }
+
+    console.log('Sending to FollowUpBoss API:', apiUrl);
+    console.log('API Key present:', apiKey ? 'Yes (length: ' + apiKey.length + ')' : 'No');
 
     // Send to FollowUpBoss API
     const response = await fetch(`${apiUrl}/people`, {
@@ -91,14 +95,23 @@ export default async function handler(
       body: JSON.stringify(followUpBossData)
     });
 
-    const responseData = await response.json();
+    const responseText = await response.text();
+    console.log('FollowUpBoss API response status:', response.status);
+    console.log('FollowUpBoss API response:', responseText);
+
+    let responseData;
+    try {
+      responseData = JSON.parse(responseText);
+    } catch (e) {
+      responseData = { message: responseText };
+    }
 
     if (!response.ok) {
       console.error('FollowUpBoss API error:', responseData);
       return res.status(response.status).json({ 
         success: false, 
         message: 'Failed to submit to CRM',
-        error: responseData.message || 'Unknown error'
+        error: responseData.message || responseData.error || JSON.stringify(responseData) || 'Unknown error from FollowUpBoss API'
       });
     }
 
