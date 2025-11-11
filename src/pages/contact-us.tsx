@@ -108,13 +108,13 @@ const ContactUs = () => {
         <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white py-20">
           {/* Creative Balloon Elements */}
           <div className="absolute top-16 left-12 w-28 h-28 object-contain opacity-70 animate-bounce shadow-2xl transform -rotate-12">
-            <Image src="/images/balloon.png" alt="RE/MAX Balloon" width={112} height={112} className="w-full h-full" />
+            <Image src="/images/company-pin-icon.png" alt="RE/MAX Balloon" width={112} height={112} className="w-full h-full" />
           </div>
           <div className="absolute top-24 right-20 w-20 h-20 object-contain opacity-60 animate-pulse shadow-xl transform rotate-45">
-            <Image src="/images/balloon.png" alt="RE/MAX Balloon" width={80} height={80} className="w-full h-full" />
+            <Image src="/images/company-pin-icon.png" alt="RE/MAX Balloon" width={80} height={80} className="w-full h-full" />
           </div>
           <div className="absolute bottom-16 left-1/3 w-16 h-16 object-contain opacity-50 animate-bounce shadow-lg transform rotate-90">
-            <Image src="/images/balloon.png" alt="RE/MAX Balloon" width={64} height={64} className="w-full h-full" />
+            <Image src="/images/company-pin-icon.png" alt="RE/MAX Balloon" width={64} height={64} className="w-full h-full" />
           </div>
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -410,7 +410,7 @@ const ContactUs = () => {
               
               <div className="relative">
                 <div className="w-32 h-32 object-contain opacity-60 animate-pulse shadow-xl transform rotate-12 absolute -top-8 -left-8">
-                  <Image src="/images/balloon.png" alt="RE/MAX Balloon" width={128} height={128} className="w-full h-full" />
+                  <Image src="/images/company-pin-icon.png" alt="RE/MAX Balloon" width={128} height={128} className="w-full h-full" />
                 </div>
                 <div className="bg-gradient-to-br from-red-900/20 to-blue-900/20 rounded-2xl p-8 border border-white/20 backdrop-blur-sm">
                   <h3 className="text-2xl font-bold mb-4">Why Visit Us?</h3>

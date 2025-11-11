@@ -22,23 +22,50 @@ const JoinUsModal: React.FC<JoinUsModalProps> = ({ isOpen, onClose }) => {
     notes: ''
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const [submitError, setSubmitError] = React.useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
-    // You can add API call here to send data to backend
-    alert('Thank you for your interest! We will contact you soon.');
-    onClose();
-    // Reset form
-    setFormData({
-      fullName: '',
-      phoneNumber: '',
-      email: '',
-      experienceLevel: '',
-      currentBrokerage: '',
-      switchTiming: '',
-      notes: ''
-    });
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      // Send data to API route
+      const response = await fetch('/api/submit-to-crm', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || 'Failed to submit form');
+      }
+
+      // Success
+      alert('Thank you for your interest! We will contact you soon.');
+      onClose();
+      
+      // Reset form
+      setFormData({
+        fullName: '',
+        phoneNumber: '',
+        email: '',
+        experienceLevel: '',
+        currentBrokerage: '',
+        switchTiming: '',
+        notes: ''
+      });
+    } catch (error) {
+      console.error('Form submission error:', error);
+      setSubmitError(error instanceof Error ? error.message : 'Failed to submit form. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -183,18 +210,27 @@ const JoinUsModal: React.FC<JoinUsModalProps> = ({ isOpen, onClose }) => {
             />
           </div>
 
-          {/* Submit Button */}
+          {/* Error Message */}
+          {submitError && (
+            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
+              <p className="text-sm">{submitError}</p>
+            </div>
+          )}
+
+          {/* Submit Buttons */}
           <div className="flex gap-4 pt-4">
             <Button
               type="submit"
-              className="flex-1 bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold py-3"
+              disabled={isSubmitting}
+              className="flex-1 bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold py-3 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Submit Application
+              {isSubmitting ? 'Submitting...' : 'Submit Application'}
             </Button>
             <Button
               type="button"
               variant="outline"
               onClick={onClose}
+              disabled={isSubmitting}
               className="flex-1"
             >
               Cancel
