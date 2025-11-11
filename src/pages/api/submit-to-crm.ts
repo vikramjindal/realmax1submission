@@ -44,29 +44,24 @@ export default async function handler(
     const lastName = nameParts.slice(1).join(' ') || firstName;
 
     // Prepare data for FollowUpBoss API
-    // Based on FollowUpBoss API v1 documentation
+    // Using minimal required fields only
     const followUpBossData = {
       firstName: firstName,
       lastName: lastName,
       emails: [
         {
-          value: email,
-          type: 'work'
+          value: email
         }
       ],
       phones: [
         {
-          value: phoneNumber,
-          type: 'mobile'
+          value: phoneNumber
         }
       ],
-      // Source information
-      source: 'Website - Remax',
-      // Tags for organization
-      tags: ['Website Lead', 'Join Team Form', experienceLevel],
-      // Note with all the details
-      note: `Experience Level: ${experienceLevel}\nCurrent Brokerage: ${currentBrokerage || 'Not specified'}\nPlanning to Switch: ${switchTiming}\nNotes: ${notes || 'None'}`
+      source: 'Website - Remax'
     };
+
+    console.log('Payload to send:', JSON.stringify(followUpBossData, null, 2));
 
     // Get API credentials from environment variables
     const apiKey = process.env.FOLLOWUPBOSS_API_KEY;
@@ -112,6 +107,38 @@ export default async function handler(
         message: 'Failed to submit to CRM',
         error: responseData.message || responseData.error || JSON.stringify(responseData) || 'Unknown error from FollowUpBoss API'
       });
+    }
+
+    console.log('Person created successfully:', responseData);
+
+    // Now try to add a note/event with the form details
+    if (responseData && responseData.id) {
+      const personId = responseData.id;
+      const noteText = `Experience Level: ${experienceLevel}\nCurrent Brokerage: ${currentBrokerage || 'Not specified'}\nPlanning to Switch: ${switchTiming}\nAdditional Notes: ${notes || 'None'}`;
+      
+      try {
+        const eventResponse = await fetch(`${apiUrl}/events`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Basic ${Buffer.from(apiKey + ':').toString('base64')}`
+          },
+          body: JSON.stringify({
+            personId: personId,
+            message: noteText,
+            source: 'Website - Remax'
+          })
+        });
+        
+        if (eventResponse.ok) {
+          console.log('Event/note added successfully');
+        } else {
+          console.log('Could not add event/note, but person was created');
+        }
+      } catch (eventError) {
+        console.error('Error adding event:', eventError);
+        // Don't fail the whole request if event fails
+      }
     }
 
     // Success response
