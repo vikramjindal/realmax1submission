@@ -111,35 +111,9 @@ export default async function handler(
 
     console.log('Person created successfully:', responseData);
 
-    // Now try to add a note/event with the form details
-    if (responseData && responseData.id) {
-      const personId = responseData.id;
-      const noteText = `Experience Level: ${experienceLevel}\nCurrent Brokerage: ${currentBrokerage || 'Not specified'}\nPlanning to Switch: ${switchTiming}\nAdditional Notes: ${notes || 'None'}`;
-      
-      try {
-        const eventResponse = await fetch(`${apiUrl}/events`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Basic ${Buffer.from(apiKey + ':').toString('base64')}`
-          },
-          body: JSON.stringify({
-            personId: personId,
-            message: noteText,
-            source: 'Website - Remax'
-          })
-        });
-        
-        if (eventResponse.ok) {
-          console.log('Event/note added successfully');
-        } else {
-          console.log('Could not add event/note, but person was created');
-        }
-      } catch (eventError) {
-        console.error('Error adding event:', eventError);
-        // Don't fail the whole request if event fails
-      }
-    }
+    // TODO: Add note/event creation later after confirming person creation works
+    // For now, just log the form details
+    console.log('Form Details - Experience:', experienceLevel, '| Brokerage:', currentBrokerage, '| Switch Timing:', switchTiming, '| Notes:', notes);
 
     // Success response
     return res.status(200).json({ 
