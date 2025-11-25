@@ -136,23 +136,25 @@ const ContactUs = () => {
                 <motion.div
                   key={index}
                   variants={fadeInUp}
-                  className="bg-gradient-to-br from-slate-50 to-blue-50 rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border border-slate-200"
+                  className="h-full"
                 >
-                  <div className="flex justify-center mb-6">
-                    {method.icon}
+                  <div className="bg-gradient-to-br from-slate-50 to-blue-50 rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border border-slate-200 h-full flex flex-col">
+                    <div className="flex justify-center mb-6">
+                      {method.icon}
+                    </div>
+                    <h3 className="text-2xl font-bold text-slate-900 mb-4 text-center">{method.title}</h3>
+                    <div className="space-y-3 mb-6 flex-1">
+                      {method.details.map((detail, detailIndex) => (
+                        <div key={detailIndex} className="text-center">
+                          <div className="text-sm font-semibold text-slate-600 mb-1">{detail.label}</div>
+                          <div className="text-slate-800 font-medium">{detail.value}</div>
+                        </div>
+                      ))}
+                    </div>
+                    <Button onClick={openModal} className="w-full bg-brand-bright-red hover:bg-black text-white font-bold">
+                      {method.action}
+                    </Button>
                   </div>
-                  <h3 className="text-2xl font-bold text-slate-900 mb-4 text-center">{method.title}</h3>
-                  <div className="space-y-3 mb-6">
-                    {method.details.map((detail, detailIndex) => (
-                      <div key={detailIndex} className="text-center">
-                        <div className="text-sm font-semibold text-slate-600 mb-1">{detail.label}</div>
-                        <div className="text-slate-800 font-medium">{detail.value}</div>
-                      </div>
-                    ))}
-                  </div>
-                  <Button onClick={openModal} className="w-full bg-brand-bright-red hover:bg-black text-white font-bold">
-                    {method.action}
-                  </Button>
                 </motion.div>
               ))}
             </motion.div>

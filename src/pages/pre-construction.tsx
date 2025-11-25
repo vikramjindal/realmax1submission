@@ -154,16 +154,17 @@ export default function PreConstruction() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.1 }}
+                className="h-full"
               >
-                <Card className="h-full bg-white border border-slate-200 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2">
-                  <CardContent className="p-8">
+                <Card className="h-full bg-white border border-slate-200 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2 flex flex-col">
+                  <CardContent className="p-8 flex flex-col flex-1">
                     <div className="w-20 h-20 bg-brand-bright-red rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
                       <HomeIcon className="h-10 w-10 text-white" />
                     </div>
-                    <h3 className="text-2xl font-bold mb-4 text-center text-slate-900">
+                    <h3 className="text-2xl font-bold mb-4 text-center text-slate-900 min-h-[4rem] flex items-center justify-center">
                       In-House<br/>Pre-Construction Access
                     </h3>
-                    <p className="text-slate-600 mb-6 text-center leading-relaxed">
+                    <p className="text-slate-600 mb-6 text-center leading-relaxed flex-grow">
                       Get first-hand access to all major projects with priority pricing, floor plans, and early incentives.
                     </p>
                     <ul className="space-y-3">
@@ -190,16 +191,17 @@ export default function PreConstruction() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.2 }}
+                className="h-full"
               >
-                <Card className="h-full bg-white border border-slate-200 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2">
-                  <CardContent className="p-8">
+                <Card className="h-full bg-white border border-slate-200 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2 flex flex-col">
+                  <CardContent className="p-8 flex flex-col flex-1">
                     <div className="w-20 h-20 bg-brand-dark-blue rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
                       <TrendingUp className="h-10 w-10 text-white" />
                     </div>
-                    <h3 className="text-2xl font-bold mb-4 text-center text-slate-900">
+                    <h3 className="text-2xl font-bold mb-4 text-center text-slate-900 min-h-[4rem] flex items-center justify-center">
                       Dedicated Admin Support
                     </h3>
-                    <p className="text-slate-600 mb-6 text-center leading-relaxed">
+                    <p className="text-slate-600 mb-6 text-center leading-relaxed flex-grow">
                       Focus on your clients while we handle the details—our team provides full administrative support for your deals.
                     </p>
                     <ul className="space-y-3">
@@ -226,16 +228,17 @@ export default function PreConstruction() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.3 }}
+                className="h-full"
               >
-                <Card className="h-full bg-white border border-slate-200 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2">
-                  <CardContent className="p-8">
+                <Card className="h-full bg-white border border-slate-200 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2 flex flex-col">
+                  <CardContent className="p-8 flex flex-col flex-1">
                     <div className="w-20 h-20 bg-brand-bright-red rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
                       <Users className="h-10 w-10 text-white" />
                     </div>
-                    <h3 className="text-2xl font-bold mb-4 text-center text-slate-900">
+                    <h3 className="text-2xl font-bold mb-4 text-center text-slate-900 min-h-[4rem] flex items-center justify-center">
                       Coaching & Training
                     </h3>
-                    <p className="text-slate-600 mb-6 text-center leading-relaxed">
+                    <p className="text-slate-600 mb-6 text-center leading-relaxed flex-grow">
                       Learn directly from our in-house real estate coach, Ken Wilder, with over 20 years of coaching experience.
                     </p>
                     <ul className="space-y-3">
