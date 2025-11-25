@@ -103,12 +103,11 @@ export default function Events() {
         <Header />
         
         {/* Hero Section */}
-        <section className="relative py-20 bg-gradient-to-br from-brand-bright-red/10 via-white to-brand-medium-blue/10 overflow-hidden">
+        <section className="relative py-20 bg-gradient-to-br from-white via-slate-50 to-white overflow-hidden">
           {/* Background Elements */}
           <div className="absolute inset-0">
-            <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-brand-bright-red/30 to-brand-dark-red/20 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-br from-brand-medium-blue/30 to-brand-dark-blue/20 rounded-full blur-3xl"></div>
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-br from-brand-dark-blue/20 to-brand-medium-blue/10 rounded-full blur-3xl"></div>
+            <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-red-200/20 to-pink-300/15 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-br from-blue-200/20 to-indigo-300/15 rounded-full blur-3xl"></div>
           </div>
           
           {/* Creative Floating Balloon Elements */}
@@ -121,8 +120,6 @@ export default function Events() {
                 height={80} 
                 className="w-20 h-20 object-contain opacity-80 animate-pulse transform rotate-6"
               />
-              <div className="absolute -top-3 -right-3 w-10 h-10 bg-gradient-to-br from-orange-400 to-yellow-500 rounded-full opacity-60 animate-bounce"></div>
-              <div className="absolute -bottom-3 -left-3 w-8 h-8 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-full opacity-70 animate-ping"></div>
             </div>
           </div>
           
@@ -135,7 +132,6 @@ export default function Events() {
                 height={56} 
                 className="w-14 h-14 object-contain opacity-70 animate-bounce transform -rotate-6"
               />
-              <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full opacity-80 animate-pulse"></div>
             </div>
           </div>
           
@@ -147,7 +143,7 @@ export default function Events() {
               className="text-center"
             >
               <h1 className="text-5xl lg:text-6xl font-black text-slate-900 mb-8 font-montserrat leading-tight">
-                Connect, Learn, and <span className="text-transparent bg-gradient-to-r from-brand-bright-red via-brand-dark-red to-brand-medium-blue bg-clip-text">Grow</span>
+                Connect, Learn, and <span className="text-brand-bright-red">Grow</span>
               </h1>
               <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-8 font-arial leading-relaxed">
                 Join our exclusive events, networking opportunities, and industry insights. Connect with top real estate professionals and stay ahead of market trends.
@@ -255,20 +251,11 @@ export default function Events() {
         </section>
 
         {/* Upcoming Events */}
-        <section className="relative py-24 bg-gradient-to-br from-slate-50 via-white to-red-50 overflow-hidden">
+        <section className="relative py-24 bg-gradient-to-br from-white via-slate-50 to-white overflow-hidden">
           {/* Background Decorative Elements */}
           <div className="absolute inset-0">
-            <div className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-br from-brand-bright-red/10 to-brand-dark-red/5 rounded-full blur-3xl animate-pulse"></div>
-            <div className="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-br from-brand-dark-blue/10 to-brand-medium-blue/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-            <div className="absolute top-1/2 left-1/3 w-64 h-64 bg-gradient-to-br from-brand-bright-red/5 to-transparent rounded-full blur-2xl"></div>
-          </div>
-
-          {/* Floating Sparkle Decorations */}
-          <div className="absolute top-32 right-1/4 animate-bounce" style={{ animationDuration: '3s' }}>
-            <Sparkles className="w-8 h-8 text-brand-bright-red/30" />
-          </div>
-          <div className="absolute bottom-32 left-1/4 animate-bounce" style={{ animationDuration: '4s', animationDelay: '1s' }}>
-            <Sparkles className="w-6 h-6 text-brand-dark-blue/30" />
+            <div className="absolute top-20 right-10 w-80 h-80 bg-gradient-to-br from-red-200/20 to-pink-300/15 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-20 left-10 w-72 h-72 bg-gradient-to-br from-blue-200/20 to-indigo-300/15 rounded-full blur-3xl"></div>
           </div>
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -279,24 +266,18 @@ export default function Events() {
               transition={{ duration: 0.6 }}
               className="text-center mb-16"
             >
-              <div className="inline-block mb-4 px-6 py-2 bg-gradient-to-r from-brand-bright-red/10 to-brand-dark-red/10 rounded-full">
+              <div className="inline-block mb-4 px-6 py-2 bg-brand-bright-red/10 rounded-full">
                 <span className="text-brand-bright-red font-bold text-sm uppercase tracking-wider">Exclusive Events</span>
               </div>
               <h2 className="text-4xl md:text-6xl font-black text-slate-900 mb-6 font-montserrat leading-tight">
-                Upcoming <span className="text-transparent bg-gradient-to-r from-brand-bright-red via-brand-dark-red to-brand-medium-blue bg-clip-text">Events</span>
+                Upcoming <span className="text-brand-bright-red">Events</span>
               </h2>
               <p className="text-xl text-slate-600 max-w-3xl mx-auto font-arial leading-relaxed">
                 Don't miss out on these exclusive opportunities to network and grow your business
               </p>
             </motion.div>
 
-            <motion.div 
-              variants={staggerContainer}
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: true }}
-              className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-            >
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
                 {
                   title: "Monthly Networking Mixer",
@@ -330,21 +311,16 @@ export default function Events() {
                 }
               ].map((event, index) => (
                 <motion.div 
-                  key={index} 
-                  variants={fadeInUp}
-                  whileHover={{ y: -8, scale: 1.02 }}
-                  transition={{ duration: 0.3 }}
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
                 >
-                  <Card className="relative h-full border-2 border-transparent bg-white hover:border-brand-bright-red/20 hover:shadow-2xl transition-all duration-500 group overflow-hidden">
-                    {/* Decorative corner gradient */}
-                    <div className={`absolute top-0 right-0 w-32 h-32 ${event.typeColor === 'red' ? 'bg-gradient-to-br from-brand-bright-red/10 to-transparent' : 'bg-gradient-to-br from-brand-dark-blue/10 to-transparent'} rounded-bl-[100px] transition-all duration-500 group-hover:w-40 group-hover:h-40`}></div>
-                    
-                    {/* Shine effect on hover */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/0 to-transparent group-hover:via-white/20 transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
-
-                    <CardHeader className="pb-4 relative z-10">
+                  <Card className="h-full border border-slate-200 bg-white shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2 flex flex-col">
+                    <CardHeader className="pb-4">
                       <div className="flex items-center justify-between mb-4">
-                        <div className={`px-4 py-2 ${event.typeColor === 'red' ? 'bg-gradient-to-r from-brand-bright-red to-brand-dark-blue' : 'bg-gradient-to-r from-brand-dark-blue to-brand-medium-blue'} rounded-full text-white text-sm font-bold shadow-lg transform group-hover:scale-110 transition-transform duration-300`}>
+                        <div className={`px-4 py-2 ${event.typeColor === 'red' ? 'bg-brand-bright-red' : 'bg-brand-dark-blue'} rounded-full text-white text-sm font-bold shadow-lg`}>
                           {event.type}
                         </div>
                         <div className={`flex items-center space-x-2 ${event.typeColor === 'red' ? 'text-brand-bright-red' : 'text-brand-dark-blue'} font-bold`}>
@@ -352,12 +328,12 @@ export default function Events() {
                           <span className="text-base">{event.attendees}</span>
                         </div>
                       </div>
-                      <CardTitle className={`text-2xl font-black font-montserrat ${event.typeColor === 'red' ? 'group-hover:text-brand-bright-red' : 'group-hover:text-brand-dark-blue'} transition-colors duration-300`}>
+                      <CardTitle className="text-2xl font-black font-montserrat text-slate-900">
                         {event.title}
                       </CardTitle>
                     </CardHeader>
-                    <CardContent className="pt-0 relative z-10">
-                      <p className="text-slate-600 mb-6 font-arial leading-relaxed text-sm">
+                    <CardContent className="pt-0 flex-1 flex flex-col">
+                      <p className="text-slate-600 mb-6 font-arial leading-relaxed text-sm flex-grow">
                         {event.description}
                       </p>
                       
@@ -384,7 +360,7 @@ export default function Events() {
                       
                       <Button 
                         onClick={openModal}
-                        className="w-full bg-brand-bright-red hover:bg-black text-white font-bold py-6 text-base shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 rounded-xl"
+                        className="w-full bg-brand-bright-red hover:bg-black text-white font-bold py-6 text-base shadow-xl hover:shadow-2xl transition-all duration-300 rounded-xl"
                       >
                         Register Now
                         <ArrowRight className="w-5 h-5 ml-2" />
@@ -393,7 +369,7 @@ export default function Events() {
                   </Card>
                 </motion.div>
               ))}
-            </motion.div>
+            </div>
           </div>
         </section>
 
