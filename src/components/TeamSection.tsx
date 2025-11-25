@@ -83,9 +83,9 @@ const TeamSection: React.FC = () => {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8"
         >
           {teamMembers.map((member, index) => (
-            <motion.div key={index} variants={fadeInUp}>
-              <Card className="card-remax group hover:shadow-lg transition-all duration-300 overflow-hidden">
-                <CardContent className="p-0">
+            <motion.div key={index} variants={fadeInUp} className="h-full">
+              <Card className="card-remax group hover:shadow-lg transition-all duration-300 overflow-hidden h-full flex flex-col">
+                <CardContent className="p-0 flex flex-col h-full">
                   <div className="relative overflow-hidden">
                     <Image
                       src={member.image}
@@ -97,13 +97,15 @@ const TeamSection: React.FC = () => {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
                   
-                  <div className="p-6 text-center">
-                    <h3 className="text-xl font-bold text-foreground mb-2 font-montserrat">
-                      {member.name}
-                    </h3>
-                    <p className="text-muted-foreground mb-4 font-arial">
-                      {member.role}
-                    </p>
+                  <div className="p-6 text-center flex-1 flex flex-col justify-between">
+                    <div>
+                      <h3 className="text-xl font-bold text-foreground mb-2 font-montserrat min-h-[3.5rem] flex items-center justify-center">
+                        {member.name}
+                      </h3>
+                      <p className="text-muted-foreground mb-4 font-arial">
+                        {member.role}
+                      </p>
+                    </div>
                     
                     <div className="flex justify-center space-x-3">
                       <a 
