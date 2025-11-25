@@ -108,7 +108,7 @@ const Footer = () => {
               <li>
                 <a href="/blog" className="text-white/90 hover:text-brand-bright-red transition-colors duration-200 flex items-center group">
                   <ArrowRight className="w-4 h-4 mr-2 group-hover:translate-x-1 transition-transform duration-200" />
-                  Market Insights
+                  Blog
                 </a>
               </li>
               <li>
