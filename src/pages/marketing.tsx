@@ -705,9 +705,6 @@ export default function Marketing() {
               transition={{ duration: 0.6 }}
               className="text-center mb-16"
             >
-              <div className="w-20 h-20 bg-gradient-to-br from-pink-200 to-pink-300 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Zap className="w-10 h-10 text-pink-600" />
-              </div>
               <h2 className="text-4xl lg:text-5xl font-black text-slate-900 mb-8 font-montserrat leading-tight">
                 AI-Powered Marketing Excellence
               </h2>
