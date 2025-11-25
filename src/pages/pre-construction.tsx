@@ -157,7 +157,7 @@ export default function PreConstruction() {
               >
                 <Card className="h-full bg-white border border-slate-200 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2">
                   <CardContent className="p-8">
-                    <div className="w-20 h-20 bg-gradient-to-br from-brand-bright-red to-red-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+                    <div className="w-20 h-20 bg-brand-bright-red rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
                       <HomeIcon className="h-10 w-10 text-white" />
                     </div>
                     <h3 className="text-2xl font-bold mb-4 text-center text-slate-900">
@@ -193,7 +193,7 @@ export default function PreConstruction() {
               >
                 <Card className="h-full bg-white border border-slate-200 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2">
                   <CardContent className="p-8">
-                    <div className="w-20 h-20 bg-gradient-to-br from-brand-dark-blue to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+                    <div className="w-20 h-20 bg-brand-dark-blue rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
                       <TrendingUp className="h-10 w-10 text-white" />
                     </div>
                     <h3 className="text-2xl font-bold mb-4 text-center text-slate-900">
@@ -229,7 +229,7 @@ export default function PreConstruction() {
               >
                 <Card className="h-full bg-white border border-slate-200 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2">
                   <CardContent className="p-8">
-                    <div className="w-20 h-20 bg-gradient-to-br from-brand-bright-red to-red-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+                    <div className="w-20 h-20 bg-brand-bright-red rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
                       <Users className="h-10 w-10 text-white" />
                     </div>
                     <h3 className="text-2xl font-bold mb-4 text-center text-slate-900">
