@@ -43,7 +43,7 @@ export default function Tools() {
   return (
     <>
       <Head>
-        <title>Tools & Technology | RE/MAX Excellence</title>
+        <title>Tools & Technology | REMAX Excellence</title>
         <meta name="description" content="Built for productivity, powered by innovation. Advanced CRM, AI tools, mobile access, and cutting-edge technology for real estate success." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
@@ -66,7 +66,7 @@ export default function Tools() {
             <div className="relative">
               <Image 
                 src="/images/company-pin-icon.png" 
-                alt="RE/MAX Balloon" 
+                alt="REMAX Balloon" 
                 width={80} 
                 height={80} 
                 className="w-20 h-20 object-contain opacity-80 animate-pulse transform rotate-6"
@@ -80,7 +80,7 @@ export default function Tools() {
             <div className="relative">
               <Image 
                 src="/images/company-pin-icon.png" 
-                alt="RE/MAX Balloon" 
+                alt="REMAX Balloon" 
                 width={56} 
                 height={56} 
                 className="w-14 h-14 object-contain opacity-70 animate-bounce transform -rotate-6"
@@ -102,7 +102,7 @@ export default function Tools() {
               <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-8 font-arial leading-relaxed">
                 Access cutting-edge technology tools designed specifically for real estate professionals. Streamline your workflow, automate tasks, and focus on what matters most - your clients.
               </p>
-              <Button size="lg" className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold">
+              <Button size="lg" className="bg-brand-bright-red hover:bg-black text-white font-bold">
                 Explore Our Tech Tools
               </Button>
             </motion.div>
@@ -528,7 +528,7 @@ export default function Tools() {
                 Let's Build Your Brand Together
               </h2>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold px-8 py-4 text-xl">
+                <Button size="lg" className="bg-brand-bright-red hover:bg-black text-white font-bold px-8 py-4 text-xl">
                   Join Us
                 </Button>
               </div>

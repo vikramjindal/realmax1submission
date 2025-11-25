@@ -190,7 +190,7 @@ const HeroSection = () => {
             </p>
             
             <div className="flex justify-start">
-              <Button onClick={openModal} className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold px-10 py-5 text-2xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 rounded-lg flex items-center space-x-4">
+              <Button onClick={openModal} className="bg-brand-bright-red hover:bg-black text-white font-bold px-10 py-5 text-2xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 rounded-lg flex items-center space-x-4">
                 <Users className="w-8 h-8" />
                 <span>Join Our Team</span>
                 <ArrowRight className="w-8 h-8" />
@@ -237,7 +237,7 @@ export default function Home() {
   const [currentAgentIndex, setCurrentAgentIndex] = useState(0);
 
   const agents = [
-    { src: "/images/gallery/Aman.png", name: "Aman" },
+    { src: "https://dontdelete2005142.kloudbean.com/1762974051_aman-d1be173.webp", name: "Aman" },
     { src: "/images/gallery/Kulwinder Gill.png", name: "Kulwinder Gill" },
     { src: "/images/gallery/Mandeep Dhesi.png", name: "Mandeep Dhesi" },
     { src: "/images/gallery/Manjot Brar.png", name: "Manjot Brar" },
@@ -281,7 +281,7 @@ export default function Home() {
 
       <Head>
 
-        <title>RE/MAX Excellence - The Youngest, Fastest-Growing Brokerage in Ontario</title>
+        <title>REMAX Excellence - The Youngest, Fastest-Growing Brokerage in Ontario</title>
 
         <meta name="description" content="Your Trusted Real Estate Partner — With a Fresh Edge. Join Ontario's youngest, fastest-growing real estate brokerage." />
 
@@ -361,7 +361,7 @@ export default function Home() {
 
               <p className="text-xl text-white max-w-4xl mx-auto font-arial leading-relaxed">
 
-                At RE/MAX Excellence, we're proud to be one of the youngest brokerage in the RE/MAX family, and that's our advantage. We bring fresh ideas, modern marketing, and a results-driven approach that keeps us ahead in a fast-changing market.
+                At REMAX Excellence, we're proud to be one of the youngest brokerage in the REMAX family, and that's our advantage. We bring fresh ideas, modern marketing, and a results-driven approach that keeps us ahead in a fast-changing market.
               </p>
 
             </motion.div>
@@ -402,7 +402,7 @@ export default function Home() {
 
             >
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 mb-8 font-montserrat leading-tight px-2">
-                HOME OF <span className="text-transparent bg-gradient-to-r from-brand-bright-red to-brand-dark-red bg-clip-text">TOP PERFORMERS</span>
+                HOME OF <span className="text-transparent bg-gradient-to-r from-brand-bright-red to-brand-dark-blue bg-clip-text">TOP PERFORMERS</span>
               </h2>
             </motion.div>
 
@@ -433,7 +433,7 @@ export default function Home() {
                             />
                           </div>
 
-                          <div className="absolute -top-3 -right-3 w-12 h-12 bg-gradient-to-br from-brand-bright-red to-brand-dark-red rounded-full flex items-center justify-center shadow-lg">
+                          <div className="absolute -top-3 -right-3 w-12 h-12 bg-gradient-to-br from-brand-bright-red to-brand-dark-blue rounded-full flex items-center justify-center shadow-lg">
                             <Crown className="w-6 h-6 text-white" />
                           </div>
                         </div>
@@ -461,7 +461,7 @@ export default function Home() {
 
 
 
-              {/* Right Column - Why Choose RE/MAX Excellence */}
+              {/* Right Column - Why Choose REMAX Excellence */}
               <motion.div
 
                 className="bg-white rounded-3xl p-4 sm:p-6 lg:p-8 shadow-2xl border border-slate-200 hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2 group"
@@ -474,7 +474,7 @@ export default function Home() {
 
               >
 
-                  <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-6 font-montserrat">WHY CHOOSE RE/MAX EXCELLENCE?</h3>
+                  <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-6 font-montserrat">WHY CHOOSE REMAX EXCELLENCE?</h3>
 
                   <div className="space-y-6">
 
@@ -495,7 +495,7 @@ export default function Home() {
 
                       title: "YOUNG & DYNAMIC TEAM",
                       description: "Driven by fresh perspectives and digital-first strategies, our young team is adapting fast to the ever-changing real estate market.",
-                      color: "from-brand-bright-red to-brand-dark-red"
+                      color: "from-brand-bright-red to-brand-dark-blue"
                       },
 
                       {
@@ -742,7 +742,7 @@ export default function Home() {
 
             >
 
-              <Button onClick={openModal} className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold px-8 py-4 text-xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 rounded-xl">
+              <Button onClick={openModal} className="bg-brand-bright-red hover:bg-black text-white font-bold px-8 py-4 text-xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 rounded-xl">
                 <UserPlus className="w-6 h-6 mr-3" />
                 Join Our Team
                 <ArrowRight className="w-6 h-6 ml-3" />
@@ -814,7 +814,7 @@ export default function Home() {
 
               <h2 className="text-5xl lg:text-6xl font-black text-white mb-8 font-montserrat leading-tight">
 
-                For Realtors® — <span className="text-transparent bg-gradient-to-r from-brand-bright-red to-brand-dark-red bg-clip-text">Join Us</span>
+                For Realtors® — <span className="text-brand-bright-red">Join Us</span>
               </h2>
 
               <p className="text-xl text-slate-300 max-w-4xl mx-auto font-arial leading-relaxed">
@@ -846,9 +846,9 @@ export default function Home() {
 
                   {[
 
-                    { icon: Users, title: "Hands-on Training", color: "from-brand-bright-red to-brand-dark-red" },
+                    { icon: Users, title: "Hands-on Training", color: "from-brand-bright-red to-brand-dark-blue" },
                     { icon: Zap, title: "Smart Tools", color: "from-brand-medium-blue to-brand-dark-blue" },
-                    { icon: Target, title: "Marketing Support", color: "from-brand-dark-red to-brand-bright-red" },
+                    { icon: Target, title: "Marketing Support", color: "from-brand-dark-blue to-brand-bright-red" },
                     { icon: Award, title: "Growth Culture", color: "from-brand-dark-blue to-brand-medium-blue" }
                   ].map((feature, index) => (
 
@@ -894,10 +894,10 @@ export default function Home() {
                   <h3 className="text-3xl font-bold text-white mb-8 font-montserrat">Current Programs</h3>
                   <div className="space-y-6">
 
-                    <div className="bg-gradient-to-r from-brand-bright-red/30 to-brand-dark-red/30 rounded-2xl p-8 border border-brand-bright-red/50 shadow-lg">
+                    <div className="bg-brand-bright-red/20 rounded-2xl p-8 border border-brand-bright-red/50 shadow-lg">
                       <div className="flex items-center space-x-4 mb-4">
 
-                        <div className="w-16 h-16 bg-gradient-to-r from-brand-bright-red to-brand-dark-red rounded-2xl flex items-center justify-center shadow-lg">
+                        <div className="w-16 h-16 bg-brand-bright-red rounded-2xl flex items-center justify-center shadow-lg">
                           <Target className="w-8 h-8 text-white" />
                         </div>
 
@@ -918,10 +918,10 @@ export default function Home() {
                     
                     
 
-                    <div className="bg-gradient-to-r from-brand-medium-blue/30 to-brand-dark-blue/30 rounded-2xl p-8 border border-brand-medium-blue/50 shadow-lg">
+                    <div className="bg-brand-dark-blue/40 rounded-2xl p-8 border border-brand-medium-blue/50 shadow-lg">
                       <div className="flex items-center space-x-4 mb-4">
 
-                        <div className="w-16 h-16 bg-gradient-to-r from-brand-medium-blue to-brand-dark-blue rounded-2xl flex items-center justify-center shadow-lg">
+                        <div className="w-16 h-16 bg-brand-dark-blue rounded-2xl flex items-center justify-center shadow-lg">
                           <TrendingUp className="w-8 h-8 text-white" />
                         </div>
 
@@ -964,7 +964,7 @@ export default function Home() {
 
             >
 
-              <Button onClick={openModal} className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold px-8 py-4 text-xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 rounded-xl">
+              <Button onClick={openModal} className="bg-brand-bright-red hover:bg-black text-white font-bold px-8 py-4 text-xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 rounded-xl">
                 <UserPlus className="w-6 h-6 mr-3" />
 
                 Join Our Team
@@ -1045,7 +1045,7 @@ export default function Home() {
 
               <p className="text-xl text-white max-w-3xl mx-auto font-arial leading-relaxed">
 
-                Real stories from real clients who've experienced the RE/MAX Excellence difference.
+                Real stories from real clients who've experienced the REMAX Excellence difference.
 
               </p>
 
@@ -1075,7 +1075,7 @@ export default function Home() {
 
                   role: "First-time Homebuyers",
 
-                  content: "RE/MAX Excellence made our first home purchase seamless. Our agent was patient, knowledgeable, and fought hard to get us the best deal. We couldn't be happier!",
+                  content: "REMAX Excellence made our first home purchase seamless. Our agent was patient, knowledgeable, and fought hard to get us the best deal. We couldn't be happier!",
 
                   rating: 5
 
@@ -1100,7 +1100,7 @@ export default function Home() {
 
                   role: "Real Estate Investor",
 
-                  content: "As an investor, I need an agent who understands the market deeply. RE/MAX Excellence delivered exceptional insights and helped me make smart investment decisions.",
+                  content: "As an investor, I need an agent who understands the market deeply. REMAX Excellence delivered exceptional insights and helped me make smart investment decisions.",
 
                   rating: 5
 
@@ -1505,7 +1505,7 @@ export default function Home() {
                 
                 <Button 
 
-                  className="w-full bg-gradient-to-r from-brand-bright-red to-brand-dark-red hover:from-brand-dark-red hover:to-brand-bright-red text-white font-bold py-3 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 rounded-xl"
+                  className="w-full bg-gradient-to-r from-brand-bright-red to-brand-dark-blue hover:from-brand-dark-blue hover:to-brand-bright-red text-white font-bold py-3 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 rounded-xl"
                   onClick={() => window.open(selectedReel.url, '_blank')}
 
                 >

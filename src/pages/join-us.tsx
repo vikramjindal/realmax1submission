@@ -46,7 +46,7 @@ export default function JoinUs() {
   return (
     <>
       <Head>
-        <title>Join RE/MAX Excellence | Your Future in Real Estate</title>
+        <title>Join REMAX Excellence | Your Future in Real Estate</title>
         <meta name="description" content="Your future in real estate starts here. Join Ontario's youngest, fastest-growing brokerage with tools, training, and support to take your business to the next level." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
@@ -69,7 +69,7 @@ export default function JoinUs() {
                       <div className="relative">
                         <Image 
                           src="/images/company-pin-icon.png" 
-                          alt="RE/MAX Balloon" 
+                          alt="REMAX Balloon" 
                           width={80} 
                           height={80} 
                           className="w-20 h-20 object-contain opacity-80 animate-pulse transform rotate-6"
@@ -83,7 +83,7 @@ export default function JoinUs() {
                       <div className="relative">
                         <Image 
                           src="/images/company-pin-icon.png" 
-                          alt="RE/MAX Balloon" 
+                          alt="REMAX Balloon" 
                           width={56} 
                           height={56} 
                           className="w-14 h-14 object-contain opacity-70 animate-bounce transform -rotate-6"
@@ -106,7 +106,7 @@ export default function JoinUs() {
                 </span>
               </h1>
               <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-8 font-arial leading-relaxed">
-                Whether you're a new agent, an experienced pro, or a team leader, RE/MAX Excellence gives you the tools, training, and support to take your business to the next level.
+                Whether you're a new agent, an experienced pro, or a team leader, REMAX Excellence gives you the tools, training, and support to take your business to the next level.
               </p>
             </motion.div>
           </div>
@@ -132,7 +132,7 @@ export default function JoinUs() {
                 Your <span className="text-transparent bg-gradient-to-r from-brand-bright-red via-brand-dark-red to-brand-medium-blue bg-clip-text">Onboarding Journey</span>
               </h2>
               <p className="text-lg text-slate-600 max-w-3xl mx-auto font-arial leading-relaxed">
-                      From AI-powered lead matching to automated onboarding, we make your transition into RE/MAX Excellence seamless. Our technology ensures you hit the ground running with smart tools and insights from day one.
+                      From AI-powered lead matching to automated onboarding, we make your transition into REMAX Excellence seamless. Our technology ensures you hit the ground running with smart tools and insights from day one.
               </p>
             </motion.div>
 
@@ -166,7 +166,7 @@ export default function JoinUs() {
                     <div className="w-14 h-14 bg-gradient-to-br from-brand-dark-red to-brand-medium-blue rounded-2xl flex items-center justify-center mx-auto mb-5 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg">
                       <span className="text-white font-bold text-xl">2</span>
                     </div>
-                    <h3 className="text-lg font-bold mb-3 text-slate-800 group-hover:text-brand-dark-red transition-colors duration-300">Orientation</h3>
+                    <h3 className="text-lg font-bold mb-3 text-slate-800 group-hover:text-brand-bright-red transition-colors duration-300">Orientation</h3>
                     <p className="text-slate-600 text-sm leading-relaxed">
                       Learn about our culture, processes, and how we support your growth every step of the way.
                     </p>
@@ -211,7 +211,7 @@ export default function JoinUs() {
                     <div className="w-14 h-14 bg-gradient-to-br from-brand-dark-red to-brand-medium-blue rounded-2xl flex items-center justify-center mx-auto mb-5 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg">
                       <span className="text-white font-bold text-xl">5</span>
                     </div>
-                    <h3 className="text-lg font-bold mb-3 text-slate-800 group-hover:text-brand-dark-red transition-colors duration-300">Listing Presentation</h3>
+                    <h3 className="text-lg font-bold mb-3 text-slate-800 group-hover:text-brand-bright-red transition-colors duration-300">Listing Presentation</h3>
                     <p className="text-slate-600 text-sm leading-relaxed">
                       Master the art of presenting properties to sellers with professional listing presentations and strategies.
                     </p>
@@ -333,7 +333,7 @@ export default function JoinUs() {
                     </div>
 
                     <div className="pt-4">
-                      <Button type="submit" size="lg" className="w-full bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold text-lg py-6">
+                      <Button type="submit" size="lg" className="w-full bg-brand-bright-red hover:bg-black text-white font-bold text-lg py-6">
                         Apply Now
                         <ArrowRight className="ml-2 h-5 w-5" />
                       </Button>
@@ -356,7 +356,7 @@ export default function JoinUs() {
               className="text-center mb-16"
             >
               <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6 font-montserrat">
-                Why <span className="text-primary">RE/MAX Excellence</span>?
+                Why <span className="text-primary">REMAX Excellence</span>?
               </h2>
             </motion.div>
 

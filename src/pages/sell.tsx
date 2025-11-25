@@ -40,8 +40,8 @@ export default function Sell() {
   return (
     <>
       <Head>
-        <title>Sell Your Home | RE/MAX Excellence</title>
-        <meta name="description" content="Get top dollar for your home with RE/MAX Excellence. Professional marketing, expert pricing, and proven results." />
+        <title>Sell Your Home | REMAX Excellence</title>
+        <meta name="description" content="Get top dollar for your home with REMAX Excellence. Professional marketing, expert pricing, and proven results." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -63,7 +63,7 @@ export default function Sell() {
             <div className="relative">
               <Image 
                 src="/images/company-pin-icon.png" 
-                alt="RE/MAX Balloon" 
+                alt="REMAX Balloon" 
                 width={80} 
                 height={80} 
                 className="w-20 h-20 object-contain opacity-80 animate-pulse transform rotate-6"
@@ -77,7 +77,7 @@ export default function Sell() {
             <div className="relative">
               <Image 
                 src="/images/company-pin-icon.png" 
-                alt="RE/MAX Balloon" 
+                alt="REMAX Balloon" 
                 width={56} 
                 height={56} 
                 className="w-14 h-14 object-contain opacity-70 animate-bounce transform -rotate-6"
@@ -100,10 +100,10 @@ export default function Sell() {
                   Get maximum value with our proven marketing strategies, professional photography, and expert negotiation skills.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <Button size="lg" className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold">
+                  <Button size="lg" className="bg-brand-bright-red hover:bg-black text-white font-bold">
                     Get Free Home Valuation
                   </Button>
-                  <Button size="lg" className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold">
+                  <Button size="lg" className="bg-brand-bright-red hover:bg-black text-white font-bold">
                     Schedule Consultation
                   </Button>
                 </div>
@@ -124,7 +124,7 @@ export default function Sell() {
                     </div>
                     <Input placeholder="Square Footage" />
                     <Input placeholder="Your Email" />
-                    <Button className="w-full bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold">
+                    <Button className="w-full bg-brand-bright-red hover:bg-black text-white font-bold">
                       Get Instant Valuation
                     </Button>
                   </div>
@@ -156,7 +156,7 @@ export default function Sell() {
               className="text-center mb-16"
             >
               <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
-                Why Sell With <span className="text-primary">RE/MAX Excellence</span>
+                Why Sell With <span className="text-primary">REMAX Excellence</span>
               </h2>
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
                 Our comprehensive marketing approach and expert guidance ensure you get the best possible price for your home.
@@ -405,7 +405,7 @@ export default function Sell() {
                 Let's Build Your Brand Together
               </h2>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold px-8 py-4 text-xl">
+                <Button size="lg" className="bg-brand-bright-red hover:bg-black text-white font-bold px-8 py-4 text-xl">
                   Join Us
                 </Button>
               </div>

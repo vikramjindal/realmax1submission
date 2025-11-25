@@ -52,7 +52,7 @@ const Footer = () => {
               <div className="mb-4">
                 <Image 
                   src="/images/logo.png" 
-                  alt="RE/MAX Excellence" 
+                  alt="REMAX Excellence" 
                   width={200} 
                   height={80} 
                   className="h-16 w-auto"
@@ -60,7 +60,7 @@ const Footer = () => {
                 />
               </div>
               <p className="text-white/90 text-sm leading-relaxed font-arial">
-                Youngest, fastest-growing real estate brokerage. We bring fresh energy with RE/MAX's unmatched global reach.
+                Youngest, fastest-growing real estate brokerage. We bring fresh energy with REMAX's unmatched global reach.
               </p>
             </div>
             
@@ -160,12 +160,12 @@ const Footer = () => {
                 </div>
                 <div>
                   <p className="text-white/80 text-sm">Email Us</p>
-                  <p className="text-white font-semibold">info@remaxexcellence.ca</p>
+                  <p className="text-white font-semibold">info@remaxex.com</p>
                 </div>
               </div>
             </div>
             
-            <Button className="w-full bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold py-3 shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-200">
+            <Button className="w-full bg-brand-bright-red hover:bg-black text-white font-bold py-3 shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-200">
               Book a Meeting
             </Button>
           </div>
@@ -174,7 +174,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/20">
           <div className="text-white/90 text-sm text-center md:text-left mb-4 md:mb-0 max-w-md drop-shadow-lg">
-            © 2024 RE/MAX Excellence. All rights reserved. | RE/MAX Excellence is an independently owned and operated franchise of RE/MAX, LLC.
+            © 2024 REMAX Excellence. All rights reserved. | REMAX Excellence is an independently owned and operated franchise of REMAX, LLC.
           </div>
           
           <div className="flex items-center space-x-6">
@@ -188,7 +188,7 @@ const Footer = () => {
             </div>
             
             <a href="https://share.google/0b8eBsJOqJ035ZZm4" target="_blank" rel="noopener noreferrer">
-              <Button className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-semibold px-6 py-2 text-sm shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200">
+              <Button className="bg-brand-bright-red hover:bg-black text-white font-semibold px-6 py-2 text-sm shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200">
                 Leave a Review
               </Button>
             </a>

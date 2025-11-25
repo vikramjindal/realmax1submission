@@ -41,46 +41,11 @@ const staggerContainer = {
 
 export default function PreConstruction() {
   const { openModal } = useJoinUsModal();
-  const projects = [
-    {
-      id: 1,
-      name: "Skyline Towers",
-      location: "Downtown Toronto",
-      image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      priceFrom: "$650,000",
-      completion: "Fall 2025",
-      units: "450 units",
-      status: "Selling Fast",
-      features: ["Luxury Amenities", "Transit Access", "City Views"]
-    },
-    {
-      id: 2,
-      name: "Riverside Commons",
-      location: "Mississauga",
-      image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      priceFrom: "$480,000",
-      completion: "Spring 2026",
-      units: "320 units",
-      status: "Now Selling",
-      features: ["Waterfront", "Family-Friendly", "Green Spaces"]
-    },
-    {
-      id: 3,
-      name: "Urban Heights",
-      location: "Brampton",
-      image: "https://images.unsplash.com/photo-1582407947304-fd86f028f716?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      priceFrom: "$420,000",
-      completion: "Winter 2025",
-      units: "280 units",
-      status: "VIP Access",
-      features: ["Modern Design", "Smart Home", "Retail Below"]
-    }
-  ];
 
   return (
     <>
       <Head>
-        <title>Pre-Construction Properties | RE/MAX Excellence</title>
+        <title>Pre-Construction Properties | REMAX Excellence</title>
         <meta name="description" content="Unlock your dream home before it's built. Exclusive pre-construction opportunities for first-time buyers, investors, and families." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
@@ -143,12 +108,12 @@ export default function PreConstruction() {
                   <span className="block">PROJECTS</span>
                 </h1>
                 
-                <p className="text-2xl lg:text-3xl text-white font-semibold leading-relaxed">
-                  Get exclusive VIP access to the best projects, prime locations, and builder incentives before they hit the market.
+                <p className="text-2xl lg:text-3xl text-white leading-relaxed">
+                  Early access. Exclusive incentives. Full marketing support — everything you need to succeed in pre-construction, all in one place.
                 </p>
                 
                 <div className="flex justify-start">
-                  <Button onClick={openModal} className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold px-10 py-5 text-2xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 rounded-lg flex items-center space-x-4">
+                  <Button onClick={openModal} className="bg-brand-bright-red hover:bg-black text-white font-bold px-10 py-5 text-2xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 rounded-lg flex items-center space-x-4">
                     <Building className="w-8 h-8" />
                     <span>Book Consultation</span>
                     <ArrowRight className="w-8 h-8" />
@@ -159,121 +124,14 @@ export default function PreConstruction() {
           </div>
         </section>
 
-        {/* Target Audience Section */}
-        <section className="py-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
-                Perfect for <span className="text-brand-bright-red">Every Buyer</span>
-              </h2>
-              <p className="text-xl text-muted-foreground">
-                Whether you're buying your first home, investing, or upgrading
-              </p>
-            </motion.div>
-
-            <motion.div 
-              variants={staggerContainer}
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: true }}
-              className="grid md:grid-cols-3 gap-8"
-            >
-              <motion.div variants={fadeInUp}>
-                <Card className="h-full border-0 bg-white hover:shadow-lg transition-all duration-300 border border-red-100">
-                  <CardContent className="p-8 text-center">
-                    <div className="w-16 h-16 bg-brand-bright-red rounded-full flex items-center justify-center mx-auto mb-6">
-                      <HomeIcon className="h-8 w-8 text-white" />
-                    </div>
-                    <h3 className="text-2xl font-bold mb-4">First-Time Buyers</h3>
-                    <p className="text-muted-foreground mb-6">
-                      Get into the market with lower down payments, extended deposit schedules, and first-time buyer incentives.
-                    </p>
-                    <ul className="text-left space-y-2 text-sm">
-                      <li className="flex items-center">
-                        <CheckCircle className="h-4 w-4 text-brand-bright-red mr-2" />
-                        Lower initial deposits
-                      </li>
-                      <li className="flex items-center">
-                        <CheckCircle className="h-4 w-4 text-brand-bright-red mr-2" />
-                        Extended payment plans
-                      </li>
-                      <li className="flex items-center">
-                        <CheckCircle className="h-4 w-4 text-brand-bright-red mr-2" />
-                        Government incentives
-                      </li>
-                    </ul>
-                  </CardContent>
-                </Card>
-              </motion.div>
-
-              <motion.div variants={fadeInUp}>
-                <Card className="h-full border-0 bg-white hover:shadow-lg transition-all duration-300 border border-blue-100">
-                  <CardContent className="p-8 text-center">
-                    <div className="w-16 h-16 bg-brand-dark-blue rounded-full flex items-center justify-center mx-auto mb-6">
-                      <TrendingUp className="h-8 w-8 text-white" />
-                    </div>
-                    <h3 className="text-2xl font-bold mb-4">Investors</h3>
-                    <p className="text-muted-foreground mb-6">
-                      Maximize returns with pre-construction pricing, assignment opportunities, and rental income potential.
-                    </p>
-                    <ul className="text-left space-y-2 text-sm">
-                      <li className="flex items-center">
-                        <CheckCircle className="h-4 w-4 text-brand-dark-blue mr-2" />
-                        Pre-construction pricing
-                      </li>
-                      <li className="flex items-center">
-                        <CheckCircle className="h-4 w-4 text-brand-dark-blue mr-2" />
-                        Assignment rights
-                      </li>
-                      <li className="flex items-center">
-                        <CheckCircle className="h-4 w-4 text-brand-dark-blue mr-2" />
-                        High rental demand
-                      </li>
-                    </ul>
-                  </CardContent>
-                </Card>
-              </motion.div>
-
-              <motion.div variants={fadeInUp}>
-                <Card className="h-full border-0 bg-white hover:shadow-lg transition-all duration-300 border border-red-100">
-                  <CardContent className="p-8 text-center">
-                    <div className="w-16 h-16 bg-brand-bright-red rounded-full flex items-center justify-center mx-auto mb-6">
-                      <Users className="h-8 w-8 text-white" />
-                    </div>
-                    <h3 className="text-2xl font-bold mb-4">Upgraders & Families</h3>
-                    <p className="text-muted-foreground mb-6">
-                      Move up to your dream home with modern amenities, larger spaces, and family-friendly communities.
-                    </p>
-                    <ul className="text-left space-y-2 text-sm">
-                      <li className="flex items-center">
-                        <CheckCircle className="h-4 w-4 text-brand-bright-red mr-2" />
-                        Modern amenities
-                      </li>
-                      <li className="flex items-center">
-                        <CheckCircle className="h-4 w-4 text-brand-bright-red mr-2" />
-                        Family-friendly design
-                      </li>
-                      <li className="flex items-center">
-                        <CheckCircle className="h-4 w-4 text-brand-bright-red mr-2" />
-                        Community features
-                      </li>
-                    </ul>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            </motion.div>
+        {/* Exclusive In-House Services Section */}
+        <section className="py-24 bg-gradient-to-br from-white via-slate-50 to-white relative overflow-hidden">
+          <div className="absolute inset-0">
+            <div className="absolute top-20 right-10 w-80 h-80 bg-gradient-to-br from-red-200/20 to-pink-300/15 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-20 left-10 w-72 h-72 bg-gradient-to-br from-blue-200/20 to-indigo-300/15 rounded-full blur-3xl"></div>
           </div>
-        </section>
 
-        {/* Featured Projects */}
-        <section className="py-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -281,90 +139,343 @@ export default function PreConstruction() {
               transition={{ duration: 0.6 }}
               className="text-center mb-16"
             >
-              <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
-                Featured <span className="text-brand-bright-red">Projects</span>
+              <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-6 font-montserrat">
+                Exclusive <span className="text-brand-bright-red">In-House Services</span>
               </h2>
-              <p className="text-xl text-muted-foreground">
-                Exclusive pre-construction opportunities available now
+              <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+                Exclusive support and access designed to help you succeed in real estate.
               </p>
             </motion.div>
 
-            <motion.div 
-              variants={staggerContainer}
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: true }}
-              className="grid lg:grid-cols-3 gap-8"
-            >
-              {projects.map((project, index) => (
-                <motion.div key={project.id} variants={fadeInUp}>
-                  <Card className="h-full overflow-hidden border-0 bg-white hover:shadow-lg transition-all duration-300 group">
-                    <div className="relative">
-                      <img 
-                        src={project.image} 
-                        alt={project.name}
-                        className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                      <div className="absolute top-4 right-4">
-                        <span className="bg-brand-bright-red text-white px-3 py-1 rounded-full text-sm font-medium">
-                          {project.status}
-                        </span>
-                      </div>
+            <div className="grid md:grid-cols-3 gap-8">
+              {/* In-House Pre-Construction Access */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+              >
+                <Card className="h-full bg-white border border-slate-200 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2">
+                  <CardContent className="p-8">
+                    <div className="w-20 h-20 bg-gradient-to-br from-brand-bright-red to-red-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+                      <HomeIcon className="h-10 w-10 text-white" />
                     </div>
-                    <CardContent className="p-6">
-                      <h3 className="text-2xl font-bold mb-2 group-hover:text-brand-bright-red transition-colors">
-                        {project.name}
-                      </h3>
-                      <p className="text-muted-foreground mb-4 flex items-center">
-                        <MapPin className="h-4 w-4 mr-2" />
-                        {project.location}
-                      </p>
-                      
-                      <div className="space-y-2 mb-6 text-sm">
-                        <div className="flex justify-between">
-                          <span className="text-muted-foreground">Starting from:</span>
-                          <span className="font-bold text-brand-bright-red">{project.priceFrom}</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-muted-foreground">Completion:</span>
-                          <span className="font-medium">{project.completion}</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-muted-foreground">Total units:</span>
-                          <span className="font-medium">{project.units}</span>
-                        </div>
-                      </div>
+                    <h3 className="text-2xl font-bold mb-4 text-center text-slate-900">
+                      In-House<br/>Pre-Construction Access
+                    </h3>
+                    <p className="text-slate-600 mb-6 text-center leading-relaxed">
+                      Get first-hand access to all major projects with priority pricing, floor plans, and early incentives.
+                    </p>
+                    <ul className="space-y-3">
+                      <li className="flex items-start">
+                        <CheckCircle className="h-5 w-5 text-brand-bright-red mr-3 mt-0.5 flex-shrink-0" />
+                        <span className="text-sm text-slate-700">Access before the public</span>
+                      </li>
+                      <li className="flex items-start">
+                        <CheckCircle className="h-5 w-5 text-brand-bright-red mr-3 mt-0.5 flex-shrink-0" />
+                        <span className="text-sm text-slate-700">Builder incentives</span>
+                      </li>
+                      <li className="flex items-start">
+                        <CheckCircle className="h-5 w-5 text-brand-bright-red mr-3 mt-0.5 flex-shrink-0" />
+                        <span className="text-sm text-slate-700">Exclusive VIP launches</span>
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
+              </motion.div>
 
-                      <div className="mb-6">
-                        <div className="flex flex-wrap gap-2">
-                          {project.features.map((feature, idx) => (
-                            <span key={idx} className="bg-muted text-muted-foreground px-2 py-1 rounded text-xs">
-                              {feature}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
+              {/* Dedicated Admin Support */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                <Card className="h-full bg-white border border-slate-200 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2">
+                  <CardContent className="p-8">
+                    <div className="w-20 h-20 bg-gradient-to-br from-brand-dark-blue to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+                      <TrendingUp className="h-10 w-10 text-white" />
+                    </div>
+                    <h3 className="text-2xl font-bold mb-4 text-center text-slate-900">
+                      Dedicated Admin Support
+                    </h3>
+                    <p className="text-slate-600 mb-6 text-center leading-relaxed">
+                      Focus on your clients while we handle the details—our team provides full administrative support for your deals.
+                    </p>
+                    <ul className="space-y-3">
+                      <li className="flex items-start">
+                        <CheckCircle className="h-5 w-5 text-brand-dark-blue mr-3 mt-0.5 flex-shrink-0" />
+                        <span className="text-sm text-slate-700">Deal paperwork assistance</span>
+                      </li>
+                      <li className="flex items-start">
+                        <CheckCircle className="h-5 w-5 text-brand-dark-blue mr-3 mt-0.5 flex-shrink-0" />
+                        <span className="text-sm text-slate-700">Scheduling & coordination</span>
+                      </li>
+                      <li className="flex items-start">
+                        <CheckCircle className="h-5 w-5 text-brand-dark-blue mr-3 mt-0.5 flex-shrink-0" />
+                        <span className="text-sm text-slate-700">Ongoing client support</span>
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
+              </motion.div>
 
-                      <Button onClick={openModal} className="w-full bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold">
-                        View Details
-                        <ArrowRight className="h-4 w-4 ml-2" />
-                      </Button>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </motion.div>
-
-            <div className="text-center mt-12">
-              <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold">
-                View All Projects
-              </Button>
+              {/* Coaching & Training */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+              >
+                <Card className="h-full bg-white border border-slate-200 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2">
+                  <CardContent className="p-8">
+                    <div className="w-20 h-20 bg-gradient-to-br from-brand-bright-red to-red-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+                      <Users className="h-10 w-10 text-white" />
+                    </div>
+                    <h3 className="text-2xl font-bold mb-4 text-center text-slate-900">
+                      Coaching & Training
+                    </h3>
+                    <p className="text-slate-600 mb-6 text-center leading-relaxed">
+                      Learn directly from our in-house real estate coach, Ken Wilder, with over 20 years of coaching experience.
+                    </p>
+                    <ul className="space-y-3">
+                      <li className="flex items-start">
+                        <CheckCircle className="h-5 w-5 text-brand-bright-red mr-3 mt-0.5 flex-shrink-0" />
+                        <span className="text-sm text-slate-700">Business growth strategies</span>
+                      </li>
+                      <li className="flex items-start">
+                        <CheckCircle className="h-5 w-5 text-brand-bright-red mr-3 mt-0.5 flex-shrink-0" />
+                        <span className="text-sm text-slate-700">Lead generation systems</span>
+                      </li>
+                      <li className="flex items-start">
+                        <CheckCircle className="h-5 w-5 text-brand-bright-red mr-3 mt-0.5 flex-shrink-0" />
+                        <span className="text-sm text-slate-700">Sales & closing training</span>
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
+              </motion.div>
             </div>
           </div>
         </section>
 
-        {/* Process Section */}
-        <section className="py-20 bg-muted/30">
+        {/* Why Work With Our Pre-Construction Division */}
+        <section className="py-24 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid lg:grid-cols-2 gap-12 items-start">
+              {/* Left Content */}
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+              >
+                <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-6 font-montserrat leading-tight">
+                  Why Work With Our <span className="text-brand-bright-red">Pre-Construction Division</span>
+                </h2>
+                <p className="text-lg text-slate-600 mb-12 leading-relaxed">
+                  At <span className="font-bold text-slate-900">REMAX Excellence</span>, our Pre-Construction team provides agents and clients with unmatched access to the GTA's top new developments. From platinum launches to curated investor opportunities, we deliver value at every stage.
+                </p>
+
+                <div className="space-y-8">
+                  {/* Platinum Project Access */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.1 }}
+                    className="flex gap-6"
+                  >
+                    <div className="flex-shrink-0">
+                      <div className="w-16 h-16 bg-brand-bright-red rounded-2xl flex items-center justify-center shadow-lg">
+                        <span className="text-white text-2xl font-black">1</span>
+                      </div>
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold text-slate-900 mb-3">Platinum Project Access</h3>
+                      <p className="text-slate-600 leading-relaxed">
+                        Priority access to VIP pricing, early floor plans, and off-market units.
+                      </p>
+                    </div>
+                  </motion.div>
+
+                  {/* Exclusive Incentives */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    className="flex gap-6"
+                  >
+                    <div className="flex-shrink-0">
+                      <div className="w-16 h-16 bg-brand-bright-red rounded-2xl flex items-center justify-center shadow-lg">
+                        <span className="text-white text-2xl font-black">2</span>
+                      </div>
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold text-slate-900 mb-3">Exclusive Incentives</h3>
+                      <p className="text-slate-600 leading-relaxed">
+                        Extended deposits, capped charges, assignment options and builder credits.
+                      </p>
+                    </div>
+                  </motion.div>
+
+                  {/* Full-Service Marketing */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                    className="flex gap-6"
+                  >
+                    <div className="flex-shrink-0">
+                      <div className="w-16 h-16 bg-brand-bright-red rounded-2xl flex items-center justify-center shadow-lg">
+                        <span className="text-white text-2xl font-black">3</span>
+                      </div>
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold text-slate-900 mb-3">Full-Service Marketing</h3>
+                      <p className="text-slate-600 leading-relaxed">
+                        Plug-and-play social posts, newsletters, brochures and media assets to help you sell faster.
+                      </p>
+                    </div>
+                  </motion.div>
+                </div>
+              </motion.div>
+
+              {/* Right Content - Call to Action Card */}
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="lg:sticky lg:top-8"
+              >
+                <Card className="bg-white border border-slate-200 shadow-2xl hover:shadow-3xl transition-all duration-500 overflow-hidden">
+                  <div className="bg-brand-bright-red p-8 text-white">
+                    <h3 className="text-3xl font-bold mb-3">Quick Contact</h3>
+                    <p className="text-white/90 leading-relaxed">
+                      Have a project in mind? Want to join our platinum network or register for a builder presentation?
+                    </p>
+                  </div>
+                  <CardContent className="p-8">
+                    <div className="space-y-6">
+                      <div className="text-center py-8">
+                        <Building2 className="h-20 w-20 text-brand-bright-red mx-auto mb-6" />
+                        <p className="text-slate-600 mb-6 text-lg leading-relaxed">
+                          Get exclusive access to VIP pricing, floor plans, and builder incentives.
+                        </p>
+                      </div>
+                      
+                      <Button 
+                        onClick={openModal} 
+                        size="lg" 
+                        className="w-full bg-brand-bright-red hover:bg-black text-white font-bold py-6 text-lg shadow-xl hover:shadow-2xl transition-all duration-300"
+                      >
+                        <Calendar className="h-5 w-5 mr-2" />
+                        Request Information
+                      </Button>
+
+                      <div className="border-t border-slate-200 pt-6 space-y-3">
+                        <div className="flex items-center text-slate-600">
+                          <CheckCircle className="h-5 w-5 text-brand-bright-red mr-3 flex-shrink-0" />
+                          <span className="text-sm">VIP Priority Pricing</span>
+                        </div>
+                        <div className="flex items-center text-slate-600">
+                          <CheckCircle className="h-5 w-5 text-brand-bright-red mr-3 flex-shrink-0" />
+                          <span className="text-sm">Extended Deposits & Credits</span>
+                        </div>
+                        <div className="flex items-center text-slate-600">
+                          <CheckCircle className="h-5 w-5 text-brand-bright-red mr-3 flex-shrink-0" />
+                          <span className="text-sm">Full Marketing Support</span>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+{/* Builder Tours & In-House Presentations */}
+        <section className="py-24 bg-gradient-to-br from-white via-slate-50 to-white relative overflow-hidden">
+          <div className="absolute inset-0">
+            <div className="absolute top-20 left-10 w-80 h-80 bg-gradient-to-br from-blue-200/20 to-indigo-300/15 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-20 right-10 w-72 h-72 bg-gradient-to-br from-red-200/20 to-pink-300/15 rounded-full blur-3xl"></div>
+          </div>
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              {/* Left Content */}
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+              >
+                <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-6 font-montserrat leading-tight">
+                  Builder Tours & <span className="text-brand-bright-red">In-House Presentations</span>
+                </h2>
+                <p className="text-lg text-slate-600 mb-8 leading-relaxed">
+                  Get hands-on with our builder tours and attend in-house presentations to ask the hard questions and gain confidence before launch.
+                </p>
+
+                <ul className="space-y-4 mb-8">
+                  <li className="flex items-start">
+                    <CheckCircle className="h-6 w-6 text-brand-bright-red mr-3 mt-1 flex-shrink-0" />
+                    <span className="text-slate-700 text-lg">Guided site tours with developer reps</span>
+                  </li>
+                  <li className="flex items-start">
+                    <CheckCircle className="h-6 w-6 text-brand-bright-red mr-3 mt-1 flex-shrink-0" />
+                    <span className="text-slate-700 text-lg">Presentation days hosted at our brokerage</span>
+                  </li>
+                  <li className="flex items-start">
+                    <CheckCircle className="h-6 w-6 text-brand-bright-red mr-3 mt-1 flex-shrink-0" />
+                    <span className="text-slate-700 text-lg">Q&A sessions, pricing breakdowns and registration guidance</span>
+                  </li>
+                </ul>
+
+                <div className="flex flex-wrap gap-4">
+                  <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-black text-white font-bold px-8 py-4 shadow-xl hover:shadow-2xl transition-all duration-300">
+                    Register for Next Tour
+                  </Button>
+                  <Button onClick={openModal} size="lg" variant="outline" className="border-2 border-slate-300 hover:border-brand-bright-red hover:text-brand-bright-red hover:bg-brand-bright-red/10 font-bold px-8 py-4 shadow-lg transition-all duration-300">
+                    See Presentation Schedule
+                  </Button>
+                </div>
+              </motion.div>
+
+              {/* Right Image/Video Placeholder */}
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="relative"
+              >
+                <Card className="bg-white border border-slate-200 shadow-2xl overflow-hidden">
+                  <div className="bg-slate-100 aspect-video flex items-center justify-center">
+                    <div className="text-center">
+                      <Building2 className="h-20 w-20 text-slate-400 mx-auto mb-4" />
+                      <p className="text-slate-500 font-medium">[Tour Photo / Video]</p>
+                    </div>
+                  </div>
+                </Card>
+                <Card className="mt-6 bg-white border border-slate-200 shadow-xl">
+                  <CardContent className="p-6">
+                    <p className="text-slate-700 leading-relaxed">
+                      <span className="font-bold text-slate-900">Past tours fill up fast —</span> join our mailing list to receive invites and priority registration.
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Marketing Assets & Agent Tools */}
+        <section className="py-24 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -373,54 +484,262 @@ export default function PreConstruction() {
               transition={{ duration: 0.6 }}
               className="text-center mb-16"
             >
-              <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
-                Your Pre-Construction Journey
+              <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-6 font-montserrat">
+                Marketing Assets & <span className="text-brand-bright-red">Agent Tools</span>
               </h2>
-              <p className="text-xl text-muted-foreground">
-                Simple steps to secure your dream home
+              <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+                Everything is provided ready-to-use so you can focus on clients and deals — not design.
               </p>
             </motion.div>
 
-            <motion.div 
-              variants={staggerContainer}
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: true }}
-              className="grid md:grid-cols-4 gap-8"
-            >
-              {[
-                { step: "1", title: "Consultation", desc: "Discuss your needs, budget, and preferences with our experts", color: "red" },
-                { step: "2", title: "Project Selection", desc: "Review curated projects that match your criteria", color: "blue" },
-                { step: "3", title: "Secure Your Unit", desc: "Reserve your preferred unit with flexible deposit terms", color: "red" },
-                { step: "4", title: "Move-In Ready", desc: "Enjoy your new home when construction is complete", color: "blue" }
-              ].map((item, index) => (
-                <motion.div key={index} variants={fadeInUp} className="text-center">
-                  <div className={`w-16 h-16 ${item.color === 'red' ? 'bg-brand-bright-red' : 'bg-brand-dark-blue'} rounded-full flex items-center justify-center mx-auto mb-6`}>
-                    <span className="text-2xl font-bold text-white">{item.step}</span>
-                  </div>
-                  <h3 className="text-xl font-bold mb-4">{item.title}</h3>
-                  <p className="text-muted-foreground">{item.desc}</p>
-                </motion.div>
-              ))}
-            </motion.div>
+            <div className="grid md:grid-cols-3 gap-8 mb-8">
+              {/* Social Media Packs */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+              >
+                <Card className="h-full bg-white border border-slate-200 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2">
+                  <CardContent className="p-8">
+                    <h3 className="text-2xl font-bold text-slate-900 mb-4">Social Media Packs</h3>
+                    <p className="text-slate-600 mb-6 leading-relaxed">
+                      Instagram, Facebook, LinkedIn templates + Reel covers and WhatsApp posters.
+                    </p>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="bg-slate-100 rounded-lg p-6 flex items-center justify-center border border-slate-200">
+                        <span className="text-slate-500 text-sm font-medium">Image</span>
+                      </div>
+                      <div className="bg-slate-100 rounded-lg p-6 flex items-center justify-center border border-slate-200">
+                        <span className="text-slate-500 text-sm font-medium">Image</span>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              {/* Project Image Library */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                <Card className="h-full bg-white border border-slate-200 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2">
+                  <CardContent className="p-8">
+                    <h3 className="text-2xl font-bold text-slate-900 mb-4">Project Image Library</h3>
+                    <p className="text-slate-600 mb-6 leading-relaxed">
+                      Renderings, floor plans, brochures and amenity previews in high resolution.
+                    </p>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="bg-slate-100 rounded-lg p-6 flex items-center justify-center border border-slate-200">
+                        <span className="text-slate-500 text-sm font-medium">Plan</span>
+                      </div>
+                      <div className="bg-slate-100 rounded-lg p-6 flex items-center justify-center border border-slate-200">
+                        <span className="text-slate-500 text-sm font-medium">Render</span>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              {/* Email & Newsletter Kits */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+              >
+                <Card className="h-full bg-white border border-slate-200 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2">
+                  <CardContent className="p-8">
+                    <h3 className="text-2xl font-bold text-slate-900 mb-4">Email & Newsletter Kits</h3>
+                    <p className="text-slate-600 mb-6 leading-relaxed">
+                      Plug-and-play campaign content with copy + visuals ready to send.
+                    </p>
+                    <div className="bg-slate-100 rounded-lg p-12 flex items-center justify-center border border-slate-200">
+                      <span className="text-slate-500 text-sm font-medium">Template Preview</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* Customizable Print Materials */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
+                <Card className="h-full bg-white border border-slate-200 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2">
+                  <CardContent className="p-8">
+                    <h3 className="text-2xl font-bold text-slate-900 mb-4">Customizable Print Materials</h3>
+                    <p className="text-slate-600 leading-relaxed">
+                      Feature sheets, price lists and flyers editable with your branding.
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              {/* Video & Media Assets */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+              >
+                <Card className="h-full bg-white border border-slate-200 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2">
+                  <CardContent className="p-8">
+                    <h3 className="text-2xl font-bold text-slate-900 mb-4">Video & Media Assets</h3>
+                    <p className="text-slate-600 leading-relaxed">
+                      Launch teasers, builder presentation highlights and event recaps.
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </div>
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className="py-20 bg-gradient-to-r from-brand-bright-red via-brand-medium-blue to-brand-dark-blue">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        {/* Platinum Projects & Featured Launches */}
+        <section className="py-24 bg-gradient-to-br from-white via-slate-50 to-white relative overflow-hidden">
+          <div className="absolute inset-0">
+            <div className="absolute top-20 right-10 w-80 h-80 bg-gradient-to-br from-red-200/20 to-pink-300/15 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-20 left-10 w-72 h-72 bg-gradient-to-br from-blue-200/20 to-indigo-300/15 rounded-full blur-3xl"></div>
+          </div>
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="flex flex-wrap justify-between items-center mb-16 gap-4">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+              >
+                <h2 className="text-4xl md:text-5xl font-black text-slate-900 font-montserrat">
+                  Platinum Projects & <span className="text-brand-bright-red">Featured Launches</span>
+                </h2>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+              >
+                <Button onClick={openModal} variant="link" className="text-brand-bright-red hover:text-black font-bold text-lg p-0">
+                  Browse all projects →
+                </Button>
+              </motion.div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+              >
+                <Card className="h-full bg-white border border-slate-200 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2 overflow-hidden group">
+                  <div className="bg-slate-100 aspect-[4/3] flex items-center justify-center border-b border-slate-200">
+                    <span className="text-slate-400 font-medium">[Project Image 1]</span>
+                  </div>
+                  <CardContent className="p-6">
+                    <h3 className="text-2xl font-bold text-slate-900 mb-2 group-hover:text-brand-bright-red transition-colors">
+                      Project Name 1
+                    </h3>
+                    <p className="text-slate-600 mb-4 leading-relaxed">
+                      Brief project tagline or highlight line that sells it.
+                    </p>
+                    <div className="flex justify-between items-center">
+                      <span className="text-slate-900 font-bold">From $XXX,XXX</span>
+                      <Button onClick={openModal} variant="link" className="text-brand-bright-red hover:text-black font-bold p-0">
+                        View details →
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                <Card className="h-full bg-white border border-slate-200 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2 overflow-hidden group">
+                  <div className="bg-slate-100 aspect-[4/3] flex items-center justify-center border-b border-slate-200">
+                    <span className="text-slate-400 font-medium">[Project Image 2]</span>
+                  </div>
+                  <CardContent className="p-6">
+                    <h3 className="text-2xl font-bold text-slate-900 mb-2 group-hover:text-brand-bright-red transition-colors">
+                      Project Name 2
+                    </h3>
+                    <p className="text-slate-600 mb-4 leading-relaxed">
+                      Brief project tagline or highlight line that sells it.
+                    </p>
+                    <div className="flex justify-between items-center">
+                      <span className="text-slate-900 font-bold">From $XXX,XXX</span>
+                      <Button onClick={openModal} variant="link" className="text-brand-bright-red hover:text-black font-bold p-0">
+                        View details →
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+              >
+                <Card className="h-full bg-white border border-slate-200 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2 overflow-hidden group">
+                  <div className="bg-slate-100 aspect-[4/3] flex items-center justify-center border-b border-slate-200">
+                    <span className="text-slate-400 font-medium">[Project Image 3]</span>
+                  </div>
+                  <CardContent className="p-6">
+                    <h3 className="text-2xl font-bold text-slate-900 mb-2 group-hover:text-brand-bright-red transition-colors">
+                      Project Name 3
+                    </h3>
+                    <p className="text-slate-600 mb-4 leading-relaxed">
+                      Brief project tagline or highlight line that sells it.
+                    </p>
+                    <div className="flex justify-between items-center">
+                      <span className="text-slate-900 font-bold">From $XXX,XXX</span>
+                      <Button onClick={openModal} variant="link" className="text-brand-bright-red hover:text-black font-bold p-0">
+                        View details →
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+{/* CTA Section */}
+        <section className="py-24 bg-gradient-to-r from-brand-bright-red via-brand-medium-blue to-brand-dark-blue relative overflow-hidden">
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute top-10 left-20 w-64 h-64 bg-white rounded-full blur-3xl"></div>
+            <div className="absolute bottom-10 right-20 w-80 h-80 bg-white rounded-full blur-3xl"></div>
+          </div>
+          
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl md:text-5xl font-bold text-white mb-8">
-                Let's Build Your Brand Together
+              <h2 className="text-4xl md:text-6xl font-black text-white mb-10 font-montserrat leading-tight">
+                Ready to Access Platinum Projects?
               </h2>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold px-8 py-4 text-xl">
-                  Join Us
+                <Button onClick={openModal} className="bg-brand-bright-red hover:bg-black text-white font-bold px-10 py-5 text-2xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 rounded-lg flex items-center space-x-4">
+                  <Building className="w-8 h-8" />
+                  <span>Get Started Today</span>
+                  <ArrowRight className="w-8 h-8" />
                 </Button>
               </div>
             </motion.div>

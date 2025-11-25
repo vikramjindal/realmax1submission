@@ -72,7 +72,7 @@ const JoinUsModal: React.FC<JoinUsModalProps> = ({ isOpen, onClose }) => {
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="text-2xl sm:text-3xl font-bold text-slate-900">Join RE/MAX Excellence</DialogTitle>
+          <DialogTitle className="text-2xl sm:text-3xl font-bold text-slate-900">Join REMAX Excellence</DialogTitle>
           <DialogDescription className="text-slate-600">
             Fill out the form below and we'll get in touch with you soon.
           </DialogDescription>
@@ -222,7 +222,7 @@ const JoinUsModal: React.FC<JoinUsModalProps> = ({ isOpen, onClose }) => {
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="flex-1 bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold py-3 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex-1 bg-brand-bright-red hover:bg-black text-white font-bold py-3 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSubmitting ? 'Submitting...' : 'Submit Application'}
             </Button>

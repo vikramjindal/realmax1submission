@@ -47,7 +47,7 @@ const Header = () => {
           <div className="cursor-pointer transform hover:scale-105 transition-transform duration-200" onClick={() => router.push("/")}>
             <Image
               src="/images/logo.png"
-              alt="RE/MAX Excellence Logo"
+              alt="REMAX Excellence Logo"
               width={200}
               height={80}
               className="h-16 w-auto"
@@ -72,7 +72,7 @@ const Header = () => {
           <div className="hidden lg:flex items-center">
             <Button 
               onClick={openModal}
-              className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold px-6 py-2 text-sm rounded"
+              className="bg-brand-bright-red hover:bg-black text-white font-bold px-6 py-2 text-sm rounded"
             >
               Join Excellence
             </Button>
@@ -108,7 +108,7 @@ const Header = () => {
                     openModal();
                     setIsMenuOpen(false);
                   }}
-                  className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold w-full mx-4 py-3 text-lg"
+                  className="bg-brand-bright-red hover:bg-black text-white font-bold w-full mx-4 py-3 text-lg"
                 >
                   Join Excellence
                 </Button>

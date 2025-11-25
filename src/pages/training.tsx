@@ -47,7 +47,7 @@ export default function Training() {
   return (
     <>
       <Head>
-        <title>Professional Training | RE/MAX Excellence</title>
+        <title>Professional Training | REMAX Excellence</title>
         <meta name="description" content="Training that turns good agents into great ones. Comprehensive education programs, AI integration, and continuous learning opportunities." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
@@ -70,7 +70,7 @@ export default function Training() {
             <div className="relative">
               <Image 
                 src="https://dontdelete2005142.kloudbean.com/1761170133_Group 14.png" 
-                alt="RE/MAX Excellence Logo" 
+                alt="REMAX Excellence Logo" 
                 width={80} 
                 height={80} 
                 className="w-20 h-20 object-contain opacity-80 animate-pulse transform rotate-6"
@@ -84,7 +84,7 @@ export default function Training() {
             <div className="relative">
               <Image 
                 src="https://dontdelete2005142.kloudbean.com/1761170133_Group 14.png" 
-                alt="RE/MAX Excellence Logo" 
+                alt="REMAX Excellence Logo" 
                 width={56} 
                 height={56} 
                 className="w-14 h-14 object-contain opacity-70 animate-bounce transform -rotate-6"
@@ -104,13 +104,13 @@ export default function Training() {
                 Turns agents into <span className="text-brand-bright-red">performers</span>
               </h1>
               <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-8 font-arial leading-relaxed">
-                At RE/MAX Excellence, learning never stops. upto 3 imperson monthly session and utpo 3 online sessions From marketing strategies to legal updates, we give you the skills to close deals and build a career that lasts.
+                At REMAX Excellence, learning never stops. upto 3 imperson monthly session and utpo 3 online sessions From marketing strategies to legal updates, we give you the skills to close deals and build a career that lasts.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold">
+                <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-black text-white font-bold">
                   View Training Schedule
                 </Button>
-                <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold">
+                <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-black text-white font-bold">
                   Join Next Session
                 </Button>
               </div>
@@ -780,7 +780,7 @@ export default function Training() {
                   </p>
                   
                   <div className="pt-4">
-                    <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold px-8 py-4 text-lg">
+                    <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-black text-white font-bold px-8 py-4 text-lg">
                       GET YOUR FREE GUIDE
                     </Button>
                   </div>
@@ -875,7 +875,7 @@ export default function Training() {
               
               <div className="relative">
                 <div className="w-32 h-32 object-contain opacity-70 animate-pulse shadow-xl transform rotate-12 absolute -top-8 -right-8">
-                  <Image src="https://dontdelete2005142.kloudbean.com/1761170133_Group 14.png" alt="RE/MAX Excellence Logo" width={128} height={128} className="w-full h-full" />
+                  <Image src="https://dontdelete2005142.kloudbean.com/1761170133_Group 14.png" alt="REMAX Excellence Logo" width={128} height={128} className="w-full h-full" />
                 </div>
                 <div className="bg-gradient-to-br from-primary/10 to-secondary/10 rounded-2xl p-8 shadow-2xl">
                   <h3 className="text-2xl font-bold mb-4">Coaching Benefits</h3>
@@ -917,7 +917,7 @@ export default function Training() {
                 About <span className="text-primary">KEN WILDER</span>
               </h2>
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                Your dedicated mentor at RE/MAX Excellence
+                Your dedicated mentor at REMAX Excellence
               </p>
             </motion.div>
 
@@ -930,7 +930,7 @@ export default function Training() {
             >
               <div className="relative">
                 <div className="w-28 h-28 object-contain opacity-80 animate-bounce shadow-2xl transform -rotate-12 absolute -top-8 -left-8">
-                  <Image src="https://dontdelete2005142.kloudbean.com/1761170133_Group 14.png" alt="RE/MAX Excellence Logo" width={112} height={112} className="w-full h-full" />
+                  <Image src="https://dontdelete2005142.kloudbean.com/1761170133_Group 14.png" alt="REMAX Excellence Logo" width={112} height={112} className="w-full h-full" />
                 </div>
                 <div className="bg-gradient-to-br from-primary/10 to-secondary/10 rounded-2xl p-8 shadow-2xl">
                   <h3 className="text-2xl font-bold mb-4">Experience & Expertise</h3>
@@ -949,7 +949,7 @@ export default function Training() {
                     </div>
                     <div className="flex items-center space-x-3">
                       <CheckCircle className="h-6 w-6 text-green-600" />
-                      <span className="text-slate-700">Top 1% RE/MAX agent</span>
+                      <span className="text-slate-700">Top 1% REMAX agent</span>
                     </div>
                     <div className="flex items-center space-x-3">
                       <CheckCircle className="h-6 w-6 text-green-600" />
@@ -992,7 +992,7 @@ export default function Training() {
                     <div>
                       <h3 className="text-2xl font-bold mb-2">Team Building</h3>
                       <p className="text-muted-foreground">
-                        Built RE/MAX Excellence from the ground up, creating opportunities for ambitious agents.
+                        Built REMAX Excellence from the ground up, creating opportunities for ambitious agents.
                       </p>
                     </div>
                   </div>
@@ -1084,7 +1084,7 @@ export default function Training() {
                 Let's Build Your Brand Together
               </h2>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold px-8 py-4 text-xl">
+                <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-black text-white font-bold px-8 py-4 text-xl">
                   Join Us
                 </Button>
               </div>

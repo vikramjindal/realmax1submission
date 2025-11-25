@@ -146,7 +146,7 @@ export default function Blog() {
   return (
     <>
       <Head>
-        <title>Real Estate Blog | RE/MAX Excellence</title>
+        <title>Real Estate Blog | REMAX Excellence</title>
         <meta name="description" content="Insights that keep you ahead. Expert advice on market trends, legal updates, marketing practices, and pre-construction opportunities." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
@@ -169,7 +169,7 @@ export default function Blog() {
             <div className="relative">
               <Image 
                 src="/images/company-pin-icon.png" 
-                alt="RE/MAX Balloon" 
+                alt="REMAX Balloon" 
                 width={64} 
                 height={64} 
                 className="w-16 h-16 object-contain opacity-80 animate-pulse transform rotate-6"
@@ -183,7 +183,7 @@ export default function Blog() {
             <div className="relative">
               <Image 
                 src="/images/company-pin-icon.png" 
-                alt="RE/MAX Balloon" 
+                alt="REMAX Balloon" 
                 width={48} 
                 height={48} 
                 className="w-12 h-12 object-contain opacity-70 animate-bounce transform -rotate-6"
@@ -243,7 +243,7 @@ export default function Blog() {
                               </span>
                               <Button 
                                 size="sm" 
-                                className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold"
+                                className="bg-brand-bright-red hover:bg-black text-white font-bold"
                                 onClick={(e) => {
                                   e.preventDefault();
                                   e.stopPropagation();
@@ -278,7 +278,7 @@ export default function Blog() {
                               </div>
                               <Button 
                                 size="sm" 
-                                className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold"
+                                className="bg-brand-bright-red hover:bg-black text-white font-bold"
                               >
                                 Read Article
                               </Button>
@@ -291,7 +291,7 @@ export default function Blog() {
                 </motion.div>
 
                 <div className="text-center mt-12">
-                  <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold">
+                  <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-black text-white font-bold">
                     Load More Articles
                   </Button>
                 </div>
@@ -315,7 +315,7 @@ export default function Blog() {
                       </p>
                       <div className="space-y-4">
                         <Input placeholder="Your email address" />
-                        <Button onClick={openModal} className="w-full bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold">
+                        <Button onClick={openModal} className="w-full bg-brand-bright-red hover:bg-black text-white font-bold">
                           Subscribe
                         </Button>
                       </div>
@@ -386,7 +386,7 @@ export default function Blog() {
                 Let's Build Your Brand Together
               </h2>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold px-8 py-4 text-xl">
+                <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-black text-white font-bold px-8 py-4 text-xl">
                   Join Us
                 </Button>
               </div>

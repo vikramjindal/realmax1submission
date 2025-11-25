@@ -121,14 +121,14 @@ export default function BlogPost() {
     return (
       <>
         <Head>
-          <title>Blog Post Not Found | RE/MAX Excellence</title>
+          <title>Blog Post Not Found | REMAX Excellence</title>
         </Head>
         <Header />
         <div className="min-h-screen flex items-center justify-center">
           <div className="text-center">
             <h1 className="text-4xl font-bold mb-4">Blog Post Not Found</h1>
             <Link href="/blog">
-              <Button className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold">
+              <Button className="bg-brand-bright-red hover:bg-black text-white font-bold">
                 Back to Blog
               </Button>
             </Link>
@@ -142,7 +142,7 @@ export default function BlogPost() {
   return (
     <>
       <Head>
-        <title>{post.title} | RE/MAX Excellence Blog</title>
+        <title>{post.title} | REMAX Excellence Blog</title>
         <meta name="description" content={post.excerpt} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
@@ -231,11 +231,11 @@ export default function BlogPost() {
 
           {/* CTA Section */}
           <div className="mt-12 p-8 bg-gradient-to-r from-brand-bright-red/10 to-brand-dark-red/10 rounded-2xl">
-            <h3 className="text-2xl font-bold mb-4 font-montserrat">Ready to Join RE/MAX Excellence?</h3>
+            <h3 className="text-2xl font-bold mb-4 font-montserrat">Ready to Join REMAX Excellence?</h3>
             <p className="text-muted-foreground mb-6">
               Become part of one of the youngest, fastest-growing real estate brokerages and take your career to the next level.
             </p>
-            <Button onClick={openModal} className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold">
+            <Button onClick={openModal} className="bg-brand-bright-red hover:bg-black text-white font-bold">
               Join Our Team
             </Button>
           </div>

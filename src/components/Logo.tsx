@@ -27,7 +27,7 @@ const Logo: React.FC<LogoProps> = ({
     <div className={`flex items-center ${className}`}>
       <Image
         src={logoSrc}
-        alt="RE/MAX Excellence - Each Office Independently Owned and Operated"
+        alt="REMAX Excellence - Each Office Independently Owned and Operated"
         width={variant === 'horizontal' ? 200 : 120}
         height={variant === 'horizontal' ? 60 : 80}
         className="h-auto w-auto max-h-12 md:max-h-14"

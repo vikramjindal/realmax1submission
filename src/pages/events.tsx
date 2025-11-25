@@ -93,7 +93,7 @@ export default function Events() {
   return (
     <>
       <Head>
-        <title>Events & Networking | RE/MAX Excellence</title>
+        <title>Events & Networking | REMAX Excellence</title>
         <meta name="description" content="Join our exclusive events, networking opportunities, and industry insights. Connect with top real estate professionals and stay ahead of market trends." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
@@ -116,7 +116,7 @@ export default function Events() {
             <div className="relative">
               <Image 
                 src="/images/company-pin-icon.png" 
-                alt="RE/MAX Balloon" 
+                alt="REMAX Balloon" 
                 width={80} 
                 height={80} 
                 className="w-20 h-20 object-contain opacity-80 animate-pulse transform rotate-6"
@@ -130,7 +130,7 @@ export default function Events() {
             <div className="relative">
               <Image 
                 src="/images/company-pin-icon.png" 
-                alt="RE/MAX Balloon" 
+                alt="REMAX Balloon" 
                 width={56} 
                 height={56} 
                 className="w-14 h-14 object-contain opacity-70 animate-bounce transform -rotate-6"
@@ -227,7 +227,7 @@ export default function Events() {
                 </div>
               </motion.div>
 
-              {/* Video 3 - RE/MAX BBQ */}
+              {/* Video 3 - REMAX BBQ */}
               <motion.div variants={fadeInUp} className="group md:col-span-2 lg:col-span-1">
                 <div className="relative bg-black rounded-2xl overflow-hidden shadow-xl transition-all duration-300">
                   <video 
@@ -244,7 +244,7 @@ export default function Events() {
                     Your browser does not support the video tag.
                   </video>
                   <div className="absolute bottom-4 left-4 right-4 text-white">
-                    <h3 className="text-lg font-bold font-montserrat">RE/MAX BBQ Event</h3>
+                    <h3 className="text-lg font-bold font-montserrat">REMAX BBQ Event</h3>
                     <p className="text-sm opacity-90">Team building and networking</p>
                   </div>
                 </div>
@@ -344,7 +344,7 @@ export default function Events() {
 
                     <CardHeader className="pb-4 relative z-10">
                       <div className="flex items-center justify-between mb-4">
-                        <div className={`px-4 py-2 ${event.typeColor === 'red' ? 'bg-gradient-to-r from-brand-bright-red to-brand-dark-red' : 'bg-gradient-to-r from-brand-dark-blue to-brand-medium-blue'} rounded-full text-white text-sm font-bold shadow-lg transform group-hover:scale-110 transition-transform duration-300`}>
+                        <div className={`px-4 py-2 ${event.typeColor === 'red' ? 'bg-gradient-to-r from-brand-bright-red to-brand-dark-blue' : 'bg-gradient-to-r from-brand-dark-blue to-brand-medium-blue'} rounded-full text-white text-sm font-bold shadow-lg transform group-hover:scale-110 transition-transform duration-300`}>
                           {event.type}
                         </div>
                         <div className={`flex items-center space-x-2 ${event.typeColor === 'red' ? 'text-brand-bright-red' : 'text-brand-dark-blue'} font-bold`}>
@@ -384,7 +384,7 @@ export default function Events() {
                       
                       <Button 
                         onClick={openModal}
-                        className="w-full bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold py-6 text-base shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 rounded-xl"
+                        className="w-full bg-brand-bright-red hover:bg-black text-white font-bold py-6 text-base shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 rounded-xl"
                       >
                         Register Now
                         <ArrowRight className="w-5 h-5 ml-2" />
@@ -483,7 +483,7 @@ export default function Events() {
                 Let's Build Your Brand Together
               </h2>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold px-8 py-4 text-xl">
+                <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-black text-white font-bold px-8 py-4 text-xl">
                   Join Us
                 </Button>
               </div>

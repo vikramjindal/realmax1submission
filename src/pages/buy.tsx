@@ -73,8 +73,8 @@ export default function Buy() {
   return (
     <>
       <Head>
-        <title>Buy Your Dream Home | RE/MAX Excellence</title>
-        <meta name="description" content="Find your perfect home with RE/MAX Excellence. Browse exclusive listings, get expert guidance, and make your homeownership dreams come true." />
+        <title>Buy Your Dream Home | REMAX Excellence</title>
+        <meta name="description" content="Find your perfect home with REMAX Excellence. Browse exclusive listings, get expert guidance, and make your homeownership dreams come true." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -96,7 +96,7 @@ export default function Buy() {
             <div className="relative">
               <Image 
                 src="/images/company-pin-icon.png" 
-                alt="RE/MAX Balloon" 
+                alt="REMAX Balloon" 
                 width={80} 
                 height={80} 
                 className="w-20 h-20 object-contain opacity-80 animate-pulse transform rotate-6"
@@ -110,7 +110,7 @@ export default function Buy() {
             <div className="relative">
               <Image 
                 src="/images/company-pin-icon.png" 
-                alt="RE/MAX Balloon" 
+                alt="REMAX Balloon" 
                 width={56} 
                 height={56} 
                 className="w-14 h-14 object-contain opacity-70 animate-bounce transform -rotate-6"
@@ -153,11 +153,11 @@ export default function Buy() {
                     </div>
                   </div>
                   <div className="flex gap-2">
-                    <Button onClick={openModal} size="lg" className="h-12 bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold">
+                    <Button onClick={openModal} size="lg" className="h-12 bg-brand-bright-red hover:bg-black text-white font-bold">
                       <Filter className="h-5 w-5 mr-2" />
                       Filters
                     </Button>
-                    <Button onClick={openModal} size="lg" className="h-12 bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold">
+                    <Button onClick={openModal} size="lg" className="h-12 bg-brand-bright-red hover:bg-black text-white font-bold">
                       <Search className="h-5 w-5 mr-2" />
                       Search
                     </Button>
@@ -179,7 +179,7 @@ export default function Buy() {
               className="text-center mb-16"
             >
               <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
-                Why Buy With <span className="text-primary">RE/MAX Excellence</span>
+                Why Buy With <span className="text-primary">REMAX Excellence</span>
               </h2>
             </motion.div>
 
@@ -278,10 +278,10 @@ export default function Buy() {
                         className="w-full h-64 object-cover"
                       />
                       <div className="absolute top-4 right-4 flex gap-2">
-                        <Button onClick={openModal} size="sm" className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold">
+                        <Button onClick={openModal} size="sm" className="bg-brand-bright-red hover:bg-black text-white font-bold">
                           <Heart className="h-4 w-4" />
                         </Button>
-                        <Button onClick={openModal} size="sm" className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold">
+                        <Button onClick={openModal} size="sm" className="bg-brand-bright-red hover:bg-black text-white font-bold">
                           <Share2 className="h-4 w-4" />
                         </Button>
                       </div>
@@ -308,7 +308,7 @@ export default function Buy() {
                         <span>{listing.baths} baths</span>
                         <span>{listing.sqft} sqft</span>
                       </div>
-                      <Button onClick={openModal} className="w-full mt-4 bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold">
+                      <Button onClick={openModal} className="w-full mt-4 bg-brand-bright-red hover:bg-black text-white font-bold">
                         View Details
                       </Button>
                     </CardContent>
@@ -318,7 +318,7 @@ export default function Buy() {
             </motion.div>
 
             <div className="text-center mt-12">
-              <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold">
+              <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-black text-white font-bold">
                 View All Listings
               </Button>
             </div>
@@ -381,7 +381,7 @@ export default function Buy() {
                 Let's Build Your Brand Together
               </h2>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold px-8 py-4 text-xl">
+                <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-black text-white font-bold px-8 py-4 text-xl">
                   Join Us
                 </Button>
               </div>

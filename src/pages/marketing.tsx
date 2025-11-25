@@ -63,7 +63,7 @@ export default function Marketing() {
   return (
     <>
       <Head>
-        <title>In-House Marketing Services | RE/MAX Excellence</title>
+        <title>In-House Marketing Services | REMAX Excellence</title>
         <meta name="description" content="Fresh, fierce & fearlessly effective marketing services. Professional design, AI-powered campaigns, and cutting-edge strategies." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />

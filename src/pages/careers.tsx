@@ -41,7 +41,7 @@ export default function Careers() {
   return (
     <>
       <Head>
-        <title>Join Our Team | RE/MAX Excellence Careers</title>
+        <title>Join Our Team | REMAX Excellence Careers</title>
         <meta name="description" content="Start your real estate career with Ontario's fastest-growing brokerage. Get the training, tools, and support you need to succeed." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
@@ -64,7 +64,7 @@ export default function Careers() {
             <div className="relative">
               <Image 
                 src="/images/company-pin-icon.png" 
-                alt="RE/MAX Balloon" 
+                alt="REMAX Balloon" 
                 width={80} 
                 height={80} 
                 className="w-20 h-20 object-contain opacity-80 animate-pulse transform rotate-6"
@@ -78,7 +78,7 @@ export default function Careers() {
             <div className="relative">
               <Image 
                 src="/images/company-pin-icon.png" 
-                alt="RE/MAX Balloon" 
+                alt="REMAX Balloon" 
                 width={56} 
                 height={56} 
                 className="w-14 h-14 object-contain opacity-70 animate-bounce transform -rotate-6"
@@ -101,10 +101,10 @@ export default function Careers() {
                 Join Ontario's youngest, fastest-growing real estate brokerage and build the career you've always dreamed of with unmatched support and cutting-edge tools.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold">
+                <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-black text-white font-bold">
                   Apply Now
                 </Button>
-                <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold">
+                <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-black text-white font-bold">
                   Schedule Interview
                 </Button>
               </div>
@@ -235,7 +235,7 @@ export default function Careers() {
               className="text-center mb-16"
             >
               <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
-                Why Choose <span className="text-primary">RE/MAX Excellence</span>
+                Why Choose <span className="text-primary">REMAX Excellence</span>
               </h2>
               <p className="text-xl text-muted-foreground">
                 We provide everything you need to build a successful real estate career
@@ -408,7 +408,7 @@ export default function Careers() {
                 Let's Build Your Brand Together
               </h2>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold px-8 py-4 text-xl">
+                <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-black text-white font-bold px-8 py-4 text-xl">
                   Join Us
                 </Button>
               </div>

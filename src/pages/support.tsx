@@ -45,7 +45,7 @@ export default function Support() {
   return (
     <>
       <Head>
-        <title>In-House Support Services | RE/MAX Excellence</title>
+        <title>In-House Support Services | REMAX Excellence</title>
         <meta name="description" content="Everything you need, all under one roof. Comprehensive support services including administrative, mortgage, vendor network, and agent support." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
@@ -71,10 +71,10 @@ export default function Support() {
                   Our comprehensive in-house support team handles the details so you can focus on what you do best - serving your clients and growing your business.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold">
+                  <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-black text-white font-bold">
                     Meet Our Support Team
                   </Button>
-                  <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold">
+                  <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-black text-white font-bold">
                     Schedule Consultation
                   </Button>
                 </div>
@@ -347,11 +347,11 @@ export default function Support() {
                     <div className="space-y-2">
                       <div>
                         <p className="text-xs text-muted-foreground">Mississauga</p>
-                        <a href="tel:9055074436" className="font-medium text-brand-bright-red hover:text-brand-dark-red">(905) 507-4436</a>
+                        <a href="tel:9055074436" className="font-medium text-brand-bright-red hover:text-black">(905) 507-4436</a>
                       </div>
                       <div>
                         <p className="text-xs text-muted-foreground">Brampton</p>
-                        <a href="tel:5193421961" className="font-medium text-brand-bright-red hover:text-brand-dark-red">519-342-1961</a>
+                        <a href="tel:5193421961" className="font-medium text-brand-bright-red hover:text-black">519-342-1961</a>
                       </div>
                     </div>
                     <p className="text-sm text-muted-foreground mt-3">Mon-Fri 8AM-8PM</p>
@@ -369,7 +369,7 @@ export default function Support() {
                     <p className="text-muted-foreground mb-4">
                       Send detailed requests and receive comprehensive responses.
                     </p>
-                    <p className="font-medium text-brand-dark-blue">support@remaxexcellence.ca</p>
+                    <p className="font-medium text-brand-dark-blue">info@remaxex.com</p>
                     <p className="text-sm text-muted-foreground">24-hour response</p>
                   </CardContent>
                 </Card>
@@ -407,7 +407,7 @@ export default function Support() {
                 Let's Build Your Brand Together
               </h2>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-brand-dark-red text-white font-bold px-8 py-4 text-xl">
+                <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-black text-white font-bold px-8 py-4 text-xl">
                   Join Us
                 </Button>
               </div>

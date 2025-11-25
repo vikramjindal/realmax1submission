@@ -24,35 +24,35 @@ const teamMembers = [
     role: "Real Estate Professional",
     image: "https://assets.co.dev/910e4b67-1d47-4112-8d57-8a5231718f2f/aman-d1be173.png",
     phone: "(416) 555-0101",
-    email: "aman@remaxexcellence.ca"
+    email: "info@remaxex.com"
   },
   {
     name: "Gurv Dhillon",
     role: "Real Estate Professional",
     image: "https://assets.co.dev/910e4b67-1d47-4112-8d57-8a5231718f2f/gurv-836439f.png",
     phone: "(416) 555-0102",
-    email: "gurv@remaxexcellence.ca"
+    email: "info@remaxex.com"
   },
   {
     name: "Shizu Asai",
     role: "Real Estate Professional", 
     image: "https://assets.co.dev/910e4b67-1d47-4112-8d57-8a5231718f2f/shizu-25638c3.png",
     phone: "(416) 555-0103",
-    email: "shizu@remaxexcellence.ca"
+    email: "info@remaxex.com"
   },
   {
     name: "Lovleen Hundal",
     role: "Real Estate Professional",
     image: "https://assets.co.dev/910e4b67-1d47-4112-8d57-8a5231718f2f/loveleen-affabf2.png",
     phone: "(416) 555-0104", 
-    email: "lovleen@remaxexcellence.ca"
+    email: "info@remaxex.com"
   },
   {
     name: "Nikita Suri",
     role: "Real Estate Professional",
-    image: "/images/agents/nikita suri.png?v=2",
+    image: "https://dontdelete2005142.kloudbean.com/1762973954_Nikita Suri.png",
     phone: "(416) 555-0105",
-    email: "nikita@remaxexcellence.ca"
+    email: "info@remaxex.com"
   }
 ];
 
