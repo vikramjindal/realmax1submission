@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Head from "next/head";
 import { motion } from "framer-motion";
 import Header from "@/components/Header";
@@ -8,6 +8,14 @@ import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { useJoinUsModal } from "@/contexts/JoinUsModalContext";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  type CarouselApi,
+} from "@/components/ui/carousel";
 import { 
   Building, 
   Building2,
@@ -38,6 +46,106 @@ const staggerContainer = {
     }
   }
 };
+
+// Builder logos array
+const builderLogos = [
+  { name: "Austin Birch", image: "https://dontdelete2005142.kloudbean.com/1764283324_builders%20logos/images_0012_Austiin-Birch.png" },
+  { name: "Great Gulf", image: "https://dontdelete2005142.kloudbean.com/1764283324_builders%20logos/images_0014_GREAT-GULF.png" },
+  { name: "Opus Homes", image: "https://dontdelete2005142.kloudbean.com/1764283324_builders%20logos/images_0016_OPUS-Homes.png" },
+  { name: "Mattamy Homes", image: "https://dontdelete2005142.kloudbean.com/1764283324_builders%20logos/images_0000_mattamyhomes.png" },
+  { name: "Branthaven", image: "https://dontdelete2005142.kloudbean.com/1764283324_builders%20logos/images_0001_BRANTHAVEN.png" },
+  { name: "Rosehaven", image: "https://dontdelete2005142.kloudbean.com/1764283324_builders%20logos/images_0002_ROSEHAVEN.png" },
+  { name: "CentreCourt", image: "https://dontdelete2005142.kloudbean.com/1764283324_builders%20logos/images_0003_CENTRECOURT.png" },
+  { name: "Fieldgate Homes", image: "https://dontdelete2005142.kloudbean.com/1764283324_builders%20logos/images_0006_FIELDGATE-Homes.png" },
+  { name: "Ballantry Homes", image: "https://dontdelete2005142.kloudbean.com/1764283324_builders%20logos/images_0004_BALLANTRY.png" },
+  { name: "Greenpark Group", image: "https://dontdelete2005142.kloudbean.com/1764283324_builders%20logos/images_0007_GreenPark-Group.png" },
+  { name: "Deco", image: "https://dontdelete2005142.kloudbean.com/1764283324_builders%20logos/images_0008_DECO.png" },
+  { name: "Treasure Hill", image: "https://dontdelete2005142.kloudbean.com/1764283324_builders%20logos/images_0011_TREASURE-HILL.png" },
+];
+
+// Builder Logos Carousel Component
+function BuilderLogosCarousel() {
+  const [api, setApi] = React.useState<CarouselApi>();
+  const [current, setCurrent] = React.useState(0);
+  const [count, setCount] = React.useState(0);
+
+  React.useEffect(() => {
+    if (!api) {
+      return;
+    }
+
+    setCount(api.scrollSnapList().length);
+    setCurrent(api.selectedScrollSnap() + 1);
+
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap() + 1);
+    });
+  }, [api]);
+
+  // Auto-scroll functionality
+  useEffect(() => {
+    if (!api) return;
+
+    const interval = setInterval(() => {
+      api.scrollNext();
+    }, 3000); // Auto-scroll every 3 seconds
+
+    return () => clearInterval(interval);
+  }, [api]);
+
+  return (
+    <div className="w-full">
+      <Carousel
+        setApi={setApi}
+        opts={{
+          align: "start",
+          loop: true,
+        }}
+        className="w-full"
+      >
+        <CarouselContent className="-ml-2 md:-ml-4">
+          {builderLogos.map((logo, index) => (
+            <CarouselItem key={index} className="pl-2 md:pl-4 md:basis-1/3 lg:basis-1/4 xl:basis-1/5">
+              <div className="relative h-48 md:h-56 lg:h-64 bg-white rounded-lg border-2 border-slate-200 shadow-lg hover:shadow-xl hover:border-brand-bright-red transition-all duration-300 flex items-center justify-center p-8 overflow-hidden group">
+                <div className="relative w-full h-full flex items-center justify-center">
+                  <Image
+                    src={logo.image}
+                    alt={logo.name}
+                    width={250}
+                    height={150}
+                    className="object-contain w-full h-full max-w-full max-h-full"
+                    unoptimized
+                    priority={index < 5}
+                    onError={(e) => {
+                      // Hide image on error - fallback will show
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                    }}
+                    onLoad={(e) => {
+                      // Hide fallback when image loads successfully
+                      const target = e.target as HTMLImageElement;
+                      const card = target.closest('.group');
+                      if (card) {
+                        const fallback = card.querySelector('.fallback-text') as HTMLElement;
+                        if (fallback) {
+                          fallback.style.display = 'none';
+                        }
+                      }
+                    }}
+                  />
+                  <div className="fallback-text absolute inset-0 flex flex-col items-center justify-center text-slate-400 text-sm font-medium text-center px-4">
+                    <Building2 className="h-12 w-12 text-slate-300 mb-2" />
+                    <span>{logo.name}</span>
+                  </div>
+                </div>
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+      </Carousel>
+    </div>
+  );
+}
 
 export default function PreConstruction() {
   const { openModal } = useJoinUsModal();
@@ -449,7 +557,7 @@ export default function PreConstruction() {
                 </div>
               </motion.div>
 
-              {/* Right Image/Video Placeholder */}
+              {/* Right Image Carousel */}
               <motion.div
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -458,12 +566,40 @@ export default function PreConstruction() {
                 className="relative"
               >
                 <Card className="bg-white border border-slate-200 shadow-2xl overflow-hidden">
-                  <div className="bg-slate-100 aspect-video flex items-center justify-center">
-                    <div className="text-center">
-                      <Building2 className="h-20 w-20 text-slate-400 mx-auto mb-4" />
-                      <p className="text-slate-500 font-medium">[Tour Photo / Video]</p>
-                    </div>
-                  </div>
+                  <Carousel
+                    opts={{
+                      align: "start",
+                      loop: true,
+                    }}
+                    className="w-full"
+                  >
+                    <CarouselContent>
+                      <CarouselItem>
+                        <div className="relative w-full aspect-video flex items-center justify-center bg-slate-50">
+                          <Image
+                            src="https://dontdelete2005142.kloudbean.com/1764280267_SOCIAL MEDIA POSTS (45).jpg"
+                            alt="Builder Tour Image 1"
+                            width={600}
+                            height={400}
+                            className="object-contain w-full h-full"
+                          />
+                        </div>
+                      </CarouselItem>
+                      <CarouselItem>
+                        <div className="relative w-full aspect-video flex items-center justify-center bg-slate-50">
+                          <Image
+                            src="https://dontdelete2005142.kloudbean.com/1764280267_SOCIAL MEDIA POSTS (46).jpg"
+                            alt="Builder Tour Image 2"
+                            width={600}
+                            height={400}
+                            className="object-contain w-full h-full"
+                          />
+                        </div>
+                      </CarouselItem>
+                    </CarouselContent>
+                    <CarouselPrevious className="left-4 bg-white/80 hover:bg-white border-slate-300" />
+                    <CarouselNext className="right-4 bg-white/80 hover:bg-white border-slate-300" />
+                  </Carousel>
                 </Card>
                 <Card className="mt-6 bg-white border border-slate-200 shadow-xl">
                   <CardContent className="p-6">
@@ -495,53 +631,77 @@ export default function PreConstruction() {
               </p>
             </motion.div>
 
-            <div className="grid md:grid-cols-3 gap-8 mb-8">
-              {/* Social Media Packs */}
+            <div className="grid md:grid-cols-4 gap-8 mb-8">
+              {/* Social Media Assets Carousel */}
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.1 }}
+                className="md:col-span-3"
               >
                 <Card className="h-full bg-white border border-slate-200 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2">
                   <CardContent className="p-8">
-                    <h3 className="text-2xl font-bold text-slate-900 mb-4">Social Media Packs</h3>
+                    <h3 className="text-2xl font-bold text-slate-900 mb-4">Social Media Assets</h3>
                     <p className="text-slate-600 mb-6 leading-relaxed">
-                      Instagram, Facebook, LinkedIn templates + Reel covers and WhatsApp posters.
+                      Browse our collection of ready-to-use social media templates and assets.
                     </p>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="bg-slate-100 rounded-lg p-6 flex items-center justify-center border border-slate-200">
-                        <span className="text-slate-500 text-sm font-medium">Image</span>
-                      </div>
-                      <div className="bg-slate-100 rounded-lg p-6 flex items-center justify-center border border-slate-200">
-                        <span className="text-slate-500 text-sm font-medium">Image</span>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-
-              {/* Project Image Library */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-              >
-                <Card className="h-full bg-white border border-slate-200 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2">
-                  <CardContent className="p-8">
-                    <h3 className="text-2xl font-bold text-slate-900 mb-4">Project Image Library</h3>
-                    <p className="text-slate-600 mb-6 leading-relaxed">
-                      Renderings, floor plans, brochures and amenity previews in high resolution.
-                    </p>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="bg-slate-100 rounded-lg p-6 flex items-center justify-center border border-slate-200">
-                        <span className="text-slate-500 text-sm font-medium">Plan</span>
-                      </div>
-                      <div className="bg-slate-100 rounded-lg p-6 flex items-center justify-center border border-slate-200">
-                        <span className="text-slate-500 text-sm font-medium">Render</span>
-                      </div>
-                    </div>
+                    <Carousel
+                      opts={{
+                        align: "start",
+                        loop: true,
+                      }}
+                      className="w-full"
+                    >
+                      <CarouselContent className="-ml-2 md:-ml-4">
+                        <CarouselItem className="pl-2 md:pl-4 basis-1/2">
+                          <div className="relative w-full aspect-[4/5] flex items-center justify-center bg-slate-50 rounded-lg overflow-hidden border border-slate-200">
+                            <Image
+                              src="https://dontdelete2005142.kloudbean.com/1764280685_SOCIAL ASSETS (61) (2).jpg"
+                              alt="Social Media Asset 1"
+                              width={400}
+                              height={500}
+                              className="object-cover w-full h-full"
+                            />
+                          </div>
+                        </CarouselItem>
+                        <CarouselItem className="pl-2 md:pl-4 basis-1/2">
+                          <div className="relative w-full aspect-[4/5] flex items-center justify-center bg-slate-50 rounded-lg overflow-hidden border border-slate-200">
+                            <Image
+                              src="https://dontdelete2005142.kloudbean.com/1764280685_SOCIAL ASSETS (53) (2).jpg"
+                              alt="Social Media Asset 2"
+                              width={400}
+                              height={500}
+                              className="object-cover w-full h-full"
+                            />
+                          </div>
+                        </CarouselItem>
+                        <CarouselItem className="pl-2 md:pl-4 basis-1/2">
+                          <div className="relative w-full aspect-[4/5] flex items-center justify-center bg-slate-50 rounded-lg overflow-hidden border border-slate-200">
+                            <Image
+                              src="https://dontdelete2005142.kloudbean.com/1764280685_SOCIAL ASSETS (51) (2).jpg"
+                              alt="Social Media Asset 3"
+                              width={400}
+                              height={500}
+                              className="object-cover w-full h-full"
+                            />
+                          </div>
+                        </CarouselItem>
+                        <CarouselItem className="pl-2 md:pl-4 basis-1/2">
+                          <div className="relative w-full aspect-[4/5] flex items-center justify-center bg-slate-50 rounded-lg overflow-hidden border border-slate-200">
+                            <Image
+                              src="https://dontdelete2005142.kloudbean.com/1764280685_SOCIAL ASSETS (3) (2).gif"
+                              alt="Social Media Asset 4"
+                              width={400}
+                              height={500}
+                              className="object-cover w-full h-full"
+                            />
+                          </div>
+                        </CarouselItem>
+                      </CarouselContent>
+                      <CarouselPrevious className="left-2 bg-white/90 hover:bg-white border-slate-300 shadow-lg" />
+                      <CarouselNext className="right-2 bg-white/90 hover:bg-white border-slate-300 shadow-lg" />
+                    </Carousel>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -551,16 +711,24 @@ export default function PreConstruction() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.3 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="md:col-span-1"
               >
                 <Card className="h-full bg-white border border-slate-200 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2">
-                  <CardContent className="p-8">
-                    <h3 className="text-2xl font-bold text-slate-900 mb-4">Email & Newsletter Kits</h3>
-                    <p className="text-slate-600 mb-6 leading-relaxed">
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-bold text-slate-900 mb-3">Email & Newsletter Kits</h3>
+                    <p className="text-slate-600 mb-4 text-sm leading-relaxed">
                       Plug-and-play campaign content with copy + visuals ready to send.
                     </p>
-                    <div className="bg-slate-100 rounded-lg p-12 flex items-center justify-center border border-slate-200">
-                      <span className="text-slate-500 text-sm font-medium">Template Preview</span>
+                    <div className="rounded-lg overflow-hidden border border-slate-200 w-full h-[400px]">
+                      <div className="relative w-full h-full">
+                        <Image
+                          src="https://dontdelete2005142.kloudbean.com/1764280813_image 17 (1).png"
+                          alt="Email & Newsletter Template Preview"
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
@@ -605,7 +773,7 @@ export default function PreConstruction() {
           </div>
         </section>
 
-        {/* Platinum Projects & Featured Launches */}
+        {/* Builder Partners Logos */}
         <section className="py-24 bg-gradient-to-br from-white via-slate-50 to-white relative overflow-hidden">
           <div className="absolute inset-0">
             <div className="absolute top-20 right-10 w-80 h-80 bg-gradient-to-br from-red-200/20 to-pink-300/15 rounded-full blur-3xl"></div>
@@ -613,111 +781,22 @@ export default function PreConstruction() {
           </div>
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="flex flex-wrap justify-between items-center mb-16 gap-4">
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-              >
-                <h2 className="text-4xl md:text-5xl font-black text-slate-900 font-montserrat">
-                  Platinum Projects & <span className="text-brand-bright-red">Featured Launches</span>
-                </h2>
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-              >
-                <Button onClick={openModal} variant="link" className="text-brand-bright-red hover:text-black font-bold text-lg p-0">
-                  Browse all projects →
-                </Button>
-              </motion.div>
-            </div>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-4xl md:text-5xl font-black text-slate-900 font-montserrat mb-6">
+                Our <span className="text-brand-bright-red">Builder Partners</span>
+              </h2>
+              <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+                We work with the GTA's most trusted builders to bring you exclusive pre-construction opportunities.
+              </p>
+            </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-              >
-                <Card className="h-full bg-white border border-slate-200 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2 overflow-hidden group">
-                  <div className="bg-slate-100 aspect-[4/3] flex items-center justify-center border-b border-slate-200">
-                    <span className="text-slate-400 font-medium">[Project Image 1]</span>
-                  </div>
-                  <CardContent className="p-6">
-                    <h3 className="text-2xl font-bold text-slate-900 mb-2 group-hover:text-brand-bright-red transition-colors">
-                      Project Name 1
-                    </h3>
-                    <p className="text-slate-600 mb-4 leading-relaxed">
-                      Brief project tagline or highlight line that sells it.
-                    </p>
-                    <div className="flex justify-between items-center">
-                      <span className="text-slate-900 font-bold">From $XXX,XXX</span>
-                      <Button onClick={openModal} variant="link" className="text-brand-bright-red hover:text-black font-bold p-0">
-                        View details →
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-              >
-                <Card className="h-full bg-white border border-slate-200 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2 overflow-hidden group">
-                  <div className="bg-slate-100 aspect-[4/3] flex items-center justify-center border-b border-slate-200">
-                    <span className="text-slate-400 font-medium">[Project Image 2]</span>
-                  </div>
-                  <CardContent className="p-6">
-                    <h3 className="text-2xl font-bold text-slate-900 mb-2 group-hover:text-brand-bright-red transition-colors">
-                      Project Name 2
-                    </h3>
-                    <p className="text-slate-600 mb-4 leading-relaxed">
-                      Brief project tagline or highlight line that sells it.
-                    </p>
-                    <div className="flex justify-between items-center">
-                      <span className="text-slate-900 font-bold">From $XXX,XXX</span>
-                      <Button onClick={openModal} variant="link" className="text-brand-bright-red hover:text-black font-bold p-0">
-                        View details →
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-              >
-                <Card className="h-full bg-white border border-slate-200 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2 overflow-hidden group">
-                  <div className="bg-slate-100 aspect-[4/3] flex items-center justify-center border-b border-slate-200">
-                    <span className="text-slate-400 font-medium">[Project Image 3]</span>
-                  </div>
-                  <CardContent className="p-6">
-                    <h3 className="text-2xl font-bold text-slate-900 mb-2 group-hover:text-brand-bright-red transition-colors">
-                      Project Name 3
-                    </h3>
-                    <p className="text-slate-600 mb-4 leading-relaxed">
-                      Brief project tagline or highlight line that sells it.
-                    </p>
-                    <div className="flex justify-between items-center">
-                      <span className="text-slate-900 font-bold">From $XXX,XXX</span>
-                      <Button onClick={openModal} variant="link" className="text-brand-bright-red hover:text-black font-bold p-0">
-                        View details →
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            </div>
+            <BuilderLogosCarousel />
           </div>
         </section>
 
