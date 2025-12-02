@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/card';
-import { Phone, Mail, Linkedin } from 'lucide-react';
+import { Phone, Mail, Linkedin, Instagram } from 'lucide-react';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -21,38 +21,48 @@ const staggerContainer = {
 const teamMembers = [
   {
     name: "Aman Bhandaal",
-    role: "Real Estate Professional",
+    role: "Broker/Owner",
     image: "https://assets.co.dev/910e4b67-1d47-4112-8d57-8a5231718f2f/aman-d1be173.png",
-    phone: "(416) 555-0101",
-    email: "info@remaxex.com"
+    phone: "+1 (416) 520-3462",
+    email: "aman@remaxex.com",
+    instagram: "https://www.instagram.com/aman.bhandaal/?hl=en",
+    linkedin: "https://www.linkedin.com/in/aman-bhandaal-703562219/?originalSubdomain=ca"
   },
   {
     name: "Gurv Dhillon",
-    role: "Real Estate Professional",
+    role: "Broker of Record",
     image: "https://assets.co.dev/910e4b67-1d47-4112-8d57-8a5231718f2f/gurv-836439f.png",
-    phone: "(416) 555-0102",
-    email: "info@remaxex.com"
+    phone: null,
+    email: "gurv@remaxex.com",
+    instagram: "https://www.instagram.com/gdhillon.remax/?hl=en",
+    linkedin: "https://www.linkedin.com/in/gurv-dhillon-b40723164/?originalSubdomain=ca"
   },
   {
     name: "Shizu Asai",
-    role: "Real Estate Professional", 
+    role: "Director of Operations", 
     image: "https://assets.co.dev/910e4b67-1d47-4112-8d57-8a5231718f2f/shizu-25638c3.png",
-    phone: "(416) 555-0103",
-    email: "info@remaxex.com"
+    phone: null,
+    email: "shizu@remaxex.com",
+    instagram: null,
+    linkedin: "https://www.linkedin.com/company/remax-excellence-realty-brokerage/"
   },
   {
     name: "Lovleen Hundal",
-    role: "Real Estate Professional",
+    role: "Deals Manager",
     image: "https://assets.co.dev/910e4b67-1d47-4112-8d57-8a5231718f2f/loveleen-affabf2.png",
-    phone: "(416) 555-0104", 
-    email: "info@remaxex.com"
+    phone: null, 
+    email: "alldeals@remaxex.com",
+    instagram: null,
+    linkedin: "https://www.linkedin.com/company/remax-excellence-realty-brokerage/"
   },
   {
     name: "Nikita Suri",
-    role: "Real Estate Professional",
+    role: "Marketing Manager",
     image: "https://dontdelete2005142.kloudbean.com/1762973954_Nikita Suri.png",
-    phone: "(416) 555-0105",
-    email: "info@remaxex.com"
+    phone: null,
+    email: "marketing@remaxex.com",
+    instagram: null,
+    linkedin: "https://www.linkedin.com/company/remax-excellence-realty-brokerage/"
   }
 ];
 
@@ -108,13 +118,15 @@ const TeamSection: React.FC = () => {
                     </div>
                     
                     <div className="flex justify-center space-x-3">
-                      <a 
-                        href={`tel:${member.phone}`}
-                        className="p-2 rounded-full bg-brand-bright-red/10 text-brand-bright-red hover:bg-brand-bright-red hover:text-white transition-colors duration-200"
-                        title={`Call ${member.name}`}
-                      >
-                        <Phone className="h-4 w-4" />
-                      </a>
+                      {member.phone && (
+                        <a 
+                          href={`tel:${member.phone}`}
+                          className="p-2 rounded-full bg-brand-bright-red/10 text-brand-bright-red hover:bg-brand-bright-red hover:text-white transition-colors duration-200"
+                          title={`Call ${member.name}`}
+                        >
+                          <Phone className="h-4 w-4" />
+                        </a>
+                      )}
                       <a 
                         href={`mailto:${member.email}`}
                         className="p-2 rounded-full bg-brand-medium-blue/10 text-brand-medium-blue hover:bg-brand-medium-blue hover:text-white transition-colors duration-200"
@@ -122,13 +134,28 @@ const TeamSection: React.FC = () => {
                       >
                         <Mail className="h-4 w-4" />
                       </a>
-                      <a 
-                        href="#"
-                        className="p-2 rounded-full bg-brand-dark-blue/10 text-brand-dark-blue hover:bg-brand-dark-blue hover:text-white transition-colors duration-200"
-                        title={`${member.name} on LinkedIn`}
-                      >
-                        <Linkedin className="h-4 w-4" />
-                      </a>
+                      {member.instagram && (
+                        <a 
+                          href={member.instagram}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="p-2 rounded-full bg-gradient-to-br from-purple-500/10 to-pink-500/10 text-purple-600 hover:from-purple-500 hover:to-pink-500 hover:text-white transition-colors duration-200"
+                          title={`${member.name} on Instagram`}
+                        >
+                          <Instagram className="h-4 w-4" />
+                        </a>
+                      )}
+                      {member.linkedin && (
+                        <a 
+                          href={member.linkedin}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="p-2 rounded-full bg-brand-dark-blue/10 text-brand-dark-blue hover:bg-brand-dark-blue hover:text-white transition-colors duration-200"
+                          title={`${member.name} on LinkedIn`}
+                        >
+                          <Linkedin className="h-4 w-4" />
+                        </a>
+                      )}
                     </div>
                   </div>
                 </CardContent>
