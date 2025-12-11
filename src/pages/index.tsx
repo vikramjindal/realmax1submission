@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
+import { GetStaticProps } from "next";
 
 import { motion } from "framer-motion";
 
@@ -12,6 +13,15 @@ import TeamSection from "@/components/TeamSection";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useJoinUsModal } from "@/contexts/JoinUsModalContext";
+import { 
+  getHeroSection, 
+  getAgents, 
+  getTestimonials,
+  getFeaturedImageUrl,
+  type HeroSection as HeroSectionType,
+  type Agent,
+  type Testimonial
+} from "@/lib/wordpress";
 
 
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
@@ -104,8 +114,20 @@ const staggerContainer = {
 
 
 
-const HeroSection = () => {
+interface HeroSectionProps {
+  heroData: HeroSectionType | null;
+}
+
+const HeroSection: React.FC<HeroSectionProps> = ({ heroData }) => {
   const { openModal } = useJoinUsModal();
+
+  const backgroundImage = heroData?.background_image || '/images/hero-background.png';
+  const title = heroData?.title || 'REMAX';
+  const subtitle = heroData?.subtitle || 'EXCELLENCE';
+  const description = heroData?.description || 'One of the Youngest, Fastest-Growing Real Estate Brokerage';
+  const statsText = heroData?.stats_text || '120+ Motivated Agents';
+  const statsSubtext = heroData?.stats_subtext || 'Growing daily';
+  const ctaText = heroData?.cta_text || 'Join Our Team';
 
   return (
 
@@ -116,7 +138,7 @@ const HeroSection = () => {
 
         style={{
 
-          backgroundImage: 'url(/images/hero-background.png)',
+          backgroundImage: `url(${backgroundImage})`,
           backgroundSize: 'cover',
 
           backgroundPosition: 'center',
@@ -175,10 +197,10 @@ const HeroSection = () => {
         <div className="flex items-center min-h-screen">
           <div className="text-left space-y-8 max-w-2xl">
             <h1 className="text-5xl lg:text-7xl font-black text-white leading-tight font-montserrat">
-              <span className="block">REMAX</span>
+              <span className="block">{title}</span>
 
               <span className="block text-brand-bright-red">
-                EXCELLENCE
+                {subtitle}
               </span>
 
             </h1>
@@ -186,13 +208,13 @@ const HeroSection = () => {
             
 
             <p className="text-2xl lg:text-3xl text-white font-semibold leading-relaxed">
-              One of the Youngest, Fastest-Growing Real Estate Brokerage
+              {description}
             </p>
             
             <div className="flex justify-start">
               <Button onClick={openModal} className="bg-brand-bright-red hover:bg-black text-white font-bold px-10 py-5 text-2xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 rounded-lg flex items-center space-x-4">
                 <Users className="w-8 h-8" />
-                <span>Join Our Team</span>
+                <span>{ctaText}</span>
                 <ArrowRight className="w-8 h-8" />
               </Button>
 
@@ -203,11 +225,11 @@ const HeroSection = () => {
 
             <div className="text-left space-y-3">
               <div className="text-5xl lg:text-6xl font-black text-white">
-                120+ Motivated Agents
+                {statsText}
                 </div>
 
               <div className="text-2xl text-white/80">
-                Growing daily
+                {statsSubtext}
               </div>
 
             </div>
@@ -226,7 +248,16 @@ const HeroSection = () => {
 
 
 
-export default function Home() {
+import { getTeamMembers, type TeamMember } from "@/lib/wordpress";
+
+interface HomeProps {
+  heroData: HeroSectionType | null;
+  agents: Agent[];
+  testimonials: Testimonial[];
+  teamMembers: TeamMember[];
+}
+
+export default function Home({ heroData, agents: wpAgents, testimonials: wpTestimonials, teamMembers }: HomeProps) {
 
   const [selectedReel, setSelectedReel] = useState<any>(null);
 
@@ -236,21 +267,29 @@ export default function Home() {
 
   const [currentAgentIndex, setCurrentAgentIndex] = useState(0);
 
-  const agents = [
-    { src: "https://dontdelete2005142.kloudbean.com/1762974051_aman-d1be173.webp", name: "Aman" },
-    { src: "/images/gallery/Kulwinder Gill.png", name: "Kulwinder Gill" },
-    { src: "/images/gallery/Mandeep Dhesi.png", name: "Mandeep Dhesi" },
-    { src: "/images/gallery/Manjot Brar.png", name: "Manjot Brar" },
-    { src: "/images/gallery/Manjot Kaur.png", name: "Manjot Kaur" },
-    { src: "/images/gallery/Tanvir Jhajj.png", name: "Tanvir Jhajj" }
-  ];
+  // Convert WordPress agents to format expected by component
+  const agents = wpAgents.length > 0 
+    ? wpAgents.map(agent => ({
+        src: getFeaturedImageUrl(agent) || '/images/gallery/default.png',
+        name: agent.agent_name || agent.title.rendered || 'Agent'
+      }))
+    : [
+        { src: "https://dontdelete2005142.kloudbean.com/1762974051_aman-d1be173.webp", name: "Aman" },
+        { src: "/images/gallery/Kulwinder Gill.png", name: "Kulwinder Gill" },
+        { src: "/images/gallery/Mandeep Dhesi.png", name: "Mandeep Dhesi" },
+        { src: "/images/gallery/Manjot Brar.png", name: "Manjot Brar" },
+        { src: "/images/gallery/Manjot Kaur.png", name: "Manjot Kaur" },
+        { src: "/images/gallery/Tanvir Jhajj.png", name: "Tanvir Jhajj" }
+      ];
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentAgentIndex((prevIndex) => (prevIndex + 1) % agents.length);
-    }, 3000); // Change every 3 seconds
+    if (agents.length > 0) {
+      const interval = setInterval(() => {
+        setCurrentAgentIndex((prevIndex) => (prevIndex + 1) % agents.length);
+      }, 3000); // Change every 3 seconds
 
-    return () => clearInterval(interval);
+      return () => clearInterval(interval);
+    }
   }, [agents.length]);
 
 
@@ -297,7 +336,7 @@ export default function Home() {
 
         <Header />
 
-        <HeroSection />
+        <HeroSection heroData={heroData} />
         
         
 
@@ -539,7 +578,7 @@ export default function Home() {
 
         
         
-        <TeamSection />
+        <TeamSection teamMembers={teamMembers} />
         
         
 
@@ -1067,46 +1106,31 @@ export default function Home() {
 
             >
 
-              {[
-
+              {(wpTestimonials.length > 0 ? wpTestimonials.map(t => ({
+                name: t.title.rendered,
+                role: t.testimonial_role || '',
+                content: t.content.rendered.replace(/<[^>]*>/g, ''), // Strip HTML tags
+                rating: t.testimonial_rating || 5
+              })) : [
                 {
-
                   name: "Sarah & Michael Chen",
-
                   role: "First-time Homebuyers",
-
                   content: "REMAX Excellence made our first home purchase seamless. Our agent was patient, knowledgeable, and fought hard to get us the best deal. We couldn't be happier!",
-
                   rating: 5
-
                 },
-
                 {
-
                   name: "Jennifer Rodriguez",
-
                   role: "Property Seller",
-
-
                   content: "Sold my condo in just 2 weeks for above asking price! The marketing strategy was brilliant - professional photos, virtual tours, and targeted social media campaigns.",
-
                   rating: 5
-
                 },
-
                 {
-
                   name: "David Thompson",
-
                   role: "Real Estate Investor",
-
                   content: "As an investor, I need an agent who understands the market deeply. REMAX Excellence delivered exceptional insights and helped me make smart investment decisions.",
-
                   rating: 5
-
                 }
-
-              ].map((testimonial, index) => (
+              ]).map((testimonial, index) => (
 
                 <motion.div 
 
@@ -1535,3 +1559,40 @@ export default function Home() {
   );
 
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+  try {
+    // Fetch data from WordPress
+    const [heroData, agents, testimonials, teamMembers] = await Promise.all([
+      getHeroSection().catch(() => null),
+      getAgents().catch(() => []),
+      getTestimonials().catch(() => []),
+      getTeamMembers().catch(() => [])
+    ]);
+
+    return {
+      props: {
+        heroData,
+        agents,
+        testimonials,
+        teamMembers
+      },
+      // Revalidate every 60 seconds (ISR)
+      // When webhook is received, it will trigger immediate revalidation
+      revalidate: 60
+    };
+  } catch (error) {
+    console.error('Error fetching WordPress data:', error);
+    
+    // Return empty data on error (fallback to hardcoded content)
+    return {
+      props: {
+        heroData: null,
+        agents: [],
+        testimonials: [],
+        teamMembers: []
+      },
+      revalidate: 60
+    };
+  }
+};

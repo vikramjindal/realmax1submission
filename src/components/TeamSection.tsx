@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/card';
 import { Phone, Mail, Linkedin, Instagram } from 'lucide-react';
+import { TeamMember, getFeaturedImageUrl } from '@/lib/wordpress';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -18,7 +19,8 @@ const staggerContainer = {
   }
 };
 
-const teamMembers = [
+// Fallback team members if WordPress data is not available
+const fallbackTeamMembers = [
   {
     name: "Aman Bhandaal",
     role: "Broker/Owner",
@@ -66,7 +68,23 @@ const teamMembers = [
   }
 ];
 
-const TeamSection: React.FC = () => {
+interface TeamSectionProps {
+  teamMembers?: TeamMember[];
+}
+
+const TeamSection: React.FC<TeamSectionProps> = ({ teamMembers: wpTeamMembers }) => {
+  // Convert WordPress team members to format expected by component
+  const teamMembers = wpTeamMembers && wpTeamMembers.length > 0
+    ? wpTeamMembers.map(member => ({
+        name: member.title.rendered,
+        role: member.team_role || '',
+        image: getFeaturedImageUrl(member) || '',
+        phone: member.team_phone,
+        email: member.team_email || '',
+        instagram: member.team_instagram,
+        linkedin: member.team_linkedin
+      }))
+    : fallbackTeamMembers;
   return (
     <section className="py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
