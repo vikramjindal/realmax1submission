@@ -1610,7 +1610,7 @@ export const getStaticProps: GetStaticProps = async () => {
     // Fetch data from WordPress with better error handling
     console.log('📡 Fetching from WordPress...');
     
-    const [heroData, agents, testimonials, teamMembers] = await Promise.all([
+    const [heroData, agents, testimonials, teamMembers, carouselSpeed] = await Promise.all([
       getHeroSection().catch((err) => {
         console.error('❌ Error fetching hero:', err.message);
         return null;
@@ -1626,7 +1626,8 @@ export const getStaticProps: GetStaticProps = async () => {
       getTeamMembers().catch((err) => {
         console.error('❌ Error fetching team members:', err.message);
         return [];
-      })
+      }),
+      getCarouselSpeed().catch(() => 15) // Default to 15 seconds
     ]);
 
     console.log('✅ WordPress data fetched:');
@@ -1640,7 +1641,8 @@ export const getStaticProps: GetStaticProps = async () => {
         heroData,
         agents,
         testimonials,
-        teamMembers
+        teamMembers,
+        carouselSpeed
       },
       // Revalidate every 60 seconds (ISR)
       // When webhook is received, it will trigger immediate revalidation
@@ -1655,7 +1657,8 @@ export const getStaticProps: GetStaticProps = async () => {
         heroData: null,
         agents: [],
         testimonials: [],
-        teamMembers: []
+        teamMembers: [],
+        carouselSpeed: 15
       },
       revalidate: 60
     };
