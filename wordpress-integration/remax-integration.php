@@ -35,6 +35,13 @@ if (file_exists($plugin_dir . 'remax-webhooks.php')) {
     error_log('REMAX Integration: remax-webhooks.php not found!');
 }
 
+// Force register post types immediately (not just on activation)
+add_action('init', function() {
+    if (function_exists('remax_register_custom_post_types')) {
+        remax_register_custom_post_types();
+    }
+}, 0); // Priority 0 to run early
+
 // Flush rewrite rules on plugin activation
 function remax_flush_rewrite_rules() {
     // Make sure the function exists before calling
