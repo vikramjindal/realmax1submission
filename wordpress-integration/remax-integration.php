@@ -19,3 +19,16 @@ require_once plugin_dir_path(__FILE__) . 'remax-custom-post-types.php';
 require_once plugin_dir_path(__FILE__) . 'remax-rest-api.php';
 require_once plugin_dir_path(__FILE__) . 'remax-webhooks.php';
 
+// Flush rewrite rules on plugin activation
+function remax_flush_rewrite_rules() {
+    remax_register_custom_post_types();
+    flush_rewrite_rules();
+}
+register_activation_hook(__FILE__, 'remax_flush_rewrite_rules');
+
+// Flush rewrite rules on plugin deactivation
+function remax_deactivate_flush() {
+    flush_rewrite_rules();
+}
+register_deactivation_hook(__FILE__, 'remax_deactivate_flush');
+
