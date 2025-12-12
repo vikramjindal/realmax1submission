@@ -1105,16 +1105,20 @@ export const getStaticProps: GetStaticProps = async () => {
 
   try {
     console.log('📡 Fetching training materials from WordPress...');
-    const trainingMaterials = await getTrainingMaterials().catch(error => {
-      console.error('❌ Error fetching training materials:', error);
-      return [];
-    });
+    const [trainingMaterials, carouselSpeed] = await Promise.all([
+      getTrainingMaterials().catch(error => {
+        console.error('❌ Error fetching training materials:', error);
+        return [];
+      }),
+      getCarouselSpeed().catch(() => 15) // Default to 15 seconds
+    ]);
 
     console.log('✅ Training materials fetched:', trainingMaterials.length);
 
     return {
       props: {
-        trainingMaterials
+        trainingMaterials,
+        carouselSpeed
       },
       revalidate: 60 // Revalidate every 60 seconds
     };
