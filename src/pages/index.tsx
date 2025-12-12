@@ -489,6 +489,12 @@ export default function Home({ heroData, agents: wpAgents, testimonials: wpTesti
                               width={320}
                               height={320}
                               className="w-full h-full object-contain transition-opacity duration-1000"
+                              unoptimized={agents[currentAgentIndex].src.startsWith('https://backend.joinremaxex.com')}
+                              onError={(e) => {
+                                console.error('Image failed to load:', agents[currentAgentIndex].src);
+                                const target = e.target as HTMLImageElement;
+                                target.src = '/images/gallery/default.png';
+                              }}
                             />
                           </div>
 
