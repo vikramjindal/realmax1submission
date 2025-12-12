@@ -159,26 +159,48 @@ export async function getBlogPostById(id: number): Promise<WordPressPost> {
 
 // Agents (Carousel)
 export async function getAgents(): Promise<Agent[]> {
+  // WordPress REST API doesn't support orderby=meta_value_num for custom post types by default
+  // Fetch all agents and sort client-side
   const agents = await fetchFromWordPress(
-    `/wp-json/wp/v2/agents?_embed&per_page=100&status=publish&orderby=meta_value_num&meta_key=_remax_agent_order&order=asc`
+    `/wp-json/wp/v2/agents?_embed&per_page=100&status=publish&orderby=date&order=asc`
   );
-  return agents;
+  
+  // Sort by agent_order meta field client-side
+  return agents.sort((a, b) => {
+    const orderA = a.agent_order || 0;
+    const orderB = b.agent_order || 0;
+    return orderA - orderB;
+  });
 }
 
 // Team Members
 export async function getTeamMembers(): Promise<TeamMember[]> {
+  // Fetch all team members and sort client-side
   const members = await fetchFromWordPress(
-    `/wp-json/wp/v2/team-members?_embed&per_page=100&status=publish&orderby=meta_value_num&meta_key=_remax_team_order&order=asc`
+    `/wp-json/wp/v2/team-members?_embed&per_page=100&status=publish&orderby=date&order=asc`
   );
-  return members;
+  
+  // Sort by team_order meta field client-side
+  return members.sort((a, b) => {
+    const orderA = a.team_order || 0;
+    const orderB = b.team_order || 0;
+    return orderA - orderB;
+  });
 }
 
 // Testimonials
 export async function getTestimonials(): Promise<Testimonial[]> {
+  // Fetch all testimonials and sort client-side
   const testimonials = await fetchFromWordPress(
-    `/wp-json/wp/v2/testimonials?_embed&per_page=100&status=publish&orderby=meta_value_num&meta_key=_remax_testimonial_order&order=asc`
+    `/wp-json/wp/v2/testimonials?_embed&per_page=100&status=publish&orderby=date&order=asc`
   );
-  return testimonials;
+  
+  // Sort by testimonial_order meta field client-side
+  return testimonials.sort((a, b) => {
+    const orderA = a.testimonial_order || 0;
+    const orderB = b.testimonial_order || 0;
+    return orderA - orderB;
+  });
 }
 
 // Hero Section
