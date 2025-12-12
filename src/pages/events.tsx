@@ -54,39 +54,70 @@ export default function Events({ events, pastEvents }: EventsProps) {
 
   // Video playback effect
   useEffect(() => {
+    const videos = [video1Ref.current, video2Ref.current, video3Ref.current].filter(Boolean) as HTMLVideoElement[];
+
     async function playAllVideos() {
-      try {
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        const playPromises = [
-          video1Ref.current?.play(),
-          video2Ref.current?.play(),
-          video3Ref.current?.play()
-        ].filter(Boolean);
-        await Promise.all(playPromises);
-      } catch (error) {
-        // Silently handle video playback errors
-        console.log('Video playback error:', error);
+      for (const video of videos) {
+        try {
+          if (video && video.readyState >= 2) { // HAVE_CURRENT_DATA or higher
+            await video.play();
+          } else {
+            // Wait for video to be ready
+            await new Promise((resolve) => {
+              const onCanPlay = () => {
+                video.removeEventListener('canplay', onCanPlay);
+                resolve(undefined);
+              };
+              video.addEventListener('canplay', onCanPlay);
+              video.load(); // Ensure video loads
+            });
+            await video.play();
+          }
+        } catch (error) {
+          console.log('Video playback error for', video.id, error);
+          // Try to play individually with user interaction fallback
+          video.addEventListener('click', () => video.play(), { once: true });
+        }
       }
     }
 
-    playAllVideos();
+    // Wait a bit for videos to mount
+    const timeoutId = setTimeout(() => {
+      playAllVideos();
+    }, 1500);
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            playAllVideos();
+          if (entry.isIntersecting && entry.target instanceof HTMLVideoElement) {
+            const video = entry.target;
+            if (video.paused) {
+              video.play().catch((error) => {
+                console.log('IntersectionObserver play error:', error);
+              });
+            }
           }
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0.3 }
     );
 
-    if (video1Ref.current) observer.observe(video1Ref.current);
-    if (video2Ref.current) observer.observe(video2Ref.current);
-    if (video3Ref.current) observer.observe(video3Ref.current);
+    videos.forEach((video) => {
+      if (video) {
+        observer.observe(video);
+        // Also try to play when video is ready
+        video.addEventListener('loadeddata', () => {
+          if (video.paused) {
+            video.play().catch(() => {
+              // Autoplay blocked, user will need to click
+            });
+          }
+        }, { once: true });
+      }
+    });
 
     return () => {
+      clearTimeout(timeoutId);
       observer.disconnect();
     };
   }, []);
@@ -189,6 +220,8 @@ export default function Events({ events, pastEvents }: EventsProps) {
                     muted
                     loop
                     playsInline
+                    autoPlay
+                    preload="auto"
                     poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 600'%3E%3Crect width='400' height='600' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' font-family='Arial' font-size='18' fill='%236b7280'%3ENetworking Event%3C/text%3E%3C/svg%3E"
                   >
                     <source src="https://dontdelete2005142.kloudbean.com/1761257463_1761203384_IMG_3416%20(1).mp4" type="video/mp4" />
@@ -212,6 +245,8 @@ export default function Events({ events, pastEvents }: EventsProps) {
                     muted
                     loop
                     playsInline
+                    autoPlay
+                    preload="auto"
                     poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 600'%3E%3Crect width='400' height='600' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' font-family='Arial' font-size='18' fill='%236b7280'%3EEvent Highlights%3C/text%3E%3C/svg%3E"
                   >
                     <source src="https://dontdelete2005142.kloudbean.com/1761203384_IMG_5203%20(1).MP4" type="video/mp4" />
@@ -235,6 +270,8 @@ export default function Events({ events, pastEvents }: EventsProps) {
                     muted
                     loop
                     playsInline
+                    autoPlay
+                    preload="auto"
                     poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 600'%3E%3Crect width='400' height='600' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' font-family='Arial' font-size='18' fill='%236b7280'%3EREMAX BBQ Event%3C/text%3E%3C/svg%3E"
                   >
                     <source src="https://dontdelete2005142.kloudbean.com/1761203384_Remax_BBQ.mp4" type="video/mp4" />
