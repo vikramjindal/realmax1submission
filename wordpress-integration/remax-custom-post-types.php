@@ -176,7 +176,9 @@ function remax_register_custom_post_types() {
     ));
 
     // 8. Marketing Services (for marketing page service cards)
-    register_post_type('remax_marketing_service', array(
+    // Note: Using 'remax_mkt_service' (16 chars) instead of 'remax_marketing_service' (23 chars)
+    // because WordPress has a 20-character limit for post type names
+    register_post_type('remax_mkt_service', array(
         'labels' => array(
             'name' => 'Marketing Services',
             'singular_name' => 'Marketing Service',
