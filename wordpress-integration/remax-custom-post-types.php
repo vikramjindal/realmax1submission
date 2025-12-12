@@ -175,7 +175,30 @@ function remax_register_custom_post_types() {
         'menu_position' => 25
     ));
 
-    // 8. Page Sections (for homepage sections)
+    // 8. Marketing Services (for marketing page service cards)
+    register_post_type('remax_marketing_service', array(
+        'labels' => array(
+            'name' => 'Marketing Services',
+            'singular_name' => 'Marketing Service',
+            'add_new' => 'Add New Service',
+            'add_new_item' => 'Add New Marketing Service',
+            'edit_item' => 'Edit Marketing Service',
+            'new_item' => 'New Marketing Service',
+            'view_item' => 'View Marketing Service',
+            'search_items' => 'Search Marketing Services',
+            'not_found' => 'No marketing services found',
+            'not_found_in_trash' => 'No marketing services found in Trash'
+        ),
+        'public' => true,
+        'has_archive' => false,
+        'show_in_rest' => true,
+        'rest_base' => 'marketing-services',
+        'menu_icon' => 'dashicons-admin-tools',
+        'supports' => array('title', 'thumbnail', 'editor'),
+        'menu_position' => 26
+    ));
+
+    // 9. Page Sections (for homepage sections)
     register_post_type('remax_section', array(
         'labels' => array(
             'name' => 'Page Sections',
@@ -268,6 +291,16 @@ function remax_add_meta_boxes() {
         'Training Material Information',
         'remax_training_meta_callback',
         'remax_training',
+        'normal',
+        'high'
+    );
+
+    // Marketing service meta box
+    add_meta_box(
+        'remax_marketing_service_meta',
+        'Marketing Service Information',
+        'remax_marketing_service_meta_callback',
+        'remax_marketing_service',
         'normal',
         'high'
     );
@@ -510,6 +543,40 @@ function remax_training_meta_callback($post) {
     echo '<p><strong>Note:</strong> Set a Featured Image for this training material. The image will be used in the carousel.</p>';
 }
 
+// Marketing Service meta box callback
+function remax_marketing_service_meta_callback($post) {
+    wp_nonce_field('remax_marketing_service_meta', 'remax_marketing_service_meta_nonce');
+    
+    $service_media_type = get_post_meta($post->ID, '_remax_service_media_type', true);
+    $service_media_url = get_post_meta($post->ID, '_remax_service_media_url', true);
+    $service_order = get_post_meta($post->ID, '_remax_service_order', true);
+    
+    echo '<table class="form-table">';
+    echo '<tr>';
+    echo '<th><label for="remax_service_media_type">Media Type</label></th>';
+    echo '<td>';
+    echo '<select id="remax_service_media_type" name="remax_service_media_type" class="regular-text">';
+    echo '<option value="image"' . selected($service_media_type, 'image', false) . '>Image</option>';
+    echo '<option value="video"' . selected($service_media_type, 'video', false) . '>Video</option>';
+    echo '</select>';
+    echo '<p class="description">Choose whether this service displays an image or video</p>';
+    echo '</td>';
+    echo '</tr>';
+    echo '<tr>';
+    echo '<th><label for="remax_service_media_url">Media URL</label></th>';
+    echo '<td>';
+    echo '<input type="url" id="remax_service_media_url" name="remax_service_media_url" value="' . esc_url($service_media_url) . '" class="regular-text" />';
+    echo '<p class="description">URL to the image or video. If empty, Featured Image will be used for images.</p>';
+    echo '</td>';
+    echo '</tr>';
+    echo '<tr>';
+    echo '<th><label for="remax_service_order">Display Order</label></th>';
+    echo '<td><input type="number" id="remax_service_order" name="remax_service_order" value="' . esc_attr($service_order ? $service_order : '0') . '" class="small-text" /><p class="description">Lower numbers appear first</p></td>';
+    echo '</tr>';
+    echo '</table>';
+    echo '<p><strong>Note:</strong> The title of this post will be used as the service name (e.g., "Facebook Ads", "Welcome Package"). Set a Featured Image if you want to use it instead of the Media URL.</p>';
+}
+
 // Section meta box callback
 function remax_section_meta_callback($post) {
     wp_nonce_field('remax_section_meta', 'remax_section_meta_nonce');
@@ -646,6 +713,19 @@ function remax_save_meta_boxes($post_id) {
         }
         if (isset($_POST['remax_training_order'])) {
             update_post_meta($post_id, '_remax_training_order', intval($_POST['remax_training_order']));
+        }
+    }
+
+    // Save Marketing Service meta
+    if (isset($_POST['remax_marketing_service_meta_nonce']) && wp_verify_nonce($_POST['remax_marketing_service_meta_nonce'], 'remax_marketing_service_meta')) {
+        if (isset($_POST['remax_service_media_type'])) {
+            update_post_meta($post_id, '_remax_service_media_type', sanitize_text_field($_POST['remax_service_media_type']));
+        }
+        if (isset($_POST['remax_service_media_url'])) {
+            update_post_meta($post_id, '_remax_service_media_url', esc_url_raw($_POST['remax_service_media_url']));
+        }
+        if (isset($_POST['remax_service_order'])) {
+            update_post_meta($post_id, '_remax_service_order', intval($_POST['remax_service_order']));
         }
     }
 

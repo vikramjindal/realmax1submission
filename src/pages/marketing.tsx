@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import { useJoinUsModal } from "@/contexts/JoinUsModalContext";
-import { getMarketingMaterials, getMarketingImageUrl, type MarketingMaterial } from "@/lib/wordpress";
+import { getMarketingMaterials, getMarketingImageUrl, getMarketingServices, getMarketingServiceMediaUrl, type MarketingMaterial, type MarketingService } from "@/lib/wordpress";
 import { Target, Sparkles, TrendingUp } from "lucide-react";
 
 const fadeInUp = {
@@ -27,9 +27,10 @@ const staggerContainer = {
 
 interface MarketingProps {
   marketingMaterials: MarketingMaterial[];
+  marketingServices: MarketingService[];
 }
 
-export default function Marketing({ marketingMaterials }: MarketingProps) {
+export default function Marketing({ marketingMaterials, marketingServices }: MarketingProps) {
   const { openModal } = useJoinUsModal();
   
   // Process marketing materials to get image URLs
@@ -337,235 +338,125 @@ export default function Marketing({ marketingMaterials }: MarketingProps) {
 
             {/* Services Grid */}
             <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-              {/* Facebook Ads */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className="group"
-              >
-                <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
-                  <div className="p-6">
-                    <h3 className="text-2xl font-bold text-brand-dark-red mb-4 font-montserrat text-center">Facebook Ads</h3>
-                    <div className="flex justify-center">
-                      <video
-                        width={350}
-                        height={525}
-                        className="rounded-xl"
-                        controls
-                        preload="metadata"
-                        onError={(e) => {
-                          console.error('Video failed to load:', e);
-                        }}
-                      >
-                        <source src="https://dontdelete2005142.kloudbean.com/1761163685_FBADS.mp4" type="video/mp4" />
-                        Your browser does not support the video tag.
-                      </video>
+              {marketingServices.length > 0 ? (
+                marketingServices.map((service, index) => {
+                  const mediaUrl = getMarketingServiceMediaUrl(service);
+                  const isVideo = service.service_media_type === 'video';
+                  const titleColor = index % 2 === 0 ? 'text-brand-dark-red' : 'text-brand-dark-blue';
+                  
+                  return (
+                    <motion.div
+                      key={service.id}
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.6, delay: index * 0.1 }}
+                      className="group"
+                    >
+                      <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+                        <div className="p-6">
+                          <h3 className={`text-2xl font-bold ${titleColor} mb-4 font-montserrat text-center`}>
+                            {service.title.rendered}
+                          </h3>
+                          <div className="flex justify-center">
+                            {isVideo && mediaUrl ? (
+                              <video
+                                width={350}
+                                height={525}
+                                className="rounded-xl"
+                                controls
+                                preload="metadata"
+                                onError={(e) => {
+                                  console.error('Video failed to load:', e);
+                                }}
+                              >
+                                <source src={mediaUrl} type="video/mp4" />
+                                Your browser does not support the video tag.
+                              </video>
+                            ) : mediaUrl ? (
+                              <img
+                                src={mediaUrl}
+                                alt={service.title.rendered}
+                                width={350}
+                                height={525}
+                                className="rounded-xl"
+                                onError={(e) => {
+                                  console.error('Image failed to load:', e);
+                                  const target = e.target as HTMLImageElement;
+                                  target.src = '/images/placeholder.png';
+                                }}
+                              />
+                            ) : (
+                              <div className="w-[350px] h-[525px] bg-gray-200 rounded-xl flex items-center justify-center">
+                                <p className="text-gray-500">No media available</p>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  );
+                })
+              ) : (
+                // Fallback services if WordPress data is not available
+                [
+                  { title: "Facebook Ads", type: "video", url: "https://dontdelete2005142.kloudbean.com/1761163685_FBADS.mp4", color: "text-brand-dark-red" },
+                  { title: "Welcome Package", type: "image", url: "https://dontdelete2005142.kloudbean.com/1761163612_MARKETING%20KIT-01.png", color: "text-brand-dark-blue" },
+                  { title: "Social Media Reels/Podcast", type: "video", url: "https://dontdelete2005142.kloudbean.com/1761163684_gurv.mp4", color: "text-brand-dark-red" },
+                  { title: "Virtual Tours", type: "image", url: "https://dontdelete2005142.kloudbean.com/1761163704_6214c16f032e902b6ee30edb_61dc7edc4959c17ee5501634_dollhouse%20mock%20up%20(1)-p-800%20(1).webp", color: "text-brand-dark-blue" },
+                  { title: "Google Ads", type: "image", url: "https://dontdelete2005142.kloudbean.com/1762879530_google ads.jpg", color: "text-brand-dark-red" },
+                  { title: "Social Media", type: "image", url: "https://dontdelete2005142.kloudbean.com/1762879530_social media (6).jpg", color: "text-brand-dark-red" },
+                  { title: "Video Shoot/Editing", type: "image", url: "https://dontdelete2005142.kloudbean.com/1762879530_video shoot  editing.jpg", color: "text-brand-dark-blue" },
+                  { title: "Website/Web Designing", type: "image", url: "https://dontdelete2005142.kloudbean.com/1762879530_website.jpg", color: "text-brand-dark-red" }
+                ].map((service, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    className="group"
+                  >
+                    <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+                      <div className="p-6">
+                        <h3 className={`text-2xl font-bold ${service.color} mb-4 font-montserrat text-center`}>
+                          {service.title}
+                        </h3>
+                        <div className="flex justify-center">
+                          {service.type === 'video' ? (
+                            <video
+                              width={350}
+                              height={525}
+                              className="rounded-xl"
+                              controls
+                              preload="metadata"
+                              onError={(e) => {
+                                console.error('Video failed to load:', e);
+                              }}
+                            >
+                              <source src={service.url} type="video/mp4" />
+                              Your browser does not support the video tag.
+                            </video>
+                          ) : (
+                            <img
+                              src={service.url}
+                              alt={service.title}
+                              width={350}
+                              height={525}
+                              className="rounded-xl"
+                              onError={(e) => {
+                                console.error('Image failed to load:', e);
+                                const target = e.target as HTMLImageElement;
+                                target.src = '/images/placeholder.png';
+                              }}
+                            />
+                          )}
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Welcome Package */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="group"
-              >
-                <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
-                  <div className="p-6">
-                    <h3 className="text-2xl font-bold text-brand-dark-blue mb-4 font-montserrat text-center">Welcome Package</h3>
-                    <div className="flex justify-center">
-                      <Image
-                        src="https://dontdelete2005142.kloudbean.com/1761163612_MARKETING%20KIT-01.png"
-                        alt="Welcome Package"
-                        width={350}
-                        height={525}
-                        className="rounded-xl"
-                        quality={100}
-                        priority={true}
-                        onError={(e) => {
-                          console.error('Image failed to load:', e);
-                        }}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Social Media Reels/Podcast */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                className="group"
-              >
-                <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
-                  <div className="p-6">
-                    <h3 className="text-2xl font-bold text-brand-dark-red mb-4 font-montserrat text-center">Social Media Reels/Podcast</h3>
-                    <div className="flex justify-center">
-                      <video
-                        width={350}
-                        height={525}
-                        className="rounded-xl"
-                        controls
-                        preload="metadata"
-                        onError={(e) => {
-                          console.error('Video failed to load:', e);
-                        }}
-                      >
-                        <source src="https://dontdelete2005142.kloudbean.com/1761163684_gurv.mp4" type="video/mp4" />
-                        Your browser does not support the video tag.
-                      </video>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Virtual Tours */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                className="group"
-              >
-                <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
-                  <div className="p-6">
-                    <h3 className="text-2xl font-bold text-brand-dark-blue mb-4 font-montserrat text-center">Virtual Tours</h3>
-                    <div className="flex justify-center">
-                      <Image
-                        src="https://dontdelete2005142.kloudbean.com/1761163704_6214c16f032e902b6ee30edb_61dc7edc4959c17ee5501634_dollhouse%20mock%20up%20(1)-p-800%20(1).webp"
-                        alt="Virtual Tours"
-                        width={350}
-                        height={525}
-                        className="rounded-xl"
-                        quality={100}
-                        priority={true}
-                        onError={(e) => {
-                          console.error('Image failed to load:', e);
-                        }}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Google Ads */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.5 }}
-                className="group"
-              >
-                <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
-                  <div className="p-6">
-                    <h3 className="text-2xl font-bold text-brand-dark-red mb-4 font-montserrat text-center">Google Ads</h3>
-                    <div className="flex justify-center">
-                      <Image
-                        src="https://dontdelete2005142.kloudbean.com/1762879530_google ads.jpg"
-                        alt="Google Ads"
-                        width={350}
-                        height={525}
-                        className="rounded-xl"
-                        quality={100}
-                        onError={(e) => {
-                          console.error('Image failed to load:', e);
-                        }}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Social Media */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.6 }}
-                className="group"
-              >
-                <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
-                  <div className="p-6">
-                    <h3 className="text-2xl font-bold text-brand-dark-red mb-4 font-montserrat text-center">Social Media</h3>
-                    <div className="flex justify-center">
-                      <Image
-                        src="https://dontdelete2005142.kloudbean.com/1762879530_social media (6).jpg"
-                        alt="Social Media"
-                        width={350}
-                        height={525}
-                        className="rounded-xl"
-                        quality={100}
-                        onError={(e) => {
-                          console.error('Image failed to load:', e);
-                        }}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Video Shoot/Editing */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.8 }}
-                className="group"
-              >
-                <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
-                  <div className="p-6">
-                    <h3 className="text-2xl font-bold text-brand-dark-blue mb-4 font-montserrat text-center">Video Shoot/Editing</h3>
-                    <div className="flex justify-center">
-                      <Image
-                        src="https://dontdelete2005142.kloudbean.com/1762879530_video shoot  editing.jpg"
-                        alt="Video Shoot/Editing"
-                        width={350}
-                        height={525}
-                        className="rounded-xl"
-                        quality={100}
-                        onError={(e) => {
-                          console.error('Image failed to load:', e);
-                        }}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Website/Web Designing */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.9 }}
-                className="group"
-              >
-                <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
-                  <div className="p-6">
-                    <h3 className="text-2xl font-bold text-brand-dark-red mb-4 font-montserrat text-center">Website/Web Designing</h3>
-                    <div className="flex justify-center">
-                      <Image
-                        src="https://dontdelete2005142.kloudbean.com/1762879530_website.jpg"
-                        alt="Website/Web Designing"
-                        width={350}
-                        height={525}
-                        className="rounded-xl"
-                        quality={100}
-                        onError={(e) => {
-                          console.error('Image failed to load:', e);
-                        }}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
+                  </motion.div>
+                ))
+              )}
             </div>
           </div>
         </section>
@@ -787,17 +678,25 @@ export const getStaticProps: GetStaticProps = async () => {
   console.log('WordPress URL:', process.env.NEXT_PUBLIC_WORDPRESS_URL || 'NOT SET');
 
   try {
-    console.log('📡 Fetching marketing materials from WordPress...');
-    const marketingMaterials = await getMarketingMaterials().catch(error => {
-      console.error('❌ Error fetching marketing materials:', error);
-      return [];
-    });
+    console.log('📡 Fetching marketing materials and services from WordPress...');
+    const [marketingMaterials, marketingServices] = await Promise.all([
+      getMarketingMaterials().catch(error => {
+        console.error('❌ Error fetching marketing materials:', error);
+        return [];
+      }),
+      getMarketingServices().catch(error => {
+        console.error('❌ Error fetching marketing services:', error);
+        return [];
+      })
+    ]);
 
     console.log('✅ Marketing materials fetched:', marketingMaterials.length);
+    console.log('✅ Marketing services fetched:', marketingServices.length);
 
     return {
       props: {
-        marketingMaterials
+        marketingMaterials,
+        marketingServices
       },
       revalidate: 60 // Revalidate every 60 seconds
     };
@@ -805,7 +704,8 @@ export const getStaticProps: GetStaticProps = async () => {
     console.error('Error in getStaticProps:', error);
     return {
       props: {
-        marketingMaterials: []
+        marketingMaterials: [],
+        marketingServices: []
       },
       revalidate: 60
     };

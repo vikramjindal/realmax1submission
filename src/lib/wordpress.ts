@@ -213,6 +213,23 @@ export interface TrainingMaterial {
   };
 }
 
+export interface MarketingService {
+  id: number;
+  title: {
+    rendered: string;
+  };
+  service_media_type: string; // 'image' or 'video'
+  service_media_url: string;
+  service_order: number;
+  featured_media: number;
+  _embedded?: {
+    'wp:featuredmedia'?: Array<{
+      source_url: string;
+      alt_text: string;
+    }>;
+  };
+}
+
 // Blog Posts
 export async function getBlogPosts(perPage: number = 10, page: number = 1): Promise<WordPressPost[]> {
   return fetchFromWordPress(
@@ -358,6 +375,35 @@ export function getTrainingImageUrl(material: TrainingMaterial): string | null {
   }
   // Otherwise use featured image
   return getFeaturedImageUrl(material);
+}
+
+// Marketing Services
+export async function getMarketingServices(): Promise<MarketingService[]> {
+  // Fetch all marketing services and sort client-side
+  const services = await fetchFromWordPress(
+    `/wp-json/wp/v2/marketing-services?_embed&per_page=100&status=publish&orderby=date&order=asc`
+  );
+  
+  // Sort by service_order meta field client-side
+  return services.sort((a, b) => {
+    const orderA = a.service_order || 0;
+    const orderB = b.service_order || 0;
+    return orderA - orderB;
+  });
+}
+
+// Helper function to get marketing service media URL
+export function getMarketingServiceMediaUrl(service: MarketingService): string | null {
+  // If custom media URL is set, use it
+  if (service.service_media_url) {
+    return service.service_media_url;
+  }
+  // For images, use featured image as fallback
+  if (service.service_media_type === 'image') {
+    return getFeaturedImageUrl(service);
+  }
+  // For videos, return null if no URL is set
+  return null;
 }
 
 // Helper function to get featured image alt text
