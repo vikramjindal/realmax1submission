@@ -18,6 +18,12 @@ const nextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'backend.joinremaxex.com',
+        port: '',
+        pathname: '/**',
+      },
             {
               protocol: 'https',
               hostname: 'dontdelete2005142.kloudbean.com',
