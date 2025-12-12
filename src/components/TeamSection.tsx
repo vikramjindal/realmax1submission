@@ -119,8 +119,9 @@ const TeamSection: React.FC<TeamSectionProps> = ({ teamMembers: wpTeamMembers })
                       src={member.image}
                       alt={`${member.name} - ${member.role}`}
                       width={300}
-                      height={300}
-                      className={`w-full h-80 object-cover group-hover:scale-105 transition-transform duration-300 ${member.name === "Nikita Suri" ? "object-top" : ""}`}
+                      height={320}
+                      className="w-full h-80 object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                      style={{ objectPosition: 'top center' }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
