@@ -150,48 +150,49 @@ export default function Marketing({ marketingMaterials }: MarketingProps) {
             {/* Auto-scrolling Marketing Materials Carousel */}
             <div className="relative overflow-hidden bg-transparent p-0">
               <div className="flex animate-scroll gap-4">
-                {/* Dynamic Marketing Flyers - First Set */}
+                {/* Dynamic Marketing Flyers - Render multiple sets for seamless loop */}
                 {marketingImages.length > 0 ? (
-                  marketingImages.map((imageUrl, index) => (
-                    <div key={`first-${index}`} className="flex-shrink-0 w-72 h-auto overflow-hidden transform hover:scale-105 transition-all duration-300">
-                      <Image
-                        src={imageUrl}
-                        alt={`Marketing Flyer ${index + 1}`}
-                        width={288}
-                        height={400}
-                        className="w-full h-auto object-contain"
-                        quality={100}
-                        priority={index < 3}
-                        unoptimized
-                        onError={(e) => {
-                          console.error('Image failed to load:', imageUrl);
-                        }}
-                      />
-                    </div>
-                  ))
+                  <>
+                    {/* First Set */}
+                    {marketingImages.map((imageUrl, index) => (
+                      <div key={`set1-${index}`} className="flex-shrink-0 w-72 h-auto overflow-hidden transform hover:scale-105 transition-all duration-300">
+                        {/* Use regular img tag for WordPress images to prevent blur */}
+                        <img
+                          src={imageUrl}
+                          alt={`Marketing Flyer ${index + 1}`}
+                          className="w-full h-auto object-contain"
+                          loading={index < 3 ? "eager" : "lazy"}
+                          onError={(e) => {
+                            console.error('Image failed to load:', imageUrl);
+                            const target = e.target as HTMLImageElement;
+                            target.src = '/images/marketing-flyers/default.png';
+                          }}
+                        />
+                      </div>
+                    ))}
+                    
+                    {/* Second Set - Only duplicate if we have more than 1 image (for seamless scrolling) */}
+                    {marketingImages.length > 1 && marketingImages.map((imageUrl, index) => (
+                      <div key={`set2-${index}`} className="flex-shrink-0 w-72 h-auto overflow-hidden transform hover:scale-105 transition-all duration-300">
+                        <img
+                          src={imageUrl}
+                          alt={`Marketing Flyer ${index + 1}`}
+                          className="w-full h-auto object-contain"
+                          loading="lazy"
+                          onError={(e) => {
+                            console.error('Duplicate image failed to load:', imageUrl);
+                            const target = e.target as HTMLImageElement;
+                            target.src = '/images/marketing-flyers/default.png';
+                          }}
+                        />
+                      </div>
+                    ))}
+                  </>
                 ) : (
                   <div className="flex-shrink-0 w-72 h-96 bg-gray-200 flex items-center justify-center">
                     <p className="text-gray-500">Loading marketing materials...</p>
                   </div>
                 )}
-                
-                {/* Duplicate ALL images for seamless loop */}
-                {marketingImages.length > 0 && marketingImages.map((imageUrl, index) => (
-                  <div key={`duplicate-${index}`} className="flex-shrink-0 w-72 h-auto overflow-hidden transform hover:scale-105 transition-all duration-300">
-                    <Image
-                      src={imageUrl}
-                      alt={`Marketing Flyer ${index + 1}`}
-                      width={288}
-                      height={400}
-                      className="w-full h-auto object-contain"
-                      quality={100}
-                      unoptimized
-                      onError={(e) => {
-                        console.error('Duplicate image failed to load:', imageUrl);
-                      }}
-                    />
-                  </div>
-                ))}
               </div>
             </div>
           </div>
