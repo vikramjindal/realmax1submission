@@ -1,5 +1,6 @@
 import React from "react";
 import Head from "next/head";
+import { GetStaticProps } from "next";
 import { motion } from "framer-motion";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -7,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import { useJoinUsModal } from "@/contexts/JoinUsModalContext";
+import { getTrainingMaterials, getTrainingImageUrl, type TrainingMaterial } from "@/lib/wordpress";
 import { 
   GraduationCap, 
   Target, 
@@ -41,8 +43,33 @@ const staggerContainer = {
   }
 };
 
-export default function Training() {
+interface TrainingProps {
+  trainingMaterials: TrainingMaterial[];
+}
+
+export default function Training({ trainingMaterials }: TrainingProps) {
   const { openModal } = useJoinUsModal();
+  
+  // Process training materials to get image URLs
+  const trainingPosters = trainingMaterials.length > 0
+    ? trainingMaterials.map(material => {
+        const imageUrl = getTrainingImageUrl(material);
+        return imageUrl || '/images/training posters/default.png';
+      })
+    : [
+        // Fallback posters if WordPress data is not available
+        "/images/training posters/RE (2).png",
+        "/images/training posters/SOCIAL MEDIA POSTS (13).png",
+        "/images/training posters/SOCIAL MEDIA POSTS (18).png",
+        "/images/training posters/SOCIAL MEDIA POSTS (23).png",
+        "/images/training posters/SOCIAL MEDIA POSTS (28).png",
+        "/images/training posters/SOCIAL MEDIA POSTS (5).png",
+        "/images/training posters/SOCIAL MEDIA POSTS (8).png",
+        "/images/training posters/Untitled (1080 x 1090 px) (3).png"
+      ];
+
+  console.log('🔍 Training materials loaded:', trainingMaterials.length);
+  console.log('📸 Training posters:', trainingPosters);
   
   return (
     <>
@@ -147,48 +174,20 @@ export default function Training() {
                 {/* Auto-scrolling carousel */}
                 <div className="flex animate-scroll space-x-8 py-8">
                   {/* First set of posters */}
-                  {[
-                    "/images/training posters/RE (2).png",
-                    "/images/training posters/SOCIAL MEDIA POSTS (13).png",
-                    "/images/training posters/SOCIAL MEDIA POSTS (18).png",
-                    "/images/training posters/SOCIAL MEDIA POSTS (23).png",
-                    "/images/training posters/SOCIAL MEDIA POSTS (28).png",
-                    "/images/training posters/SOCIAL MEDIA POSTS (5).png",
-                    "/images/training posters/SOCIAL MEDIA POSTS (8).png",
-                    "/images/training posters/Untitled (1080 x 1090 px) (3).png"
-                  ].map((poster, index) => (
-                    <div key={index} className="flex-shrink-0 group">
+                  {trainingPosters.map((poster, index) => (
+                    <div key={`training-${index}`} className="flex-shrink-0 group">
                       <div className="w-80 h-96 group-hover:scale-105 transition-all duration-500">
-                        <Image
+                        {/* Use regular img tag to prevent blur */}
+                        <img
                           src={poster}
                           alt={`Training Poster ${index + 1}`}
-                          width={320}
-                          height={384}
                           className="w-full h-full object-cover rounded-lg shadow-lg group-hover:shadow-2xl transition-all duration-500"
-                        />
-                      </div>
-                    </div>
-                  ))}
-                  
-                  {/* Duplicate set for seamless loop */}
-                  {[
-                    "/images/training posters/RE (2).png",
-                    "/images/training posters/SOCIAL MEDIA POSTS (13).png",
-                    "/images/training posters/SOCIAL MEDIA POSTS (18).png",
-                    "/images/training posters/SOCIAL MEDIA POSTS (23).png",
-                    "/images/training posters/SOCIAL MEDIA POSTS (28).png",
-                    "/images/training posters/SOCIAL MEDIA POSTS (5).png",
-                    "/images/training posters/SOCIAL MEDIA POSTS (8).png",
-                    "/images/training posters/Untitled (1080 x 1090 px) (3).png"
-                  ].map((poster, index) => (
-                    <div key={`duplicate-${index}`} className="flex-shrink-0 group">
-                      <div className="w-80 h-96 group-hover:scale-105 transition-all duration-500">
-                        <Image
-                          src={poster}
-                          alt={`Training Poster ${index + 1}`}
-                          width={320}
-                          height={384}
-                          className="w-full h-full object-cover rounded-lg shadow-lg group-hover:shadow-2xl transition-all duration-500"
+                          loading={index < 4 ? "eager" : "lazy"}
+                          onError={(e) => {
+                            console.error('Training poster failed to load:', poster);
+                            const target = e.target as HTMLImageElement;
+                            target.src = '/images/training posters/default.png';
+                          }}
                         />
                       </div>
                     </div>
@@ -1098,3 +1097,33 @@ export default function Training() {
     </>
   );
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+  console.log('🔍 Training Page - WordPress Integration Debug:');
+  console.log('WordPress URL:', process.env.NEXT_PUBLIC_WORDPRESS_URL || 'NOT SET');
+
+  try {
+    console.log('📡 Fetching training materials from WordPress...');
+    const trainingMaterials = await getTrainingMaterials().catch(error => {
+      console.error('❌ Error fetching training materials:', error);
+      return [];
+    });
+
+    console.log('✅ Training materials fetched:', trainingMaterials.length);
+
+    return {
+      props: {
+        trainingMaterials
+      },
+      revalidate: 60 // Revalidate every 60 seconds
+    };
+  } catch (error) {
+    console.error('Error in getStaticProps:', error);
+    return {
+      props: {
+        trainingMaterials: []
+      },
+      revalidate: 60
+    };
+  }
+};

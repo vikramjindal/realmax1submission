@@ -197,6 +197,22 @@ export interface PastEvent {
   };
 }
 
+export interface TrainingMaterial {
+  id: number;
+  title: {
+    rendered: string;
+  };
+  training_image_url: string;
+  training_order: number;
+  featured_media: number;
+  _embedded?: {
+    'wp:featuredmedia'?: Array<{
+      source_url: string;
+      alt_text: string;
+    }>;
+  };
+}
+
 // Blog Posts
 export async function getBlogPosts(perPage: number = 10, page: number = 1): Promise<WordPressPost[]> {
   return fetchFromWordPress(
@@ -317,7 +333,7 @@ export async function getPastEvents(): Promise<PastEvent[]> {
 }
 
 // Helper function to get featured image URL
-export function getFeaturedImageUrl(post: WordPressPost | Agent | TeamMember | MarketingMaterial | Event | PastEvent): string | null {
+export function getFeaturedImageUrl(post: WordPressPost | Agent | TeamMember | MarketingMaterial | Event | PastEvent | TrainingMaterial): string | null {
   if (post._embedded?.['wp:featuredmedia']?.[0]?.source_url) {
     return post._embedded['wp:featuredmedia'][0].source_url;
   }
@@ -329,6 +345,16 @@ export function getMarketingImageUrl(material: MarketingMaterial): string | null
   // If custom image URL is set, use it
   if (material.marketing_image_url) {
     return material.marketing_image_url;
+  }
+  // Otherwise use featured image
+  return getFeaturedImageUrl(material);
+}
+
+// Helper function to get training material image URL (checks custom URL first, then featured image)
+export function getTrainingImageUrl(material: TrainingMaterial): string | null {
+  // If custom image URL is set, use it
+  if (material.training_image_url) {
+    return material.training_image_url;
   }
   // Otherwise use featured image
   return getFeaturedImageUrl(material);

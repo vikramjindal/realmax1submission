@@ -152,7 +152,30 @@ function remax_register_custom_post_types() {
         'menu_position' => 24
     ));
 
-    // 7. Page Sections (for homepage sections)
+    // 7. Training Materials (for training page carousel)
+    register_post_type('remax_training', array(
+        'labels' => array(
+            'name' => 'Training Materials',
+            'singular_name' => 'Training Material',
+            'add_new' => 'Add New Material',
+            'add_new_item' => 'Add New Training Material',
+            'edit_item' => 'Edit Training Material',
+            'new_item' => 'New Training Material',
+            'view_item' => 'View Training Material',
+            'search_items' => 'Search Training Materials',
+            'not_found' => 'No training materials found',
+            'not_found_in_trash' => 'No training materials found in Trash'
+        ),
+        'public' => true,
+        'has_archive' => false,
+        'show_in_rest' => true,
+        'rest_base' => 'training-materials',
+        'menu_icon' => 'dashicons-welcome-learn-more',
+        'supports' => array('title', 'thumbnail', 'editor'),
+        'menu_position' => 25
+    ));
+
+    // 8. Page Sections (for homepage sections)
     register_post_type('remax_section', array(
         'labels' => array(
             'name' => 'Page Sections',
@@ -235,6 +258,16 @@ function remax_add_meta_boxes() {
         'Past Event Information',
         'remax_past_event_meta_callback',
         'remax_past_event',
+        'normal',
+        'high'
+    );
+
+    // Training material meta box
+    add_meta_box(
+        'remax_training_meta',
+        'Training Material Information',
+        'remax_training_meta_callback',
+        'remax_training',
         'normal',
         'high'
     );
@@ -454,6 +487,29 @@ function remax_past_event_meta_callback($post) {
     echo '<p><strong>Note:</strong> Set a Featured Image for this past event. The image will be displayed in the highlights section.</p>';
 }
 
+// Training material meta box callback
+function remax_training_meta_callback($post) {
+    wp_nonce_field('remax_training_meta', 'remax_training_meta_nonce');
+    
+    $training_order = get_post_meta($post->ID, '_remax_training_order', true);
+    $training_image_url = get_post_meta($post->ID, '_remax_training_image_url', true);
+    
+    echo '<table class="form-table">';
+    echo '<tr>';
+    echo '<th><label for="remax_training_image_url">Image URL (Optional)</label></th>';
+    echo '<td>';
+    echo '<input type="url" id="remax_training_image_url" name="remax_training_image_url" value="' . esc_url($training_image_url) . '" class="regular-text" />';
+    echo '<p class="description">If you want to use an external image URL instead of featured image. Leave empty to use featured image.</p>';
+    echo '</td>';
+    echo '</tr>';
+    echo '<tr>';
+    echo '<th><label for="remax_training_order">Display Order</label></th>';
+    echo '<td><input type="number" id="remax_training_order" name="remax_training_order" value="' . esc_attr($training_order ? $training_order : '0') . '" class="small-text" /><p class="description">Lower numbers appear first</p></td>';
+    echo '</tr>';
+    echo '</table>';
+    echo '<p><strong>Note:</strong> Set a Featured Image for this training material. The image will be used in the carousel.</p>';
+}
+
 // Section meta box callback
 function remax_section_meta_callback($post) {
     wp_nonce_field('remax_section_meta', 'remax_section_meta_nonce');
@@ -580,6 +636,16 @@ function remax_save_meta_boxes($post_id) {
         }
         if (isset($_POST['remax_past_event_order'])) {
             update_post_meta($post_id, '_remax_past_event_order', intval($_POST['remax_past_event_order']));
+        }
+    }
+
+    // Save Training meta
+    if (isset($_POST['remax_training_meta_nonce']) && wp_verify_nonce($_POST['remax_training_meta_nonce'], 'remax_training_meta')) {
+        if (isset($_POST['remax_training_image_url'])) {
+            update_post_meta($post_id, '_remax_training_image_url', esc_url_raw($_POST['remax_training_image_url']));
+        }
+        if (isset($_POST['remax_training_order'])) {
+            update_post_meta($post_id, '_remax_training_order', intval($_POST['remax_training_order']));
         }
     }
 

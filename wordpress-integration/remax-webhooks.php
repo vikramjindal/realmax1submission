@@ -10,7 +10,7 @@
 // Send webhook when any custom post type is saved
 function remax_send_webhook($post_id, $post, $update) {
     // Only send for our custom post types
-    $custom_post_types = array('remax_agent', 'remax_team', 'remax_testimonial', 'remax_section', 'remax_marketing', 'remax_event', 'remax_past_event');
+    $custom_post_types = array('remax_agent', 'remax_team', 'remax_testimonial', 'remax_section', 'remax_marketing', 'remax_event', 'remax_past_event', 'remax_training');
     
     if (!in_array($post->post_type, $custom_post_types) && $post->post_type !== 'post') {
         return;
@@ -78,7 +78,7 @@ function remax_send_delete_webhook($post_id) {
         return;
     }
 
-    $custom_post_types = array('remax_agent', 'remax_team', 'remax_testimonial', 'remax_section', 'remax_marketing', 'remax_event', 'remax_past_event');
+    $custom_post_types = array('remax_agent', 'remax_team', 'remax_testimonial', 'remax_section', 'remax_marketing', 'remax_event', 'remax_past_event', 'remax_training');
     
     if (!in_array($post->post_type, $custom_post_types) && $post->post_type !== 'post') {
         return;
