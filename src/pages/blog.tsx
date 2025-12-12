@@ -41,8 +41,12 @@ export default function Blog({ posts }: BlogProps) {
   
   // Helper function to format date
   const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    try {
+      const date = new Date(dateString);
+      return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    } catch (error) {
+      return 'Date TBA';
+    }
   };
 
   // Helper function to get category from post
@@ -64,22 +68,46 @@ export default function Blog({ posts }: BlogProps) {
 
   // Helper function to estimate read time
   const getReadTime = (content: string) => {
-    const words = content.replace(/<[^>]*>/g, '').split(/\s+/).length;
-    const minutes = Math.ceil(words / 200);
-    return `${minutes} min read`;
+    try {
+      if (!content) return '1 min read';
+      const words = content.replace(/<[^>]*>/g, '').split(/\s+/).filter(word => word.length > 0).length;
+      const minutes = Math.max(1, Math.ceil(words / 200));
+      return `${minutes} min read`;
+    } catch (error) {
+      return '1 min read';
+    }
   };
 
-  const recentPosts = posts.map(post => ({
-    id: post.id,
-    slug: post.slug,
-    title: post.title.rendered,
-    excerpt: post.excerpt.rendered.replace(/<[^>]*>/g, '').substring(0, 200) + '...',
-    category: getCategory(post),
-    author: getAuthor(post),
-    date: formatDate(post.date),
-    readTime: getReadTime(post.content.rendered),
-    image: getFeaturedImageUrl(post) || 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
-  }));
+  // Safely process posts with error handling
+  const recentPosts = (posts && Array.isArray(posts) && posts.length > 0)
+    ? posts
+        .filter(post => post && post.title && post.title.rendered) // Filter out invalid posts
+        .map(post => {
+          try {
+            const excerpt = post.excerpt?.rendered 
+              ? post.excerpt.rendered.replace(/<[^>]*>/g, '').substring(0, 200) + '...'
+              : 'No excerpt available.';
+            
+            const content = post.content?.rendered || '';
+            
+            return {
+              id: post.id,
+              slug: post.slug || `post-${post.id}`,
+              title: post.title.rendered,
+              excerpt: excerpt,
+              category: getCategory(post),
+              author: getAuthor(post),
+              date: formatDate(post.date || new Date().toISOString()),
+              readTime: getReadTime(content),
+              image: getFeaturedImageUrl(post) || 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
+            };
+          } catch (error) {
+            console.error('Error processing post:', post.id, error);
+            return null;
+          }
+        })
+        .filter(post => post !== null) // Remove any failed posts
+    : [];
 
   // Fallback posts if WordPress data is not available
   const fallbackPosts = [
