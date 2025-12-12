@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
+import { GetStaticProps } from "next";
 import { motion } from "framer-motion";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -7,25 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import { useJoinUsModal } from "@/contexts/JoinUsModalContext";
-import { 
-  Palette, 
-  Megaphone, 
-  BarChart3, 
-  Building,
-  Zap,
-  Target,
-  Sparkles,
-  Users,
-  TrendingUp,
-  Camera,
-  Share2,
-  Globe,
-  Smartphone,
-  Mail,
-  CheckCircle,
-  Calendar,
-  Home as HomeIcon
-} from "lucide-react";
+import { getMarketingMaterials, getMarketingImageUrl, type MarketingMaterial } from "@/lib/wordpress";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -41,24 +24,31 @@ const staggerContainer = {
   }
 };
 
-export default function Marketing() {
-  const { openModal } = useJoinUsModal();
-  const [marketingImages, setMarketingImages] = useState<string[]>([]);
+interface MarketingProps {
+  marketingMaterials: MarketingMaterial[];
+}
 
-  useEffect(() => {
-    // List of marketing flyer images - Order: 1-3-2-4-5-6
-    const imageList = [
-      'https://dontdelete2005142.kloudbean.com/1762877751_Sold_2.png',     // Position 1
-      'https://dontdelete2005142.kloudbean.com/1762877751_Sold_1 .png',    // Position 3
-      'https://dontdelete2005142.kloudbean.com/1762877751_sale_2.png',     // Position 2
-      'https://dontdelete2005142.kloudbean.com/1762877751_Sold_2.png',     // Position 4
-      'https://dontdelete2005142.kloudbean.com/1762877751_PreCon_1.jpg',   // Position 5
-      'https://dontdelete2005142.kloudbean.com/1762877751_Precon_2.jpg'    // Position 6
-    ];
-    
-    setMarketingImages(imageList);
-    console.log('Marketing images loaded:', imageList);
-  }, []);
+export default function Marketing({ marketingMaterials }: MarketingProps) {
+  const { openModal } = useJoinUsModal();
+  
+  // Process marketing materials to get image URLs
+  const marketingImages = marketingMaterials.length > 0
+    ? marketingMaterials.map(material => {
+        const imageUrl = getMarketingImageUrl(material);
+        return imageUrl || '/images/marketing-flyers/default.png';
+      })
+    : [
+        // Fallback images if WordPress data is not available
+        'https://dontdelete2005142.kloudbean.com/1762877751_Sold_2.png',
+        'https://dontdelete2005142.kloudbean.com/1762877751_Sold_1 .png',
+        'https://dontdelete2005142.kloudbean.com/1762877751_sale_2.png',
+        'https://dontdelete2005142.kloudbean.com/1762877751_Sold_2.png',
+        'https://dontdelete2005142.kloudbean.com/1762877751_PreCon_1.jpg',
+        'https://dontdelete2005142.kloudbean.com/1762877751_Precon_2.jpg'
+      ];
+
+  console.log('🔍 Marketing materials loaded:', marketingMaterials.length);
+  console.log('📸 Marketing images:', marketingImages);
 
   return (
     <>
@@ -752,7 +742,7 @@ export default function Marketing() {
                   {/* Duplicate set for seamless loop */}
                   {[
                     { name: "Collov.ai", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqtppn8zI-NDHl3tx8m_mb9EEPSjkBjh6K1A&s" },
-                    { name: "Eleven Labs", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBVNpGHzjV-JkT1ekBJqayI93p42HDiK2XSw&s" },
+                    { name: "Eleven Labs", logo: "https://encrypted-tb0.gstatic.com/images?q=tbn:ANd9GcTBVNpGHzjV-JkT1ekBJqayI93p42HDiK2XSw&s" },
                     { name: "Boldtrail", logo: "https://play-lh.googleusercontent.com/Arz-WvOeHYEzyixj0ObACnjFop814NxwWZuFfnoq-l-Cw-sYKxYaejfR0jMX1Z9SUA" },
                     { name: "SendGrid", logo: "https://cdn.dribbble.com/userupload/21155567/file/original-e0922910e5ed9a602582d9fc27ef9959.jpg?resize=752x&vertical=center" },
                     { name: "FollowUp Boss", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwJE_cdjNHipgrAIPP5GuGpF4S-ukkyigCPw&s" },
@@ -809,3 +799,33 @@ export default function Marketing() {
     </>
   );
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+  console.log('🔍 Marketing Page - WordPress Integration Debug:');
+  console.log('WordPress URL:', process.env.NEXT_PUBLIC_WORDPRESS_URL || 'NOT SET');
+
+  try {
+    console.log('📡 Fetching marketing materials from WordPress...');
+    const marketingMaterials = await getMarketingMaterials().catch(error => {
+      console.error('❌ Error fetching marketing materials:', error);
+      return [];
+    });
+
+    console.log('✅ Marketing materials fetched:', marketingMaterials.length);
+
+    return {
+      props: {
+        marketingMaterials
+      },
+      revalidate: 60 // Revalidate every 60 seconds
+    };
+  } catch (error) {
+    console.error('Error in getStaticProps:', error);
+    return {
+      props: {
+        marketingMaterials: []
+      },
+      revalidate: 60
+    };
+  }
+};

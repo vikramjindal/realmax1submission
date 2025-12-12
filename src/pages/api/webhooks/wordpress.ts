@@ -98,6 +98,11 @@ async function revalidatePages(postType: string, postId: number) {
       pathsToRevalidate.push('/');
       break;
 
+    case 'remax_marketing':
+      // Revalidate marketing page
+      pathsToRevalidate.push('/marketing');
+      break;
+
     case 'post':
       // Revalidate blog listing and individual post
       pathsToRevalidate.push('/blog');

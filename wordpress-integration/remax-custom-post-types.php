@@ -83,7 +83,30 @@ function remax_register_custom_post_types() {
         'menu_position' => 22
     ));
 
-    // 4. Page Sections (for homepage sections)
+    // 4. Marketing Materials (for marketing page carousel)
+    register_post_type('remax_marketing', array(
+        'labels' => array(
+            'name' => 'Marketing Materials',
+            'singular_name' => 'Marketing Material',
+            'add_new' => 'Add New Material',
+            'add_new_item' => 'Add New Marketing Material',
+            'edit_item' => 'Edit Marketing Material',
+            'new_item' => 'New Marketing Material',
+            'view_item' => 'View Marketing Material',
+            'search_items' => 'Search Marketing Materials',
+            'not_found' => 'No marketing materials found',
+            'not_found_in_trash' => 'No marketing materials found in Trash'
+        ),
+        'public' => true,
+        'has_archive' => false,
+        'show_in_rest' => true,
+        'rest_base' => 'marketing-materials',
+        'menu_icon' => 'dashicons-format-image',
+        'supports' => array('title', 'thumbnail', 'editor'),
+        'menu_position' => 24
+    ));
+
+    // 5. Page Sections (for homepage sections)
     register_post_type('remax_section', array(
         'labels' => array(
             'name' => 'Page Sections',
@@ -136,6 +159,16 @@ function remax_add_meta_boxes() {
         'Testimonial Information',
         'remax_testimonial_meta_callback',
         'remax_testimonial',
+        'normal',
+        'high'
+    );
+
+    // Marketing material meta box
+    add_meta_box(
+        'remax_marketing_meta',
+        'Marketing Material Information',
+        'remax_marketing_meta_callback',
+        'remax_marketing',
         'normal',
         'high'
     );
@@ -235,6 +268,29 @@ function remax_testimonial_meta_callback($post) {
     echo '<p><strong>Note:</strong> The testimonial content should be entered in the main content editor above.</p>';
 }
 
+// Marketing material meta box callback
+function remax_marketing_meta_callback($post) {
+    wp_nonce_field('remax_marketing_meta', 'remax_marketing_meta_nonce');
+    
+    $marketing_order = get_post_meta($post->ID, '_remax_marketing_order', true);
+    $marketing_image_url = get_post_meta($post->ID, '_remax_marketing_image_url', true);
+    
+    echo '<table class="form-table">';
+    echo '<tr>';
+    echo '<th><label for="remax_marketing_image_url">Image URL (Optional)</label></th>';
+    echo '<td>';
+    echo '<input type="url" id="remax_marketing_image_url" name="remax_marketing_image_url" value="' . esc_url($marketing_image_url) . '" class="regular-text" />';
+    echo '<p class="description">If you want to use an external image URL instead of featured image. Leave empty to use featured image.</p>';
+    echo '</td>';
+    echo '</tr>';
+    echo '<tr>';
+    echo '<th><label for="remax_marketing_order">Display Order</label></th>';
+    echo '<td><input type="number" id="remax_marketing_order" name="remax_marketing_order" value="' . esc_attr($marketing_order ? $marketing_order : '0') . '" class="small-text" /><p class="description">Lower numbers appear first</p></td>';
+    echo '</tr>';
+    echo '</table>';
+    echo '<p><strong>Note:</strong> Set a Featured Image for this marketing material. The image will be used in the carousel.</p>';
+}
+
 // Section meta box callback
 function remax_section_meta_callback($post) {
     wp_nonce_field('remax_section_meta', 'remax_section_meta_nonce');
@@ -311,6 +367,16 @@ function remax_save_meta_boxes($post_id) {
         }
     }
 
+    // Save Marketing meta
+    if (isset($_POST['remax_marketing_meta_nonce']) && wp_verify_nonce($_POST['remax_marketing_meta_nonce'], 'remax_marketing_meta')) {
+        if (isset($_POST['remax_marketing_image_url'])) {
+            update_post_meta($post_id, '_remax_marketing_image_url', esc_url_raw($_POST['remax_marketing_image_url']));
+        }
+        if (isset($_POST['remax_marketing_order'])) {
+            update_post_meta($post_id, '_remax_marketing_order', intval($_POST['remax_marketing_order']));
+        }
+    }
+
     // Save Testimonial meta
     if (isset($_POST['remax_testimonial_meta_nonce']) && wp_verify_nonce($_POST['remax_testimonial_meta_nonce'], 'remax_testimonial_meta')) {
         if (isset($_POST['remax_testimonial_role'])) {
@@ -321,6 +387,16 @@ function remax_save_meta_boxes($post_id) {
         }
         if (isset($_POST['remax_testimonial_order'])) {
             update_post_meta($post_id, '_remax_testimonial_order', intval($_POST['remax_testimonial_order']));
+        }
+    }
+
+    // Save Marketing meta
+    if (isset($_POST['remax_marketing_meta_nonce']) && wp_verify_nonce($_POST['remax_marketing_meta_nonce'], 'remax_marketing_meta')) {
+        if (isset($_POST['remax_marketing_image_url'])) {
+            update_post_meta($post_id, '_remax_marketing_image_url', esc_url_raw($_POST['remax_marketing_image_url']));
+        }
+        if (isset($_POST['remax_marketing_order'])) {
+            update_post_meta($post_id, '_remax_marketing_order', intval($_POST['remax_marketing_order']));
         }
     }
 

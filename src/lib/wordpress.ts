@@ -139,6 +139,22 @@ export interface PageSection {
   featured_image: string | null;
 }
 
+export interface MarketingMaterial {
+  id: number;
+  title: {
+    rendered: string;
+  };
+  marketing_image_url: string;
+  marketing_order: number;
+  featured_media: number;
+  _embedded?: {
+    'wp:featuredmedia'?: Array<{
+      source_url: string;
+      alt_text: string;
+    }>;
+  };
+}
+
 // Blog Posts
 export async function getBlogPosts(perPage: number = 10, page: number = 1): Promise<WordPressPost[]> {
   return fetchFromWordPress(
@@ -213,12 +229,37 @@ export async function getHomepageSections(): Promise<PageSection[]> {
   return fetchFromWordPress('/wp-json/remax/v1/homepage-sections');
 }
 
+// Marketing Materials
+export async function getMarketingMaterials(): Promise<MarketingMaterial[]> {
+  // Fetch all marketing materials and sort client-side
+  const materials = await fetchFromWordPress(
+    `/wp-json/wp/v2/marketing-materials?_embed&per_page=100&status=publish&orderby=date&order=asc`
+  );
+  
+  // Sort by marketing_order meta field client-side
+  return materials.sort((a, b) => {
+    const orderA = a.marketing_order || 0;
+    const orderB = b.marketing_order || 0;
+    return orderA - orderB;
+  });
+}
+
 // Helper function to get featured image URL
-export function getFeaturedImageUrl(post: WordPressPost | Agent | TeamMember): string | null {
+export function getFeaturedImageUrl(post: WordPressPost | Agent | TeamMember | MarketingMaterial): string | null {
   if (post._embedded?.['wp:featuredmedia']?.[0]?.source_url) {
     return post._embedded['wp:featuredmedia'][0].source_url;
   }
   return null;
+}
+
+// Helper function to get marketing material image URL (checks custom URL first, then featured image)
+export function getMarketingImageUrl(material: MarketingMaterial): string | null {
+  // If custom image URL is set, use it
+  if (material.marketing_image_url) {
+    return material.marketing_image_url;
+  }
+  // Otherwise use featured image
+  return getFeaturedImageUrl(material);
 }
 
 // Helper function to get featured image alt text

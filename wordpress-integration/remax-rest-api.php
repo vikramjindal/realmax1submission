@@ -89,6 +89,19 @@ function remax_register_rest_fields() {
         }
     ));
 
+    // Marketing Materials
+    register_rest_field('remax_marketing', 'marketing_image_url', array(
+        'get_callback' => function($post) {
+            return get_post_meta($post['id'], '_remax_marketing_image_url', true);
+        }
+    ));
+
+    register_rest_field('remax_marketing', 'marketing_order', array(
+        'get_callback' => function($post) {
+            return intval(get_post_meta($post['id'], '_remax_marketing_order', true));
+        }
+    ));
+
     // Sections
     register_rest_field('remax_section', 'section_type', array(
         'get_callback' => function($post) {
