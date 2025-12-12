@@ -9,6 +9,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import { useJoinUsModal } from "@/contexts/JoinUsModalContext";
 import { getMarketingMaterials, getMarketingImageUrl, type MarketingMaterial } from "@/lib/wordpress";
+import { Target, Sparkles, TrendingUp } from "lucide-react";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
