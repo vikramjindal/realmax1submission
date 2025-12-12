@@ -52,10 +52,11 @@ export default function Events({ events, pastEvents }: EventsProps) {
   const safeEvents = Array.isArray(events) ? events : [];
   const safePastEvents = Array.isArray(pastEvents) ? pastEvents : [];
 
+  // Video playback effect - temporarily simplified for build
   useEffect(() => {
     const playAllVideos = async () => {
       try {
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise((resolve) => setTimeout(resolve, 1000));
         const playPromises = [
           video1Ref.current?.play(),
           video2Ref.current?.play(),
@@ -65,9 +66,9 @@ export default function Events({ events, pastEvents }: EventsProps) {
         console.log('All videos started playing');
       } catch (error) {
         console.log('Some videos may not have started:', error);
-        video1Ref.current?.play().catch(e => console.log('Video 1 error:', e));
-        video2Ref.current?.play().catch(e => console.log('Video 2 error:', e));
-        video3Ref.current?.play().catch(e => console.log('Video 3 error:', e));
+        video1Ref.current?.play().catch((e) => console.log('Video 1 error:', e));
+        video2Ref.current?.play().catch((e) => console.log('Video 2 error:', e));
+        video3Ref.current?.play().catch((e) => console.log('Video 3 error:', e));
       }
     };
 
@@ -84,9 +85,15 @@ export default function Events({ events, pastEvents }: EventsProps) {
       { threshold: 0.5 }
     );
 
-    if (video1Ref.current) observer.observe(video1Ref.current);
-    if (video2Ref.current) observer.observe(video2Ref.current);
-    if (video3Ref.current) observer.observe(video3Ref.current);
+    if (video1Ref.current) {
+      observer.observe(video1Ref.current);
+    }
+    if (video2Ref.current) {
+      observer.observe(video2Ref.current);
+    }
+    if (video3Ref.current) {
+      observer.observe(video3Ref.current);
+    }
 
     return () => {
       observer.disconnect();
