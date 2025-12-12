@@ -52,43 +52,44 @@ export default function Events({ events, pastEvents }: EventsProps) {
   const safeEvents = Array.isArray(events) ? events : [];
   const safePastEvents = Array.isArray(pastEvents) ? pastEvents : [];
 
-  // Video playback effect - temporarily disabled for build
-  // useEffect(() => {
-  //   async function playAllVideos() {
-  //     try {
-  //       await new Promise((resolve) => setTimeout(resolve, 1000));
-  //       const playPromises = [
-  //         video1Ref.current?.play(),
-  //         video2Ref.current?.play(),
-  //         video3Ref.current?.play()
-  //       ].filter(Boolean);
-  //       await Promise.all(playPromises);
-  //     } catch (error) {
-  //       // Silently handle video playback errors
-  //     }
-  //   }
+  // Video playback effect
+  useEffect(() => {
+    async function playAllVideos() {
+      try {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        const playPromises = [
+          video1Ref.current?.play(),
+          video2Ref.current?.play(),
+          video3Ref.current?.play()
+        ].filter(Boolean);
+        await Promise.all(playPromises);
+      } catch (error) {
+        // Silently handle video playback errors
+        console.log('Video playback error:', error);
+      }
+    }
 
-  //   playAllVideos();
+    playAllVideos();
 
-  //   const observer = new IntersectionObserver(
-  //     (entries) => {
-  //       entries.forEach((entry) => {
-  //         if (entry.isIntersecting) {
-  //           playAllVideos();
-  //         }
-  //       });
-  //     },
-  //     { threshold: 0.5 }
-  //   );
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            playAllVideos();
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
 
-  //   if (video1Ref.current) observer.observe(video1Ref.current);
-  //   if (video2Ref.current) observer.observe(video2Ref.current);
-  //   if (video3Ref.current) observer.observe(video3Ref.current);
+    if (video1Ref.current) observer.observe(video1Ref.current);
+    if (video2Ref.current) observer.observe(video2Ref.current);
+    if (video3Ref.current) observer.observe(video3Ref.current);
 
-  //   return () => {
-  //     observer.disconnect();
-  //   };
-  // }, []);
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   return (
     <>
