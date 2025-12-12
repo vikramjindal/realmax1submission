@@ -365,14 +365,20 @@ export default function Blog({ posts }: BlogProps) {
                         </Card>
                       </Link>
                     </motion.div>
-                  ))}
+                  )) : (
+                    <div className="text-center py-12">
+                      <p className="text-muted-foreground text-lg">No blog posts available at the moment. Please check back later.</p>
+                    </div>
+                  )}
                 </motion.div>
 
-                <div className="text-center mt-12">
-                  <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-black text-white font-bold">
-                    Load More Articles
-                  </Button>
-                </div>
+                {recentPosts.length > 0 && (
+                  <div className="text-center mt-12">
+                    <Button onClick={openModal} size="lg" className="bg-brand-bright-red hover:bg-black text-white font-bold">
+                      Load More Articles
+                    </Button>
+                  </div>
+                )}
               </div>
 
               {/* Sidebar */}
