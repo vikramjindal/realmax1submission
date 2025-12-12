@@ -268,11 +268,29 @@ export default function Home({ heroData, agents: wpAgents, testimonials: wpTesti
   const [currentAgentIndex, setCurrentAgentIndex] = useState(0);
 
   // Convert WordPress agents to format expected by component
+  console.log('🔍 Processing agents:', wpAgents.length, wpAgents);
+  
   const agents = wpAgents.length > 0 
-    ? wpAgents.map(agent => ({
-        src: getFeaturedImageUrl(agent) || '/images/gallery/default.png',
-        name: agent.agent_name || agent.title.rendered || 'Agent'
-      }))
+    ? wpAgents.map(agent => {
+        const imageUrl = getFeaturedImageUrl(agent);
+        const agentName = agent.agent_name || agent.title.rendered || 'Agent';
+        
+        console.log('📸 Agent:', {
+          id: agent.id,
+          title: agent.title.rendered,
+          agent_name: agent.agent_name,
+          final_name: agentName,
+          featured_media: agent.featured_media,
+          has_embedded: !!agent._embedded,
+          has_featured_media: !!agent._embedded?.['wp:featuredmedia'],
+          image_url: imageUrl
+        });
+        
+        return {
+          src: imageUrl || '/images/gallery/default.png',
+          name: agentName
+        };
+      })
     : [
         { src: "https://dontdelete2005142.kloudbean.com/1762974051_aman-d1be173.webp", name: "Aman" },
         { src: "/images/gallery/Kulwinder Gill.png", name: "Kulwinder Gill" },
@@ -281,6 +299,8 @@ export default function Home({ heroData, agents: wpAgents, testimonials: wpTesti
         { src: "/images/gallery/Manjot Kaur.png", name: "Manjot Kaur" },
         { src: "/images/gallery/Tanvir Jhajj.png", name: "Tanvir Jhajj" }
       ];
+  
+  console.log('✅ Final agents array:', agents);
 
   useEffect(() => {
     if (agents.length > 0) {
