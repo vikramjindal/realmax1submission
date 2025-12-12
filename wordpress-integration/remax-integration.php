@@ -15,20 +15,42 @@ if (!defined('ABSPATH')) {
 }
 
 // Load plugin files
-require_once plugin_dir_path(__FILE__) . 'remax-custom-post-types.php';
-require_once plugin_dir_path(__FILE__) . 'remax-rest-api.php';
-require_once plugin_dir_path(__FILE__) . 'remax-webhooks.php';
+$plugin_dir = plugin_dir_path(__FILE__);
+
+if (file_exists($plugin_dir . 'remax-custom-post-types.php')) {
+    require_once $plugin_dir . 'remax-custom-post-types.php';
+} else {
+    error_log('REMAX Integration: remax-custom-post-types.php not found!');
+}
+
+if (file_exists($plugin_dir . 'remax-rest-api.php')) {
+    require_once $plugin_dir . 'remax-rest-api.php';
+} else {
+    error_log('REMAX Integration: remax-rest-api.php not found!');
+}
+
+if (file_exists($plugin_dir . 'remax-webhooks.php')) {
+    require_once $plugin_dir . 'remax-webhooks.php';
+} else {
+    error_log('REMAX Integration: remax-webhooks.php not found!');
+}
 
 // Flush rewrite rules on plugin activation
 function remax_flush_rewrite_rules() {
-    remax_register_custom_post_types();
+    // Make sure the function exists before calling
+    if (function_exists('remax_register_custom_post_types')) {
+        remax_register_custom_post_types();
+    }
     flush_rewrite_rules();
+    // Force rewrite rules to be regenerated
+    delete_option('rewrite_rules');
 }
 register_activation_hook(__FILE__, 'remax_flush_rewrite_rules');
 
 // Flush rewrite rules on plugin deactivation
 function remax_deactivate_flush() {
     flush_rewrite_rules();
+    delete_option('rewrite_rules');
 }
 register_deactivation_hook(__FILE__, 'remax_deactivate_flush');
 
