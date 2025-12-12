@@ -155,6 +155,30 @@ export interface MarketingMaterial {
   };
 }
 
+export interface Event {
+  id: number;
+  title: {
+    rendered: string;
+  };
+  content: {
+    rendered: string;
+  };
+  event_date: string;
+  event_time: string;
+  event_location: string;
+  event_attendees: string;
+  event_type: string;
+  event_type_color: string;
+  event_order: number;
+  featured_media: number;
+  _embedded?: {
+    'wp:featuredmedia'?: Array<{
+      source_url: string;
+      alt_text: string;
+    }>;
+  };
+}
+
 // Blog Posts
 export async function getBlogPosts(perPage: number = 10, page: number = 1): Promise<WordPressPost[]> {
   return fetchFromWordPress(
@@ -244,8 +268,23 @@ export async function getMarketingMaterials(): Promise<MarketingMaterial[]> {
   });
 }
 
+// Events
+export async function getEvents(): Promise<Event[]> {
+  // Fetch all events and sort client-side
+  const events = await fetchFromWordPress(
+    `/wp-json/wp/v2/events?_embed&per_page=100&status=publish&orderby=date&order=asc`
+  );
+  
+  // Sort by event_order meta field client-side
+  return events.sort((a, b) => {
+    const orderA = a.event_order || 0;
+    const orderB = b.event_order || 0;
+    return orderA - orderB;
+  });
+}
+
 // Helper function to get featured image URL
-export function getFeaturedImageUrl(post: WordPressPost | Agent | TeamMember | MarketingMaterial): string | null {
+export function getFeaturedImageUrl(post: WordPressPost | Agent | TeamMember | MarketingMaterial | Event): string | null {
   if (post._embedded?.['wp:featuredmedia']?.[0]?.source_url) {
     return post._embedded['wp:featuredmedia'][0].source_url;
   }

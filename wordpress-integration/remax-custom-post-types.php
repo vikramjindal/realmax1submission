@@ -106,7 +106,30 @@ function remax_register_custom_post_types() {
         'menu_position' => 24
     ));
 
-    // 5. Page Sections (for homepage sections)
+    // 5. Events (for events page)
+    register_post_type('remax_event', array(
+        'labels' => array(
+            'name' => 'Events',
+            'singular_name' => 'Event',
+            'add_new' => 'Add New Event',
+            'add_new_item' => 'Add New Event',
+            'edit_item' => 'Edit Event',
+            'new_item' => 'New Event',
+            'view_item' => 'View Event',
+            'search_items' => 'Search Events',
+            'not_found' => 'No events found',
+            'not_found_in_trash' => 'No events found in Trash'
+        ),
+        'public' => true,
+        'has_archive' => false,
+        'show_in_rest' => true,
+        'rest_base' => 'events',
+        'menu_icon' => 'dashicons-calendar-alt',
+        'supports' => array('title', 'thumbnail', 'editor'),
+        'menu_position' => 23
+    ));
+
+    // 6. Page Sections (for homepage sections)
     register_post_type('remax_section', array(
         'labels' => array(
             'name' => 'Page Sections',
@@ -169,6 +192,16 @@ function remax_add_meta_boxes() {
         'Marketing Material Information',
         'remax_marketing_meta_callback',
         'remax_marketing',
+        'normal',
+        'high'
+    );
+
+    // Event meta box
+    add_meta_box(
+        'remax_event_meta',
+        'Event Information',
+        'remax_event_meta_callback',
+        'remax_event',
         'normal',
         'high'
     );
@@ -291,6 +324,65 @@ function remax_marketing_meta_callback($post) {
     echo '<p><strong>Note:</strong> Set a Featured Image for this marketing material. The image will be used in the carousel.</p>';
 }
 
+// Event meta box callback
+function remax_event_meta_callback($post) {
+    wp_nonce_field('remax_event_meta', 'remax_event_meta_nonce');
+    
+    $event_date = get_post_meta($post->ID, '_remax_event_date', true);
+    $event_time = get_post_meta($post->ID, '_remax_event_time', true);
+    $event_location = get_post_meta($post->ID, '_remax_event_location', true);
+    $event_attendees = get_post_meta($post->ID, '_remax_event_attendees', true);
+    $event_type = get_post_meta($post->ID, '_remax_event_type', true);
+    $event_type_color = get_post_meta($post->ID, '_remax_event_type_color', true);
+    $event_order = get_post_meta($post->ID, '_remax_event_order', true);
+    
+    echo '<table class="form-table">';
+    echo '<tr>';
+    echo '<th><label for="remax_event_date">Event Date</label></th>';
+    echo '<td><input type="text" id="remax_event_date" name="remax_event_date" value="' . esc_attr($event_date) . '" class="regular-text" placeholder="e.g., December 15, 2024" /><p class="description">Format: Month Day, Year (e.g., December 15, 2024)</p></td>';
+    echo '</tr>';
+    echo '<tr>';
+    echo '<th><label for="remax_event_time">Event Time</label></th>';
+    echo '<td><input type="text" id="remax_event_time" name="remax_event_time" value="' . esc_attr($event_time) . '" class="regular-text" placeholder="e.g., 6:00 PM - 9:00 PM" /></td>';
+    echo '</tr>';
+    echo '<tr>';
+    echo '<th><label for="remax_event_location">Location</label></th>';
+    echo '<td><input type="text" id="remax_event_location" name="remax_event_location" value="' . esc_attr($event_location) . '" class="regular-text" placeholder="e.g., Downtown Toronto" /></td>';
+    echo '</tr>';
+    echo '<tr>';
+    echo '<th><label for="remax_event_attendees">Expected Attendees</label></th>';
+    echo '<td><input type="text" id="remax_event_attendees" name="remax_event_attendees" value="' . esc_attr($event_attendees) . '" class="regular-text" placeholder="e.g., 50+" /></td>';
+    echo '</tr>';
+    echo '<tr>';
+    echo '<th><label for="remax_event_type">Event Type</label></th>';
+    echo '<td>';
+    echo '<select id="remax_event_type" name="remax_event_type" class="regular-text">';
+    echo '<option value="Networking"' . selected($event_type, 'Networking', false) . '>Networking</option>';
+    echo '<option value="Education"' . selected($event_type, 'Education', false) . '>Education</option>';
+    echo '<option value="Conference"' . selected($event_type, 'Conference', false) . '>Conference</option>';
+    echo '<option value="Workshop"' . selected($event_type, 'Workshop', false) . '>Workshop</option>';
+    echo '<option value="Seminar"' . selected($event_type, 'Seminar', false) . '>Seminar</option>';
+    echo '</select>';
+    echo '</td>';
+    echo '</tr>';
+    echo '<tr>';
+    echo '<th><label for="remax_event_type_color">Type Color</label></th>';
+    echo '<td>';
+    echo '<select id="remax_event_type_color" name="remax_event_type_color" class="regular-text">';
+    echo '<option value="red"' . selected($event_type_color, 'red', false) . '>Red</option>';
+    echo '<option value="blue"' . selected($event_type_color, 'blue', false) . '>Blue</option>';
+    echo '</select>';
+    echo '<p class="description">Color for the event type badge</p>';
+    echo '</td>';
+    echo '</tr>';
+    echo '<tr>';
+    echo '<th><label for="remax_event_order">Display Order</label></th>';
+    echo '<td><input type="number" id="remax_event_order" name="remax_event_order" value="' . esc_attr($event_order ? $event_order : '0') . '" class="small-text" /><p class="description">Lower numbers appear first</p></td>';
+    echo '</tr>';
+    echo '</table>';
+    echo '<p><strong>Note:</strong> The event description should be entered in the main content editor above. The title will be used as the event title.</p>';
+}
+
 // Section meta box callback
 function remax_section_meta_callback($post) {
     wp_nonce_field('remax_section_meta', 'remax_section_meta_nonce');
@@ -374,6 +466,31 @@ function remax_save_meta_boxes($post_id) {
         }
         if (isset($_POST['remax_marketing_order'])) {
             update_post_meta($post_id, '_remax_marketing_order', intval($_POST['remax_marketing_order']));
+        }
+    }
+
+    // Save Event meta
+    if (isset($_POST['remax_event_meta_nonce']) && wp_verify_nonce($_POST['remax_event_meta_nonce'], 'remax_event_meta')) {
+        if (isset($_POST['remax_event_date'])) {
+            update_post_meta($post_id, '_remax_event_date', sanitize_text_field($_POST['remax_event_date']));
+        }
+        if (isset($_POST['remax_event_time'])) {
+            update_post_meta($post_id, '_remax_event_time', sanitize_text_field($_POST['remax_event_time']));
+        }
+        if (isset($_POST['remax_event_location'])) {
+            update_post_meta($post_id, '_remax_event_location', sanitize_text_field($_POST['remax_event_location']));
+        }
+        if (isset($_POST['remax_event_attendees'])) {
+            update_post_meta($post_id, '_remax_event_attendees', sanitize_text_field($_POST['remax_event_attendees']));
+        }
+        if (isset($_POST['remax_event_type'])) {
+            update_post_meta($post_id, '_remax_event_type', sanitize_text_field($_POST['remax_event_type']));
+        }
+        if (isset($_POST['remax_event_type_color'])) {
+            update_post_meta($post_id, '_remax_event_type_color', sanitize_text_field($_POST['remax_event_type_color']));
+        }
+        if (isset($_POST['remax_event_order'])) {
+            update_post_meta($post_id, '_remax_event_order', intval($_POST['remax_event_order']));
         }
     }
 

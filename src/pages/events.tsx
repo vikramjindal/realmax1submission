@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import Head from "next/head";
+import { GetStaticProps } from "next";
 import { motion } from "framer-motion";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -7,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
 import { useJoinUsModal } from '@/contexts/JoinUsModalContext';
+import { getEvents, getFeaturedImageUrl, type Event } from "@/lib/wordpress";
 import { 
   Calendar,
   MapPin,
@@ -35,7 +37,11 @@ const staggerContainer = {
   }
 };
 
-export default function Events() {
+interface EventsProps {
+  events: Event[];
+}
+
+export default function Events({ events }: EventsProps) {
   const { openModal } = useJoinUsModal();
   const video1Ref = useRef<HTMLVideoElement>(null);
   const video2Ref = useRef<HTMLVideoElement>(null);
@@ -278,96 +284,167 @@ export default function Events() {
             </motion.div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[
-                {
-                  title: "Monthly Networking Mixer",
-                  date: "December 15, 2024",
-                  time: "6:00 PM - 9:00 PM",
-                  location: "Downtown Toronto",
-                  attendees: "50+",
-                  type: "Networking",
-                  typeColor: "red",
-                  description: "Connect with fellow agents, share success stories, and build lasting relationships in a relaxed, social setting."
-                },
-                {
-                  title: "Market Trends Workshop",
-                  date: "December 20, 2024",
-                  time: "10:00 AM - 2:00 PM",
-                  location: "Virtual Event",
-                  attendees: "100+",
-                  type: "Education",
-                  typeColor: "blue",
-                  description: "Deep dive into current market trends, investment opportunities, and strategies for success in 2025."
-                },
-                {
-                  title: "Agent Success Summit",
-                  date: "January 10, 2025",
-                  time: "9:00 AM - 5:00 PM",
-                  location: "Mississauga Conference Centre",
-                  attendees: "200+",
-                  type: "Conference",
-                  typeColor: "red",
-                  description: "Our biggest event of the year featuring industry leaders, breakout sessions, and exclusive networking opportunities."
-                }
-              ].map((event, index) => (
-                <motion.div 
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                >
-                  <Card className="h-full border border-slate-200 bg-white shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2 flex flex-col">
-                    <CardHeader className="pb-4">
-                      <div className="flex items-center justify-between mb-4">
-                        <div className={`px-4 py-2 ${event.typeColor === 'red' ? 'bg-brand-bright-red' : 'bg-brand-dark-blue'} rounded-full text-white text-sm font-bold shadow-lg`}>
-                          {event.type}
-                        </div>
-                        <div className={`flex items-center space-x-2 ${event.typeColor === 'red' ? 'text-brand-bright-red' : 'text-brand-dark-blue'} font-bold`}>
-                          <Users className="w-5 h-5" />
-                          <span className="text-base">{event.attendees}</span>
-                        </div>
-                      </div>
-                      <CardTitle className="text-2xl font-black font-montserrat text-slate-900">
-                        {event.title}
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="pt-0 flex-1 flex flex-col">
-                      <p className="text-slate-600 mb-6 font-arial leading-relaxed text-sm flex-grow">
-                        {event.description}
-                      </p>
-                      
-                      <div className="space-y-3 mb-6 bg-slate-50 rounded-xl p-4">
-                        <div className="flex items-center space-x-3">
-                          <div className={`w-8 h-8 ${event.typeColor === 'red' ? 'bg-brand-bright-red' : 'bg-brand-dark-blue'} rounded-lg flex items-center justify-center shadow-md`}>
-                            <Calendar className="w-4 h-4 text-white" />
+              {events.length > 0 ? (
+                events.map((event, index) => {
+                  // Parse HTML content to get plain text description
+                  const description = event.content?.rendered 
+                    ? event.content.rendered.replace(/<[^>]*>/g, '').trim() 
+                    : '';
+                  
+                  return (
+                    <motion.div 
+                      key={event.id}
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.6, delay: index * 0.1 }}
+                    >
+                      <Card className="h-full border border-slate-200 bg-white shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2 flex flex-col">
+                        <CardHeader className="pb-4">
+                          <div className="flex items-center justify-between mb-4">
+                            <div className={`px-4 py-2 ${event.event_type_color === 'red' ? 'bg-brand-bright-red' : 'bg-brand-dark-blue'} rounded-full text-white text-sm font-bold shadow-lg`}>
+                              {event.event_type || 'Event'}
+                            </div>
+                            <div className={`flex items-center space-x-2 ${event.event_type_color === 'red' ? 'text-brand-bright-red' : 'text-brand-dark-blue'} font-bold`}>
+                              <Users className="w-5 h-5" />
+                              <span className="text-base">{event.event_attendees || '0+'}</span>
+                            </div>
                           </div>
-                          <span className="text-sm font-semibold text-slate-700">{event.date}</span>
-                        </div>
-                        <div className="flex items-center space-x-3">
-                          <div className={`w-8 h-8 ${event.typeColor === 'red' ? 'bg-brand-bright-red' : 'bg-brand-dark-blue'} rounded-lg flex items-center justify-center shadow-md`}>
-                            <Clock className="w-4 h-4 text-white" />
+                          <CardTitle className="text-2xl font-black font-montserrat text-slate-900">
+                            {event.title.rendered}
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent className="pt-0 flex-1 flex flex-col">
+                          <p className="text-slate-600 mb-6 font-arial leading-relaxed text-sm flex-grow">
+                            {description || 'Join us for this exciting event!'}
+                          </p>
+                          
+                          <div className="space-y-3 mb-6 bg-slate-50 rounded-xl p-4">
+                            <div className="flex items-center space-x-3">
+                              <div className={`w-8 h-8 ${event.event_type_color === 'red' ? 'bg-brand-bright-red' : 'bg-brand-dark-blue'} rounded-lg flex items-center justify-center shadow-md`}>
+                                <Calendar className="w-4 h-4 text-white" />
+                              </div>
+                              <span className="text-sm font-semibold text-slate-700">{event.event_date || 'TBA'}</span>
+                            </div>
+                            <div className="flex items-center space-x-3">
+                              <div className={`w-8 h-8 ${event.event_type_color === 'red' ? 'bg-brand-bright-red' : 'bg-brand-dark-blue'} rounded-lg flex items-center justify-center shadow-md`}>
+                                <Clock className="w-4 h-4 text-white" />
+                              </div>
+                              <span className="text-sm font-semibold text-slate-700">{event.event_time || 'TBA'}</span>
+                            </div>
+                            <div className="flex items-center space-x-3">
+                              <div className={`w-8 h-8 ${event.event_type_color === 'red' ? 'bg-brand-bright-red' : 'bg-brand-dark-blue'} rounded-lg flex items-center justify-center shadow-md`}>
+                                <MapPin className="w-4 h-4 text-white" />
+                              </div>
+                              <span className="text-sm font-semibold text-slate-700">{event.event_location || 'TBA'}</span>
+                            </div>
                           </div>
-                          <span className="text-sm font-semibold text-slate-700">{event.time}</span>
-                        </div>
-                        <div className="flex items-center space-x-3">
-                          <div className={`w-8 h-8 ${event.typeColor === 'red' ? 'bg-brand-bright-red' : 'bg-brand-dark-blue'} rounded-lg flex items-center justify-center shadow-md`}>
-                            <MapPin className="w-4 h-4 text-white" />
+                          
+                          <Button 
+                            onClick={openModal}
+                            className="w-full bg-brand-bright-red hover:bg-black text-white font-bold py-6 text-base shadow-xl hover:shadow-2xl transition-all duration-300 rounded-xl"
+                          >
+                            Register Now
+                            <ArrowRight className="w-5 h-5 ml-2" />
+                          </Button>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  );
+                })
+              ) : (
+                // Fallback events if WordPress data is not available
+                [
+                  {
+                    title: "Monthly Networking Mixer",
+                    date: "December 15, 2024",
+                    time: "6:00 PM - 9:00 PM",
+                    location: "Downtown Toronto",
+                    attendees: "50+",
+                    type: "Networking",
+                    typeColor: "red",
+                    description: "Connect with fellow agents, share success stories, and build lasting relationships in a relaxed, social setting."
+                  },
+                  {
+                    title: "Market Trends Workshop",
+                    date: "December 20, 2024",
+                    time: "10:00 AM - 2:00 PM",
+                    location: "Virtual Event",
+                    attendees: "100+",
+                    type: "Education",
+                    typeColor: "blue",
+                    description: "Deep dive into current market trends, investment opportunities, and strategies for success in 2025."
+                  },
+                  {
+                    title: "Agent Success Summit",
+                    date: "January 10, 2025",
+                    time: "9:00 AM - 5:00 PM",
+                    location: "Mississauga Conference Centre",
+                    attendees: "200+",
+                    type: "Conference",
+                    typeColor: "red",
+                    description: "Our biggest event of the year featuring industry leaders, breakout sessions, and exclusive networking opportunities."
+                  }
+                ].map((event, index) => (
+                  <motion.div 
+                    key={index}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                  >
+                    <Card className="h-full border border-slate-200 bg-white shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2 flex flex-col">
+                      <CardHeader className="pb-4">
+                        <div className="flex items-center justify-between mb-4">
+                          <div className={`px-4 py-2 ${event.typeColor === 'red' ? 'bg-brand-bright-red' : 'bg-brand-dark-blue'} rounded-full text-white text-sm font-bold shadow-lg`}>
+                            {event.type}
                           </div>
-                          <span className="text-sm font-semibold text-slate-700">{event.location}</span>
+                          <div className={`flex items-center space-x-2 ${event.typeColor === 'red' ? 'text-brand-bright-red' : 'text-brand-dark-blue'} font-bold`}>
+                            <Users className="w-5 h-5" />
+                            <span className="text-base">{event.attendees}</span>
+                          </div>
                         </div>
-                      </div>
-                      
-                      <Button 
-                        onClick={openModal}
-                        className="w-full bg-brand-bright-red hover:bg-black text-white font-bold py-6 text-base shadow-xl hover:shadow-2xl transition-all duration-300 rounded-xl"
-                      >
-                        Register Now
-                        <ArrowRight className="w-5 h-5 ml-2" />
-                      </Button>
-                    </CardContent>
-                  </Card>
-                </motion.div>
+                        <CardTitle className="text-2xl font-black font-montserrat text-slate-900">
+                          {event.title}
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent className="pt-0 flex-1 flex flex-col">
+                        <p className="text-slate-600 mb-6 font-arial leading-relaxed text-sm flex-grow">
+                          {event.description}
+                        </p>
+                        
+                        <div className="space-y-3 mb-6 bg-slate-50 rounded-xl p-4">
+                          <div className="flex items-center space-x-3">
+                            <div className={`w-8 h-8 ${event.typeColor === 'red' ? 'bg-brand-bright-red' : 'bg-brand-dark-blue'} rounded-lg flex items-center justify-center shadow-md`}>
+                              <Calendar className="w-4 h-4 text-white" />
+                            </div>
+                            <span className="text-sm font-semibold text-slate-700">{event.date}</span>
+                          </div>
+                          <div className="flex items-center space-x-3">
+                            <div className={`w-8 h-8 ${event.typeColor === 'red' ? 'bg-brand-bright-red' : 'bg-brand-dark-blue'} rounded-lg flex items-center justify-center shadow-md`}>
+                              <Clock className="w-4 h-4 text-white" />
+                            </div>
+                            <span className="text-sm font-semibold text-slate-700">{event.time}</span>
+                          </div>
+                          <div className="flex items-center space-x-3">
+                            <div className={`w-8 h-8 ${event.typeColor === 'red' ? 'bg-brand-bright-red' : 'bg-brand-dark-blue'} rounded-lg flex items-center justify-center shadow-md`}>
+                              <MapPin className="w-4 h-4 text-white" />
+                            </div>
+                            <span className="text-sm font-semibold text-slate-700">{event.location}</span>
+                          </div>
+                        </div>
+                        
+                        <Button 
+                          onClick={openModal}
+                          className="w-full bg-brand-bright-red hover:bg-black text-white font-bold py-6 text-base shadow-xl hover:shadow-2xl transition-all duration-300 rounded-xl"
+                        >
+                          Register Now
+                          <ArrowRight className="w-5 h-5 ml-2" />
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                ))
               ))}
             </div>
           </div>
@@ -473,3 +550,33 @@ export default function Events() {
     </>
   );
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+  console.log('🔍 Events Page - WordPress Integration Debug:');
+  console.log('WordPress URL:', process.env.NEXT_PUBLIC_WORDPRESS_URL || 'NOT SET');
+
+  try {
+    console.log('📡 Fetching events from WordPress...');
+    const events = await getEvents().catch(error => {
+      console.error('❌ Error fetching events:', error);
+      return [];
+    });
+
+    console.log('✅ Events fetched:', events.length);
+
+    return {
+      props: {
+        events
+      },
+      revalidate: 60 // Revalidate every 60 seconds
+    };
+  } catch (error) {
+    console.error('Error in getStaticProps:', error);
+    return {
+      props: {
+        events: []
+      },
+      revalidate: 60
+    };
+  }
+};
