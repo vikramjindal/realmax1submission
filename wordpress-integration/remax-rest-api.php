@@ -145,6 +145,36 @@ function remax_register_rest_fields() {
         }
     ));
 
+    // Past Events
+    register_rest_field('remax_past_event', 'past_event_date', array(
+        'get_callback' => function($post) {
+            return get_post_meta($post['id'], '_remax_past_event_date', true);
+        }
+    ));
+
+    register_rest_field('remax_past_event', 'past_event_attendees', array(
+        'get_callback' => function($post) {
+            return get_post_meta($post['id'], '_remax_past_event_attendees', true);
+        }
+    ));
+
+    register_rest_field('remax_past_event', 'past_event_highlights', array(
+        'get_callback' => function($post) {
+            $highlights = get_post_meta($post['id'], '_remax_past_event_highlights', true);
+            // Convert newline-separated string to array
+            if (is_string($highlights) && !empty($highlights)) {
+                return array_filter(array_map('trim', explode("\n", $highlights)));
+            }
+            return array();
+        }
+    ));
+
+    register_rest_field('remax_past_event', 'past_event_order', array(
+        'get_callback' => function($post) {
+            return intval(get_post_meta($post['id'], '_remax_past_event_order', true));
+        }
+    ));
+
     // Sections
     register_rest_field('remax_section', 'section_type', array(
         'get_callback' => function($post) {

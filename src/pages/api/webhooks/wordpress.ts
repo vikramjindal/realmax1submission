@@ -104,6 +104,7 @@ async function revalidatePages(postType: string, postId: number) {
       break;
 
     case 'remax_event':
+    case 'remax_past_event':
       // Revalidate events page
       pathsToRevalidate.push('/events');
       break;

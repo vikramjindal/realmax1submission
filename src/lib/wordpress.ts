@@ -179,6 +179,24 @@ export interface Event {
   };
 }
 
+export interface PastEvent {
+  id: number;
+  title: {
+    rendered: string;
+  };
+  past_event_date: string;
+  past_event_attendees: string;
+  past_event_highlights: string[];
+  past_event_order: number;
+  featured_media: number;
+  _embedded?: {
+    'wp:featuredmedia'?: Array<{
+      source_url: string;
+      alt_text: string;
+    }>;
+  };
+}
+
 // Blog Posts
 export async function getBlogPosts(perPage: number = 10, page: number = 1): Promise<WordPressPost[]> {
   return fetchFromWordPress(
@@ -283,8 +301,23 @@ export async function getEvents(): Promise<Event[]> {
   });
 }
 
+// Past Events
+export async function getPastEvents(): Promise<PastEvent[]> {
+  // Fetch all past events and sort client-side
+  const pastEvents = await fetchFromWordPress(
+    `/wp-json/wp/v2/past-events?_embed&per_page=100&status=publish&orderby=date&order=asc`
+  );
+  
+  // Sort by past_event_order meta field client-side
+  return pastEvents.sort((a, b) => {
+    const orderA = a.past_event_order || 0;
+    const orderB = b.past_event_order || 0;
+    return orderA - orderB;
+  });
+}
+
 // Helper function to get featured image URL
-export function getFeaturedImageUrl(post: WordPressPost | Agent | TeamMember | MarketingMaterial | Event): string | null {
+export function getFeaturedImageUrl(post: WordPressPost | Agent | TeamMember | MarketingMaterial | Event | PastEvent): string | null {
   if (post._embedded?.['wp:featuredmedia']?.[0]?.source_url) {
     return post._embedded['wp:featuredmedia'][0].source_url;
   }

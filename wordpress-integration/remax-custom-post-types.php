@@ -129,7 +129,30 @@ function remax_register_custom_post_types() {
         'menu_position' => 23
     ));
 
-    // 6. Page Sections (for homepage sections)
+    // 6. Past Events (for events page highlights)
+    register_post_type('remax_past_event', array(
+        'labels' => array(
+            'name' => 'Past Events',
+            'singular_name' => 'Past Event',
+            'add_new' => 'Add New Past Event',
+            'add_new_item' => 'Add New Past Event',
+            'edit_item' => 'Edit Past Event',
+            'new_item' => 'New Past Event',
+            'view_item' => 'View Past Event',
+            'search_items' => 'Search Past Events',
+            'not_found' => 'No past events found',
+            'not_found_in_trash' => 'No past events found in Trash'
+        ),
+        'public' => true,
+        'has_archive' => false,
+        'show_in_rest' => true,
+        'rest_base' => 'past-events',
+        'menu_icon' => 'dashicons-calendar',
+        'supports' => array('title', 'thumbnail', 'editor'),
+        'menu_position' => 24
+    ));
+
+    // 7. Page Sections (for homepage sections)
     register_post_type('remax_section', array(
         'labels' => array(
             'name' => 'Page Sections',
@@ -202,6 +225,16 @@ function remax_add_meta_boxes() {
         'Event Information',
         'remax_event_meta_callback',
         'remax_event',
+        'normal',
+        'high'
+    );
+
+    // Past Event meta box
+    add_meta_box(
+        'remax_past_event_meta',
+        'Past Event Information',
+        'remax_past_event_meta_callback',
+        'remax_past_event',
         'normal',
         'high'
     );
@@ -383,6 +416,44 @@ function remax_event_meta_callback($post) {
     echo '<p><strong>Note:</strong> The event description should be entered in the main content editor above. The title will be used as the event title.</p>';
 }
 
+// Past Event meta box callback
+function remax_past_event_meta_callback($post) {
+    wp_nonce_field('remax_past_event_meta', 'remax_past_event_meta_nonce');
+    
+    $past_event_date = get_post_meta($post->ID, '_remax_past_event_date', true);
+    $past_event_attendees = get_post_meta($post->ID, '_remax_past_event_attendees', true);
+    $past_event_highlights = get_post_meta($post->ID, '_remax_past_event_highlights', true);
+    $past_event_order = get_post_meta($post->ID, '_remax_past_event_order', true);
+    
+    // Highlights stored as newline-separated string
+    $highlights_text = is_array($past_event_highlights) 
+        ? implode("\n", $past_event_highlights) 
+        : ($past_event_highlights ? $past_event_highlights : '');
+    
+    echo '<table class="form-table">';
+    echo '<tr>';
+    echo '<th><label for="remax_past_event_date">Event Date</label></th>';
+    echo '<td><input type="text" id="remax_past_event_date" name="remax_past_event_date" value="' . esc_attr($past_event_date) . '" class="regular-text" placeholder="e.g., October 2024" /><p class="description">Format: Month Year (e.g., October 2024)</p></td>';
+    echo '</tr>';
+    echo '<tr>';
+    echo '<th><label for="remax_past_event_attendees">Attendees</label></th>';
+    echo '<td><input type="text" id="remax_past_event_attendees" name="remax_past_event_attendees" value="' . esc_attr($past_event_attendees) . '" class="regular-text" placeholder="e.g., 150+" /></td>';
+    echo '</tr>';
+    echo '<tr>';
+    echo '<th><label for="remax_past_event_highlights">Event Highlights</label></th>';
+    echo '<td>';
+    echo '<textarea id="remax_past_event_highlights" name="remax_past_event_highlights" rows="6" class="large-text">' . esc_textarea($highlights_text) . '</textarea>';
+    echo '<p class="description">Enter each highlight on a new line. For example:<br>Keynote from industry leader<br>Speed networking sessions<br>Award ceremony<br>Live entertainment</p>';
+    echo '</td>';
+    echo '</tr>';
+    echo '<tr>';
+    echo '<th><label for="remax_past_event_order">Display Order</label></th>';
+    echo '<td><input type="number" id="remax_past_event_order" name="remax_past_event_order" value="' . esc_attr($past_event_order ? $past_event_order : '0') . '" class="small-text" /><p class="description">Lower numbers appear first</p></td>';
+    echo '</tr>';
+    echo '</table>';
+    echo '<p><strong>Note:</strong> Set a Featured Image for this past event. The image will be displayed in the highlights section.</p>';
+}
+
 // Section meta box callback
 function remax_section_meta_callback($post) {
     wp_nonce_field('remax_section_meta', 'remax_section_meta_nonce');
@@ -491,6 +562,24 @@ function remax_save_meta_boxes($post_id) {
         }
         if (isset($_POST['remax_event_order'])) {
             update_post_meta($post_id, '_remax_event_order', intval($_POST['remax_event_order']));
+        }
+    }
+
+    // Save Past Event meta
+    if (isset($_POST['remax_past_event_meta_nonce']) && wp_verify_nonce($_POST['remax_past_event_meta_nonce'], 'remax_past_event_meta')) {
+        if (isset($_POST['remax_past_event_date'])) {
+            update_post_meta($post_id, '_remax_past_event_date', sanitize_text_field($_POST['remax_past_event_date']));
+        }
+        if (isset($_POST['remax_past_event_attendees'])) {
+            update_post_meta($post_id, '_remax_past_event_attendees', sanitize_text_field($_POST['remax_past_event_attendees']));
+        }
+        if (isset($_POST['remax_past_event_highlights'])) {
+            // Store highlights as newline-separated string
+            $highlights = sanitize_textarea_field($_POST['remax_past_event_highlights']);
+            update_post_meta($post_id, '_remax_past_event_highlights', $highlights);
+        }
+        if (isset($_POST['remax_past_event_order'])) {
+            update_post_meta($post_id, '_remax_past_event_order', intval($_POST['remax_past_event_order']));
         }
     }
 

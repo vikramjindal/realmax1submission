@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
 import { useJoinUsModal } from '@/contexts/JoinUsModalContext';
-import { getEvents, getFeaturedImageUrl, type Event } from "@/lib/wordpress";
+import { getEvents, getPastEvents, getFeaturedImageUrl, type Event, type PastEvent } from "@/lib/wordpress";
 import { 
   Calendar,
   MapPin,
@@ -39,9 +39,10 @@ const staggerContainer = {
 
 interface EventsProps {
   events: Event[];
+  pastEvents: PastEvent[];
 }
 
-export default function Events({ events }: EventsProps) {
+export default function Events({ events, pastEvents }: EventsProps) {
   const { openModal } = useJoinUsModal();
   const video1Ref = useRef<HTMLVideoElement>(null);
   const video2Ref = useRef<HTMLVideoElement>(null);
@@ -475,49 +476,94 @@ export default function Events({ events }: EventsProps) {
               viewport={{ once: true }}
               className="grid md:grid-cols-2 gap-8"
             >
-              {[
-                {
-                  title: "Fall Networking Gala",
-                  date: "October 2024",
-                  attendees: "150+",
-                  highlights: ["Keynote from industry leader", "Speed networking sessions", "Award ceremony", "Live entertainment"],
-                  image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
-                },
-                {
-                  title: "Summer Training Bootcamp",
-                  date: "August 2024",
-                  attendees: "75+",
-                  highlights: ["Intensive 3-day program", "Hands-on workshops", "Certification completion", "Mentor matching"],
-                  image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
-                }
-              ].map((event, index) => (
-                <motion.div key={index} variants={fadeInUp}>
-                  <Card className="border-0 shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-300">
-                    <div className="relative h-48 overflow-hidden">
-                      <img 
-                        src={event.image} 
-                        alt={event.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                      <div className="absolute bottom-4 left-4 text-white">
-                        <h3 className="text-xl font-bold font-montserrat">{event.title}</h3>
-                        <p className="text-sm opacity-90">{event.date} • {event.attendees} attendees</p>
+              {pastEvents.length > 0 ? (
+                pastEvents.map((event, index) => {
+                  const imageUrl = getFeaturedImageUrl(event) || 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80';
+                  
+                  return (
+                    <motion.div key={event.id} variants={fadeInUp}>
+                      <Card className="border-0 shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-300">
+                        <div className="relative h-48 overflow-hidden">
+                          <img 
+                            src={imageUrl} 
+                            alt={event.title.rendered}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            onError={(e) => {
+                              const target = e.target as HTMLImageElement;
+                              target.src = 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80';
+                            }}
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                          <div className="absolute bottom-4 left-4 text-white">
+                            <h3 className="text-xl font-bold font-montserrat">{event.title.rendered}</h3>
+                            <p className="text-sm opacity-90">{event.past_event_date || 'TBA'} • {event.past_event_attendees || '0+'} attendees</p>
+                          </div>
+                        </div>
+                        <CardContent className="p-6">
+                          <h4 className="font-semibold text-foreground mb-4 font-montserrat">Event Highlights:</h4>
+                          <ul className="space-y-2">
+                            {event.past_event_highlights && event.past_event_highlights.length > 0 ? (
+                              event.past_event_highlights.map((highlight, idx) => (
+                                <li key={idx} className="flex items-center space-x-2 text-sm text-muted-foreground">
+                                  <Star className="w-4 h-4 text-primary flex-shrink-0" />
+                                  <span>{highlight}</span>
+                                </li>
+                              ))
+                            ) : (
+                              <li className="text-sm text-muted-foreground">No highlights available</li>
+                            )}
+                          </ul>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  );
+                })
+              ) : (
+                // Fallback past events if WordPress data is not available
+                [
+                  {
+                    title: "Fall Networking Gala",
+                    date: "October 2024",
+                    attendees: "150+",
+                    highlights: ["Keynote from industry leader", "Speed networking sessions", "Award ceremony", "Live entertainment"],
+                    image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                  },
+                  {
+                    title: "Summer Training Bootcamp",
+                    date: "August 2024",
+                    attendees: "75+",
+                    highlights: ["Intensive 3-day program", "Hands-on workshops", "Certification completion", "Mentor matching"],
+                    image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                  }
+                ].map((event, index) => (
+                  <motion.div key={index} variants={fadeInUp}>
+                    <Card className="border-0 shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-300">
+                      <div className="relative h-48 overflow-hidden">
+                        <img 
+                          src={event.image} 
+                          alt={event.title}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div className="absolute bottom-4 left-4 text-white">
+                          <h3 className="text-xl font-bold font-montserrat">{event.title}</h3>
+                          <p className="text-sm opacity-90">{event.date} • {event.attendees} attendees</p>
+                        </div>
                       </div>
-                    </div>
-                    <CardContent className="p-6">
-                      <h4 className="font-semibold text-foreground mb-4 font-montserrat">Event Highlights:</h4>
-                      <ul className="space-y-2">
-                        {event.highlights.map((highlight, idx) => (
-                          <li key={idx} className="flex items-center space-x-2 text-sm text-muted-foreground">
-                            <Star className="w-4 h-4 text-primary flex-shrink-0" />
-                            <span>{highlight}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </CardContent>
-                  </Card>
-                </motion.div>
+                      <CardContent className="p-6">
+                        <h4 className="font-semibold text-foreground mb-4 font-montserrat">Event Highlights:</h4>
+                        <ul className="space-y-2">
+                          {event.highlights.map((highlight, idx) => (
+                            <li key={idx} className="flex items-center space-x-2 text-sm text-muted-foreground">
+                              <Star className="w-4 h-4 text-primary flex-shrink-0" />
+                              <span>{highlight}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                ))
               ))}
             </motion.div>
           </div>
@@ -556,17 +602,25 @@ export const getStaticProps: GetStaticProps = async () => {
   console.log('WordPress URL:', process.env.NEXT_PUBLIC_WORDPRESS_URL || 'NOT SET');
 
   try {
-    console.log('📡 Fetching events from WordPress...');
-    const events = await getEvents().catch(error => {
-      console.error('❌ Error fetching events:', error);
-      return [];
-    });
+    console.log('📡 Fetching events and past events from WordPress...');
+    const [events, pastEvents] = await Promise.all([
+      getEvents().catch(error => {
+        console.error('❌ Error fetching events:', error);
+        return [];
+      }),
+      getPastEvents().catch(error => {
+        console.error('❌ Error fetching past events:', error);
+        return [];
+      })
+    ]);
 
     console.log('✅ Events fetched:', events.length);
+    console.log('✅ Past events fetched:', pastEvents.length);
 
     return {
       props: {
-        events
+        events,
+        pastEvents
       },
       revalidate: 60 // Revalidate every 60 seconds
     };
@@ -574,7 +628,8 @@ export const getStaticProps: GetStaticProps = async () => {
     console.error('Error in getStaticProps:', error);
     return {
       props: {
-        events: []
+        events: [],
+        pastEvents: []
       },
       revalidate: 60
     };
