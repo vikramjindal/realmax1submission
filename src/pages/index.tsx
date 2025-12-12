@@ -1561,14 +1561,52 @@ export default function Home({ heroData, agents: wpAgents, testimonials: wpTesti
 }
 
 export const getStaticProps: GetStaticProps = async () => {
+  const WORDPRESS_URL = process.env.NEXT_PUBLIC_WORDPRESS_URL;
+  
+  console.log('🔍 WordPress Integration Debug:');
+  console.log('WordPress URL:', WORDPRESS_URL || 'NOT SET');
+  
+  if (!WORDPRESS_URL) {
+    console.error('❌ NEXT_PUBLIC_WORDPRESS_URL is not set!');
+    return {
+      props: {
+        heroData: null,
+        agents: [],
+        testimonials: [],
+        teamMembers: []
+      },
+      revalidate: 60
+    };
+  }
+
   try {
-    // Fetch data from WordPress
+    // Fetch data from WordPress with better error handling
+    console.log('📡 Fetching from WordPress...');
+    
     const [heroData, agents, testimonials, teamMembers] = await Promise.all([
-      getHeroSection().catch(() => null),
-      getAgents().catch(() => []),
-      getTestimonials().catch(() => []),
-      getTeamMembers().catch(() => [])
+      getHeroSection().catch((err) => {
+        console.error('❌ Error fetching hero:', err.message);
+        return null;
+      }),
+      getAgents().catch((err) => {
+        console.error('❌ Error fetching agents:', err.message);
+        return [];
+      }),
+      getTestimonials().catch((err) => {
+        console.error('❌ Error fetching testimonials:', err.message);
+        return [];
+      }),
+      getTeamMembers().catch((err) => {
+        console.error('❌ Error fetching team members:', err.message);
+        return [];
+      })
     ]);
+
+    console.log('✅ WordPress data fetched:');
+    console.log('  - Hero:', heroData ? '✅' : '❌');
+    console.log('  - Agents:', agents.length);
+    console.log('  - Testimonials:', testimonials.length);
+    console.log('  - Team Members:', teamMembers.length);
 
     return {
       props: {
@@ -1582,7 +1620,7 @@ export const getStaticProps: GetStaticProps = async () => {
       revalidate: 60
     };
   } catch (error) {
-    console.error('Error fetching WordPress data:', error);
+    console.error('❌ Fatal error fetching WordPress data:', error);
     
     // Return empty data on error (fallback to hardcoded content)
     return {

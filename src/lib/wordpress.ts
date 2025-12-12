@@ -12,8 +12,14 @@ if (!WORDPRESS_API_URL) {
 
 // Helper function to fetch from WordPress API
 async function fetchFromWordPress(endpoint: string, options: RequestInit = {}) {
+  if (!WORDPRESS_API_URL) {
+    throw new Error('NEXT_PUBLIC_WORDPRESS_URL is not set in environment variables');
+  }
+
   try {
     const url = `${WORDPRESS_API_URL}${endpoint}`;
+    console.log(`📡 Fetching: ${url}`);
+    
     const response = await fetch(url, {
       ...options,
       headers: {
@@ -23,12 +29,16 @@ async function fetchFromWordPress(endpoint: string, options: RequestInit = {}) {
     });
 
     if (!response.ok) {
+      const errorText = await response.text();
+      console.error(`❌ WordPress API error (${response.status}):`, errorText);
       throw new Error(`WordPress API error: ${response.status} ${response.statusText}`);
     }
 
-    return await response.json();
+    const data = await response.json();
+    console.log(`✅ Fetched from ${endpoint}:`, Array.isArray(data) ? `${data.length} items` : 'object');
+    return data;
   } catch (error) {
-    console.error(`Error fetching from WordPress: ${endpoint}`, error);
+    console.error(`❌ Error fetching from WordPress: ${endpoint}`, error);
     throw error;
   }
 }
