@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
+import { GetStaticProps, GetStaticPaths } from "next";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import { useJoinUsModal } from '@/contexts/JoinUsModalContext';
+import { getBlogPosts, getBlogPost, getFeaturedImageUrl, type WordPressPost } from "@/lib/wordpress";
 import { 
   Calendar,
   User,
@@ -20,103 +21,14 @@ import {
   Linkedin
 } from "lucide-react";
 
-const blogPosts = [
-  {
-    id: 1,
-    title: "The Future of Real Estate: AI and Market Predictions",
-    excerpt: "Discover how artificial intelligence is revolutionizing property valuation and market analysis in 2024.",
-    content: `
-      <p>Artificial intelligence is transforming the real estate industry in unprecedented ways. From property valuation to market trend analysis, AI is helping agents and brokers make more informed decisions and provide better service to their clients.</p>
-      
-      <h2>The Rise of AI in Real Estate</h2>
-      <p>In 2024, AI-powered tools have become essential for real estate professionals. These tools can analyze vast amounts of data to provide accurate property valuations, predict market trends, and identify the best investment opportunities.</p>
-      
-      <h2>Key Benefits of AI for Real Estate Agents</h2>
-      <ul>
-        <li><strong>Accurate Property Valuations:</strong> AI algorithms can analyze comparable sales, market trends, and property features to provide precise valuations.</li>
-        <li><strong>Market Trend Predictions:</strong> Machine learning models can identify emerging trends before they become obvious to the human eye.</li>
-        <li><strong>Lead Generation:</strong> AI can help identify potential buyers and sellers based on behavior patterns and data analysis.</li>
-        <li><strong>Automated Marketing:</strong> AI tools can create personalized marketing campaigns that resonate with specific target audiences.</li>
-      </ul>
-      
-      <h2>AI Tools Every Agent Should Know</h2>
-      <p>There are several AI-powered platforms that have become game-changers for real estate professionals:</p>
-      <ul>
-        <li>Predictive analytics platforms for market forecasting</li>
-        <li>AI-powered CRM systems that prioritize leads</li>
-        <li>Virtual staging and property visualization tools</li>
-        <li>Chatbots for 24/7 client communication</li>
-      </ul>
-      
-      <h2>The Future Ahead</h2>
-      <p>As AI technology continues to evolve, we can expect even more sophisticated tools that will further streamline the real estate process. Agents who embrace these technologies now will be well-positioned to lead the industry in the years to come.</p>
-      
-      <p>The key is not to fear AI, but to learn how to leverage it effectively. Those who master these tools will provide unparalleled value to their clients and build thriving businesses in the AI-powered future of real estate.</p>
-    `,
-    category: "Market Trends",
-    author: "Sarah Chen",
-    date: "March 15, 2024",
-    readTime: "5 min read",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
-  },
-  {
-    id: 2,
-    title: "New Ontario Real Estate Regulations: What Agents Need to Know",
-    excerpt: "A comprehensive guide to the latest regulatory changes affecting real estate professionals in Ontario.",
-    content: `
-      <p>Ontario's real estate landscape is evolving with new regulations that every agent must understand. These changes are designed to protect consumers and ensure higher standards of professional practice.</p>
-      
-      <h2>Key Regulatory Updates</h2>
-      <p>The Real Estate Council of Ontario (RECO) has introduced several important changes that affect how agents conduct business in 2024.</p>
-      
-      <h2>Enhanced Disclosure Requirements</h2>
-      <p>Agents are now required to provide more detailed disclosures about property conditions, market conditions, and potential conflicts of interest. This includes:</p>
-      <ul>
-        <li>Detailed property history reports</li>
-        <li>Market analysis documentation</li>
-        <li>Clear disclosure of representation relationships</li>
-        <li>Enhanced form requirements for all transactions</li>
-      </ul>
-      
-      <h2>Professional Standards Updates</h2>
-      <p>New professional standards emphasize ethical conduct and client-first service. Agents must now:</p>
-      <ul>
-        <li>Complete additional continuing education hours</li>
-        <li>Maintain higher errors and omissions insurance coverage</li>
-        <li>Follow stricter guidelines for advertising and marketing</li>
-        <li>Adhere to new data protection and privacy requirements</li>
-      </ul>
-      
-      <h2>Impact on Daily Practice</h2>
-      <p>These regulations affect everyday transactions in several ways. Agents need to allow more time for paperwork, maintain better records, and ensure all communications are documented properly.</p>
-      
-      <h2>Staying Compliant</h2>
-      <p>To ensure full compliance with these new regulations:</p>
-      <ul>
-        <li>Attend all required training sessions</li>
-        <li>Update your forms and templates</li>
-        <li>Review your insurance coverage</li>
-        <li>Implement proper record-keeping systems</li>
-      </ul>
-      
-      <p>While these changes may seem burdensome at first, they ultimately protect both agents and clients, creating a more professional and trustworthy real estate industry.</p>
-    `,
-    category: "Legal Updates",
-    author: "Michael Rodriguez",
-    date: "March 12, 2024",
-    readTime: "8 min read",
-    image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
-  },
-  // Add more blog posts here...
-];
+interface BlogPostProps {
+  post: WordPressPost;
+  relatedPosts: WordPressPost[];
+}
 
-export default function BlogPost() {
-  const router = useRouter();
-  const { id } = router.query;
+export default function BlogPost({ post, relatedPosts }: BlogPostProps) {
   const { openModal } = useJoinUsModal();
   
-  const post = blogPosts.find(p => p.id === Number(id));
-
   if (!post) {
     return (
       <>
@@ -139,11 +51,39 @@ export default function BlogPost() {
     );
   }
 
+  // Helper functions
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  };
+
+  const getCategory = (post: WordPressPost) => {
+    if (post._embedded?.['wp:term']?.[0]?.[0]?.name) {
+      return post._embedded['wp:term'][0][0].name;
+    }
+    return 'General';
+  };
+
+  const getAuthor = (post: WordPressPost) => {
+    if (post._embedded?.author?.[0]?.name) {
+      return post._embedded.author[0].name;
+    }
+    return 'REMAX Excellence';
+  };
+
+  const getReadTime = (content: string) => {
+    const words = content.replace(/<[^>]*>/g, '').split(/\s+/).length;
+    const minutes = Math.ceil(words / 200);
+    return `${minutes} min read`;
+  };
+
+  const postImage = getFeaturedImageUrl(post) || 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80';
+
   return (
     <>
       <Head>
-        <title>{post.title} | REMAX Excellence Blog</title>
-        <meta name="description" content={post.excerpt} />
+        <title>{post.title.rendered} | REMAX Excellence Blog</title>
+        <meta name="description" content={post.excerpt.rendered.replace(/<[^>]*>/g, '').substring(0, 160)} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -154,9 +94,13 @@ export default function BlogPost() {
         {/* Hero Image */}
         <div className="relative h-96 w-full">
           <img 
-            src={post.image} 
-            alt={post.title}
+            src={postImage} 
+            alt={post.title.rendered}
             className="w-full h-full object-cover"
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              target.src = 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80';
+            }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
         </div>
@@ -174,7 +118,7 @@ export default function BlogPost() {
           {/* Category Badge */}
           <div className="mb-4">
             <span className="bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-semibold">
-              {post.category}
+              {getCategory(post)}
             </span>
           </div>
 
@@ -184,22 +128,22 @@ export default function BlogPost() {
             animate={{ opacity: 1, y: 0 }}
             className="text-4xl md:text-5xl font-black text-foreground mb-6 font-montserrat leading-tight"
           >
-            {post.title}
+            {post.title.rendered}
           </motion.h1>
 
           {/* Meta Information */}
           <div className="flex flex-wrap items-center gap-6 text-muted-foreground mb-8 pb-8 border-b">
             <div className="flex items-center">
               <User className="h-5 w-5 mr-2" />
-              <span className="font-medium">{post.author}</span>
+              <span className="font-medium">{getAuthor(post)}</span>
             </div>
             <div className="flex items-center">
               <Calendar className="h-5 w-5 mr-2" />
-              <span>{post.date}</span>
+              <span>{formatDate(post.date)}</span>
             </div>
             <div className="flex items-center">
               <Clock className="h-5 w-5 mr-2" />
-              <span>{post.readTime}</span>
+              <span>{getReadTime(post.content.rendered)}</span>
             </div>
           </div>
 
@@ -226,7 +170,7 @@ export default function BlogPost() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
             className="prose prose-lg max-w-none font-arial"
-            dangerouslySetInnerHTML={{ __html: post.content }}
+            dangerouslySetInnerHTML={{ __html: post.content.rendered }}
           />
 
           {/* CTA Section */}
@@ -246,31 +190,40 @@ export default function BlogPost() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl font-bold mb-12 font-montserrat">Related Articles</h2>
             <div className="grid md:grid-cols-3 gap-8">
-              {blogPosts
-                .filter(p => p.id !== post.id)
-                .slice(0, 3)
-                .map((relatedPost) => (
-                  <Link key={relatedPost.id} href={`/blog/${relatedPost.id}`}>
+              {relatedPosts.length > 0 ? relatedPosts.slice(0, 3).map((relatedPost) => {
+                const relatedImage = getFeaturedImageUrl(relatedPost) || 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80';
+                const relatedCategory = relatedPost._embedded?.['wp:term']?.[0]?.[0]?.name || 'General';
+                const relatedExcerpt = relatedPost.excerpt.rendered.replace(/<[^>]*>/g, '').substring(0, 150) + '...';
+                
+                return (
+                  <Link key={relatedPost.id} href={`/blog/${relatedPost.slug}`}>
                     <Card className="h-full overflow-hidden border-0 bg-white hover:shadow-lg transition-all duration-300 cursor-pointer">
                       <div className="relative h-48">
                         <img 
-                          src={relatedPost.image} 
-                          alt={relatedPost.title}
+                          src={relatedImage} 
+                          alt={relatedPost.title.rendered}
                           className="w-full h-full object-cover"
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.src = 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80';
+                          }}
                         />
                       </div>
                       <CardContent className="p-6">
-                        <span className="text-sm text-primary font-semibold">{relatedPost.category}</span>
+                        <span className="text-sm text-primary font-semibold">{relatedCategory}</span>
                         <h3 className="text-xl font-bold mt-2 mb-3 line-clamp-2">
-                          {relatedPost.title}
+                          {relatedPost.title.rendered}
                         </h3>
                         <p className="text-muted-foreground text-sm line-clamp-2">
-                          {relatedPost.excerpt}
+                          {relatedExcerpt}
                         </p>
                       </CardContent>
                     </Card>
                   </Link>
-                ))}
+                );
+              }) : (
+                <p className="text-muted-foreground">No related posts available.</p>
+              )}
             </div>
           </div>
         </section>
@@ -280,4 +233,79 @@ export default function BlogPost() {
     </>
   );
 }
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  console.log('🔍 Blog Post - Generating static paths...');
+  
+  try {
+    const posts = await getBlogPosts(100, 1).catch(error => {
+      console.error('❌ Error fetching posts for paths:', error);
+      return [];
+    });
+
+    const paths = posts.map((post) => ({
+      params: { id: post.slug },
+    }));
+
+    console.log('✅ Generated paths for', paths.length, 'posts');
+
+    return {
+      paths,
+      fallback: 'blocking', // Generate pages on-demand if not found
+    };
+  } catch (error) {
+    console.error('Error in getStaticPaths:', error);
+    return {
+      paths: [],
+      fallback: 'blocking',
+    };
+  }
+};
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const slug = params?.id as string;
+
+  if (!slug) {
+    return {
+      notFound: true,
+    };
+  }
+
+  console.log('🔍 Blog Post - Fetching post:', slug);
+
+  try {
+    const post = await getBlogPost(slug).catch(error => {
+      console.error('❌ Error fetching post:', error);
+      return null;
+    });
+
+    if (!post) {
+      return {
+        notFound: true,
+      };
+    }
+
+    // Get related posts (same category or recent posts)
+    const allPosts = await getBlogPosts(20, 1).catch(() => []);
+    const relatedPosts = allPosts
+      .filter(p => p.id !== post.id)
+      .slice(0, 3);
+
+    console.log('✅ Post fetched:', post.title.rendered);
+    console.log('✅ Related posts:', relatedPosts.length);
+
+    return {
+      props: {
+        post,
+        relatedPosts,
+      },
+      revalidate: 60, // Revalidate every 60 seconds
+    };
+  } catch (error) {
+    console.error('Error in getStaticProps:', error);
+    return {
+      notFound: true,
+    };
+  }
+};
 

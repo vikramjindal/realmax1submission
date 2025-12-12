@@ -1,5 +1,6 @@
 import React from "react";
 import Head from "next/head";
+import { GetStaticProps } from "next";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Header from "@/components/Header";
@@ -9,6 +10,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import { useJoinUsModal } from '@/contexts/JoinUsModalContext';
+import { getBlogPosts, getFeaturedImageUrl, type WordPressPost } from "@/lib/wordpress";
 import { 
   Calendar,
   User,
@@ -30,9 +32,57 @@ const staggerContainer = {
   }
 };
 
-export default function Blog() {
+interface BlogProps {
+  posts: WordPressPost[];
+}
+
+export default function Blog({ posts }: BlogProps) {
   const { openModal } = useJoinUsModal();
-  const recentPosts = [
+  
+  // Helper function to format date
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  };
+
+  // Helper function to get category from post
+  const getCategory = (post: WordPressPost) => {
+    // Try to get category from embedded terms
+    if (post._embedded?.['wp:term']?.[0]?.[0]?.name) {
+      return post._embedded['wp:term'][0][0].name;
+    }
+    return 'General';
+  };
+
+  // Helper function to get author name
+  const getAuthor = (post: WordPressPost) => {
+    if (post._embedded?.author?.[0]?.name) {
+      return post._embedded.author[0].name;
+    }
+    return 'REMAX Excellence';
+  };
+
+  // Helper function to estimate read time
+  const getReadTime = (content: string) => {
+    const words = content.replace(/<[^>]*>/g, '').split(/\s+/).length;
+    const minutes = Math.ceil(words / 200);
+    return `${minutes} min read`;
+  };
+
+  const recentPosts = posts.map(post => ({
+    id: post.id,
+    slug: post.slug,
+    title: post.title.rendered,
+    excerpt: post.excerpt.rendered.replace(/<[^>]*>/g, '').substring(0, 200) + '...',
+    category: getCategory(post),
+    author: getAuthor(post),
+    date: formatDate(post.date),
+    readTime: getReadTime(post.content.rendered),
+    image: getFeaturedImageUrl(post) || 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
+  }));
+
+  // Fallback posts if WordPress data is not available
+  const fallbackPosts = [
     {
       id: 1,
       title: "The Future of Real Estate: AI and Market Predictions",
@@ -232,9 +282,9 @@ export default function Blog() {
                   viewport={{ once: true }}
                   className="space-y-8"
                 >
-                  {recentPosts.map((post, index) => (
+                  {recentPosts.length > 0 ? recentPosts.map((post, index) => (
                     <motion.div key={post.id} variants={fadeInUp}>
-                      <Link href={`/blog/${post.id}`}>
+                      <Link href={`/blog/${post.slug}`}>
                         <Card className="border-0 bg-white hover:shadow-lg transition-all duration-300 group cursor-pointer">
                           <CardContent className="p-8">
                             <div className="flex items-start justify-between mb-4">
@@ -400,3 +450,33 @@ export default function Blog() {
     </>
   );
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+  console.log('🔍 Blog Page - WordPress Integration Debug:');
+  console.log('WordPress URL:', process.env.NEXT_PUBLIC_WORDPRESS_URL || 'NOT SET');
+
+  try {
+    console.log('📡 Fetching blog posts from WordPress...');
+    const posts = await getBlogPosts(20, 1).catch(error => {
+      console.error('❌ Error fetching blog posts:', error);
+      return [];
+    });
+
+    console.log('✅ Blog posts fetched:', posts.length);
+
+    return {
+      props: {
+        posts
+      },
+      revalidate: 60 // Revalidate every 60 seconds
+    };
+  } catch (error) {
+    console.error('Error in getStaticProps:', error);
+    return {
+      props: {
+        posts: []
+      },
+      revalidate: 60
+    };
+  }
+};
