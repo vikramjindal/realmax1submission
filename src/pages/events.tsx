@@ -14,7 +14,6 @@ import {
   MapPin,
   Clock,
   Users,
-  Star,
   ArrowRight,
   Video,
   Award,
