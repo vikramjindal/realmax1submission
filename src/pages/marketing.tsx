@@ -743,7 +743,7 @@ export default function Marketing({ marketingMaterials }: MarketingProps) {
                   {/* Duplicate set for seamless loop */}
                   {[
                     { name: "Collov.ai", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqtppn8zI-NDHl3tx8m_mb9EEPSjkBjh6K1A&s" },
-                    { name: "Eleven Labs", logo: "https://encrypted-tb0.gstatic.com/images?q=tbn:ANd9GcTBVNpGHzjV-JkT1ekBJqayI93p42HDiK2XSw&s" },
+                    { name: "Eleven Labs", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBVNpGHzjV-JkT1ekBJqayI93p42HDiK2XSw&s" },
                     { name: "Boldtrail", logo: "https://play-lh.googleusercontent.com/Arz-WvOeHYEzyixj0ObACnjFop814NxwWZuFfnoq-l-Cw-sYKxYaejfR0jMX1Z9SUA" },
                     { name: "SendGrid", logo: "https://cdn.dribbble.com/userupload/21155567/file/original-e0922910e5ed9a602582d9fc27ef9959.jpg?resize=752x&vertical=center" },
                     { name: "FollowUp Boss", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwJE_cdjNHipgrAIPP5GuGpF4S-ukkyigCPw&s" },

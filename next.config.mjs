@@ -50,6 +50,12 @@ const nextConfig = {
             },
             {
               protocol: 'https',
+              hostname: 'encrypted-tb0.gstatic.com',
+              port: '',
+              pathname: '/**',
+            },
+            {
+              protocol: 'https',
               hostname: 'images-eds-ssl.xboxlive.com',
               port: '',
               pathname: '/**',
