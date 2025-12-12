@@ -18,6 +18,7 @@ import {
   getAgents, 
   getTestimonials,
   getFeaturedImageUrl,
+  getCarouselSpeed,
   type HeroSection as HeroSectionType,
   type Agent,
   type Testimonial
@@ -257,7 +258,7 @@ interface HomeProps {
   teamMembers: TeamMember[];
 }
 
-export default function Home({ heroData, agents: wpAgents, testimonials: wpTestimonials, teamMembers }: HomeProps) {
+export default function Home({ heroData, agents: wpAgents, testimonials: wpTestimonials, teamMembers, carouselSpeed }: HomeProps) {
 
   const [selectedReel, setSelectedReel] = useState<any>(null);
 
@@ -1216,7 +1217,7 @@ export default function Home({ heroData, agents: wpAgents, testimonials: wpTesti
 
             {/* Infinite Carousel Container */}
 
-            <div className="flex animate-scroll space-x-6">
+            <div className="flex animate-scroll space-x-6" style={{ animationDuration: `${carouselSpeed}s` }}>
 
               {/* First Set of Reels */}
 

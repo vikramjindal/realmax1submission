@@ -226,7 +226,12 @@
 }
 
 .animate-scroll {
-  animation: scroll 20s linear infinite;
+  animation: scroll 15s linear infinite;
+}
+
+/* Dynamic carousel speed - will be overridden by inline styles from WordPress */
+.animate-scroll-custom {
+  animation: scroll var(--carousel-speed, 15s) linear infinite;
 }
 
 .animate-scroll:hover {

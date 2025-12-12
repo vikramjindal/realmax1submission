@@ -421,3 +421,17 @@ export function formatWordPressDate(dateString: string): string {
   });
 }
 
+// Get carousel speed from WordPress settings
+export async function getCarouselSpeed(): Promise<number> {
+  try {
+    const response = await fetch(`${WORDPRESS_API_URL}/wp-json/remax/v1/carousel-speed`);
+    if (response.ok) {
+      const data = await response.json();
+      return data.speed || 15; // Default to 15 seconds
+    }
+  } catch (error) {
+    console.error('Error fetching carousel speed:', error);
+  }
+  return 15; // Default fallback
+}
+

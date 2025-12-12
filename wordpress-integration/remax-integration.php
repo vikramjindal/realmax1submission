@@ -35,6 +35,12 @@ if (file_exists($plugin_dir . 'remax-webhooks.php')) {
     error_log('REMAX Integration: remax-webhooks.php not found!');
 }
 
+if (file_exists($plugin_dir . 'remax-settings.php')) {
+    require_once $plugin_dir . 'remax-settings.php';
+} else {
+    error_log('REMAX Integration: remax-settings.php not found!');
+}
+
 // Force register post types immediately (not just on activation)
 add_action('init', function() {
     if (function_exists('remax_register_custom_post_types')) {

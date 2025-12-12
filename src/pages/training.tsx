@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import { useJoinUsModal } from "@/contexts/JoinUsModalContext";
-import { getTrainingMaterials, getTrainingImageUrl, type TrainingMaterial } from "@/lib/wordpress";
+import { getTrainingMaterials, getTrainingImageUrl, getCarouselSpeed, type TrainingMaterial } from "@/lib/wordpress";
 import { 
   GraduationCap, 
   Target, 
@@ -45,9 +45,10 @@ const staggerContainer = {
 
 interface TrainingProps {
   trainingMaterials: TrainingMaterial[];
+  carouselSpeed: number;
 }
 
-export default function Training({ trainingMaterials }: TrainingProps) {
+export default function Training({ trainingMaterials, carouselSpeed }: TrainingProps) {
   const { openModal } = useJoinUsModal();
   
   // Process training materials to get image URLs
@@ -172,7 +173,7 @@ export default function Training({ trainingMaterials }: TrainingProps) {
             >
               <div className="relative overflow-hidden">
                 {/* Auto-scrolling carousel */}
-                <div className="flex animate-scroll space-x-8 py-8">
+                <div className="flex animate-scroll space-x-8 py-8" style={{ animationDuration: `${carouselSpeed}s` }}>
                   {/* First set of posters */}
                   {trainingPosters.map((poster, index) => (
                     <div key={`training-${index}`} className="flex-shrink-0 group">
@@ -1121,7 +1122,8 @@ export const getStaticProps: GetStaticProps = async () => {
     console.error('Error in getStaticProps:', error);
     return {
       props: {
-        trainingMaterials: []
+        trainingMaterials: [],
+        carouselSpeed: 15
       },
       revalidate: 60
     };

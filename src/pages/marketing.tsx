@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import { useJoinUsModal } from "@/contexts/JoinUsModalContext";
-import { getMarketingMaterials, getMarketingImageUrl, getMarketingServices, getMarketingServiceMediaUrl, type MarketingMaterial, type MarketingService } from "@/lib/wordpress";
+import { getMarketingMaterials, getMarketingImageUrl, getMarketingServices, getMarketingServiceMediaUrl, getCarouselSpeed, type MarketingMaterial, type MarketingService } from "@/lib/wordpress";
 import { Target, Sparkles, TrendingUp } from "lucide-react";
 
 const fadeInUp = {
@@ -28,9 +28,10 @@ const staggerContainer = {
 interface MarketingProps {
   marketingMaterials: MarketingMaterial[];
   marketingServices: MarketingService[];
+  carouselSpeed: number;
 }
 
-export default function Marketing({ marketingMaterials, marketingServices }: MarketingProps) {
+export default function Marketing({ marketingMaterials, marketingServices, carouselSpeed }: MarketingProps) {
   const { openModal } = useJoinUsModal();
   
   // Process marketing materials to get image URLs
@@ -150,7 +151,7 @@ export default function Marketing({ marketingMaterials, marketingServices }: Mar
 
             {/* Auto-scrolling Marketing Materials Carousel */}
             <div className="relative overflow-hidden bg-transparent p-0">
-              <div className="flex animate-scroll gap-4">
+              <div className="flex animate-scroll gap-4" style={{ animationDuration: `${carouselSpeed}s` }}>
                 {/* Dynamic Marketing Flyers - Each image shows only once */}
                 {marketingImages.length > 0 ? (
                   marketingImages.map((imageUrl, index) => (
@@ -583,7 +584,7 @@ export default function Marketing({ marketingMaterials, marketingServices }: Mar
             >
               <div className="relative overflow-hidden">
                 {/* Auto-scrolling carousel */}
-                <div className="flex animate-scroll space-x-12 py-8">
+                <div className="flex animate-scroll space-x-12 py-8" style={{ animationDuration: `${carouselSpeed}s` }}>
                   {/* First set of tools */}
                   {[
                     { name: "Collov.ai", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqtppn8zI-NDHl3tx8m_mb9EEPSjkBjh6K1A&s" },
@@ -679,7 +680,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   try {
     console.log('📡 Fetching marketing materials and services from WordPress...');
-    const [marketingMaterials, marketingServices] = await Promise.all([
+    const [marketingMaterials, marketingServices, carouselSpeed] = await Promise.all([
       getMarketingMaterials().catch(error => {
         console.error('❌ Error fetching marketing materials:', error);
         return [];
@@ -687,7 +688,8 @@ export const getStaticProps: GetStaticProps = async () => {
       getMarketingServices().catch(error => {
         console.error('❌ Error fetching marketing services:', error);
         return [];
-      })
+      }),
+      getCarouselSpeed().catch(() => 15) // Default to 15 seconds
     ]);
 
     console.log('✅ Marketing materials fetched:', marketingMaterials.length);
@@ -696,7 +698,8 @@ export const getStaticProps: GetStaticProps = async () => {
     return {
       props: {
         marketingMaterials,
-        marketingServices
+        marketingServices,
+        carouselSpeed
       },
       revalidate: 60 // Revalidate every 60 seconds
     };
@@ -705,7 +708,8 @@ export const getStaticProps: GetStaticProps = async () => {
     return {
       props: {
         marketingMaterials: [],
-        marketingServices: []
+        marketingServices: [],
+        carouselSpeed: 15
       },
       revalidate: 60
     };
