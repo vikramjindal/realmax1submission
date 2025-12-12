@@ -302,7 +302,7 @@ function remax_add_meta_boxes() {
         'remax_marketing_service_meta',
         'Marketing Service Information',
         'remax_marketing_service_meta_callback',
-        'remax_marketing_service',
+        'remax_mkt_service',
         'normal',
         'high'
     );
