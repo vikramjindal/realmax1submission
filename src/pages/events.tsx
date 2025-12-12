@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from 'react';
 import Head from "next/head";
 import { GetStaticProps } from "next";
 import { motion } from "framer-motion";
@@ -47,35 +47,32 @@ export default function Events({ events, pastEvents }: EventsProps) {
   const video1Ref = useRef<HTMLVideoElement>(null);
   const video2Ref = useRef<HTMLVideoElement>(null);
   const video3Ref = useRef<HTMLVideoElement>(null);
+  
+  // Ensure events and pastEvents are arrays
+  const safeEvents = Array.isArray(events) ? events : [];
+  const safePastEvents = Array.isArray(pastEvents) ? pastEvents : [];
 
   useEffect(() => {
     const playAllVideos = async () => {
       try {
-        // Wait a bit for the videos to load
         await new Promise(resolve => setTimeout(resolve, 1000));
-        
-        // Play all videos simultaneously
         const playPromises = [
           video1Ref.current?.play(),
           video2Ref.current?.play(),
           video3Ref.current?.play()
         ].filter(Boolean);
-
         await Promise.all(playPromises);
         console.log('All videos started playing');
       } catch (error) {
         console.log('Some videos may not have started:', error);
-        // Fallback: try to play each video individually
         video1Ref.current?.play().catch(e => console.log('Video 1 error:', e));
         video2Ref.current?.play().catch(e => console.log('Video 2 error:', e));
         video3Ref.current?.play().catch(e => console.log('Video 3 error:', e));
       }
     };
 
-    // Play videos when component mounts
     playAllVideos();
 
-    // Also try to play when videos come into view
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -87,7 +84,6 @@ export default function Events({ events, pastEvents }: EventsProps) {
       { threshold: 0.5 }
     );
 
-    // Observe all video elements
     if (video1Ref.current) observer.observe(video1Ref.current);
     if (video2Ref.current) observer.observe(video2Ref.current);
     if (video3Ref.current) observer.observe(video3Ref.current);
@@ -285,10 +281,10 @@ export default function Events({ events, pastEvents }: EventsProps) {
             </motion.div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {events.length > 0 ? (
-                events.map((event, index) => {
+              {safeEvents.length > 0 ? (
+                safeEvents.map((event, index) => {
                   // Parse HTML content to get plain text description
-                  const description = event.content?.rendered 
+                  const description = event.content && event.content.rendered
                     ? event.content.rendered.replace(/<[^>]*>/g, '').trim() 
                     : '';
                   
@@ -476,8 +472,8 @@ export default function Events({ events, pastEvents }: EventsProps) {
               viewport={{ once: true }}
               className="grid md:grid-cols-2 gap-8"
             >
-              {pastEvents.length > 0 ? (
-                pastEvents.map((event, index) => {
+              {safePastEvents.length > 0 ? (
+                safePastEvents.map((event, index) => {
                   const imageUrl = getFeaturedImageUrl(event) || 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80';
                   
                   return (
@@ -597,7 +593,7 @@ export default function Events({ events, pastEvents }: EventsProps) {
   );
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps<EventsProps> = async () => {
   console.log('🔍 Events Page - WordPress Integration Debug:');
   console.log('WordPress URL:', process.env.NEXT_PUBLIC_WORDPRESS_URL || 'NOT SET');
 
