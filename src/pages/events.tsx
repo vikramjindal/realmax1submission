@@ -51,34 +51,40 @@ export default function Events({ events }: EventsProps) {
 
   // Video playback effect
   useEffect(() => {
-    const videos = [video1Ref.current, video2Ref.current, video3Ref.current].filter(Boolean) as HTMLVideoElement[];
+    const video1 = video1Ref.current;
+    const video2 = video2Ref.current;
+    const video3 = video3Ref.current;
+    const videos = [video1, video2, video3].filter((v): v is HTMLVideoElement => v !== null);
+
+    if (videos.length === 0) {
+      return; // No videos to play
+    }
 
     async function playAllVideos() {
       for (const video of videos) {
         try {
-          if (video && video.readyState >= 2) { // HAVE_CURRENT_DATA or higher
+          if (video.readyState >= 2) {
             await video.play();
           } else {
-            // Wait for video to be ready
-            await new Promise((resolve) => {
+            await new Promise<void>((resolve) => {
               const onCanPlay = () => {
                 video.removeEventListener('canplay', onCanPlay);
-                resolve(undefined);
+                resolve();
               };
               video.addEventListener('canplay', onCanPlay);
-              video.load(); // Ensure video loads
+              if (video.readyState === 0) {
+                video.load();
+              }
             });
             await video.play();
           }
         } catch (error) {
-          console.log('Video playback error for', video.id, error);
-          // Try to play individually with user interaction fallback
-          video.addEventListener('click', () => video.play(), { once: true });
+          // Autoplay blocked or video error - user can click to play
+          console.log('Video playback error for', video.id || 'unknown', error);
         }
       }
     }
 
-    // Wait a bit for videos to mount
     const timeoutId = setTimeout(() => {
       playAllVideos();
     }, 1500);
@@ -88,9 +94,9 @@ export default function Events({ events }: EventsProps) {
         entries.forEach((entry) => {
           if (entry.isIntersecting && entry.target instanceof HTMLVideoElement) {
             const video = entry.target;
-            if (video.paused) {
-              video.play().catch((error) => {
-                console.log('IntersectionObserver play error:', error);
+            if (video && video.paused) {
+              video.play().catch(() => {
+                // Autoplay blocked
               });
             }
           }
@@ -100,17 +106,14 @@ export default function Events({ events }: EventsProps) {
     );
 
     videos.forEach((video) => {
-      if (video) {
-        observer.observe(video);
-        // Also try to play when video is ready
-        video.addEventListener('loadeddata', () => {
-          if (video.paused) {
-            video.play().catch(() => {
-              // Autoplay blocked, user will need to click
-            });
-          }
-        }, { once: true });
-      }
+      observer.observe(video);
+      video.addEventListener('loadeddata', () => {
+        if (video.paused) {
+          video.play().catch(() => {
+            // Autoplay blocked
+          });
+        }
+      }, { once: true });
     });
 
     return () => {
