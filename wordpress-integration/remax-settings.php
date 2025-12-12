@@ -80,10 +80,10 @@ function remax_register_carousel_speed_endpoint() {
         'permission_callback' => '__return_true'
     ));
 }
-add_action('rest_api_init', 'remax_register_carousel_speed_endpoint');
+add_action('rest_api_init', 'remax_register_carousel_speed_endpoint', 10);
 
-function remax_get_carousel_speed() {
+function remax_get_carousel_speed($request) {
     $speed = get_option('remax_carousel_speed', 15);
-    return new WP_REST_Response(array('speed' => intval($speed)), 200);
+    return rest_ensure_response(array('speed' => intval($speed)));
 }
 
