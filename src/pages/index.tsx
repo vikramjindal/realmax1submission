@@ -461,7 +461,7 @@ export default function Home({ heroData, agents: wpAgents, testimonials: wpTesti
                 transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
               >
-                <div className="flex flex-col lg:flex-row items-center lg:items-start lg:space-x-8 space-y-6 lg:space-y-0">
+                <div className="flex flex-col lg:flex-row items-center lg:items-center lg:space-x-8 space-y-6 lg:space-y-0">
                       {/* Agent Image Carousel with Name */}
                       <div className="flex flex-col items-center space-y-4">
                         <div className="relative">
@@ -500,8 +500,8 @@ export default function Home({ heroData, agents: wpAgents, testimonials: wpTesti
                       </div>
 
                       {/* Agent Info - HOME OF TOP PERFORMERS */}
-                      <div className="flex-1 text-center lg:text-left">
-                        <div className="text-3xl lg:text-4xl font-black text-slate-900 mb-2 leading-tight">HOME OF TOP PERFORMERS</div>
+                      <div className="flex-1 flex items-center justify-center lg:justify-start">
+                        <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 leading-tight text-center lg:text-left whitespace-nowrap">HOME OF<br />TOP PERFORMERS</div>
                       </div>
 
                 </div>
