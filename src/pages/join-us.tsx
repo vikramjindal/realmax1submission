@@ -345,46 +345,6 @@ export default function JoinUs() {
           </div>
         </section>
 
-        {/* Why Choose Us */}
-        <section className="py-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6 font-montserrat">
-                Why <span className="text-primary">REMAX Excellence</span>?
-              </h2>
-            </motion.div>
-
-            <motion.div 
-              variants={staggerContainer}
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: true }}
-              className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
-            >
-              {[
-                { number: "500+", label: "Properties Sold", icon: Building2 },
-                { number: "98%", label: "Client Satisfaction", icon: Star },
-                { number: "50+", label: "Expert Agents", icon: Users },
-                { number: "#1", label: "Growth Rate", icon: TrendingUp }
-              ].map((stat, index) => (
-                <motion.div key={index} variants={fadeInUp} className="text-center">
-                  <div className="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-4">
-                    <stat.icon className="h-8 w-8 text-primary" />
-                  </div>
-                  <div className="text-3xl md:text-4xl font-bold text-primary mb-2 font-montserrat">{stat.number}</div>
-                  <div className="text-muted-foreground font-arial">{stat.label}</div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
-        </section>
-
       </div>
       
       <Footer />

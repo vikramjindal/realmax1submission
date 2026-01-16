@@ -6,9 +6,7 @@ import {
   Mail, 
   MapPin, 
   Facebook, 
-  Twitter, 
   Instagram, 
-  Linkedin, 
   ArrowRight,
   Globe,
   Award,
@@ -66,17 +64,11 @@ const Footer = () => {
             
             {/* Social Media */}
             <div className="flex space-x-4">
-              <a href="#" className="w-10 h-10 bg-white/10 hover:bg-brand-bright-red rounded-full flex items-center justify-center transition-all duration-200 transform hover:scale-110">
+              <a href="https://www.facebook.com/share/1AZsvgz2kJ/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/10 hover:bg-brand-bright-red rounded-full flex items-center justify-center transition-all duration-200 transform hover:scale-110">
                 <Facebook className="w-5 h-5" />
               </a>
-              <a href="#" className="w-10 h-10 bg-white/10 hover:bg-brand-bright-red rounded-full flex items-center justify-center transition-all duration-200 transform hover:scale-110">
-                <Twitter className="w-5 h-5" />
-              </a>
-              <a href="#" className="w-10 h-10 bg-white/10 hover:bg-brand-bright-red rounded-full flex items-center justify-center transition-all duration-200 transform hover:scale-110">
+              <a href="https://www.instagram.com/weareexcellence_yyz?igsh=MXBxdTFibzRtdjBweQ%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/10 hover:bg-brand-bright-red rounded-full flex items-center justify-center transition-all duration-200 transform hover:scale-110">
                 <Instagram className="w-5 h-5" />
-              </a>
-              <a href="#" className="w-10 h-10 bg-white/10 hover:bg-brand-bright-red rounded-full flex items-center justify-center transition-all duration-200 transform hover:scale-110">
-                <Linkedin className="w-5 h-5" />
               </a>
             </div>
           </div>

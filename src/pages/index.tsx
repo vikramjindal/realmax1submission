@@ -126,8 +126,6 @@ const HeroSection: React.FC<HeroSectionProps> = ({ heroData }) => {
   const title = heroData?.title || 'REMAX';
   const subtitle = heroData?.subtitle || 'EXCELLENCE';
   const description = heroData?.description || 'One of the Youngest, Fastest-Growing Real Estate Brokerage';
-  const statsText = heroData?.stats_text || '120+ Motivated Agents';
-  const statsSubtext = heroData?.stats_subtext || 'Growing daily';
   const ctaText = heroData?.cta_text || 'Join Our Team';
 
   return (
@@ -220,20 +218,6 @@ const HeroSection: React.FC<HeroSectionProps> = ({ heroData }) => {
               </Button>
 
           </div>
-
-
-
-
-            <div className="text-left space-y-3">
-              <div className="text-5xl lg:text-6xl font-black text-white">
-                {statsText}
-                </div>
-
-              <div className="text-2xl text-white/80">
-                {statsSubtext}
-              </div>
-
-            </div>
             
               </div>
 
@@ -515,10 +499,9 @@ export default function Home({ heroData, agents: wpAgents, testimonials: wpTesti
                         </div>
                       </div>
 
-                      {/* Agent Info - #1 HOME OF TOP PERFORMERS */}
+                      {/* Agent Info - HOME OF TOP PERFORMERS */}
                       <div className="flex-1 text-center lg:text-left">
-                        <div className="text-6xl sm:text-7xl lg:text-8xl font-black text-slate-900 mb-4">#1</div>
-                        <div className="text-xl lg:text-2xl font-bold text-slate-900 mb-2 leading-tight">HOME OF TOP PERFORMERS</div>
+                        <div className="text-3xl lg:text-4xl font-black text-slate-900 mb-2 leading-tight">HOME OF TOP PERFORMERS</div>
                       </div>
 
                 </div>
@@ -1106,7 +1089,7 @@ export default function Home({ heroData, agents: wpAgents, testimonials: wpTesti
 
               <h2 className="text-5xl lg:text-6xl font-black text-white mb-8 font-montserrat leading-tight">
 
-                What Our <span className="text-brand-bright-red">Clients Say</span>
+                What Our <span className="text-brand-bright-red">Team Says</span>
               </h2>
 
               <p className="text-xl text-white max-w-3xl mx-auto font-arial leading-relaxed">
