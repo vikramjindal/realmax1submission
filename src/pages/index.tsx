@@ -501,7 +501,7 @@ export default function Home({ heroData, agents: wpAgents, testimonials: wpTesti
 
                       {/* Agent Info - HOME OF TOP PERFORMERS */}
                       <div className="flex-1 flex items-center justify-center lg:justify-start">
-                        <div className="text-xl sm:text-2xl lg:text-3xl font-black text-slate-900 leading-snug text-center lg:text-left">
+                        <div className="text-lg sm:text-xl lg:text-2xl font-black text-slate-900 leading-snug text-center lg:text-left">
                           HOME OF<br /><span className="text-brand-bright-red">TOP PERFORMERS</span>
                         </div>
                       </div>
